@@ -1,0 +1,7 @@
+config/application/
+node_modules/
+public/css/
+public/js/
+vendor/
+.ftpconfig
+.npmrc

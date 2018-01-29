@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.0",
+    "@fortawesome/fontawesome-free-solid": "^5.0.2",
+    "@fortawesome/fontawesome-pro-regular": "^5.0.4",
+    "ol": "^4.6.4"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "build": "npm run build:css & npm run build:js",
+    "build:css": "node-sass --output-style compressed --output public/css resources/sass/style.scss",
+    "build:js": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run watch:css",
+    "watch:css": "node-sass --watch --output-style compressed --output public/css resources/sass/style.scss"
+  }
+}

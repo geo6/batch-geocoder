@@ -1,0 +1,14 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+    <link rel="stylesheet" href="./css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+    <script src="./js/batch-geocoder.min.js"></script>
+<?php $this->stop() ?>
+
+<div class="container">
+  <h1><?=$this->translate('View')?></h1>
+  <hr>
+</div>

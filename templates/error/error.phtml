@@ -1,0 +1,6 @@
+<?php $this->layout('layout::error', ['title' => 'Geocoder']) ?>
+
+<div class="jumbotron mt-3">
+  <h1><i class="fas fa-exclamation-circle"></i> <?=_('Error 405 - Method Not Allowed')?></h1>
+  <?php var_dump($allowedMethods); ?>
+</div>

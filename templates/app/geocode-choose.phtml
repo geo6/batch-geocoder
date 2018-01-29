@@ -1,0 +1,45 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+    <link rel="stylesheet" href="../css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+    <script src="../js/batch-geocoder.min.js"></script>
+<?php $this->stop() ?>
+
+<div class="container">
+  <h1><?=$this->translate('Geocode')?>: <?=$this->translate('Choose the correct result')?></h1>
+  <hr>
+  <dl>
+    <dt><?=$this->translate('Table')?></dt>
+    <dd><?=$this->e($table)?></dd>
+  </dl>
+  <hr>
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="text-primary">
+        <strong><?=$this->translate('Address')?></strong>:
+        <?=$this->e($address)?>
+      </div>
+    </div>
+    <div class="col text-right">
+      <a href="?skip=<?=$this->e($id)?>" class="btn btn-outline-danger"><?=$this->translate('Skip')?> <i class="fas fa-angle-double-right"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div>
+  <?php foreach ($results as $provider => $addresses) : ?>
+    <h2><i class="fas fa-map-marker-alt"></i> <?=$this->translate($provider)?></h2>
+    <ul>
+    <?php foreach ($addresses as $i => $addr) : ?>
+      <li>
+        <a href="?id=<?=$id?>&amp;provider=<?=$provider?>&amp;address=<?=$i?>"><?=$this->e($addr['address'])?></a>
+      </li>
+    <?php endforeach; ?>
+    </ul>
+  <?php endforeach; ?>
+  </div>
+  <hr>
+  // TODO: Add map
+</div>

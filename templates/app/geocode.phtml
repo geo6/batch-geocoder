@@ -1,0 +1,103 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+    <link rel="stylesheet" href="./css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+    <script src="./js/batch-geocoder.min.js"></script>
+    <script>
+      window.app.geocode.launch = <?=json_encode($launch)?>;
+      window.app.geocode.total = <?=$count?>;
+      window.app.geocode.count = <?=$countNotGeocoded?>;
+      window.app.geocode.countAlreadyGeocoded = <?=$countGeocoded?>;
+    </script>
+<?php $this->stop() ?>
+
+<div class="container">
+  <h1><?=$this->translate('Geocode')?></h1>
+  <hr>
+  <dl>
+    <dt><?=$this->translate('Table')?></dt>
+    <dd><?=$this->e($table)?></dd>
+    <dt><?=$this->translate('Record count')?></dt>
+    <dd><?=sprintf($this->translatePlural('%d record', '%d records', $count), $count)?></dd>
+    <dt><?=$this->translate('Progress')?></dt>
+    <dd>
+      <div class="row">
+        <div class="col text-danger" id="count-invalid"><?=sprintf($this->translate('%d invalid record(s)'), $countInvalid)?></div>
+        <div class="col text-warning" id="count-notgeocoded"><?=sprintf($this->translate('%d not geocoded record(s)'), $countNotGeocoded)?></div>
+        <div class="col text-success" id="count-geocoded"><?=sprintf($this->translate('%d geocoded record(s)'), $countGeocoded)?></div>
+      </div>
+      <div class="progress mt-2" style="height: 25px;">
+        <div class="progress-bar bg-danger" role="progressbar" id="progress-invalid" style="width: <?=round($countInvalid/$count*100)?>%" aria-valuenow="<?=round($countInvalid/$count*100)?>" aria-valuemin="0" aria-valuemax="100"><?=round($countInvalid/$count*100)?>%</div>
+        <div class="progress-bar bg-warning" role="progressbar" id="progress-notgeocoded" style="width: <?=round(($count-$countInvalid-$countGeocoded)/$count*100)?>%" aria-valuenow="<?=round(($count-$countInvalid-$countGeocoded)/$count*100)?>" aria-valuemin="0" aria-valuemax="100"><?=round(($count-$countInvalid-$countGeocoded)/$count*100)?>%</div>
+        <div class="progress-bar bg-success" role="progressbar" id="progress-geocoded" style="width: <?=round($countGeocoded/$count*100)?>%" aria-valuenow="<?=round($countGeocoded/$count*100)?>" aria-valuemin="0" aria-valuemax="100"><?=round($countGeocoded/$count*100)?>%</div>
+      </div>
+    </dd>
+  </dl>
+  <hr>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col">
+          <a href="?launch" class="btn btn-primary btn-block" id="btn-geocode-launch">
+            <i class="far fa-rocket"></i> <?=$this->translate('Launch process')?>
+          </a>
+        </div>
+        <div class="col">
+          <a href="?reset" class="btn btn-danger btn-block" id="btn-geocode-reset">
+            <i class="far fa-eraser"></i> <?=$this->translate('Reset')?>
+          </a>
+        </div>
+        <div class="col">
+          <a href="./geocode/choose" class="btn btn-secondary btn-block disabled" id="btn-geocode-next">
+            <?=$this->translate('Next')?> <i class="fas fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+<?php if ($launch === true) : ?>
+  <dl>
+    <dt>
+      <i class="fas fa-cog fa-spin"></i>
+      <?=$this->translate('Progress')?> :
+      <span id="progress-count" class="text-info"></span>
+    </dt>
+    <dd>
+      <div class="progress mt-2" id="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </dd>
+    <dt>
+      <?=$this->translate('Single result')?> :
+      <span id="progress-single-count" class="text-info"></span>
+    </dt>
+    <dd>
+      <div class="progress mt-2" id="progress-single">
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </dd>
+    <dt>
+      <?=$this->translate('Multiple result')?> :
+      <span id="progress-multiple-count" class="text-info"></span>
+    </dt>
+    <dd>
+      <div class="progress mt-2" id="progress-multiple">
+        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </dd>
+    <dt>
+      <?=$this->translate('No result')?> :
+      <span id="progress-noresult-count" class="text-info"></span>
+    </dt>
+    <dd>
+      <div class="progress mt-2" id="progress-noresult">
+        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </dd>
+  </dl>
+<?php endif ?>
+</div>

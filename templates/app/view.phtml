@@ -1,0 +1,72 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+        <link rel="stylesheet" href="./css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+        <script src="./js/batch-geocoder.min.js"></script>
+<?php $this->stop() ?>
+
+<div class="container">
+    <h1><?=$this->translate('View')?></h1>
+    <hr>
+    <ul class="nav nav-tabs" id="tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab-geocoded" data-toggle="tab" href="#geocoded" role="tab" aria-controls="home" aria-selected="true">
+                <i class="far fa-list-alt text-success"></i>
+                <?=$this->translate('Geocoded')?>
+                <span class="badge badge-pill badge-light"><?=count($addressGeocoded)?></span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab-notgeocoded" data-toggle="tab" href="#notgeocoded" role="tab" aria-controls="profile" aria-selected="false">
+                <i class="far fa-list-alt text-warning"></i>
+                <?=$this->translate('Not geocoded')?>
+                <span class="badge badge-pill badge-light"><?=count($addressNotGeocoded)?></span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab-invalid" data-toggle="tab" href="#invalid" role="tab" aria-controls="contact" aria-selected="false">
+                <i class="far fa-list-alt text-danger"></i>
+                <?=$this->translate('Invalid')?>
+                <span class="badge badge-pill badge-light"><?=count($addressInvalid)?></span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="tabs-content">
+        <div class="tab-pane fade show active" id="geocoded" role="tabpanel" aria-labelledby="tab-geocoded">
+            <ul class="mt-3">
+                <?php foreach ($addressGeocoded as $address): ?>
+                    <li>
+                        <div class="row">
+                            <div class="col"><?=$address[1]?></div>
+                            <div class="col-1 text-center"><i class="fas fa-arrow-right"></i></div>
+                            <div class="col"><?=$address[2]?></div>
+                            <div class="col-1 text-nowrap">
+                                <span class="badge badge-light"><?=$address[0]?></span>
+                                <?php if ($address[3] === true): ?>
+                                    <span class="badge badge-light"><i class="fas fa-user"></i></span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+        <div class="tab-pane fade" id="notgeocoded" role="tabpanel" aria-labelledby="tab-notgeocoded">
+            <ul class="mt-3">
+                <?php foreach ($addressNotGeocoded as $address): ?>
+                    <li><?=$address?></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+        <div class="tab-pane fade" id="invalid" role="tabpanel" aria-labelledby="tab-invalid">
+            <ul class="mt-3">
+                <?php foreach ($addressInvalid as $address): ?>
+                    <li><?=$address?></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    </div>
+</div>

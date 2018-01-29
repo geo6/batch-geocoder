@@ -1,0 +1,49 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+    <link rel="stylesheet" href="./css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+    <script src="./js/batch-geocoder.min.js"></script>
+<?php $this->stop() ?>
+
+<div class="container">
+  <h1><?=$this->translate($title)?></h1>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In accumsan nisl lacus, ut hendrerit tellus tincidunt a. Quisque a mauris vel massa faucibus dictum. Praesent non mattis velit. Quisque sed nulla maximus, maximus tortor non, fringilla nunc. Vivamus accumsan in sapien sed porta. Curabitur arcu orci, dignissim in tincidunt id, bibendum mattis justo. Maecenas condimentum sollicitudin est. Quisque metus tellus, pharetra nec magna id, sodales hendrerit velit. Nullam at posuere eros, ac imperdiet leo. Nam tristique urna odio, et lobortis arcu suscipit a. Vivamus non leo libero.
+  </p>
+  <hr>
+  <h2><?=$this->translate('Data structure')?></h2>
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <table class="table table-sm">
+        <tr><th><?=$this->translate('Identifier')?></th><td class="text-info"><em>string</em></td><td><?=$this->translate('Must be unique')?></td></tr>
+        <tr><th><?=$this->translate('Streetname')?></th><td class="text-info"><em>string</em></td><td></td></tr>
+        <tr><th><?=$this->translate('House number')?></th><td class="text-info"><em>string</em></td><td></td></tr>
+        <tr><th><?=$this->translate('Postal code')?></th><td class="text-info"><em>integer</em></td><td></td></tr>
+        <tr><th><?=$this->translate('Locality')?></th><td class="text-info"><em>string</em></td><td></td></tr>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+<?php if (!is_null($error)): ?>
+      <div class="alert alert-danger">
+        <strong><?=$this->translate('An error occured :')?></strong><br>
+        <?=$error?>
+      </div>
+<?php endif ?>
+      <form id="geocoder-form" action="./upload" method="post" autocomplete="off" enctype="multipart/form-data">
+        <p class="form-text"><?=$this->translate('You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>.')?></p>
+        <div class="form-group">
+          <input type="file" name="file" class="form-control-file" accept=".csv,.txt" required="required">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-3"><i class="fa fa-upload"></i> <?=$this->translate('Send')?></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<?=$this->fetch('partial::modal', $this->data())?>
