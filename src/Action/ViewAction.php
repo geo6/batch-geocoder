@@ -2,22 +2,19 @@
 
 namespace App\Action;
 
+use App\Middleware\ConfigMiddleware;
+use App\Middleware\DbAdapterMiddleware;
+use Geo6\Text\Text;
+use Geocoder\Formatter\StringFormatter;
+use Geocoder\Model\Address;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Flash\FlashMessageMiddleware;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
-
-use App\Middleware\ConfigMiddleware;
-use App\Middleware\DbAdapterMiddleware;
-
-use Geocoder\Formatter\StringFormatter;
-use Geocoder\Model\Address;
-use \Geo6\Text\Text;
 
 class ViewAction implements MiddlewareInterface
 {
@@ -54,9 +51,9 @@ class ViewAction implements MiddlewareInterface
         foreach ($resultsGeocoded as $r) {
             $address = Address::createFromArray([
               'streetNumber' => $r->housenumber,
-              'streetName' => $r->streetname,
-              'postalCode' => $r->postalcode,
-              'locality' => $r->locality,
+              'streetName'   => $r->streetname,
+              'postalCode'   => $r->postalcode,
+              'locality'     => $r->locality,
             ]);
 
             $formatter = new StringFormatter();
@@ -88,9 +85,9 @@ class ViewAction implements MiddlewareInterface
         foreach ($resultsNotGeocoded as $r) {
             $address = Address::createFromArray([
               'streetNumber' => $r->housenumber,
-              'streetName' => $r->streetname,
-              'postalCode' => $r->postalcode,
-              'locality' => $r->locality,
+              'streetName'   => $r->streetname,
+              'postalCode'   => $r->postalcode,
+              'locality'     => $r->locality,
             ]);
 
             $addressNotGeocoded[] = $formatter->format($address, '%S %n, %z %L');
@@ -108,19 +105,19 @@ class ViewAction implements MiddlewareInterface
         foreach ($resultsInvalid as $r) {
             $address = Address::createFromArray([
               'streetNumber' => $r->housenumber,
-              'streetName' => $r->streetname,
-              'postalCode' => $r->postalcode,
-              'locality' => $r->locality,
+              'streetName'   => $r->streetname,
+              'postalCode'   => $r->postalcode,
+              'locality'     => $r->locality,
             ]);
 
             $addressInvalid[] = $formatter->format($address, '%S %n, %z %L');
         }
 
         $data = [
-            'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-            'addressGeocoded' => $addressGeocoded,
+            'title'              => substr($config['name'], strpos($config['name'], '/') + 1),
+            'addressGeocoded'    => $addressGeocoded,
             'addressNotGeocoded' => $addressNotGeocoded,
-            'addressInvalid' => $addressInvalid,
+            'addressInvalid'     => $addressInvalid,
         ];
 
         return new HtmlResponse($this->template->render('app::view', $data));

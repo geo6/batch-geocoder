@@ -8,9 +8,9 @@ use App\Validator\Address as AddressValidator;
 use Geocoder\Collection;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
+use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
-use Geocoder\Provider\Provider;
 use Zend\Db\Adapter\Adapter;
 
 final class BatchGeocoderProvider implements Provider
@@ -28,7 +28,7 @@ final class BatchGeocoderProvider implements Provider
     /**
      * @param Provider[] $providers
      */
-    public function __construct(array $providers = [], Adapter $adapter)
+    public function __construct(array $providers, Adapter $adapter)
     {
         $this->providers = $providers;
         $this->adapter = $adapter;
@@ -55,7 +55,7 @@ final class BatchGeocoderProvider implements Provider
                     if ($validator->isValid($result->first()) === true) {
                         return $result;
                     }
-                } else if ($result->count() > 1) {
+                } elseif ($result->count() > 1) {
                     if (self::extract($query, $result, $this->adapter) === true) {
                         return $result;
                     }
@@ -104,9 +104,6 @@ final class BatchGeocoderProvider implements Provider
         return $this;
     }
 
-    /**
-     *
-     */
     private static function extract(GeocodeQuery $query, Collection &$collection, Adapter $adapter)
     {
         $result = [];

@@ -11,15 +11,15 @@ use Zend\ConfigAggregator\ZendConfigProvider;
 
 class ConfigMiddleware implements MiddlewareInterface
 {
-  public const CONFIG_ATTRIBUTE = 'config';
+    public const CONFIG_ATTRIBUTE = 'config';
 
-  public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
-  {
-    $config = new ConfigAggregator([
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
+    {
+        $config = new ConfigAggregator([
       new ZendConfigProvider('../composer.json'),
       new ZendConfigProvider('../config/application/*.{php,ini,xml,json,yaml}'),
     ]);
 
-    return $delegate->process($request->withAttribute(self::CONFIG_ATTRIBUTE, $config->getMergedConfig()));
-  }
+        return $delegate->process($request->withAttribute(self::CONFIG_ATTRIBUTE, $config->getMergedConfig()));
+    }
 }

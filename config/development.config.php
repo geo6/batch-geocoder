@@ -9,7 +9,6 @@
  * Developers on your team will then automatically enable them by calling on
  * `composer development-enable`.
  */
-
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\Expressive\Container;
 use Zend\Expressive\Middleware\ErrorResponseGenerator;
@@ -25,7 +24,7 @@ return [
         ],
     ],
 
-    'debug' => true,
+    'debug'                        => true,
     ConfigAggregator::ENABLE_CACHE => false,
 
     'whoops' => [

@@ -9,11 +9,11 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class ValidateFactory
 {
-  public function __invoke(ContainerInterface $container)
-  {
-    $router   = $container->get(RouterInterface::class);
-    $template = $container->get(TemplateRendererInterface::class);
+    public function __invoke(ContainerInterface $container)
+    {
+        $router = $container->get(RouterInterface::class);
+        $template = $container->get(TemplateRendererInterface::class);
 
-    return new ValidateAction($router, $template);
-  }
+        return new ValidateAction($router, $template);
+    }
 }

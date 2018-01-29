@@ -2,6 +2,14 @@
 
 namespace App\Action;
 
+use App\Middleware\ConfigMiddleware;
+use App\Middleware\DbAdapterMiddleware;
+use Geocoder\Formatter\StringFormatter;
+use Geocoder\Model\Address;
+use Geocoder\Provider;
+use Geocoder\ProviderAggregator;
+use Geocoder\Query\GeocodeQuery;
+use Http\Adapter\Guzzle6\Client as Guzzle6Client;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,16 +20,6 @@ use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
-
-use App\Middleware\ConfigMiddleware;
-use App\Middleware\DbAdapterMiddleware;
-
-use Geocoder\Formatter\StringFormatter;
-use Geocoder\Model\Address;
-use Geocoder\ProviderAggregator;
-use Geocoder\Provider;
-use Geocoder\Query\GeocodeQuery;
-use Http\Adapter\Guzzle6\Client as Guzzle6Client;
 
 class GeocodeChooseAction implements MiddlewareInterface
 {
@@ -50,7 +48,7 @@ class GeocodeChooseAction implements MiddlewareInterface
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),
-                'process_count' => 0,
+                'process_count'    => 0,
                 'process_provider' => new Expression('NULL'),
             ]);
             $update->where(['id' => $query['skip']]);
@@ -60,7 +58,7 @@ class GeocodeChooseAction implements MiddlewareInterface
 
             $session->unset('id');
             $session->unset('addresses');
-        } else if (isset($query['id'], $query['provider'], $query['address']) && $query['id'] === $session->get('id')) {
+        } elseif (isset($query['id'], $query['provider'], $query['address']) && $query['id'] === $session->get('id')) {
             $addresses = $session->get('addresses');
 
             if (isset($addresses[$query['provider']], $addresses[$query['provider']][$query['address']])) {
@@ -69,9 +67,9 @@ class GeocodeChooseAction implements MiddlewareInterface
                 $update = $sql->update();
                 $update->set([
                     'process_datetime' => date('c'),
-                    'process_count' => -1,
+                    'process_count'    => -1,
                     'process_provider' => $query['provider'],
-                    'process_address' => $address['address'],
+                    'process_address'  => $address['address'],
                 ]);
                 $update->where(['id' => $query['id']]);
 
@@ -110,9 +108,9 @@ class GeocodeChooseAction implements MiddlewareInterface
 
             $address = Address::createFromArray([
                 'streetNumber' => $result->housenumber,
-                'streetName' => $result->streetname,
-                'postalCode' => $result->postalcode,
-                'locality' => $result->locality,
+                'streetName'   => $result->streetname,
+                'postalCode'   => $result->postalcode,
+                'locality'     => $result->locality,
             ]);
 
             $formatter = new StringFormatter();
@@ -135,10 +133,10 @@ class GeocodeChooseAction implements MiddlewareInterface
             $session->set('addresses', $addresses);
 
             $data = [
-                'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-                'table' => $table,
+                'title'   => substr($config['name'], strpos($config['name'], '/') + 1),
+                'table'   => $table,
                 'address' => $formatter->format($address, '%S %n, %z %L'),
-                'id' => $result->id,
+                'id'      => $result->id,
                 'results' => $addresses,
             ];
 

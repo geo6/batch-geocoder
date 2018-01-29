@@ -11,21 +11,21 @@ use Zend\Db\Adapter\Adapter;
 
 class DbAdapterMiddleware implements MiddlewareInterface
 {
-  public const DBADAPTER_ATTRIBUTE = 'adapter';
+    public const DBADAPTER_ATTRIBUTE = 'adapter';
 
-  public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
-  {
-    $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
+    {
+        $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 
-    if (isset($config['postgresql'])) {
-      $adapter = new Adapter(array_merge(['driver' => 'Pgsql'], $config['postgresql']));
-    } else {
-      throw new Exception(sprintf(
+        if (isset($config['postgresql'])) {
+            $adapter = new Adapter(array_merge(['driver' => 'Pgsql'], $config['postgresql']));
+        } else {
+            throw new Exception(sprintf(
         'Cannot create %s; could not locate PostgreSQL parameters in application configuration.',
-        DbAdapterMiddleware::class
+        self::class
       ));
-    }
+        }
 
-    return $delegate->process($request->withAttribute(self::DBADAPTER_ATTRIBUTE, $adapter));
-  }
+        return $delegate->process($request->withAttribute(self::DBADAPTER_ATTRIBUTE, $adapter));
+    }
 }
