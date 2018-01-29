@@ -2,30 +2,24 @@
 
 namespace App\Action;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Predicate;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template\TemplateRendererInterface;
-
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-
 use App\Provider\BatchGeocoderProvider;
 use App\Validator\Address as AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
-use Geocoder\Model\AdminLevelCollection;
-use Geocoder\ProviderAggregator;
 use Geocoder\Provider;
+use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Locale;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Sql;
+use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Session\SessionMiddleware;
 
 class GeocodeProcessAction implements MiddlewareInterface
 {
@@ -68,8 +62,8 @@ class GeocodeProcessAction implements MiddlewareInterface
             return new JsonResponse(null);
         } else {
             $data = [
-                'count' => $results->count(),
-                'countSingle' => 0,
+                'count'         => $results->count(),
+                'countSingle'   => 0,
                 'countMultiple' => 0,
                 'countNoResult' => 0,
             ];
@@ -77,9 +71,9 @@ class GeocodeProcessAction implements MiddlewareInterface
             foreach ($results as $r) {
                 $address = Address::createFromArray([
                     'streetNumber' => $r->housenumber,
-                    'streetName' => $r->streetname,
-                    'postalCode' => $r->postalcode,
-                    'locality' => $r->locality,
+                    'streetName'   => $r->streetname,
+                    'postalCode'   => $r->postalcode,
+                    'locality'     => $r->locality,
                 ]);
 
                 $formatter = new StringFormatter();
@@ -93,12 +87,11 @@ class GeocodeProcessAction implements MiddlewareInterface
 
                 $updateData = [
                     'process_datetime' => date('c'),
-                    'process_count' => $count,
+                    'process_count'    => $count,
                 ];
 
                 if ($count >= 1) {
                     $updateData['process_provider'] = $result->first()->getProvidedBy();
-
 
                     if ($count === 1) {
                         $validator = new AddressValidator($query->getData('address'), $adapter);

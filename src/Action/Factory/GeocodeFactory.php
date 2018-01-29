@@ -9,11 +9,11 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class GeocodeFactory
 {
-  public function __invoke(ContainerInterface $container)
-  {
-    $router   = $container->get(RouterInterface::class);
-    $template = $container->get(TemplateRendererInterface::class);
+    public function __invoke(ContainerInterface $container)
+    {
+        $router = $container->get(RouterInterface::class);
+        $template = $container->get(TemplateRendererInterface::class);
 
-    return new GeocodeAction($router, $template);
-  }
+        return new GeocodeAction($router, $template);
+    }
 }

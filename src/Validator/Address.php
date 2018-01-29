@@ -35,7 +35,7 @@ final class Address
 
         if ($levenshtein < 5 && $locality1 === $locality2) {
             return true;
-        } else if ($levenshtein < 5) {
+        } elseif ($levenshtein < 5) {
             $postalcode = $this->address->getPostalcode();
 
             $sql = new Sql($this->adapter, 'validation_bpost');
@@ -50,7 +50,7 @@ final class Address
             $localities = array_column($results->toArray(), 'normalized');
             $localities = array_map('self::filter', $localities);
 
-            return (in_array($locality2, $localities));
+            return in_array($locality2, $localities);
         }
 
         return false;

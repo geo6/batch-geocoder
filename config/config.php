@@ -3,7 +3,6 @@
 use Zend\ConfigAggregator\ArrayProvider;
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\ConfigAggregator\PhpFileProvider;
-use Zend\ConfigAggregator\ZendConfigProvider;
 
 $cacheConfig = [
   'config_cache_path' => 'data/cache/config.php',

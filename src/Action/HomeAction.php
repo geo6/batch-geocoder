@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use App\Middleware\ConfigMiddleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,31 +11,29 @@ use Zend\Expressive\Flash\FlashMessageMiddleware;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-use App\Middleware\ConfigMiddleware;
-
 class HomeAction implements MiddlewareInterface
 {
-  private $router;
-  private $template;
+    private $router;
+    private $template;
 
-  public function __construct(RouterInterface $router, TemplateRendererInterface $template)
-  {
-    $this->router = $router;
-    $this->template = $template;
-  }
+    public function __construct(RouterInterface $router, TemplateRendererInterface $template)
+    {
+        $this->router = $router;
+        $this->template = $template;
+    }
 
-  public function process(ServerRequestInterface $request, DelegateInterface $delegate)
-  {
-    $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
-    $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    {
+        $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
+        $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
-    $error = $flashMessages->getFlash('error-upload');
+        $error = $flashMessages->getFlash('error-upload');
 
-    $data = [
+        $data = [
       'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-      'error' => $error
+      'error' => $error,
     ];
 
-    return new HtmlResponse($this->template->render('app::home', $data));
-  }
+        return new HtmlResponse($this->template->render('app::home', $data));
+    }
 }
