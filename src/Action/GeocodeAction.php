@@ -46,7 +46,7 @@ class GeocodeAction implements MiddlewareInterface
         $countInvalid = $sql->select();
         $countInvalid->columns(['count' => new Expression('COUNT(*)')]);
         $countInvalid->where
-      ->equalTo('valid', 'f');
+            ->equalTo('valid', 'f');
 
         $qsz = $sql->buildSqlString($countInvalid);
         $resultInvalid = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
@@ -54,27 +54,27 @@ class GeocodeAction implements MiddlewareInterface
         if (isset($query['reset'])) {
             $reset = $sql->update();
             $reset->set([
-        'process_datetime' => new Expression('NULL'),
-        'process_count'    => new Expression('NULL'),
-        'process_provider' => new Expression('NULL'),
-        'process_address'  => new Expression('NULL'),
-        'the_geog'         => new Expression('NULL'),
-      ]);
+                'process_datetime' => new Expression('NULL'),
+                'process_count'    => new Expression('NULL'),
+                'process_provider' => new Expression('NULL'),
+                'process_address'  => new Expression('NULL'),
+                'the_geog'         => new Expression('NULL'),
+            ]);
 
             $qsz = $sql->buildSqlString($reset);
             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
         } elseif (isset($query['launch'])) {
             $reset = $sql->update();
             $reset->set([
-        'process_datetime' => new Expression('NULL'),
-        'process_count'    => new Expression('NULL'),
-        'process_provider' => new Expression('NULL'),
-        'process_address'  => new Expression('NULL'),
-        'the_geog'         => new Expression('NULL'),
-      ]);
+                'process_datetime' => new Expression('NULL'),
+                'process_count'    => new Expression('NULL'),
+                'process_provider' => new Expression('NULL'),
+                'process_address'  => new Expression('NULL'),
+                'the_geog'         => new Expression('NULL'),
+            ]);
             $reset->where
-        ->equalTo('valid', 't')
-        ->isNull('process_address');
+                ->equalTo('valid', 't')
+                ->isNull('process_address');
 
             $qsz = $sql->buildSqlString($reset);
             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
@@ -83,26 +83,26 @@ class GeocodeAction implements MiddlewareInterface
         $countGeocoded = $sql->select();
         $countGeocoded->columns(['count' => new Expression('COUNT(*)')]);
         $countGeocoded->where
-      ->equalTo('valid', 't')
-      ->isNotNull('process_count')
-      ->nest()
-      ->equalTo('process_count', 1)
-      ->or
-      ->equalTo('process_count', -1)
-      ->unnest();
+            ->equalTo('valid', 't')
+            ->isNotNull('process_count')
+            ->nest()
+            ->equalTo('process_count', 1)
+            ->or
+            ->equalTo('process_count', -1)
+            ->unnest();
 
         $qsz = $sql->buildSqlString($countGeocoded);
         $resultGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
 
         $data = [
-      'title'            => substr($config['name'], strpos($config['name'], '/') + 1),
-      'table'            => $table,
-      'count'            => $resultCount->count,
-      'countInvalid'     => $resultInvalid->count,
-      'countGeocoded'    => $resultGeocoded->count,
-      'countNotGeocoded' => ($resultCount->count - ($resultInvalid->count + $resultGeocoded->count)),
-      'launch'           => (isset($query['launch'])),
-    ];
+            'title'            => substr($config['name'], strpos($config['name'], '/') + 1),
+            'table'            => $table,
+            'count'            => $resultCount->count,
+            'countInvalid'     => $resultInvalid->count,
+            'countGeocoded'    => $resultGeocoded->count,
+            'countNotGeocoded' => ($resultCount->count - ($resultInvalid->count + $resultGeocoded->count)),
+            'launch'           => (isset($query['launch'])),
+        ];
 
         return new HtmlResponse($this->template->render('app::geocode', $data));
     }

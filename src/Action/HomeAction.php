@@ -30,9 +30,9 @@ class HomeAction implements MiddlewareInterface
         $error = $flashMessages->getFlash('error-upload');
 
         $data = [
-      'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-      'error' => $error,
-    ];
+            'title' => substr($config['name'], strpos($config['name'], '/') + 1),
+            'error' => $error,
+        ];
 
         return new HtmlResponse($this->template->render('app::home', $data));
     }

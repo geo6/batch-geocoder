@@ -83,9 +83,9 @@ class UploadAction implements MiddlewareInterface
 
                     // Create table
                     $adapter->query(
-            sprintf(file_get_contents(__DIR__.'/../../scripts/create-table.sql'), $tablename),
-            $adapter::QUERY_MODE_EXECUTE
-          );
+                        sprintf(file_get_contents(__DIR__.'/../../scripts/create-table.sql'), $tablename),
+                        $adapter::QUERY_MODE_EXECUTE
+                    );
 
                     // Load data
                     $pg = $adapter->getDriver()->getConnection()->getResource();
@@ -106,9 +106,9 @@ class UploadAction implements MiddlewareInterface
                     $alter = new Ddl\AlterTable($tablename);
                     $alter->addConstraint(new Ddl\Constraint\PrimaryKey('id'));
                     $adapter->query(
-            $sql->getSqlStringForSqlObject($alter),
-            $adapter::QUERY_MODE_EXECUTE
-          );
+                        $sql->getSqlStringForSqlObject($alter),
+                        $adapter::QUERY_MODE_EXECUTE
+                    );
 
                     $session->set('path', $path);
                     $session->set('table', $tablename);

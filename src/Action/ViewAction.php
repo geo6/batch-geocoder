@@ -50,10 +50,10 @@ class ViewAction implements MiddlewareInterface
         $addressGeocoded = [];
         foreach ($resultsGeocoded as $r) {
             $address = Address::createFromArray([
-              'streetNumber' => $r->housenumber,
-              'streetName'   => $r->streetname,
-              'postalCode'   => $r->postalcode,
-              'locality'     => $r->locality,
+                'streetNumber' => $r->housenumber,
+                'streetName'   => $r->streetname,
+                'postalCode'   => $r->postalcode,
+                'locality'     => $r->locality,
             ]);
 
             $formatter = new StringFormatter();
@@ -84,10 +84,10 @@ class ViewAction implements MiddlewareInterface
         $addressNotGeocoded = [];
         foreach ($resultsNotGeocoded as $r) {
             $address = Address::createFromArray([
-              'streetNumber' => $r->housenumber,
-              'streetName'   => $r->streetname,
-              'postalCode'   => $r->postalcode,
-              'locality'     => $r->locality,
+                'streetNumber' => $r->housenumber,
+                'streetName'   => $r->streetname,
+                'postalCode'   => $r->postalcode,
+                'locality'     => $r->locality,
             ]);
 
             $addressNotGeocoded[] = $formatter->format($address, '%S %n, %z %L');

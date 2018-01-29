@@ -22,8 +22,8 @@ class ConfigProvider
     public function __invoke() : array
     {
         return [
-      'dependencies' => $this->getDependencies(),
-    ];
+            'dependencies' => $this->getDependencies(),
+        ];
     }
 
     /**
@@ -34,22 +34,22 @@ class ConfigProvider
     public function getDependencies() : array
     {
         return [
-      'delegators' => [
-          Application::class => [
-            RoutesDelegator::class,
-          ],
-      ],
-      'invokables' => [
-      ],
-      'factories'  => [
-        Action\ConfigAction::class        => Action\Factory\ConfigFactory::class,
-        Action\GeocodeAction::class       => Action\Factory\GeocodeFactory::class,
-        Action\GeocodeChooseAction::class => Action\Factory\GeocodeChooseFactory::class,
-        Action\HomeAction::class          => Action\Factory\HomeFactory::class,
-        Action\UploadAction::class        => Action\Factory\UploadFactory::class,
-        Action\ValidateAction::class      => Action\Factory\ValidateFactory::class,
-        Action\ViewAction::class          => Action\Factory\ViewFactory::class,
-      ],
-    ];
+            'delegators' => [
+                Application::class => [
+                    RoutesDelegator::class,
+                ],
+            ],
+            'invokables' => [
+            ],
+            'factories'  => [
+                Action\ConfigAction::class        => Action\Factory\ConfigFactory::class,
+                Action\GeocodeAction::class       => Action\Factory\GeocodeFactory::class,
+                Action\GeocodeChooseAction::class => Action\Factory\GeocodeChooseFactory::class,
+                Action\HomeAction::class          => Action\Factory\HomeFactory::class,
+                Action\UploadAction::class        => Action\Factory\UploadFactory::class,
+                Action\ValidateAction::class      => Action\Factory\ValidateFactory::class,
+                Action\ViewAction::class          => Action\Factory\ViewFactory::class,
+            ],
+        ];
     }
 }

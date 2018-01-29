@@ -21,9 +21,9 @@ class DbAdapterMiddleware implements MiddlewareInterface
             $adapter = new Adapter(array_merge(['driver' => 'Pgsql'], $config['postgresql']));
         } else {
             throw new Exception(sprintf(
-        'Cannot create %s; could not locate PostgreSQL parameters in application configuration.',
-        self::class
-      ));
+                'Cannot create %s; could not locate PostgreSQL parameters in application configuration.',
+                self::class
+            ));
         }
 
         return $delegate->process($request->withAttribute(self::DBADAPTER_ATTRIBUTE, $adapter));

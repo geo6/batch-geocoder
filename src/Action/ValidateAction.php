@@ -40,7 +40,7 @@ class ValidateAction implements MiddlewareInterface
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
-      ->notIn('postalcode', (new Select('validation_bpost'))->columns(['postalcode']));
+            ->notIn('postalcode', (new Select('validation_bpost'))->columns(['postalcode']));
 
         $qsz = $sql->buildSqlString($update);
         $results = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
@@ -48,10 +48,10 @@ class ValidateAction implements MiddlewareInterface
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
-      ->notIn(
-          new Expression('unaccent(UPPER("locality"))'),
-          (new Select(['b' => 'validation_bpost']))->where('postalcode = b."postalcode"')->columns(['normalized'])
-      );
+            ->notIn(
+                new Expression('unaccent(UPPER("locality"))'),
+                (new Select(['b' => 'validation_bpost']))->where('postalcode = b."postalcode"')->columns(['normalized'])
+            );
 
         $qsz = $sql->buildSqlString($update);
         $results = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);

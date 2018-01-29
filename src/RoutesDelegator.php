@@ -22,9 +22,9 @@ class RoutesDelegator
         // Setup routes:
         $app->get('/applications/batch-geocoder/', Action\HomeAction::class, 'home');
         $app->post('/applications/batch-geocoder/upload', [
-      Action\UploadAction::class,
-      Action\ValidateAction::class,
-    ], 'upload');
+            Action\UploadAction::class,
+            Action\ValidateAction::class,
+        ], 'upload');
         $app->get('/applications/batch-geocoder/geocode', Action\GeocodeAction::class, 'geocode');
         $app->get('/applications/batch-geocoder/geocode/process', Action\GeocodeProcessAction::class, 'geocode.process');
         $app->get('/applications/batch-geocoder/geocode/choose', Action\GeocodeChooseAction::class, 'geocode.choose');

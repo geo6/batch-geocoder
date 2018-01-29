@@ -23,8 +23,8 @@ class MapAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $data = [
-      'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-    ];
+            'title' => substr($config['name'], strpos($config['name'], '/') + 1),
+        ];
 
         return new HtmlResponse($this->template->render('app::map', $data));
     }
