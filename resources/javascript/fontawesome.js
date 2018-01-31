@@ -1,4 +1,4 @@
-import fontawesome from '@fortawesome/fontawesome'
+import fontawesome from "@fortawesome/fontawesome";
 
 import {
   faAngleDoubleRight,
@@ -8,8 +8,7 @@ import {
   faMapMarkerAlt,
   faUpload,
   faUser
-} from '@fortawesome/fontawesome-free-solid'
-//fontawesome.library.add(faCog, faUpload);
+} from "@fortawesome/fontawesome-free-solid";
 
 import {
   faEraser,
@@ -18,5 +17,4 @@ import {
   faMap,
   faRocket,
   faTable
-} from '@fortawesome/fontawesome-pro-regular'
-//fontawesome.library.add(faRocket);
+} from "@fortawesome/fontawesome-pro-regular";

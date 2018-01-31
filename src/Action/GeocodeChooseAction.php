@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Action;
 
 use App\Middleware\ConfigMiddleware;
@@ -108,7 +110,7 @@ class GeocodeChooseAction implements MiddlewareInterface
 
             $address = Address::createFromArray([
                 'streetNumber' => $result->housenumber,
-                'streetName'   => $result->streetname,
+                'streetName'   => str_replace('/', '', $result->streetname), // Issue with SPW service
                 'postalCode'   => $result->postalcode,
                 'locality'     => $result->locality,
             ]);

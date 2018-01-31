@@ -1,8 +1,8 @@
-require('./fontawesome');
+require("./fontawesome");
 
 window.app = {};
 window.app.fn = {
-  geocodeProcess: require('./geocodeProcess')
+  geocodeProcess: require("./geocodeProcess")
 };
 window.app.geocode = {
   count: 0,
@@ -19,9 +19,7 @@ window.app.geocode = {
 
 $(document).ready(function () {
   if (window.app.geocode.launch === true) {
-    $('#btn-geocode-launch, #btn-geocode-reset').addClass('disabled');
-
-    console.log(window.app.geocode.count + ' record(s) to geocode!');
+    $("#btn-geocode-launch, #btn-geocode-reset").addClass("disabled");
 
     window.app.fn.geocodeProcess();
   }

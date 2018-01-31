@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Action;
 
 use App\Middleware\ConfigMiddleware;
@@ -71,7 +73,7 @@ class GeocodeProcessAction implements MiddlewareInterface
             foreach ($results as $r) {
                 $address = Address::createFromArray([
                     'streetNumber' => $r->housenumber,
-                    'streetName'   => $r->streetname,
+                    'streetName'   => str_replace('/', '', $r->streetname), // Issue with SPW service
                     'postalCode'   => $r->postalcode,
                     'locality'     => $r->locality,
                 ]);
