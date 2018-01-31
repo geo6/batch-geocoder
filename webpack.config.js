@@ -22,5 +22,11 @@ module.exports = {
   },
   plugins: [
     //new webpack.optimize.UglifyJsPlugin()
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@fortawesome/fontawesome-free-solid$': '@fortawesome/fontawesome-free-solid/shakable.es.js',
+      '@fortawesome/fontawesome-pro-regular$': '@fortawesome/fontawesome-pro-regular/shakable.es.js'
+    }
+  }
 };
