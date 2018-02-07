@@ -18,7 +18,7 @@
         "geocoder-php/chain-provider": "^4.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6",
-        "zendframework/zend-component-installer": "^1.1",
+        "zendframework/zend-component-installer": "^2.0",
         "zendframework/zend-config": "^3.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-db": "^2.9",
