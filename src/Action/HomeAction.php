@@ -48,9 +48,9 @@ class HomeAction implements MiddlewareInterface
         rsort($tables);
 
         $data = [
-            'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-            'error' => $error,
-            'tables' => $tables,
+            'title'    => substr($config['name'], strpos($config['name'], '/') + 1),
+            'error'    => $error,
+            'tables'   => $tables,
             'archives' => ($config['archives'] === true && isset($query['archives'])),
         ];
 
