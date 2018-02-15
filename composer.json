@@ -10,6 +10,7 @@
     ],
     "require": {
         "php": "^7.2",
+        "geo6/geocoder-php-addok-provider": "^1.0",
         "geo6/geocoder-php-bpost-provider": "^1.1",
         "geo6/geocoder-php-geopunt-provider": "^1.0",
         "geo6/geocoder-php-spw-provider": "^1.0",

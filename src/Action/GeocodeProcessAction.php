@@ -43,6 +43,7 @@ class GeocodeProcessAction implements MiddlewareInterface
         $client = new Guzzle6Client();
 
         $chain = new BatchGeocoderProvider([
+            new Provider\Addok\Addok($client, 'http://addok.geocode.be/'),
             new Provider\UrbIS\UrbIS($client),
             new Provider\Geopunt\Geopunt($client),
             new Provider\SPW\SPW($client),
@@ -91,7 +92,7 @@ class GeocodeProcessAction implements MiddlewareInterface
                 $formatter = new StringFormatter();
                 $validated = false;
 
-                $query = GeocodeQuery::create($formatter->format($address, '%S %n, %z %L'));
+                $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
                 $query = $query->withLocale(Locale::getDefault());
                 $query = $query->withData('address', $address);
                 $result = $geocoder->geocodeQuery($query);
@@ -109,7 +110,7 @@ class GeocodeProcessAction implements MiddlewareInterface
                         $validator = new AddressValidator($query->getData('address'), $adapter);
 
                         if ($validator->isValid($result->first()) === true) {
-                            $updateData['process_address'] = $formatter->format($result->first(), '%S %n, %z %L');
+                            $updateData['process_address'] = $formatter->format($result->first(), '%n %S, %z %L');
                             /*$processData['coordinates'] = [
                                 $result->first()->getCoordinates()->getLongitude(),
                                 $result->first()->getCoordinates()->getLatitude(),

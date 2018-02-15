@@ -99,6 +99,7 @@ class GeocodeChooseAction implements MiddlewareInterface
             $client = new Guzzle6Client();
 
             $geocoder->registerProviders([
+                new Provider\Addok\Addok($client, 'http://addok.geocode.be/'),
                 new Provider\UrbIS\UrbIS($client),
                 new Provider\Geopunt\Geopunt($client),
                 new Provider\SPW\SPW($client),
@@ -119,14 +120,14 @@ class GeocodeChooseAction implements MiddlewareInterface
 
             $addresses = [];
             foreach ($providers as $provider) {
-                $collection = $geocoder->using($provider)->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
+                $collection = $geocoder->using($provider)->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%n %S, %z %L')));
                 foreach ($collection as $addr) {
                     $providedBy = $addr->getProvidedBy();
                     if (!isset($addresses[$providedBy])) {
                         $addresses[$providedBy] = [];
                     }
                     $addresses[$providedBy][] = [
-                        'address' => $formatter->format($addr, '%S %n, %z %L'),
+                        'address' => $formatter->format($addr, '%n %S, %z %L'),
                     ];
                 }
             }
@@ -137,7 +138,7 @@ class GeocodeChooseAction implements MiddlewareInterface
             $data = [
                 'title'   => substr($config['name'], strpos($config['name'], '/') + 1),
                 'table'   => $table,
-                'address' => $formatter->format($address, '%S %n, %z %L'),
+                'address' => $formatter->format($address, '%n %S, %z %L'),
                 'id'      => $result->id,
                 'results' => $addresses,
             ];
