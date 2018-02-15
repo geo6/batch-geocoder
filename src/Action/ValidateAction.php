@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Action;
 
+use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -33,7 +34,14 @@ class ValidateAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
+        $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+
+        $query = $request->getParsedBody();
+
+        if ($config['archives'] === true && isset($query['table'])) {
+            $session->set('table', $query['table']);
+        }
 
         $table = $session->get('table');
 

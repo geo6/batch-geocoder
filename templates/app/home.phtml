@@ -44,6 +44,24 @@
       </form>
     </div>
   </div>
+<?php if ($archives === true): ?>
+  <hr>
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <form id="geocoder-archives-form" action="./validate" method="post" autocomplete="off">
+          <div class="form-group">
+              <label for="selectArchives" class="font-weight-bold"><i class="fas fa-archive"></i> <?=$this->translate('Archives')?></label>
+              <select name="table" id="selectArchives" class="form-control">
+<?php foreach ($tables as $t): ?>
+                  <option value="<?=$t?>"><?=$t?></option>
+<?php endforeach ?>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-3"><?=$this->translate('Load')?></button>
+      </form>
+    </div>
+  </div>
+<?php endif ?>
 </div>
 
 <?=$this->fetch('partial::modal', $this->data())?>

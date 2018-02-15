@@ -2,6 +2,7 @@ import fontawesome from "@fortawesome/fontawesome";
 
 import {
     faAngleDoubleRight,
+    faArchive,
     faArrowCircleRight,
     faArrowRight,
     faCog,
@@ -12,6 +13,7 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 fontawesome.library.add(
     faAngleDoubleRight,
+    faArchive,
     faArrowCircleRight,
     faArrowRight,
     faCog,

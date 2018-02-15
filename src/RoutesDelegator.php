@@ -27,6 +27,7 @@ class RoutesDelegator
             Action\UploadAction::class,
             Action\ValidateAction::class,
         ], 'upload');
+        $app->post('/applications/batch-geocoder/validate', Action\ValidateAction::class, 'validate');
         $app->get('/applications/batch-geocoder/geocode', Action\GeocodeAction::class, 'geocode');
         $app->get('/applications/batch-geocoder/geocode/process', Action\GeocodeProcessAction::class, 'geocode.process');
         $app->get('/applications/batch-geocoder/geocode/choose', Action\GeocodeChooseAction::class, 'geocode.choose');
