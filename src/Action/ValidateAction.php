@@ -57,13 +57,13 @@ class ValidateAction implements MiddlewareInterface
 
                     $update = $sql->update();
                     $update->set([
-                        'valid' => new Expression('true'),
+                        'valid'      => new Expression('true'),
                         'validation' => new Expression('hstore(ARRAY[\'postalcode\', ?, \'locality\', ?])', $valid),
                     ]);
                     $update->where([
-                        'valid' => new Expression('false'),
+                        'valid'      => new Expression('false'),
                         'postalcode' => $postalcode,
-                        'locality' => $locality,
+                        'locality'   => $locality,
                     ]);
 
                     $qsz = $sql->buildSqlString($update);
@@ -80,8 +80,8 @@ class ValidateAction implements MiddlewareInterface
 
         if ($suggestions !== false && !empty($suggestions)) {
             $data = [
-                'title' => substr($config['name'], strpos($config['name'], '/') + 1),
-                'table' => $table,
+                'title'       => substr($config['name'], strpos($config['name'], '/') + 1),
+                'table'       => $table,
                 'suggestions' => $suggestions,
             ];
 
