@@ -52,6 +52,14 @@ class GeocodeProcessAction implements MiddlewareInterface
         $geocoder->registerProvider($chain);
 
         $select = $sql->select();
+        $select->columns([
+            'id',
+            'streetname',
+            'housenumber',
+            'postalcode',
+            'locality',
+            'validation' => new Expression('hstore_to_json(validation)'),
+        ]);
         $select->where
             ->equalTo('valid', 't')
             ->isNull('process_count');
@@ -71,11 +79,13 @@ class GeocodeProcessAction implements MiddlewareInterface
             ];
 
             foreach ($results as $r) {
+                $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
+
                 $address = Address::createFromArray([
                     'streetNumber' => $r->housenumber,
                     'streetName'   => str_replace('/', '', $r->streetname), // Issue with SPW service
-                    'postalCode'   => $r->postalcode,
-                    'locality'     => $r->locality,
+                    'postalCode'   => isset($validation->postalcode) ? $validation->postalcode : $r->postalcode,
+                    'locality'     => isset($validation->locality) ? $validation->locality : $r->locality,
                 ]);
 
                 $formatter = new StringFormatter();

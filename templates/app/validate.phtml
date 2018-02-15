@@ -1,0 +1,70 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('stylesheet') ?>
+    <link rel="stylesheet" href="./css/style.css">
+<?php $this->stop() ?>
+
+<?php $this->start('scripts') ?>
+    <script src="./js/batch-geocoder.min.js"></script>
+<?php $this->stop() ?>
+
+<div class="container">
+    <h1><?=$this->translate('Validate')?></h1>
+    <hr>
+    <dl>
+        <dt><?=$this->translate('Table')?></dt>
+        <dd><?=$this->e($table)?></dd>
+    </dl>
+    <hr>
+
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis, ipsum ac sodales egestas, elit magna consectetur velit, at semper ligula ligula ac erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula fringilla dui, ac congue tortor sollicitudin quis. Duis hendrerit elit sit amet risus tristique viverra. In sodales varius ex. Aliquam velit libero, ullamcorper a risus eu, sollicitudin efficitur metus. Duis vel risus ut magna mattis fermentum. Quisque vitae metus at est ultrices rhoncus non sed mauris. Proin in malesuada ex, ac pulvinar eros. Etiam nec accumsan enim.
+    </p>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <a href="./geocode" class="btn btn-danger btn-block">
+                <i class="far fa-times-circle"></i>
+                <?=$this->translate('Skip all')?>
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
+    <form action="./validate" method="post">
+        <table class="table table-striped">
+            <tbody>
+            <?php foreach ($suggestions as $postalcode => $suggest): ?>
+                <?php foreach ($suggest as $locality => $sugg): ?>
+                    <tr>
+                        <td class="align-middle"><?=$postalcode?></td>
+                        <td class="align-middle"><?=$locality?></td>
+                        <td>
+                            <select class="form-control" name="validate[<?=$postalcode?>][<?=$locality?>]">
+                            <?php foreach ($sugg as $s): ?>
+                                <option value="<?=$s['postalcode']?>|<?=$s['name']?>"><?=$s['postalcode']?> - <?=$s['name']?></option>
+                            <?php endforeach ?>
+                            </select>
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning btn-skip-validation">
+                                <i class="far fa-times-circle"></i>
+                                <?=$this->translate('Skip')?>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary btn-block" name="action" value="validate">
+                    <i class="far fa-check-circle"></i>
+                    <?=$this->translate('Save')?>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
