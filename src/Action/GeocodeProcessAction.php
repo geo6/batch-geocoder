@@ -90,7 +90,6 @@ class GeocodeProcessAction implements MiddlewareInterface
                 ]);
 
                 $formatter = new StringFormatter();
-                $validated = false;
 
                 $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
                 $query = $query->withLocale(Locale::getDefault());
@@ -111,10 +110,11 @@ class GeocodeProcessAction implements MiddlewareInterface
 
                         if ($validator->isValid($result->first()) === true) {
                             $updateData['process_address'] = $formatter->format($result->first(), '%n %S, %z %L');
-                            /*$processData['coordinates'] = [
+                            $updateData['the_geog'] = new Expression(sprintf(
+                                'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
                                 $result->first()->getCoordinates()->getLongitude(),
-                                $result->first()->getCoordinates()->getLatitude(),
-                            ];*/
+                                $result->first()->getCoordinates()->getLatitude()
+                            ));
 
                             $data['countSingle']++;
                         } else {
@@ -126,14 +126,6 @@ class GeocodeProcessAction implements MiddlewareInterface
                 } else {
                     $data['countNoResult']++;
                 }
-
-                /*if (isset($coordinates)) {
-                    $updateData['the_geog'] = new Expression(sprintf(
-                        'ST_MakePoint(%f, %f)',
-                        $coordinates->getLongitude(),
-                        $coordinates->getLatitude()
-                    ));
-                }*/
 
                 $update = $sql->update();
                 $update->set($updateData);
