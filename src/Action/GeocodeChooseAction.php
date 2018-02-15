@@ -109,8 +109,8 @@ class GeocodeChooseAction implements MiddlewareInterface
             $result = $results->current();
 
             $address = Address::createFromArray([
-                'streetNumber' => $result->housenumber,
-                'streetName'   => str_replace('/', '', $result->streetname), // Issue with SPW service
+                'streetNumber' => str_replace('/', '-', $result->housenumber), // Issue with SPW service
+                'streetName'   => str_replace('/', '-', $result->streetname), // Issue with SPW service
                 'postalCode'   => $result->postalcode,
                 'locality'     => $result->locality,
             ]);

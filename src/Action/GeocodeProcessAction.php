@@ -82,8 +82,8 @@ class GeocodeProcessAction implements MiddlewareInterface
                 $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
 
                 $address = Address::createFromArray([
-                    'streetNumber' => $r->housenumber,
-                    'streetName'   => str_replace('/', '', $r->streetname), // Issue with SPW service
+                    'streetNumber' => str_replace('/', '-', $r->housenumber), // Issue with SPW service
+                    'streetName'   => str_replace('/', '-', $r->streetname), // Issue with SPW service
                     'postalCode'   => isset($validation->postalcode) ? $validation->postalcode : $r->postalcode,
                     'locality'     => isset($validation->locality) ? $validation->locality : $r->locality,
                 ]);
