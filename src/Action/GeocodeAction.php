@@ -87,11 +87,7 @@ class GeocodeAction implements MiddlewareInterface
         $countGeocoded->where
             ->equalTo('valid', 't')
             ->isNotNull('process_count')
-            ->nest()
-            ->equalTo('process_count', 1)
-            ->or
-            ->equalTo('process_count', -1)
-            ->unnest();
+            ->isNotNull('process_address');
 
         $qsz = $sql->buildSqlString($countGeocoded);
         $resultGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
