@@ -11,6 +11,7 @@ use Geocoder\Model\Address;
 use Geocoder\Provider;
 use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
+use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -95,17 +96,16 @@ class GeocodeChooseAction implements MiddlewareInterface
         $results = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         if ($results->count() > 0) {
-            $geocoder = new ProviderAggregator();
             $client = new Guzzle6Client();
 
-            $geocoder->registerProviders([
-                new Provider\Addok\Addok($client, 'http://addok.geocode.be/'),
+            $geocoderExternal = new ProviderAggregator();
+            $geocoderExternal->registerProviders([
                 new Provider\UrbIS\UrbIS($client),
                 new Provider\Geopunt\Geopunt($client),
                 new Provider\SPW\SPW($client),
                 new Provider\bpost\bpost($client),
             ]);
-            $providers = array_keys($geocoder->getProviders());
+            $providers = array_keys($geocoderExternal->getProviders());
 
             $result = $results->current();
 
@@ -119,15 +119,28 @@ class GeocodeChooseAction implements MiddlewareInterface
             $formatter = new StringFormatter();
 
             $addresses = [];
+
+            $geocoder = new StatefulGeocoder(new Provider\Addok\Addok($client, 'http://addok.geocode.be/'));
+            $collection = $geocoder->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%n %S, %z %L')));
+            foreach ($collection as $addr) {
+                $providedBy = $addr->getProvidedBy();
+                if (!isset($addresses[$providedBy])) {
+                    $addresses[$providedBy] = [];
+                }
+                $addresses[$providedBy][] = [
+                    'address' => $formatter->format($addr, '%S %n, %z %L'),
+                ];
+            }
+
             foreach ($providers as $provider) {
-                $collection = $geocoder->using($provider)->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%n %S, %z %L')));
+                $collection = $geocoderExternal->using($provider)->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
                 foreach ($collection as $addr) {
                     $providedBy = $addr->getProvidedBy();
                     if (!isset($addresses[$providedBy])) {
                         $addresses[$providedBy] = [];
                     }
                     $addresses[$providedBy][] = [
-                        'address' => $formatter->format($addr, '%n %S, %z %L'),
+                        'address' => $formatter->format($addr, '%S %n, %z %L'),
                     ];
                 }
             }
@@ -138,7 +151,7 @@ class GeocodeChooseAction implements MiddlewareInterface
             $data = [
                 'title'   => substr($config['name'], strpos($config['name'], '/') + 1),
                 'table'   => $table,
-                'address' => $formatter->format($address, '%n %S, %z %L'),
+                'address' => $formatter->format($address, '%S %n, %z %L'),
                 'id'      => $result->id,
                 'results' => $addresses,
             ];

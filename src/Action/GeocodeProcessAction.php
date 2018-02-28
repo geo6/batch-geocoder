@@ -13,11 +13,13 @@ use Geocoder\Model\Address;
 use Geocoder\Provider;
 use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
+use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Locale;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\JsonResponse;
@@ -26,6 +28,9 @@ use Zend\Expressive\Session\SessionMiddleware;
 class GeocodeProcessAction implements MiddlewareInterface
 {
     public const LIMIT = 25;
+    public const RESULT_MULTIPLE = 2;
+    public const RESULT_NORESULT = 0;
+    public const RESULT_SINGLE = 1;
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
@@ -37,21 +42,19 @@ class GeocodeProcessAction implements MiddlewareInterface
 
         $table = $session->get('table');
 
-        $sql = new Sql($adapter, $table);
-
-        $geocoder = new ProviderAggregator();
         $client = new Guzzle6Client();
 
+        $geocoder = new StatefulGeocoder(new Provider\Addok\Addok($client, 'http://addok.geocode.be/'));
+        $geocoderExternal = new ProviderAggregator();
         $chain = new BatchGeocoderProvider([
-            new Provider\Addok\Addok($client, 'http://addok.geocode.be/'),
             new Provider\UrbIS\UrbIS($client),
             new Provider\Geopunt\Geopunt($client),
             new Provider\SPW\SPW($client),
             new Provider\bpost\bpost($client),
         ], $adapter);
+        $geocoderExternal->registerProvider($chain);
 
-        $geocoder->registerProvider($chain);
-
+        $sql = new Sql($adapter, $table);
         $select = $sql->select();
         $select->columns([
             'id',
@@ -91,40 +94,28 @@ class GeocodeProcessAction implements MiddlewareInterface
 
                 $formatter = new StringFormatter();
 
-                $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
-                $query = $query->withLocale(Locale::getDefault());
-                $query = $query->withData('address', $address);
-                $result = $geocoder->geocodeQuery($query);
-                $count = $result->count();
-
-                $updateData = [
-                    'process_datetime' => date('c'),
-                    'process_count'    => $count,
-                ];
-
-                if ($count >= 1) {
-                    $updateData['process_provider'] = $result->first()->getProvidedBy();
-
-                    if ($count === 1) {
-                        $validator = new AddressValidator($query->getData('address'), $adapter);
-
-                        if ($validator->isValid($result->first()) === true) {
-                            $updateData['process_address'] = $formatter->format($result->first(), '%n %S, %z %L');
-                            $updateData['the_geog'] = new Expression(sprintf(
-                                'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                                $result->first()->getCoordinates()->getLongitude(),
-                                $result->first()->getCoordinates()->getLatitude()
-                            ));
-
-                            $data['countSingle']++;
-                        } else {
-                            $data['countMultiple']++;
-                        }
-                    } else {
-                        $data['countMultiple']++;
-                    }
+                $count = -1;
+                $query = self::geocode($geocoder, $address, '%n %S, %z %L', $adapter, $count);
+                if ($count === self::RESULT_SINGLE) {
+                    $updateData = $query;
+                    $data['countSingle']++;
                 } else {
-                    $data['countNoResult']++;
+                    $countExternal = -1;
+                    $queryExternal = self::geocode($geocoderExternal, $address, '%S %n, %z %L', $adapter, $countExternal);
+
+                    if ($countExternal === self::RESULT_SINGLE) {
+                        $updateData = $queryExternal;
+                        $data['countSingle']++;
+                    } else if ($count === self::RESULT_MULTIPLE) {
+                        $updateData = $query;
+                        $data['countMultiple']++;
+                    } else if ($countExternal === self::RESULT_MULTIPLE) {
+                        $updateData = $queryExternal;
+                        $data['countMultiple']++;
+                    } else if ($countExternal === self::RESULT_NORESULT) {
+                        $updateData = $queryExternal;
+                        $data['countNoResult']++;
+                    }
                 }
 
                 $update = $sql->update();
@@ -137,5 +128,51 @@ class GeocodeProcessAction implements MiddlewareInterface
 
             return new JsonResponse($data);
         }
+    }
+
+    /**
+     * @param ProviderAggregator|StatefulGeocoder $geocoder Geocode instance
+     */
+    private static function geocode($geocoder, Address $address, string $format, Adapter $adapter, int &$result)
+    {
+        $formatter = new StringFormatter();
+
+        $query = GeocodeQuery::create($formatter->format($address, $format));
+        $query = $query->withLocale(Locale::getDefault());
+        $query = $query->withData('address', $address);
+        $result = $geocoder->geocodeQuery($query);
+        $count = $result->count();
+
+        $updateData = [
+            'process_datetime' => date('c'),
+            'process_count'    => $count,
+        ];
+
+        if ($count >= 1) {
+            $updateData['process_provider'] = $result->first()->getProvidedBy();
+
+            if ($count === 1) {
+                $validator = new AddressValidator($query->getData('address'), $adapter);
+
+                if ($validator->isValid($result->first()) === true) {
+                    $updateData['process_address'] = $formatter->format($result->first(), '%S %n, %z %L');
+                    $updateData['the_geog'] = new Expression(sprintf(
+                        'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                        $result->first()->getCoordinates()->getLongitude(),
+                        $result->first()->getCoordinates()->getLatitude()
+                    ));
+
+                    $result = self::RESULT_SINGLE;
+                } else {
+                    $result = self::RESULT_MULTIPLE;
+                }
+            } else {
+                $result = self::RESULT_MULTIPLE;
+            }
+        } else {
+            $result = self::RESULT_NORESULT;
+        }
+
+        return $updateData;
     }
 }

@@ -61,7 +61,7 @@ class ViewAction implements MiddlewareInterface
             $formatter = new StringFormatter();
 
             $diff = Text::renderDiff(Text::diff(
-                $formatter->format($address, '%n %S, %z %L'),
+                $formatter->format($address, '%S %n, %z %L'),
                 $r->process_address
             ));
 
@@ -92,7 +92,7 @@ class ViewAction implements MiddlewareInterface
                 'locality'     => $r->locality,
             ]);
 
-            $addressNotGeocoded[] = $formatter->format($address, '%n %S, %z %L');
+            $addressNotGeocoded[] = $formatter->format($address, '%S %n, %z %L');
         }
 
         $select = $sql->select();
@@ -112,7 +112,7 @@ class ViewAction implements MiddlewareInterface
               'locality'     => $r->locality,
             ]);
 
-            $addressInvalid[] = $formatter->format($address, '%n %S, %z %L');
+            $addressInvalid[] = $formatter->format($address, '%S %n, %z %L');
         }
 
         $data = [
