@@ -106,13 +106,13 @@ class GeocodeProcessAction implements MiddlewareInterface
                     if ($countExternal === self::RESULT_SINGLE) {
                         $updateData = $queryExternal;
                         $data['countSingle']++;
-                    } else if ($count === self::RESULT_MULTIPLE) {
+                    } elseif ($count === self::RESULT_MULTIPLE) {
                         $updateData = $query;
                         $data['countMultiple']++;
-                    } else if ($countExternal === self::RESULT_MULTIPLE) {
+                    } elseif ($countExternal === self::RESULT_MULTIPLE) {
                         $updateData = $queryExternal;
                         $data['countMultiple']++;
-                    } else if ($countExternal === self::RESULT_NORESULT) {
+                    } elseif ($countExternal === self::RESULT_NORESULT) {
                         $updateData = $queryExternal;
                         $data['countNoResult']++;
                     }
