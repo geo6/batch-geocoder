@@ -346,16 +346,16 @@
         },
         {
             "name": "geo6/geocoder-php-spw-provider",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geo6/geocoder-php-spw-provider.git",
-                "reference": "a076a567b53cae47583ca267a9daf5d30cf4c07f"
+                "reference": "0703bf148d450da3504e4cd4b842aa18ad6c6f89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geo6/geocoder-php-spw-provider/zipball/a076a567b53cae47583ca267a9daf5d30cf4c07f",
-                "reference": "a076a567b53cae47583ca267a9daf5d30cf4c07f",
+                "url": "https://api.github.com/repos/geo6/geocoder-php-spw-provider/zipball/0703bf148d450da3504e4cd4b842aa18ad6c6f89",
+                "reference": "0703bf148d450da3504e4cd4b842aa18ad6c6f89",
                 "shasum": ""
             },
             "require": {
@@ -394,7 +394,7 @@
                 }
             ],
             "description": "Geocoder Service Public de Wallonie adapter",
-            "time": "2018-03-05T14:39:59+00:00"
+            "time": "2018-03-07T14:46:20+00:00"
         },
         {
             "name": "geo6/geocoder-php-urbis-provider",
