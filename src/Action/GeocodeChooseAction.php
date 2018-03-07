@@ -73,6 +73,11 @@ class GeocodeChooseAction implements MiddlewareInterface
                     'process_count'    => -1,
                     'process_provider' => $query['provider'],
                     'process_address'  => $address['address'],
+                    'the_geog'         => new Expression(sprintf(
+                        'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                        $address['longitude'],
+                        $address['latitude']
+                    )),
                 ]);
                 $update->where(['id' => $query['id']]);
 
