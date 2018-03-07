@@ -5,3 +5,4 @@ public/js/
 vendor/
 .ftpconfig
 .npmrc
+package-lock.json
