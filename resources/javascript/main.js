@@ -1,8 +1,12 @@
 require("./fontawesome");
 
+import initMap from "./map.js";
+import geocodeProcess from "./geocodeProcess.js";
+
 window.app = {};
 window.app.fn = {
-    geocodeProcess: require("./geocodeProcess")
+    geocodeProcess: geocodeProcess,
+    initMap: initMap
 };
 window.app.geocode = {
     count: 0,

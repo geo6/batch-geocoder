@@ -1,4 +1,4 @@
-var fnGeocodeProcess = function () {
+export default function geocodeProcess() {
   fetch("./geocode/process", {
     cache: "no-cache",
     credentials: "same-origin",
@@ -72,5 +72,3 @@ var fnGeocodeProcess = function () {
     }
   });
 };
-
-module.exports = fnGeocodeProcess;

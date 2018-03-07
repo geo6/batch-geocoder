@@ -128,7 +128,9 @@ class GeocodeChooseAction implements MiddlewareInterface
                     $addresses[$providedBy] = [];
                 }
                 $addresses[$providedBy][] = [
-                    'address' => $formatter->format($addr, '%S %n, %z %L'),
+                    'address'   => $formatter->format($addr, '%S %n, %z %L'),
+                    'longitude' => $addr->getCoordinates()->getLongitude(),
+                    'latitude'  => $addr->getCoordinates()->getLatitude(),
                 ];
             }
 
@@ -140,7 +142,9 @@ class GeocodeChooseAction implements MiddlewareInterface
                         $addresses[$providedBy] = [];
                     }
                     $addresses[$providedBy][] = [
-                        'address' => $formatter->format($addr, '%S %n, %z %L'),
+                        'address'   => $formatter->format($addr, '%S %n, %z %L'),
+                        'longitude' => $addr->getCoordinates()->getLongitude(),
+                        'latitude'  => $addr->getCoordinates()->getLatitude(),
                     ];
                 }
             }

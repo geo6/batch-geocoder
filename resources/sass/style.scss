@@ -7,3 +7,18 @@ ins {
     font-weight: bold;
     text-decoration: none;
 }
+
+.ol-attribution.ol-logo-only,
+.ol-attribution.ol-uncollapsible {
+    height: 1.5em !important;
+    max-width: calc(100% - 3em) !important;
+}
+.ol-control button, .ol-attribution, .ol-scale-line-inner {
+    font-family: 'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif !important;
+}
+
+.btn-text {
+    font-size: 75%;
+    line-height: 1;
+    padding: .25em .4em;
+}
