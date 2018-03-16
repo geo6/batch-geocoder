@@ -6,7 +6,7 @@
     "ol": "4.6.4"
   },
   "devDependencies": {
-    "css-loader": "0.28.10",
+    "css-loader": "0.28.11",
     "node-sass": "4.8.2",
     "sass-loader": "6.0.7",
     "style-loader": "0.20.3",
