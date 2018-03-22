@@ -1646,16 +1646,16 @@
         },
         {
             "name": "zendframework/zend-component-installer",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-component-installer.git",
-                "reference": "fe99e61e69e12890b3bad8152dd5bba5e5a16766"
+                "reference": "788b74439fff056b848c47aeb3d8b63cf2fb2161"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-component-installer/zipball/fe99e61e69e12890b3bad8152dd5bba5e5a16766",
-                "reference": "fe99e61e69e12890b3bad8152dd5bba5e5a16766",
+                "url": "https://api.github.com/repos/zendframework/zend-component-installer/zipball/788b74439fff056b848c47aeb3d8b63cf2fb2161",
+                "reference": "788b74439fff056b848c47aeb3d8b63cf2fb2161",
                 "shasum": ""
             },
             "require": {
@@ -1694,7 +1694,7 @@
                 "plugin",
                 "zf"
             ],
-            "time": "2018-02-08T15:24:34+00:00"
+            "time": "2018-03-21T16:53:56+00:00"
         },
         {
             "name": "zendframework/zend-config",
