@@ -1,7 +1,9 @@
-require("./fontawesome");
+/*global $*/
 
-import initMap from "./map.js";
-import geocodeProcess from "./geocodeProcess.js";
+require('./fontawesome');
+
+import initMap from './map.js';
+import geocodeProcess from './geocodeProcess.js';
 
 window.app = {};
 window.app.fn = {
@@ -23,12 +25,12 @@ window.app.geocode = {
 
 $(document).ready(function () {
     if (window.app.geocode.launch === true) {
-        $("#btn-geocode-launch, #btn-geocode-reset").addClass("disabled");
+        $('#btn-geocode-launch, #btn-geocode-reset').addClass('disabled');
 
         window.app.fn.geocodeProcess();
     }
 
-    $(".btn-skip-validation").on("click", function () {
-        $(this).closest("tr").find("select").prop("disabled", true);
+    $('.btn-skip-validation').on('click', function () {
+        $(this).closest('tr').find('select').prop('disabled', true);
     });
 });

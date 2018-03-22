@@ -1,8 +1,28 @@
-config/application/
+# Composer files
+composer.phar
+vendor/
+
+# NPM files
 node_modules/
+
+# Local configs
+config/autoload/*.local.php
+
+# Binary gettext files
+*.mo
+
+# Data
+data/logs/
+data/cache/
+data/sessions/
+data/tmp/
+temp/
+
+# Misc.
+config/application/
 public/css/
 public/js/
-vendor/
 .ftpconfig
+
 .npmrc
 package-lock.json

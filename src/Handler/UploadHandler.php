@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use App\Middleware\DbAdapterMiddleware;
 use ErrorException;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Sql\Ddl;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\RedirectResponse;
@@ -22,7 +22,7 @@ use Zend\Validator\File\Extension;
 use Zend\Validator\File\MimeType;
 use Zend\Validator\ValidatorChain;
 
-class UploadAction implements MiddlewareInterface
+class UploadHandler implements RequestHandlerInterface
 {
     private $flashMessages;
     private $router;
@@ -41,7 +41,7 @@ class UploadAction implements MiddlewareInterface
         return new RedirectResponse($this->router->generateUri('home'));
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
@@ -92,7 +92,11 @@ class UploadAction implements MiddlewareInterface
                     // Load data
                     $pg = $adapter->getDriver()->getConnection()->getResource();
 
-                    $qsz = sprintf('COPY "%s" (id, streetname, housenumber, postalcode, locality) FROM STDIN WITH (FORMAT csv)', $tablename);
+
+                    $qsz = sprintf(
+                        'COPY "%s" (id, streetname, housenumber, postalcode, locality) FROM STDIN WITH (FORMAT csv)',
+                        $tablename
+                    );
                     pg_query($pg, $qsz);
 
                     $handle = fopen($path, 'r');

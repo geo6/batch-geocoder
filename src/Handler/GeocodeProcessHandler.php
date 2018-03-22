@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
@@ -15,24 +15,24 @@ use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Locale;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Session\SessionMiddleware;
 
-class GeocodeProcessAction implements MiddlewareInterface
+class GeocodeProcessHandler implements RequestHandlerInterface
 {
     public const LIMIT = 25;
     public const RESULT_MULTIPLE = 2;
     public const RESULT_NORESULT = 0;
     public const RESULT_SINGLE = 1;
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -88,7 +88,11 @@ class GeocodeProcessAction implements MiddlewareInterface
                 $address = Address::createFromArray([
                     'streetNumber' => str_replace('/', '-', $r->housenumber), // Issue with SPW service
                     'streetName'   => str_replace('/', '-', $r->streetname), // Issue with SPW service
-                    'postalCode'   => isset($validation->postalcode) ? $validation->postalcode : $r->postalcode,
+                    'postalCode'   => (
+                        isset($validation->postalcode) ?
+                            (string) $validation->postalcode :
+                            (string) $r->postalcode
+                    ),
                     'locality'     => isset($validation->locality) ? $validation->locality : $r->locality,
                 ]);
 
@@ -101,7 +105,13 @@ class GeocodeProcessAction implements MiddlewareInterface
                     $data['countSingle']++;
                 } else {
                     $countExternal = -1;
-                    $queryExternal = self::geocode($geocoderExternal, $address, '%S %n, %z %L', $adapter, $countExternal);
+                    $queryExternal = self::geocode(
+                        $geocoderExternal,
+                        $address,
+                        '%S %n, %z %L',
+                        $adapter,
+                        $countExternal
+                    );
 
                     if ($countExternal === self::RESULT_SINGLE) {
                         $updateData = $queryExternal;

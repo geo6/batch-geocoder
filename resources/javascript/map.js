@@ -1,3 +1,5 @@
+/*global $*/
+
 import 'ol/ol.css';
 
 import Map from 'ol/map';
@@ -62,22 +64,22 @@ export default function initMap() {
                 source: source,
                 style: function(feature) {
                     let fill = new Fill({
-                      color: feature.getProperties().properties.color
+                        color: feature.getProperties().properties.color
                     });
                     let stroke = new Stroke({
-                      color: '#FFF',
-                      width: 2
+                        color: '#FFF',
+                        width: 2
                     });
                     return [
-                      new Style({
-                        image: new Circle({
-                          fill: fill,
-                          stroke: stroke,
-                          radius: 5
-                        }),
-                        fill: fill,
-                        stroke: stroke
-                      })
+                        new Style({
+                            image: new Circle({
+                                fill: fill,
+                                stroke: stroke,
+                                radius: 5
+                            }),
+                            fill: fill,
+                            stroke: stroke
+                        })
                     ];
                 }
             })
@@ -90,4 +92,4 @@ export default function initMap() {
     });
 
     window.app.map.getView().fit(source.getExtent());
-};
+}

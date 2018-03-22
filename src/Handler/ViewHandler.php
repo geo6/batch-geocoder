@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use Geo6\Text\Text;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class ViewAction implements MiddlewareInterface
+class ViewHandler implements RequestHandlerInterface
 {
     private $router;
     private $template;
@@ -29,7 +29,7 @@ class ViewAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -54,7 +54,7 @@ class ViewAction implements MiddlewareInterface
             $address = Address::createFromArray([
                 'streetNumber' => $r->housenumber,
                 'streetName'   => $r->streetname,
-                'postalCode'   => $r->postalcode,
+                'postalCode'   => (string) $r->postalcode,
                 'locality'     => $r->locality,
             ]);
 
@@ -88,7 +88,7 @@ class ViewAction implements MiddlewareInterface
             $address = Address::createFromArray([
                 'streetNumber' => $r->housenumber,
                 'streetName'   => $r->streetname,
-                'postalCode'   => $r->postalcode,
+                'postalCode'   => (string) $r->postalcode,
                 'locality'     => $r->locality,
             ]);
 
@@ -108,7 +108,7 @@ class ViewAction implements MiddlewareInterface
             $address = Address::createFromArray([
               'streetNumber' => $r->housenumber,
               'streetName'   => $r->streetname,
-              'postalCode'   => $r->postalcode,
+              'postalCode'   => (string) $r->postalcode,
               'locality'     => $r->locality,
             ]);
 

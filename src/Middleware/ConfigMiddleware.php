@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\ConfigAggregator\ConfigAggregator;
 use Zend\ConfigAggregator\ZendConfigProvider;
 
@@ -15,13 +15,13 @@ class ConfigMiddleware implements MiddlewareInterface
 {
     public const CONFIG_ATTRIBUTE = 'config';
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
         $config = new ConfigAggregator([
-            new ZendConfigProvider('../composer.json'),
-            new ZendConfigProvider('../config/application/*.{php,ini,xml,json,yaml}'),
+            new ZendConfigProvider('./composer.json'),
+            new ZendConfigProvider('./config/application/*.{php,ini,xml,json,yaml}'),
         ]);
 
-        return $delegate->process($request->withAttribute(self::CONFIG_ATTRIBUTE, $config->getMergedConfig()));
+        return $handler->handle($request->withAttribute(self::CONFIG_ATTRIBUTE, $config->getMergedConfig()));
     }
 }

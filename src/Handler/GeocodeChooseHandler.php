@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
@@ -13,9 +13,9 @@ use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -24,7 +24,7 @@ use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class GeocodeChooseAction implements MiddlewareInterface
+class GeocodeChooseHandler implements RequestHandlerInterface
 {
     private $router;
     private $template;
@@ -35,7 +35,7 @@ class GeocodeChooseAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -117,7 +117,7 @@ class GeocodeChooseAction implements MiddlewareInterface
             $address = Address::createFromArray([
                 'streetNumber' => str_replace('/', '-', $result->housenumber), // Issue with SPW service
                 'streetName'   => str_replace('/', '-', $result->streetname), // Issue with SPW service
-                'postalCode'   => $result->postalcode,
+                'postalCode'   => (string) $result->postalcode,
                 'locality'     => $result->locality,
             ]);
 
@@ -140,7 +140,9 @@ class GeocodeChooseAction implements MiddlewareInterface
             }
 
             foreach ($providers as $provider) {
-                $collection = $geocoderExternal->using($provider)->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
+                $collection = $geocoderExternal
+                    ->using($provider)
+                    ->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
                 foreach ($collection as $addr) {
                     $providedBy = $addr->getProvidedBy();
                     if (!isset($addresses[$providedBy])) {

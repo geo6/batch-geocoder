@@ -1,4 +1,4 @@
-import fontawesome from "@fortawesome/fontawesome";
+import fontawesome from '@fortawesome/fontawesome';
 
 import {
     faAngleDoubleRight,
@@ -10,7 +10,7 @@ import {
     faSync,
     faUpload,
     faUser
-} from "@fortawesome/fontawesome-free-solid";
+} from '@fortawesome/fontawesome-free-solid';
 fontawesome.library.add(
     faAngleDoubleRight,
     faArchive,
@@ -32,7 +32,7 @@ import {
     faRocket,
     faTable,
     faTimesCircle
-} from "@fortawesome/fontawesome-pro-regular";
+} from '@fortawesome/fontawesome-pro-regular';
 fontawesome.library.add(
     faCheckCircle,
     faEraser,

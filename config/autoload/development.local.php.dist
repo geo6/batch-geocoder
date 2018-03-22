@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Development-only configuration.
  *
@@ -9,7 +8,9 @@
  * Developers on your team will then automatically enable them by calling on
  * `composer development-enable`.
  */
-use Zend\ConfigAggregator\ConfigAggregator;
+
+declare(strict_types=1);
+
 use Zend\Expressive\Container;
 use Zend\Expressive\Middleware\ErrorResponseGenerator;
 
@@ -24,16 +25,11 @@ return [
         ],
     ],
 
-    'debug'                        => true,
-    ConfigAggregator::ENABLE_CACHE => false,
-
     'whoops' => [
-/*
         'json_exceptions' => [
             'display'    => true,
             'show_trace' => true,
             'ajax_only'  => true,
         ],
-*/
     ],
 ];

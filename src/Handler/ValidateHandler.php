@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Action;
+namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use Geo6\Text\Text;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
@@ -23,7 +23,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 /**
  * @see http://www.bpost.be/site/fr/envoyer/adressage/rechercher-un-code-postal/
  */
-class ValidateAction implements MiddlewareInterface
+class ValidateHandler implements RequestHandlerInterface
 {
     private $router;
     private $template;
@@ -34,7 +34,7 @@ class ValidateAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
