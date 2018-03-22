@@ -92,7 +92,6 @@ class UploadHandler implements RequestHandlerInterface
                     // Load data
                     $pg = $adapter->getDriver()->getConnection()->getResource();
 
-
                     $qsz = sprintf(
                         'COPY "%s" (id, streetname, housenumber, postalcode, locality) FROM STDIN WITH (FORMAT csv)',
                         $tablename
