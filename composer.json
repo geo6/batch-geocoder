@@ -67,6 +67,7 @@
         "gettext:nl_BE:po": "mkdir -p locale/nl_BE && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=locale/nl_BE",
         "gettext:nl_BE:mo": "msgfmt -c -o locale/nl_BE/messages.mo locale/nl_BE/messages.po",
         "init:directory": "mkdir -p data/cache && mkdir -p data/upload && sudo chmod -R 0777 data/",
-        "init:sql": "sudo -u postgres createuser --pwprompt geocode && sudo -u postgres psql -f scripts/create-database.sql && sudo -u postgres psql -f scripts/create-extension.sql geocode"
+        "init:sql": "sudo -u postgres createuser --pwprompt geocode && sudo -u postgres psql -f scripts/create-database.sql && sudo -u postgres psql -f scripts/create-extension.sql geocode",
+        "git:pull": "git fetch --all && git reset --hard origin/master && git pull origin master"
     }
 }
