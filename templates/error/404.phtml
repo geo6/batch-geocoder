@@ -1,5 +1,8 @@
-<?php $this->layout('layout::error', ['title' => 'Geocoder']) ?>
+<?php $this->layout('layout::default', ['title' => '404 Not Found']) ?>
 
-<div class="jumbotron mt-3">
-  <h1><i class="fas fa-exclamation-circle"></i> <?=_('Error 404 - Not found')?></h1>
+<div class="container">
+    <h1><?=$this->translate('Oops!')?></h1>
+    <h2><?=$this->translate('This is awkward.')?></h2>
+    <p><?=$this->translate('We encountered a "404 Not Found" error')?>.</p>
+    <p><?=sprintf($this->translate('You are looking for something that doesn\'t exist or may have moved. Check out one of the links on this page or head back to <a href="%s">Home</a>.'), $this->url('home'))?></p>
 </div>

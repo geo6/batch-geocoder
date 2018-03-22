@@ -6,13 +6,19 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<?php if (isset($navbar)): ?>
-        <ul class="navbar-nav mr-auto">
-<?php foreach($navbar as $navbarLink): ?>
-          <li class="nav-item">
-            <a class="nav-link" href="<?=$this->e($navbarLink->link)?>"><?=$this->e($navbarLink->title)?></a>
-          </li>
-<?php endforeach ?>
+<?php if (isset($identity)): ?>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle" title="<?=$identity?>"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?=$this->url('logout')?>">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <?=$this->translate('Log out')?>
+                    </a>
+                </div>
+            </li>
         </ul>
 <?php endif ?>
     </div>

@@ -1,11 +1,6 @@
 <?php $this->layout('layout::default', ['title' => $title]) ?>
 
-<?php $this->start('stylesheet') ?>
-    <link rel="stylesheet" href="./css/style.css">
-<?php $this->stop() ?>
-
 <?php $this->start('scripts') ?>
-    <script src="./js/batch-geocoder.min.js"></script>
     <script>
       window.app.geocode.launch = <?=json_encode($launch)?>;
       window.app.geocode.total = <?=$count?>;

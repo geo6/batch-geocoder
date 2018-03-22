@@ -1,6 +1,10 @@
-<?php $this->layout('layout::error', ['title' => 'Geocoder']) ?>
+<?php $this->layout('layout::default', ['title' => sprintf('%d %s', $status, $reason)]) ?>
 
-<div class="jumbotron mt-3">
-  <h1><i class="fas fa-exclamation-circle"></i> <?=_('Error 405 - Method Not Allowed')?></h1>
-  <?php var_dump($allowedMethods); ?>
+<div class="container">
+    <h1><?=$this->translate('Oops!')?></h1>
+    <h2><?=$this->translate('This is awkward.')?></h2>
+    <p><?=sprintf($this->translate('We encountered a "%d %s" error.'), $status, $reason)?></p>
+    <?php if ($status == 404) : ?>
+        <p><?=sprintf($this->translate('You are looking for something that doesn\'t exist or may have moved. Check out one of the links on this page or head back to <a href="%s">Home</a>.'), $this->url('home'))?></p>
+    <?php endif; ?>
 </div>
