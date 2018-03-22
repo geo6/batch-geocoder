@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-22 15:59+0100\n"
+"PO-Revision-Date: 2018-03-22 16:06+0100\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.5\n"
+
+msgid "Choose the correct result"
+msgstr ""
+
+msgid "Geocode"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Skip"
+msgstr ""
+
+msgid "View on map"
+msgstr ""
+
+msgid "Record count"
+msgstr ""
+
+#, php-format
+msgid "%d record"
+msgid_plural "%d records"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Progress"
+msgstr ""
+
+#, php-format
+msgid "%d invalid record(s)"
+msgstr ""
+
+#, php-format
+msgid "%d not geocoded record(s)"
+msgstr ""
+
+#, php-format
+msgid "%d geocoded record(s)"
+msgstr ""
+
+msgid "Launch process"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Single result"
+msgstr ""
+
+msgid "Multiple result"
+msgstr ""
+
+msgid "No result"
+msgstr ""
+
+msgid "Data structure"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Must be unique"
+msgstr ""
+
+msgid "Streetname"
+msgstr ""
+
+msgid "House number"
+msgstr ""
+
+msgid "Postal code"
+msgstr ""
+
+msgid "Locality"
+msgstr ""
+
+msgid "An error occured :"
+msgstr ""
+
+msgid ""
+"You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must "
+"be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>. Your file "
+"must not have a header."
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Archives"
+msgstr ""
+
+msgid "Load"
+msgstr ""
+
+msgid "Validate"
+msgstr ""
+
+msgid "Skip all"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "Geocoded"
+msgstr ""
+
+msgid "Not geocoded"
+msgstr ""
+
+msgid "Invalid"
+msgstr ""
+
+msgid "Oops!"
+msgstr ""
+
+msgid "This is awkward."
+msgstr ""
+
+msgid "We encountered a \"404 Not Found\" error"
+msgstr ""
+
+#, php-format
+msgid ""
+"You are looking for something that doesn't exist or may have moved. Check "
+"out one of the links on this page or head back to <a href=\"%s\">Home</a>."
+msgstr ""
+
+#, php-format
+msgid "We encountered a \"%d %s\" error."
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Results"
+msgstr ""

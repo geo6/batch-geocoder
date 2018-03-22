@@ -65,17 +65,17 @@
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/ -d display_errors=1",
         "gettext": [
-            "@gettext:fr_BE:po",
-            "@gettext:nl_BE:po"
+            "@gettext:fr:po",
+            "@gettext:nl:po"
         ],
         "gettext:mo": [
-            "@gettext:fr_BE:mo",
-            "@gettext:nl_BE:mo"
+            "@gettext:fr:mo",
+            "@gettext:nl:mo"
         ],
-        "gettext:fr_BE:po": "mkdir -p locale/fr_BE && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=locale/fr_BE",
-        "gettext:fr_BE:mo": "msgfmt -c -o locale/fr_BE/messages.mo locale/fr_BE/messages.po",
-        "gettext:nl_BE:po": "mkdir -p locale/nl_BE && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=locale/nl_BE",
-        "gettext:nl_BE:mo": "msgfmt -c -o locale/nl_BE/messages.mo locale/nl_BE/messages.po",
+        "gettext:fr:po": "mkdir -p data/locale/fr && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/fr",
+        "gettext:fr:mo": "msgfmt -c -o data/locale/fr/messages.mo data/locale/fr/messages.po",
+        "gettext:nl:po": "mkdir -p data/locale/nl && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/nl",
+        "gettext:nl:mo": "msgfmt -c -o data/locale/nl/messages.mo data/locale/nl/messages.po",
         "init:directory": "mkdir -p data/cache && mkdir -p data/upload && sudo chmod -R 0777 data/",
         "init:sql": "sudo -u postgres createuser --pwprompt geocode && sudo -u postgres psql -f scripts/create-database.sql && sudo -u postgres psql -f scripts/create-extension.sql geocode",
         "git:pull": "git fetch --all && git reset --hard origin/master && git pull origin master"

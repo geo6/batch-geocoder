@@ -33,7 +33,7 @@ class LocalizationMiddleware implements MiddlewareInterface
             $locale = Locale::acceptFromHttp($server['HTTP_ACCEPT_LANGUAGE']);
             Locale::setDefault(Locale::getPrimaryLanguage($locale));
         } else {
-            Locale::setDefault('en_US');
+            Locale::setDefault('en');
         }
 
         return $handler->handle($request->withAttribute(self::LOCALIZATION_ATTRIBUTE, Locale::getDefault()));
