@@ -1927,16 +1927,16 @@
         },
         {
             "name": "zendframework/zend-expressive",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive.git",
-                "reference": "7cbc574376f0a6712c98a7fc2afdcc385dc5fc9c"
+                "reference": "4ea54ed15906c0e06d5211daf88a00ed36a0df83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/7cbc574376f0a6712c98a7fc2afdcc385dc5fc9c",
-                "reference": "7cbc574376f0a6712c98a7fc2afdcc385dc5fc9c",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/4ea54ed15906c0e06d5211daf88a00ed36a0df83",
+                "reference": "4ea54ed15906c0e06d5211daf88a00ed36a0df83",
                 "shasum": ""
             },
             "require": {
@@ -2015,7 +2015,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-03-19T16:15:11+00:00"
+            "time": "2018-04-10T16:22:30+00:00"
         },
         {
             "name": "zendframework/zend-expressive-fastroute",
