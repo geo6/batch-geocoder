@@ -4,10 +4,10 @@ vendor/
 
 # NPM files
 node_modules/
-package-lock.json
 
 # Local configs
 config/autoload/*.local.php
+config/development.config.php
 
 # Binary gettext files
 *.mo
@@ -24,4 +24,6 @@ config/application/
 public/css/
 public/js/
 .ftpconfig
+
 .npmrc
+package-lock.json
