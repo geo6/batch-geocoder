@@ -20,7 +20,7 @@
         "php-http/guzzle6-adapter": "1.1.1",
         "php-http/message": "1.6.0",
         "zendframework/zend-component-installer": "2.1.1",
-        "zendframework/zend-config": "3.1.0",
+        "zendframework/zend-config": "3.2.0",
         "zendframework/zend-config-aggregator": "1.1.1",
         "zendframework/zend-db": "2.9.3",
         "zendframework/zend-diactoros": "1.7.1",
