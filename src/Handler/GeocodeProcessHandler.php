@@ -86,8 +86,8 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
 
                 $address = Address::createFromArray([
-                    'streetNumber' => str_replace('/', '-', $r->housenumber), // Issue with SPW service
-                    'streetName'   => str_replace('/', '-', $r->streetname), // Issue with SPW service
+                    'streetNumber' => $r->housenumber,
+                    'streetName'   => $r->streetname,
                     'postalCode'   => (
                         isset($validation->postalcode) ?
                             (string) $validation->postalcode :
