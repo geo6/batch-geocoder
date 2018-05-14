@@ -9,8 +9,8 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/app/batch-geocoder/', App\Handler\HomeHandler::class, 'home');
     $app->post('/app/batch-geocoder/upload', [
-        Action\Handler\UploadHandler::class,
-        Action\Handler\ValidateHandler::class,
+        App\Handler\UploadHandler::class,
+        App\Handler\ValidateHandler::class,
     ], 'upload');
     $app->route('/app/batch-geocoder/validate', App\Handler\ValidateHandler::class, ['GET', 'POST'], 'validate');
     $app->get('/app/batch-geocoder/geocode', App\Handler\GeocodeHandler::class, 'geocode');
