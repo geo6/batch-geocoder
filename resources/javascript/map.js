@@ -57,7 +57,8 @@ export default function initMap() {
             new TileLayer({
                 source: new OSMSource({
                     attributions: [OSMSource.ATTRIBUTION, 'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>'],
-                    url: 'https://tile.geo6.be/osmbe/{z}/{x}/{y}.png'
+                    url: 'https://tile.geo6.be/osmbe/{z}/{x}/{y}.png',
+                    maxZoom: 18
                 })
             }),
             new VectorLayer({
