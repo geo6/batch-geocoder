@@ -13,6 +13,7 @@ use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;
+use Locale;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -115,18 +116,36 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $result = $results->current();
 
             $address = Address::createFromArray([
-                'streetNumber' => str_replace('/', '-', $result->housenumber), // Issue with SPW service
-                'streetName'   => str_replace('/', '-', $result->streetname), // Issue with SPW service
-                'postalCode'   => (string) $result->postalcode,
-                'locality'     => $result->locality,
+                'streetNumber' => trim($result->housenumber),
+                'streetName'   => trim($result->streetname),
+                'postalCode'   => trim(
+                    isset($validation->postalcode) ?
+                        (string) $validation->postalcode :
+                        (string) $result->postalcode
+                ),
+                'locality'     => trim(
+                    isset($validation->locality) ?
+                        $validation->locality :
+                        $result->locality
+                ),
             ]);
 
             $formatter = new StringFormatter();
 
             $addresses = [];
 
-            $geocoder = new StatefulGeocoder(new Provider\Addok\Addok($client, 'http://addok.geocode.be/'));
-            $collection = $geocoder->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%n %S, %z %L')));
+            $geocoder = new StatefulGeocoder(new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']));
+
+            $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
+            $query = $query->withLocale(Locale::getDefault());
+            $query = $query->withData('address', $address);
+
+            $query = $query->withData('streetName', $address->getStreetName());
+            $query = $query->withData('streetNumber', $address->getStreetNumber());
+            $query = $query->withData('locality', $address->getLocality());
+            $query = $query->withData('postalCode', $address->getPostalCode());
+
+            $collection = $geocoder->geocodeQuery($query);
             foreach ($collection as $addr) {
                 $providedBy = $addr->getProvidedBy();
                 if (!isset($addresses[$providedBy])) {

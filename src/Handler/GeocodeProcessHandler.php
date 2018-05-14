@@ -44,7 +44,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         $client = new Guzzle6Client();
 
-        $geocoder = new StatefulGeocoder(new Provider\Addok\Addok($client, 'http://addok.geocode.be/'));
+        $geocoder = new StatefulGeocoder(new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']));
         $geocoderExternal = new ProviderAggregator();
         $chain = new BatchGeocoderProvider([
             new Provider\UrbIS\UrbIS($client),
@@ -86,14 +86,18 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
 
                 $address = Address::createFromArray([
-                    'streetNumber' => $r->housenumber,
-                    'streetName'   => $r->streetname,
-                    'postalCode'   => (
+                    'streetNumber' => trim($r->housenumber),
+                    'streetName'   => trim($r->streetname),
+                    'postalCode'   => trim(
                         isset($validation->postalcode) ?
                             (string) $validation->postalcode :
                             (string) $r->postalcode
                     ),
-                    'locality'     => isset($validation->locality) ? $validation->locality : $r->locality,
+                    'locality'     => trim(
+                        isset($validation->locality) ?
+                            $validation->locality :
+                            $r->locality
+                    ),
                 ]);
 
                 $formatter = new StringFormatter();
@@ -150,6 +154,12 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $query = GeocodeQuery::create($formatter->format($address, $format));
         $query = $query->withLocale(Locale::getDefault());
         $query = $query->withData('address', $address);
+
+        $query = $query->withData('streetName', $address->getStreetName());
+        $query = $query->withData('streetNumber', $address->getStreetNumber());
+        $query = $query->withData('locality', $address->getLocality());
+        $query = $query->withData('postalCode', $address->getPostalCode());
+
         $result = $geocoder->geocodeQuery($query);
         $count = $result->count();
 
