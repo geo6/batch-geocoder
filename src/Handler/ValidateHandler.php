@@ -62,8 +62,8 @@ class ValidateHandler implements RequestHandlerInterface
                     ]);
                     $update->where([
                         'valid'      => new Expression('false'),
-                        'postalcode' => $postalcode,
-                        'locality'   => $locality,
+                        'postalcode' => empty($postalcode) ? '' : $postalcode,
+                        'locality'   => empty($locality) ? '' : $locality,
                     ]);
 
                     $qsz = $sql->buildSqlString($update);
