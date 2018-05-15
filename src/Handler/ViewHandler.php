@@ -12,6 +12,7 @@ use Geocoder\Model\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Router\RouterInterface;
@@ -38,6 +39,20 @@ class ViewHandler implements RequestHandlerInterface
         $table = $session->get('table');
 
         $sql = new Sql($adapter, $table);
+
+        $reset = $sql->update();
+        $reset->set([
+            'process_count'    => 0,
+            'process_provider' => new Expression('NULL'),
+            'process_address'  => new Expression('NULL'),
+            'the_geog'         => new Expression('NULL'),
+        ]);
+        $reset->where
+            ->equalTo('valid', 't')
+            ->isNull('process_address');
+
+        $qsz = $sql->buildSqlString($reset);
+        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         $select = $sql->select();
         $select->where
