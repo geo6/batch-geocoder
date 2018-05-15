@@ -6,8 +6,6 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use Geo6\Text\Text;
-use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -50,7 +48,7 @@ class MapHandler implements RequestHandlerInterface
             'process_count',
             'process_provider',
             'process_address',
-            'the_geog' => new Expression('ST_AsGeoJSON("the_geog")')
+            'the_geog' => new Expression('ST_AsGeoJSON("the_geog")'),
         ]);
         $select->where
             ->equalTo('valid', 't')
@@ -62,15 +60,15 @@ class MapHandler implements RequestHandlerInterface
         $resultsGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         $geojson = [
-            'type' => 'FeatureCollection',
+            'type'     => 'FeatureCollection',
             'features' => [],
         ];
         foreach ($resultsGeocoded as $r) {
             $geojson['features'][] = [
-                'type' => 'Feature',
-                'id' => $r->id,
+                'type'       => 'Feature',
+                'id'         => $r->id,
                 'properties' => [
-                    'address' => $r->streetname,
+                    'address'  => $r->streetname,
                     'provider' => $r->process_provider,
                 ],
                 'geometry' => json_decode($r->the_geog),
