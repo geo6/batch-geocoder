@@ -13,7 +13,6 @@ use Zend\Db\Metadata\Metadata;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Flash\FlashMessageMiddleware;
 use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomeHandler implements RequestHandlerInterface
@@ -31,10 +30,7 @@ class HomeHandler implements RequestHandlerInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
-        $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-
-        $session->regenerate(); // Force session generation otherwise session does not seem to be generated. Why ???
 
         $query = $request->getQueryParams();
 
