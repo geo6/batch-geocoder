@@ -1,0 +1,21 @@
+<?php $this->layout('layout::default', ['title' => $title]) ?>
+
+<?php $this->start('scripts') ?>
+    <script>
+        $(document).ready(function () {
+            window.app.fn.initMap(<?=json_encode($geojson)?>);
+        });
+    </script>
+<?php $this->stop() ?>
+
+<div class="container">
+    <h1>
+        <?=$this->translate('Map')?>
+        <a href="<?=$this->url('view')?>" class="btn btn-lg btn-outline-primary float-right" style="text-decoration: none;">
+            <i class="fas fa-list-ul"></i>
+            <?=$this->translate('List')?>
+        </a>
+    </h1>
+    <hr>
+    <div id="map"></div>
+</div>

@@ -1,7 +1,13 @@
 <?php $this->layout('layout::default', ['title' => $title]) ?>
 
 <div class="container">
-    <h1><?=$this->translate('View')?></h1>
+    <h1>
+        <?=$this->translate('Results')?>
+        <a href="<?=$this->url('map')?>" class="btn btn-lg btn-outline-primary float-right" style="text-decoration: none;">
+            <i class="far fa-map"></i>
+            <?=$this->translate('Map')?>
+        </a>
+    </h1>
     <hr>
     <ul class="nav nav-tabs" id="tabs" role="tablist">
         <li class="nav-item">

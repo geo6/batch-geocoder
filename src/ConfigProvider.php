@@ -40,6 +40,7 @@ class ConfigProvider
                 Handler\GeocodeHandler::class       => Handler\Factory\GeocodeHandlerFactory::class,
                 Handler\GeocodeChooseHandler::class => Handler\Factory\GeocodeChooseHandlerFactory::class,
                 Handler\HomeHandler::class          => Handler\Factory\HomeHandlerFactory::class,
+                Handler\MapHandler::class           => Handler\Factory\MapHandlerFactory::class,
                 Handler\UploadHandler::class        => Handler\Factory\UploadHandlerFactory::class,
                 Handler\ValidateHandler::class      => Handler\Factory\ValidateHandlerFactory::class,
                 Handler\ViewHandler::class          => Handler\Factory\ViewHandlerFactory::class,

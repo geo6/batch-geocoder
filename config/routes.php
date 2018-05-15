@@ -17,4 +17,5 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/app/batch-geocoder/geocode/process', App\Handler\GeocodeProcessHandler::class, 'geocode.process');
     $app->get('/app/batch-geocoder/geocode/choose', App\Handler\GeocodeChooseHandler::class, 'geocode.choose');
     $app->get('/app/batch-geocoder/view', App\Handler\ViewHandler::class, 'view');
+    $app->get('/app/batch-geocoder/map', App\Handler\MapHandler::class, 'map');
 };
