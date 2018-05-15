@@ -6,6 +6,7 @@ import {
     faArrowRight,
     faCog,
     faMapMarkerAlt,
+    faSave,
     faSync,
     faUpload,
     faUser
@@ -35,6 +36,7 @@ library.add(
     faMap,
     faMapMarkerAlt,
     faRocket,
+    faSave,
     faSync,
     faTable,
     faTimesCircle,

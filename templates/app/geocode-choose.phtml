@@ -3,7 +3,7 @@
 <?php $this->start('scripts') ?>
     <script>
         $(document).ready(function () {
-            window.app.fn.initMap();
+            window.app.fn.initMapChoose();
         });
     </script>
 <?php $this->stop() ?>
@@ -20,10 +20,13 @@
         <div class="col">
             <div class="text-primary">
                 <strong><?=$this->translate('Address')?></strong>:
-                <?=$this->e($address)?>
+                <?=$this->e($address)?><br>
+                <i class="fas fa-arrow-right"></i>
+                <span id="selection"></span>
             </div>
         </div>
         <div class="col text-right">
+            <a href="#" class="btn btn-primary disabled" data-id="<?=$id?>" id="btn-save"><i class="fas fa-save"></i> <?=$this->translate('Save')?></a>
             <a href="?skip=<?=$this->e($id)?>" class="btn btn-outline-danger"><?=$this->translate('Skip')?> <i class="fas fa-angle-double-right"></i></a>
         </div>
     </div>
@@ -31,15 +34,12 @@
     <div class="row">
         <div class="col" id="results">
             <?php foreach ($results as $provider => $addresses) : ?>
-            <div>
+            <div data-provider="<?=$provider?>">
                 <h2><i class="fas fa-map-marker-alt"></i> <?=$this->translate($provider)?></h2>
                 <ul>
                     <?php foreach ($addresses as $i => $addr) : ?>
-                        <li>
-                            <a href="?id=<?=$id?>&amp;provider=<?=$provider?>&amp;address=<?=$i?>"><?=$this->e($addr['address'])?></a>
-                            <button class="btn btn-info btn-text float-right" data-longitude="<?=$addr['longitude']?>" data-latitude="<?=$addr['latitude']?>">
-                                <?=$this->translate('View on map')?>
-                            </button>
+                        <li data-longitude="<?=$addr['longitude']?>" data-latitude="<?=$addr['latitude']?>" data-id="<?=$id?>" data-address="<?=$i?>">
+                            <?=$this->e($addr['address'])?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

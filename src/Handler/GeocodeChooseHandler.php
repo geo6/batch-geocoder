@@ -159,19 +159,23 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             }
 
             foreach ($providers as $provider) {
-                $collection = $geocoderExternal
-                    ->using($provider)
-                    ->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
-                foreach ($collection as $addr) {
-                    $providedBy = $addr->getProvidedBy();
-                    if (!isset($addresses[$providedBy])) {
-                        $addresses[$providedBy] = [];
+                try {
+                    $collection = $geocoderExternal
+                        ->using($provider)
+                        ->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
+                    foreach ($collection as $addr) {
+                        $providedBy = $addr->getProvidedBy();
+                        if (!isset($addresses[$providedBy])) {
+                            $addresses[$providedBy] = [];
+                        }
+                        $addresses[$providedBy][] = [
+                            'address'   => $formatter->format($addr, '%S %n, %z %L'),
+                            'longitude' => $addr->getCoordinates()->getLongitude(),
+                            'latitude'  => $addr->getCoordinates()->getLatitude(),
+                        ];
                     }
-                    $addresses[$providedBy][] = [
-                        'address'   => $formatter->format($addr, '%S %n, %z %L'),
-                        'longitude' => $addr->getCoordinates()->getLongitude(),
-                        'latitude'  => $addr->getCoordinates()->getLatitude(),
-                    ];
+                } catch (\Geocoder\Exception\InvalidServerResponse $e) {
+                    // Todo : add log
                 }
             }
 

@@ -2,13 +2,13 @@
 
 require('./fontawesome');
 
-import initMap from './map.js';
+import initMapChoose from './map-choose.js';
 import geocodeProcess from './geocodeProcess.js';
 
 window.app = {};
 window.app.fn = {
     geocodeProcess: geocodeProcess,
-    initMap: initMap
+    initMapChoose: initMapChoose
 };
 window.app.geocode = {
     count: 0,

@@ -21,7 +21,30 @@ import View from 'ol/view';
 
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
 
-export default function initMap() {
+function selectAddress(provider, address, recenter) {
+    let li = $('#results > div[data-provider=' + provider + '] > ul > li[data-address=' + address + ']');
+    let data = $.extend($(li).data(), $(li).closest('div').data());
+    let coordinates = [
+        data.longitude,
+        data.latitude
+    ];
+
+    $('#results > div > ul > li.text-primary').removeClass('text-primary');
+    $(li).addClass('text-primary');
+
+    $('#selection').text($(li).text());
+    $('#btn-save').removeClass('disabled').
+        attr('href', '?id=' + $('#btn-save').data('id') + '&provider=' + data.provider + '&address=' + data.address);
+
+    if (recenter === true) {
+        window.app.map.getView().animate({
+            zoom: 17,
+            center: Proj.fromLonLat(coordinates)
+        });
+    }
+}
+
+export default function initMapChoose() {
     $('#results > div').each(function(index) {
         $(this).data('color', colors[index]);
         $(this).find('h2 > svg').css('color', colors[index]);
@@ -29,25 +52,25 @@ export default function initMap() {
 
     let source = new VectorSource();
 
-    $('#results > div > ul > li > button').each(function() {
+    $('#results > div > ul > li').each(function() {
+        let data = $.extend($(this).data(), $(this).closest('div').data());
         let coordinates = [
-            $(this).data('longitude'),
-            $(this).data('latitude')
+            data.longitude,
+            data.latitude
         ];
-        let color = $(this).closest('div').data('color');
+        let color = data.color;
 
         source.addFeature(new Feature({
             geometry: new Point(Proj.fromLonLat(coordinates)),
             properties: {
-                color: color
+                address: data.address,
+                color: color,
+                provider: data.provider
             }
         }));
 
-        $(this).on('click', function() {
-            window.app.map.getView().animate({
-                zoom: 17,
-                center: Proj.fromLonLat(coordinates)
-            });
+        $(this).on('click', function () {
+            selectAddress(data.provider, data.address, true);
         });
     });
 
@@ -93,4 +116,19 @@ export default function initMap() {
     });
 
     window.app.map.getView().fit(source.getExtent());
+
+    window.app.map.on('click', function (event) {
+        let features = this.getFeaturesAtPixel(event.pixel);
+
+        if (features !== null && features.length > 0) {
+            let properties = features[0].getProperties().properties;
+
+            selectAddress(properties.provider, properties.address);
+        } else {
+            $('#results > div > ul > li.text-primary').removeClass('text-primary');
+            $('#selection').text('');
+            $('#btn-save').addClass('disabled').
+                attr('href', '#');
+        }
+    });
 }
