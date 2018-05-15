@@ -62,8 +62,7 @@ final class BatchGeocoderProvider implements Provider
                         }
                     }
                 }
-            }
-            catch (\Geocoder\Exception\InvalidServerResponse $e) {
+            } catch (\Geocoder\Exception\InvalidServerResponse $e) {
                 // Todo: Add log !!
             }
         }
