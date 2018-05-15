@@ -44,22 +44,27 @@ final class BatchGeocoderProvider implements Provider
         $validator = new AddressValidator($query->getData('address'), $this->adapter);
 
         foreach ($this->providers as $provider) {
-            $result = $provider->geocodeQuery($query);
+            try {
+                $result = $provider->geocodeQuery($query);
 
-            if (!$result->isEmpty()) {
-                if (is_null($firstNotEmptyResult)) {
-                    $firstNotEmptyResult = $result;
-                }
+                if (!$result->isEmpty()) {
+                    if (is_null($firstNotEmptyResult)) {
+                        $firstNotEmptyResult = $result;
+                    }
 
-                if ($result->count() === 1) {
-                    if ($validator->isValid($result->first()) === true) {
-                        return $result;
-                    }
-                } elseif ($result->count() > 1) {
-                    if (self::extract($query, $result, $this->adapter) === true) {
-                        return $result;
+                    if ($result->count() === 1) {
+                        if ($validator->isValid($result->first()) === true) {
+                            return $result;
+                        }
+                    } elseif ($result->count() > 1) {
+                        if (self::extract($query, $result, $this->adapter) === true) {
+                            return $result;
+                        }
                     }
                 }
+            }
+            catch (\Geocoder\Exception\InvalidServerResponse $e) {
+                // Todo: Add log !!
             }
         }
 
