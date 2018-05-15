@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0e5b3239e735423f6a060dbcb378d03",
+    "content-hash": "5134038e50c9e84ab04c3a50225076cb",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -192,57 +192,6 @@
             "time": "2017-02-09T16:10:21+00:00"
         },
         {
-            "name": "geo6/geocoder-php-addok-provider",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/geo6/geocoder-php-addok-provider.git",
-                "reference": "6fe7a2b9c35e010e2416de5075aabf6bc9179e25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/geo6/geocoder-php-addok-provider/zipball/6fe7a2b9c35e010e2416de5075aabf6bc9179e25",
-                "reference": "6fe7a2b9c35e010e2416de5075aabf6bc9179e25",
-                "shasum": ""
-            },
-            "require": {
-                "geocoder-php/common-http": "^4.0",
-                "php": "^7.0",
-                "willdurand/geocoder": "^4.0"
-            },
-            "provide": {
-                "geocoder-php/provider-implementation": "1.0"
-            },
-            "require-dev": {
-                "geocoder-php/provider-integration-tests": "^1.0",
-                "nyholm/psr7": "^0.2.2",
-                "php-http/curl-client": "^1.7",
-                "php-http/message": "^1.0",
-                "phpunit/phpunit": "6.3.*|6.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Geocoder\\Provider\\Addok\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Beliën",
-                    "email": "jbe@geo6.be"
-                }
-            ],
-            "description": "Geocoder addok adapter",
-            "time": "2018-02-12T16:53:19+00:00"
-        },
-        {
             "name": "geo6/geocoder-php-bpost-provider",
             "version": "v1.1.2",
             "source": {
@@ -292,6 +241,57 @@
             ],
             "description": "Geocoder bpost adapter",
             "time": "2018-01-30T13:14:12+00:00"
+        },
+        {
+            "name": "geo6/geocoder-php-geo6-provider",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geo6/geocoder-php-geo6-provider.git",
+                "reference": "a6bb55c1bc42d1307d7bead465b2ff307f9f15fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geo6/geocoder-php-geo6-provider/zipball/a6bb55c1bc42d1307d7bead465b2ff307f9f15fc",
+                "reference": "a6bb55c1bc42d1307d7bead465b2ff307f9f15fc",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.0",
+                "php": "^7.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.0",
+                "nyholm/psr7": "^0.2.2",
+                "php-http/curl-client": "^1.7",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "6.3.*|6.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\Geo6\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Beliën",
+                    "email": "jbe@geo6.be"
+                }
+            ],
+            "description": "Geocoder Geo-6 adapter",
+            "time": "2018-05-11T13:17:15+00:00"
         },
         {
             "name": "geo6/geocoder-php-geopunt-provider",
@@ -2394,16 +2394,16 @@
         },
         {
             "name": "zendframework/zend-expressive-session-ext",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-session-ext.git",
-                "reference": "0735a9ab2a09eae52a7793fa5722dc7ac848d048"
+                "reference": "b1102131c1e2293026a15b82d1ea459b8f3a9dcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-session-ext/zipball/0735a9ab2a09eae52a7793fa5722dc7ac848d048",
-                "reference": "0735a9ab2a09eae52a7793fa5722dc7ac848d048",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-session-ext/zipball/b1102131c1e2293026a15b82d1ea459b8f3a9dcb",
+                "reference": "b1102131c1e2293026a15b82d1ea459b8f3a9dcb",
                 "shasum": ""
             },
             "require": {
@@ -2449,7 +2449,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-05-10T17:34:33+00:00"
+            "time": "2018-05-14T15:11:54+00:00"
         },
         {
             "name": "zendframework/zend-expressive-template",
@@ -3001,6 +3001,57 @@
                 "whoops"
             ],
             "time": "2017-11-23T18:22:44+00:00"
+        },
+        {
+            "name": "geo6/geocoder-php-addok-provider",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geo6/geocoder-php-addok-provider.git",
+                "reference": "6fe7a2b9c35e010e2416de5075aabf6bc9179e25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geo6/geocoder-php-addok-provider/zipball/6fe7a2b9c35e010e2416de5075aabf6bc9179e25",
+                "reference": "6fe7a2b9c35e010e2416de5075aabf6bc9179e25",
+                "shasum": ""
+            },
+            "require": {
+                "geocoder-php/common-http": "^4.0",
+                "php": "^7.0",
+                "willdurand/geocoder": "^4.0"
+            },
+            "provide": {
+                "geocoder-php/provider-implementation": "1.0"
+            },
+            "require-dev": {
+                "geocoder-php/provider-integration-tests": "^1.0",
+                "nyholm/psr7": "^0.2.2",
+                "php-http/curl-client": "^1.7",
+                "php-http/message": "^1.0",
+                "phpunit/phpunit": "6.3.*|6.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Geocoder\\Provider\\Addok\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Beliën",
+                    "email": "jbe@geo6.be"
+                }
+            ],
+            "description": "Geocoder addok adapter",
+            "time": "2018-02-12T16:53:19+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
