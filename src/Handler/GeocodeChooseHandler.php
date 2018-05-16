@@ -88,6 +88,26 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
             $session->unset('id');
             $session->unset('addresses');
+        } elseif (isset($query['id'], $query['longitude'], $query['latitude']) && $query['id'] === $session->get('id')) {
+            $update = $sql->update();
+            $update->set([
+                'process_datetime' => date('c'),
+                'process_count'    => -1,
+                'process_provider' => 'manual',
+                'process_address'  => '',
+                'the_geog'         => new Expression(sprintf(
+                    'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                    $query['longitude'],
+                    $query['latitude']
+                )),
+            ]);
+            $update->where(['id' => $query['id']]);
+
+            $qsz = $sql->buildSqlString($update);
+            $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+            $session->unset('id');
+            $session->unset('addresses');
         }
 
         $select = $sql->select();

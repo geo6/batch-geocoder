@@ -119,7 +119,7 @@ export default function initMapChoose() {
         padding: [5,5,5,5]
     });
 
-    window.app.map.on('click', function (event) {
+    window.app.map.on('singleclick', function (event) {
         let features = this.getFeaturesAtPixel(event.pixel);
 
         if (features !== null && features.length > 0) {
@@ -127,10 +127,24 @@ export default function initMapChoose() {
 
             selectAddress(properties.provider, properties.address);
         } else {
+            let coordinates = window.app.map.getCoordinateFromPixel(event.pixel);
+            let lnglat = Proj.toLonLat(coordinates);
+
             $('#results > div > ul > li.text-primary').removeClass('text-primary');
             $('#selection').text('');
             $('#btn-save').addClass('disabled').
                 attr('href', '#');
+
+            if (window.app.map.getView().getZoom() < 17) {
+                alert('Please zoom in to set the location by clicking in the map !');
+            } else {
+                $('#selection').text(
+                    Math.round(lnglat[0] * 1000000) / 1000000 + ', ' +
+                    Math.round(lnglat[1] * 1000000) / 1000000
+                );
+                $('#btn-save').removeClass('disabled').
+                    attr('href', '?id=' + $('#btn-save').data('id') + '&longitude=' + lnglat[0] + '&latitude=' + lnglat[1]);
+            }
         }
     });
 }
