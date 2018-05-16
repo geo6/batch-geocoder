@@ -75,4 +75,16 @@ export default function initMap(geojson) {
     });
 
     window.app.map.getView().fit(source.getExtent());
+
+    window.app.map.on('singleclick', function (event) {
+        let features = this.getFeaturesAtPixel(event.pixel);
+
+        if (features !== null && features.length > 0) {
+            let properties = features[0].getProperties();
+
+            $('#address').text(properties.address).show();
+        } else {
+            $('#address').empty().hide();
+        }
+    });
 }

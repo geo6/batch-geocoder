@@ -6,6 +6,7 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
+use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -64,11 +65,20 @@ class MapHandler implements RequestHandlerInterface
             'features' => [],
         ];
         foreach ($resultsGeocoded as $r) {
+            $address = Address::createFromArray([
+                'streetNumber' => $r->housenumber,
+                'streetName'   => $r->streetname,
+                'postalCode'   => (string) $r->postalcode,
+                'locality'     => $r->locality,
+            ]);
+
+            $formatter = new StringFormatter();
+
             $geojson['features'][] = [
                 'type'       => 'Feature',
                 'id'         => $r->id,
                 'properties' => [
-                    'address'  => $r->streetname,
+                    'address'  => $formatter->format($address, '%n %S, %z %L'),
                     'provider' => $r->process_provider,
                 ],
                 'geometry' => json_decode($r->the_geog),
