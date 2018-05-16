@@ -23,6 +23,9 @@ ins {
     padding: .25em .4em;
 }
 
+#map {
+    min-height: 350px;
+}
 #results > div > ul > li {
     cursor: pointer;
 
