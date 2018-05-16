@@ -157,7 +157,6 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $geocoder = new StatefulGeocoder(new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']));
 
             $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
-            $query = $query->withLocale(Locale::getDefault());
             $query = $query->withData('address', $address);
 
             $query = $query->withData('streetName', $address->getStreetName());

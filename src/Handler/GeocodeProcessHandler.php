@@ -152,7 +152,6 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $formatter = new StringFormatter();
 
         $query = GeocodeQuery::create($formatter->format($address, $format));
-        $query = $query->withLocale(Locale::getDefault());
         $query = $query->withData('address', $address);
 
         $query = $query->withData('streetName', $address->getStreetName());
