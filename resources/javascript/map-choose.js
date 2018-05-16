@@ -115,7 +115,9 @@ export default function initMapChoose() {
         })
     });
 
-    window.app.map.getView().fit(source.getExtent());
+    window.app.map.getView().fit(source.getExtent(), {
+        padding: [5,5,5,5]
+    });
 
     window.app.map.on('click', function (event) {
         let features = this.getFeaturesAtPixel(event.pixel);
