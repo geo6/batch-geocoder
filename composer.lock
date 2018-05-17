@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5134038e50c9e84ab04c3a50225076cb",
+    "content-hash": "874f9f2f462c268fccfc4d7389ba4c34",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -244,16 +244,16 @@
         },
         {
             "name": "geo6/geocoder-php-geo6-provider",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geo6/geocoder-php-geo6-provider.git",
-                "reference": "a6bb55c1bc42d1307d7bead465b2ff307f9f15fc"
+                "reference": "9f88ce0bd19ceefe16d520208bdebc6449cfca38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geo6/geocoder-php-geo6-provider/zipball/a6bb55c1bc42d1307d7bead465b2ff307f9f15fc",
-                "reference": "a6bb55c1bc42d1307d7bead465b2ff307f9f15fc",
+                "url": "https://api.github.com/repos/geo6/geocoder-php-geo6-provider/zipball/9f88ce0bd19ceefe16d520208bdebc6449cfca38",
+                "reference": "9f88ce0bd19ceefe16d520208bdebc6449cfca38",
                 "shasum": ""
             },
             "require": {
@@ -291,7 +291,7 @@
                 }
             ],
             "description": "Geocoder Geo-6 adapter",
-            "time": "2018-05-11T13:17:15+00:00"
+            "time": "2018-05-16T14:32:30+00:00"
         },
         {
             "name": "geo6/geocoder-php-geopunt-provider",
