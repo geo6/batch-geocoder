@@ -111,7 +111,7 @@ class ValidateHandler implements RequestHandlerInterface
             ->notIn(
                 new Expression('unaccent(UPPER("locality"))'),
                 (new Select('validation_bpost'))->where(
-                    $adapter->getPlatform()->quoteIdentifierChain([$table, 'postalcode']) . ' = '.
+                    $adapter->getPlatform()->quoteIdentifierChain([$table, 'postalcode']).' = '.
                     $adapter->getPlatform()->quoteIdentifierChain(['validation_bpost', 'postalcode'])
                 )->columns(['normalized'])
             );

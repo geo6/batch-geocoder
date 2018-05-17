@@ -92,7 +92,7 @@ final class Address
 
         if ($streetNumber1 === $streetNumber2) {
             return true;
-        } else if (intval($streetNumber1) === intval($streetNumber2)) {
+        } elseif (intval($streetNumber1) === intval($streetNumber2)) {
             return true;
         }
 
