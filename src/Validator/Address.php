@@ -25,17 +25,38 @@ final class Address
 
     public function isValid(AddressModel $address): bool
     {
-        $streetname1 = self::filter($this->address->getStreetname());
-        $streetname2 = self::filter($address->getStreetname());
+        return $this->validatePostalCode($address) &&
+            $this->validateLocality($address) &&
+            $this->validateStreetname($address) &&
+            $this->validateStreetNumber($address);
+    }
 
-        $levenshtein = levenshtein($streetname1, $streetname2);
+    private static function filter(string $str): string
+    {
+        $filterChain = new FilterChain();
+        $filterChain
+            ->attach(new Alnum())
+            ->attach(new StringToUpper());
 
+        return $filterChain->filter(Text::removeAccents($str));
+    }
+
+    private function validatePostalCode(AddressModel $address): bool
+    {
+        $postalCode1 = $this->address->getPostalCode();
+        $postalCode2 = $address->getPostalCode();
+
+        return $postalCode1 === $postalCode2;
+    }
+
+    private function validateLocality(AddressModel $address): bool
+    {
         $locality1 = self::filter($this->address->getLocality());
         $locality2 = self::filter($address->getLocality());
 
-        if ($levenshtein < 5 && $locality1 === $locality2) {
+        if ($locality1 === $locality2) {
             return true;
-        } elseif ($levenshtein < 5) {
+        } else {
             $postalcode = $this->address->getPostalcode();
 
             $sql = new Sql($this->adapter, 'validation_bpost');
@@ -52,17 +73,29 @@ final class Address
 
             return in_array($locality2, $localities);
         }
-
-        return false;
     }
 
-    private static function filter(string $str): string
+    private function validateStreetname(AddressModel $address): bool
     {
-        $filterChain = new FilterChain();
-        $filterChain
-            ->attach(new Alnum())
-            ->attach(new StringToUpper());
+        $streetname1 = self::filter($this->address->getStreetname());
+        $streetname2 = self::filter($address->getStreetname());
 
-        return $filterChain->filter(Text::removeAccents($str));
+        $levenshtein = levenshtein($streetname1, $streetname2);
+
+        return $levenshtein < 5;
+    }
+
+    private function validateStreetNumber(AddressModel $address): bool
+    {
+        $streetNumber1 = $this->address->getStreetNumber();
+        $streetNumber2 = $address->getStreetNumber();
+
+        if ($streetNumber1 === $streetNumber2) {
+            return true;
+        } else if (intval($streetNumber1) === intval($streetNumber2)) {
+            return true;
+        }
+
+        return false;
     }
 }
