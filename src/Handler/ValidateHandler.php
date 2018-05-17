@@ -107,12 +107,14 @@ class ValidateHandler implements RequestHandlerInterface
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
-            ->isNull(new Expression('validation->\'locality\''))
+            ->isNull(new Expression('"validation"->\'locality\''))
             ->notIn(
                 new Expression('unaccent(UPPER("locality"))'),
-                (new Select(['b' => 'validation_bpost']))->where('postalcode = b."postalcode"')->columns(['normalized'])
+                (new Select('validation_bpost'))->where(
+                    $adapter->getPlatform()->quoteIdentifierChain([$table, 'postalcode']) . ' = '.
+                    $adapter->getPlatform()->quoteIdentifierChain(['validation_bpost', 'postalcode'])
+                )->columns(['normalized'])
             );
-
         $qsz = $sql->buildSqlString($update);
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
     }
