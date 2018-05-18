@@ -34,23 +34,29 @@
     </ul>
     <div class="tab-content" id="tabs-content">
         <div class="tab-pane fade show active" id="geocoded" role="tabpanel" aria-labelledby="tab-geocoded">
-            <ul class="mt-3">
+            <table class="mt-3 table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th><?=$this->translate('Source address')?></th>
+                        <th><?=$this->translate('Geocoded address')?></th>
+                        <th><?=$this->translate('Provider')?></th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php foreach ($addressGeocoded as $address): ?>
-                    <li>
-                        <div class="row">
-                            <div class="col"><?=$address[1]?></div>
-                            <div class="col-1 text-center"><i class="fas fa-arrow-right"></i></div>
-                            <div class="col"><?=$address[2]?></div>
-                            <div class="col-1 text-nowrap">
-                                <span class="badge badge-light"><?=$address[0]?></span>
-                                <?php if ($address[3] === true): ?>
-                                    <span class="badge badge-light"><i class="fas fa-user"></i></span>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                    </li>
+                    <tr>
+                        <td><?=$address[1]?></td>
+                        <td><?=$address[2]?></td>
+                        <td class="text-center text-nowrap">
+                            <span class="badge badge-light"><?=$address[0]?></span>
+                            <?php if ($address[3] === true): ?>
+                                <span class="badge badge-light"><i class="fas fa-user"></i></span>
+                            <?php endif ?>
+                        </td>
+                    </tr>
                 <?php endforeach ?>
-            </ul>
+                </tbody>
+            </table>
         </div>
         <div class="tab-pane fade" id="notgeocoded" role="tabpanel" aria-labelledby="tab-notgeocoded">
             <ul class="mt-3">
