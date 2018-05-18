@@ -58,7 +58,7 @@ class UploadHandler implements RequestHandlerInterface
             if (!is_null($file) && $file->getError() === UPLOAD_ERR_OK) {
                 $info = pathinfo($file->getClientFilename());
 
-                $directory = realpath(__DIR__.'/../../data/upload');
+                $directory = realpath('data/upload');
                 $directory = $directory.'/'.date('Y').'/'.date('m');
                 $fname = $file->getClientFilename();
 
@@ -87,7 +87,7 @@ class UploadHandler implements RequestHandlerInterface
 
                     // Create table
                     $adapter->query(
-                        sprintf(file_get_contents(__DIR__.'/../../scripts/create-table.sql'), $tablename),
+                        sprintf(file_get_contents('scripts/create-table.sql'), $tablename),
                         $adapter::QUERY_MODE_EXECUTE
                     );
 
