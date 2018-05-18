@@ -9,7 +9,6 @@ use App\Middleware\DbAdapterMiddleware;
 use ErrorException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Sql\Ddl;
 use Zend\Db\Sql\Sql;
@@ -24,7 +23,7 @@ use Zend\Validator\File\Extension;
 use Zend\Validator\File\MimeType;
 use Zend\Validator\ValidatorChain;
 
-class UploadHandler implements MiddlewareInterface
+class UploadHandler implements RequestHandlerInterface
 {
     private $flashMessages;
     private $router;
@@ -43,7 +42,7 @@ class UploadHandler implements MiddlewareInterface
         return new RedirectResponse($this->router->generateUri('home'));
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
 
@@ -147,6 +146,6 @@ class UploadHandler implements MiddlewareInterface
             return $this->flashError($e);
         }
 
-        return $handler->handle($request);
+        return new RedirectResponse($this->router->generateUri('validate'));
     }
 }
