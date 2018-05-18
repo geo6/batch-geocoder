@@ -55,6 +55,18 @@ class ViewHandler implements RequestHandlerInterface
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         $select = $sql->select();
+        $select->columns([
+            'id',
+            'streetname',
+            'housenumber',
+            'postalcode',
+            'locality',
+            'validation' => new Expression('hstore_to_json(validation)'),
+            'process_address',
+            'process_count',
+            'process_score',
+            'process_provider',
+        ]);
         $select->where
             ->equalTo('valid', 't')
             ->isNotNull('process_count')
@@ -66,11 +78,21 @@ class ViewHandler implements RequestHandlerInterface
 
         $addressGeocoded = [];
         foreach ($resultsGeocoded as $r) {
+            $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
+
             $address = Address::createFromArray([
-                'streetNumber' => $r->housenumber,
-                'streetName'   => $r->streetname,
-                'postalCode'   => (string) $r->postalcode,
-                'locality'     => $r->locality,
+                'streetNumber' => trim($r->housenumber),
+                'streetName'   => trim($r->streetname),
+                'postalCode'   => trim(
+                    isset($validation->postalcode) ?
+                        (string) $validation->postalcode :
+                        (string) $r->postalcode
+                ),
+                'locality'     => trim(
+                    isset($validation->locality) ?
+                        $validation->locality :
+                        $r->locality
+                ),
             ]);
 
             $formatter = new StringFormatter();
