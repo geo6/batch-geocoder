@@ -6,7 +6,6 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use App\Provider\BatchGeocoderProvider;
 use App\Validator\Address as AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
@@ -43,15 +42,13 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         $client = new Guzzle6Client();
 
-        $geocoder = new StatefulGeocoder(new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']));
-        $geocoderExternal = new ProviderAggregator();
-        $chain = new BatchGeocoderProvider([
+        $providers = [
+            new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']),
             new Provider\UrbIS\UrbIS($client),
             new Provider\Geopunt\Geopunt($client),
             new Provider\SPW\SPW($client),
             new Provider\bpost\bpost($client),
-        ], $adapter);
-        $geocoderExternal->registerProvider($chain);
+        ];
 
         $sql = new Sql($adapter, $table);
         $select = $sql->select();
@@ -100,57 +97,83 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 ]);
 
                 $formatter = new StringFormatter();
+                $progress = [];
+                $noresult = true;
 
-                $count = -1;
-                $query = self::geocode($geocoder, $address, '%n %S, %z %L', $adapter, $count);
-                if ($count === self::RESULT_SINGLE) {
-                    $updateData = $query;
-                    $data['countSingle']++;
-                } else {
-                    $countExternal = -1;
-                    $queryExternal = self::geocode(
-                        $geocoderExternal,
-                        $address,
-                        '%S %n, %z %L',
-                        $adapter,
-                        $countExternal
-                    );
+                foreach ($providers as $i => $provider) {
+                    switch ($provider->getName()) {
+                        case 'geo6':
+                            $format = '%n %S, %z %L';
+                            break;
 
-                    if ($countExternal === self::RESULT_SINGLE) {
-                        $updateData = $queryExternal;
+                        default:
+                            $format = '%S %n, %z %L';
+                            break;
+                    }
+
+                    $result = self::RESULT_NORESULT;
+                    $query = self::geocode($provider, $address, $format, $adapter, $result);
+
+                    $progress[$i] = $query;
+
+                    if ($result === self::RESULT_SINGLE) {
                         $data['countSingle']++;
-                    } elseif ($count === self::RESULT_MULTIPLE) {
-                        $updateData = $query;
-                        $data['countMultiple']++;
-                    } elseif ($countExternal === self::RESULT_MULTIPLE) {
-                        $updateData = $queryExternal;
-                        $data['countMultiple']++;
-                    } elseif ($countExternal === self::RESULT_NORESULT) {
-                        $updateData = $queryExternal;
-                        $data['countNoResult']++;
+                        $noresult = false;
+
+                        $update = $sql->update();
+                        $update->set($query);
+                        $update->where(['id' => $r->id]);
+
+                        $qsz = $sql->buildSqlString($update);
+                        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+                        break;
                     }
                 }
 
-                $update = $sql->update();
-                $update->set($updateData);
-                $update->where(['id' => $r->id]);
+                if ($noresult === true) {
+                    // Find the first Provider that returned results
+                    foreach ($progress as $p => $result) {
+                        if ($result['process_count'] > 0) {
+                            $data['countMultiple']++;
+                            $noresult = false;
 
-                $qsz = $sql->buildSqlString($update);
-                $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                            $update = $sql->update();
+                            $update->set($result);
+                            $update->where(['id' => $r->id]);
+
+                            $qsz = $sql->buildSqlString($update);
+                            $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+                            break;
+                        }
+                    }
+                }
+
+                if ($noresult === true) {
+                    $data['countNoResult']++;
+
+                    $update = $sql->update();
+                    $update->set([
+                        'process_count' => 0,
+                    ]);
+                    $update->where(['id' => $r->id]);
+
+                    $qsz = $sql->buildSqlString($update);
+                    $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                }
             }
 
             return new JsonResponse($data);
         }
     }
 
-    /**
-     * @param ProviderAggregator|StatefulGeocoder $geocoder Geocode instance
-     */
-    private static function geocode($geocoder, Address $address, string $format, Adapter $adapter, int &$result)
+    private static function geocode($provider, Address $address, string $format, Adapter $adapter, int &$result)
     {
         $formatter = new StringFormatter();
 
         $query = GeocodeQuery::create($formatter->format($address, $format));
+
         $query = $query->withData('address', $address);
 
         $query = $query->withData('streetName', $address->getStreetName());
@@ -158,33 +181,37 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $query = $query->withData('locality', $address->getLocality());
         $query = $query->withData('postalCode', $address->getPostalCode());
 
-        $result = $geocoder->geocodeQuery($query);
+        $result = (new StatefulGeocoder($provider))->geocodeQuery($query);
         $count = $result->count();
 
         $updateData = [
             'process_datetime' => date('c'),
-            'process_count'    => $count,
+            'process_count'    => 0,
+            'process_provider' => $provider->getName(),
         ];
 
         if ($count >= 1) {
-            $updateData['process_provider'] = $result->first()->getProvidedBy();
-
-            if ($count === 1) {
-                $validator = new AddressValidator($query->getData('address'), $adapter);
-
-                if ($validator->isValid($result->first()) === true) {
-                    $updateData['process_address'] = $formatter->format($result->first(), '%S %n, %z %L');
-                    $updateData['the_geog'] = new Expression(sprintf(
-                        'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                        $result->first()->getCoordinates()->getLongitude(),
-                        $result->first()->getCoordinates()->getLatitude()
-                    ));
-
-                    $result = self::RESULT_SINGLE;
-                } else {
-                    $result = self::RESULT_MULTIPLE;
+            $validResult = [];
+            $validator = new AddressValidator($query->getData('address'), $adapter);
+            foreach ($result as $address) {
+                if ($validator->isValid($address) === true) {
+                    $validResult[] = $address;
                 }
+            }
+
+            if (count($validResult) === 1) {
+                $updateData['process_count'] = 1;
+                $updateData['process_address'] = $formatter->format($result->first(), '%S %n, %z %L');
+                $updateData['the_geog'] = new Expression(sprintf(
+                    'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                    $result->first()->getCoordinates()->getLongitude(),
+                    $result->first()->getCoordinates()->getLatitude()
+                ));
+
+                $result = self::RESULT_SINGLE;
             } else {
+                $updateData['process_count'] = count($validResult);
+
                 $result = self::RESULT_MULTIPLE;
             }
         } else {

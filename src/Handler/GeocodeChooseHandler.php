@@ -51,7 +51,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),
-                'process_count'    => 0,
+                'process_count'    => -1,
                 'process_provider' => new Expression('NULL'),
             ]);
             $update->where(['id' => $query['skip']]);
@@ -113,7 +113,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         $select->where
             ->equalTo('valid', 't')
             ->isNotNull('process_count')
-            ->greaterThan('process_count', 0)
+            ->greaterThanOrEqualTo('process_count', 0)
             ->isNull('process_address');
         $select->limit(1);
 
