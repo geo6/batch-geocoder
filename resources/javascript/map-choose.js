@@ -20,6 +20,32 @@ import Style from 'ol/style/style';
 import View from 'ol/view';
 
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
+let addressesLayer = new VectorLayer({
+    source: new VectorSource(),
+    style: function(feature) {
+        let fill = new Fill({
+            color: feature.getProperties().properties.color
+        });
+        let stroke = new Stroke({
+            color: '#FFF',
+            width: 2
+        });
+        return [
+            new Style({
+                image: new Circle({
+                    fill: fill,
+                    stroke: stroke,
+                    radius: 5
+                }),
+                fill: fill,
+                stroke: stroke
+            })
+        ];
+    }
+});
+let locationLayer = new VectorLayer({
+    source: new VectorSource()
+});
 
 function selectAddress(provider, address, recenter) {
     let li = $('#results > div[data-provider=' + provider + '] > ul > li[data-address=' + address + ']');
@@ -28,6 +54,8 @@ function selectAddress(provider, address, recenter) {
         data.longitude,
         data.latitude
     ];
+
+    locationLayer.getSource().clear();
 
     $('#results > div > ul > li.text-primary').removeClass('text-primary');
     $(li).addClass('text-primary');
@@ -50,8 +78,6 @@ export default function initMapChoose() {
         $(this).find('h2 > svg').css('color', colors[index]);
     });
 
-    let source = new VectorSource();
-
     $('#results > div > ul > li').each(function() {
         let data = $.extend($(this).data(), $(this).closest('div').data());
         let coordinates = [
@@ -60,7 +86,7 @@ export default function initMapChoose() {
         ];
         let color = data.color;
 
-        source.addFeature(new Feature({
+        addressesLayer.getSource().addFeature(new Feature({
             geometry: new Point(Proj.fromLonLat(coordinates)),
             properties: {
                 address: data.address,
@@ -84,29 +110,8 @@ export default function initMapChoose() {
                     maxZoom: 18
                 })
             }),
-            new VectorLayer({
-                source: source,
-                style: function(feature) {
-                    let fill = new Fill({
-                        color: feature.getProperties().properties.color
-                    });
-                    let stroke = new Stroke({
-                        color: '#FFF',
-                        width: 2
-                    });
-                    return [
-                        new Style({
-                            image: new Circle({
-                                fill: fill,
-                                stroke: stroke,
-                                radius: 5
-                            }),
-                            fill: fill,
-                            stroke: stroke
-                        })
-                    ];
-                }
-            })
+            addressesLayer,
+            locationLayer
         ],
         target: 'map',
         view: new View({
@@ -115,7 +120,7 @@ export default function initMapChoose() {
         })
     });
 
-    window.app.map.getView().fit(source.getExtent(), {
+    window.app.map.getView().fit(addressesLayer.getSource().getExtent(), {
         padding: [5,5,5,5]
     });
 
@@ -129,6 +134,11 @@ export default function initMapChoose() {
         } else {
             let coordinates = window.app.map.getCoordinateFromPixel(event.pixel);
             let lnglat = Proj.toLonLat(coordinates);
+
+            locationLayer.getSource().clear();
+            locationLayer.getSource().addFeature(new Feature({
+                geometry: new Point(coordinates),
+            }));
 
             $('#results > div > ul > li.text-primary').removeClass('text-primary');
             $('#selection').text('');
