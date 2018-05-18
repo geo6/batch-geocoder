@@ -17,7 +17,7 @@ import Stroke from 'ol/style/stroke';
 import Style from 'ol/style/style';
 import View from 'ol/view';
 
-let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
+let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b', '#000'];
 let providers = [];
 
 export default function initMap(geojson) {
@@ -44,6 +44,7 @@ export default function initMap(geojson) {
 
                     if (typeof providers[properties.provider] === 'undefined') {
                         providers[properties.provider] = colors.shift();
+                        $('#legend').append('<strong style="color: ' + providers[properties.provider] + '">' +  properties.provider + '</strong>, ')
                     }
 
                     let fill = new Fill({

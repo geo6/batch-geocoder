@@ -27,21 +27,29 @@ ins {
     min-height: 350px;
     position: relative;
 }
-.overlay {
-    background-color:rgba(255,255,255,0.8);
-    border-radius:4px;
-    color:#000;
-    font-family:'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
-    font-size:.7rem;
-    line-height:1.375em;
+.overlays {
     margin:0;
-    padding:10px;
     position:absolute;
     right:15px;
     top:15px;
     max-width:33%;
     min-width:20%;
-    z-index:999
+    z-index:999;
+
+    &> .overlay {
+        &:first-child {
+            margin-top: 0;
+        }
+
+        background-color:rgba(255,255,255,0.8);
+        border-radius:4px;
+        color:#000;
+        font-family:'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
+        font-size:.7rem;
+        line-height:1.375em;
+        margin-top: 5px;
+        padding:10px;
+    }
 }
 #results > div > ul > li {
     cursor: pointer;
