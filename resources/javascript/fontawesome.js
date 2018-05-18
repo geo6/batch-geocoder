@@ -8,6 +8,7 @@ import {
     faListUl,
     faMapMarkerAlt,
     faSave,
+    faStar,
     faSync,
     faUpload,
     faUser
@@ -20,6 +21,7 @@ import {
     faListAlt,
     faMap,
     faRocket,
+    faStar as faStarEmpty,
     faTable,
     faTimesCircle,
 } from '@fortawesome/pro-regular-svg-icons'
@@ -39,6 +41,8 @@ library.add(
     faMapMarkerAlt,
     faRocket,
     faSave,
+    faStar,
+    faStarEmpty,
     faSync,
     faTable,
     faTimesCircle,

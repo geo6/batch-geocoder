@@ -80,10 +80,17 @@ class ViewHandler implements RequestHandlerInterface
                 $r->process_address
             ));
 
+            $score = 0;
+            if ($r->process_score & 1) { $score++; }
+            if ($r->process_score & 2) { $score++; }
+            if ($r->process_score & 4) { $score++; }
+            if ($r->process_score & 8) { $score++; }
+
             $addressGeocoded[] = [
                 $r->process_provider,
                 $diff['old'],
                 $diff['new'],
+                $score,
                 (intval($r->process_count) === -1),
             ];
         }

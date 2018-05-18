@@ -15,5 +15,6 @@ CREATE TABLE "%s" (
   "process_count" int,
   "process_provider" varchar,
   "process_address" varchar,
+  "process_score" int,
   "the_geog" geography
 );

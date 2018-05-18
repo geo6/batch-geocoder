@@ -39,7 +39,7 @@
                 <ul>
                     <?php foreach ($addresses as $i => $addr) : ?>
                         <li data-longitude="<?=$addr['longitude']?>" data-latitude="<?=$addr['latitude']?>" data-id="<?=$id?>" data-address="<?=$i?>">
-                            <?=$this->e($addr['address'])?>
+                            <?=$this->e($addr['display'])?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

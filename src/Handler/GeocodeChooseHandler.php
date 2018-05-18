@@ -6,6 +6,7 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
+use App\Validator\Address as AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Geocoder\Provider;
@@ -64,19 +65,48 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         } elseif (isset($query['id'], $query['provider'], $query['address']) && $query['id'] === $session->get('id')) {
             $addresses = $session->get('addresses');
 
+            $select = $sql->select();
+            $select->where(['id' => $query['id']]);
+            $qsz = $sql->buildSqlString($select);
+            $r = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
+
+            $address = Address::createFromArray([
+                'streetNumber' => trim($r->housenumber),
+                'streetName'   => trim($r->streetname),
+                'postalCode'   => trim(
+                    isset($validation->postalcode) ?
+                        (string) $validation->postalcode :
+                        (string) $r->postalcode
+                ),
+                'locality'     => trim(
+                    isset($validation->locality) ?
+                        $validation->locality :
+                        $r->locality
+                ),
+            ]);
+
             if (isset($addresses[$query['provider']], $addresses[$query['provider']][$query['address']])) {
-                $address = $addresses[$query['provider']][$query['address']];
+                $validator = new AddressValidator($address);
+
+                $selection = $addresses[$query['provider']][$query['address']];
+                $addr = Address::createFromArray([
+                    'streetNumber' => $selection['streetnumber'],
+                    'streetName'   => $selection['streetname'],
+                    'postalCode'   => $selection['postalcode'],
+                    'locality'     => $selection['locality'],
+                ]);
 
                 $update = $sql->update();
                 $update->set([
                     'process_datetime' => date('c'),
                     'process_count'    => -1,
                     'process_provider' => $query['provider'],
-                    'process_address'  => $address['address'],
+                    'process_address'  => $selection['display'],
+                    'process_score'    => $validator->getScore($addr),
                     'the_geog'         => new Expression(sprintf(
                         'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                        $address['longitude'],
-                        $address['latitude']
+                        $selection['longitude'],
+                        $selection['latitude']
                     )),
                 ]);
                 $update->where(['id' => $query['id']]);
@@ -123,14 +153,13 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         if ($results->count() > 0) {
             $client = new Guzzle6Client();
 
-            $geocoderExternal = new ProviderAggregator();
-            $geocoderExternal->registerProviders([
+            $providers = [
+                new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']),
                 new Provider\UrbIS\UrbIS($client),
                 new Provider\Geopunt\Geopunt($client),
                 new Provider\SPW\SPW($client),
                 new Provider\bpost\bpost($client),
-            ]);
-            $providers = array_keys($geocoderExternal->getProviders());
+            ];
 
             $result = $results->current();
 
@@ -153,44 +182,42 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
             $addresses = [];
 
-            $geocoder = new StatefulGeocoder(new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']));
+            foreach ($providers as $i => $provider) {
+                switch ($provider->getName()) {
+                    case 'geo6':
+                        $format = '%n %S, %z %L';
+                        break;
 
-            $query = GeocodeQuery::create($formatter->format($address, '%n %S, %z %L'));
-            $query = $query->withData('address', $address);
-
-            $query = $query->withData('streetName', $address->getStreetName());
-            $query = $query->withData('streetNumber', $address->getStreetNumber());
-            $query = $query->withData('locality', $address->getLocality());
-            $query = $query->withData('postalCode', $address->getPostalCode());
-
-            $collection = $geocoder->geocodeQuery($query);
-            foreach ($collection as $addr) {
-                $providedBy = $addr->getProvidedBy();
-                if (!isset($addresses[$providedBy])) {
-                    $addresses[$providedBy] = [];
+                    default:
+                        $format = '%S %n, %z %L';
+                        break;
                 }
-                $addresses[$providedBy][] = [
-                    'address'   => $formatter->format($addr, '%S %n, %z %L'),
-                    'longitude' => $addr->getCoordinates()->getLongitude(),
-                    'latitude'  => $addr->getCoordinates()->getLatitude(),
-                ];
-            }
 
-            foreach ($providers as $provider) {
+                $query = GeocodeQuery::create($formatter->format($address, $format));
+                $query = $query->withData('address', $address);
+
+                $query = $query->withData('streetName', $address->getStreetName());
+                $query = $query->withData('streetNumber', $address->getStreetNumber());
+                $query = $query->withData('locality', $address->getLocality());
+                $query = $query->withData('postalCode', $address->getPostalCode());
+
                 try {
-                    $collection = $geocoderExternal
-                        ->using($provider)
-                        ->geocodeQuery(GeocodeQuery::create($formatter->format($address, '%S %n, %z %L')));
-                    foreach ($collection as $addr) {
-                        $providedBy = $addr->getProvidedBy();
-                        if (!isset($addresses[$providedBy])) {
-                            $addresses[$providedBy] = [];
+                    $collection = (new StatefulGeocoder($provider))->geocodeQuery($query);
+
+                    if ($collection->count() > 0) {
+                        $addresses[$provider->getName()] = [];
+
+                        foreach ($collection as $addr) {
+                            $addresses[$provider->getName()][] = [
+                                'streetname'   => $addr->getStreetName(),
+                                'streetnumber' => $addr->getStreetNumber(),
+                                'locality'     => $addr->getLocality(),
+                                'postalcode'   => $addr->getPostalCode(),
+                                'display'      => $formatter->format($addr, '%S %n, %z %L'),
+                                'longitude'    => $addr->getCoordinates()->getLongitude(),
+                                'latitude'     => $addr->getCoordinates()->getLatitude(),
+                            ];
                         }
-                        $addresses[$providedBy][] = [
-                            'address'   => $formatter->format($addr, '%S %n, %z %L'),
-                            'longitude' => $addr->getCoordinates()->getLongitude(),
-                            'latitude'  => $addr->getCoordinates()->getLatitude(),
-                        ];
                     }
                 } catch (\Geocoder\Exception\InvalidServerResponse $e) {
                     // Todo : add log

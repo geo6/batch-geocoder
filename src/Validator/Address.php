@@ -17,7 +17,7 @@ final class Address
     private $adapter;
     private $address;
 
-    public function __construct(AddressModel $address, Adapter $adapter)
+    public function __construct(AddressModel $address, Adapter $adapter = null)
     {
         $this->adapter = $adapter;
         $this->address = $address;
@@ -29,6 +29,29 @@ final class Address
             $this->validateLocality($address) &&
             $this->validateStreetname($address) &&
             $this->validateStreetNumber($address);
+    }
+
+    public function getScore(AddressModel $address): int
+    {
+        $score = 0;
+
+        $postalCode1 = $this->address->getPostalCode();
+        $postalCode2 = $address->getPostalCode();
+        if ($postalCode1 === $postalCode2) { $score += 8; }
+
+        $locality1 = self::filter($this->address->getLocality());
+        $locality2 = self::filter($address->getLocality());
+        if ($locality1 === $locality2) { $score += 4; }
+
+        $streetname1 = self::filter($this->address->getStreetname());
+        $streetname2 = self::filter($address->getStreetname());
+        if ($streetname1 === $streetname2) { $score += 2; }
+
+        $streetNumber1 = $this->address->getStreetNumber();
+        $streetNumber2 = $address->getStreetNumber();
+        if ($streetNumber1 === $streetNumber2) { $score += 1; }
+
+        return $score;
     }
 
     private static function filter(string $str): string

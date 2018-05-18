@@ -39,6 +39,7 @@
                     <tr>
                         <th><?=$this->translate('Source address')?></th>
                         <th><?=$this->translate('Geocoded address')?></th>
+                        <th><?=$this->translate('Score')?></th>
                         <th><?=$this->translate('Provider')?></th>
                     </tr>
                 </thead>
@@ -48,8 +49,11 @@
                         <td><?=$address[1]?></td>
                         <td><?=$address[2]?></td>
                         <td class="text-center text-nowrap">
+                            <?php for ($i = 0; $i < $address[3]; $i++): ?><i class="fas fa-star"></i><?php endfor ?><?php for ($i = $address[3]; $i < 4; $i++): ?><i class="far fa-star"></i><?php endfor ?>
+                        </td>
+                        <td class="text-center text-nowrap">
                             <span class="badge badge-light"><?=$address[0]?></span>
-                            <?php if ($address[3] === true): ?>
+                            <?php if ($address[4] === true): ?>
                                 <span class="badge badge-light"><i class="fas fa-user"></i></span>
                             <?php endif ?>
                         </td>
