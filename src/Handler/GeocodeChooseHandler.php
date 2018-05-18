@@ -10,7 +10,6 @@ use App\Validator\Address as AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Geocoder\Provider;
-use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
 use Http\Adapter\Guzzle6\Client as Guzzle6Client;

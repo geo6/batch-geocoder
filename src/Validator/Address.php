@@ -37,19 +37,27 @@ final class Address
 
         $postalCode1 = $this->address->getPostalCode();
         $postalCode2 = $address->getPostalCode();
-        if ($postalCode1 === $postalCode2) { $score += 8; }
+        if ($postalCode1 === $postalCode2) {
+            $score += 8;
+        }
 
         $locality1 = self::filter($this->address->getLocality());
         $locality2 = self::filter($address->getLocality());
-        if ($locality1 === $locality2) { $score += 4; }
+        if ($locality1 === $locality2) {
+            $score += 4;
+        }
 
         $streetname1 = self::filter($this->address->getStreetname());
         $streetname2 = self::filter($address->getStreetname());
-        if ($streetname1 === $streetname2) { $score += 2; }
+        if ($streetname1 === $streetname2) {
+            $score += 2;
+        }
 
         $streetNumber1 = $this->address->getStreetNumber();
         $streetNumber2 = $address->getStreetNumber();
-        if ($streetNumber1 === $streetNumber2) { $score += 1; }
+        if ($streetNumber1 === $streetNumber2) {
+            $score += 1;
+        }
 
         return $score;
     }
