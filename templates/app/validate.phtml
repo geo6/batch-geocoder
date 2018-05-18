@@ -13,15 +13,6 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis, ipsum ac sodales egestas, elit magna consectetur velit, at semper ligula ligula ac erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula fringilla dui, ac congue tortor sollicitudin quis. Duis hendrerit elit sit amet risus tristique viverra. In sodales varius ex. Aliquam velit libero, ullamcorper a risus eu, sollicitudin efficitur metus. Duis vel risus ut magna mattis fermentum. Quisque vitae metus at est ultrices rhoncus non sed mauris. Proin in malesuada ex, ac pulvinar eros. Etiam nec accumsan enim.
     </p>
 
-    <div class="row justify-content-md-center">
-        <div class="col-md-6">
-            <a href="./geocode" class="btn btn-danger btn-block">
-                <i class="far fa-times-circle"></i>
-                <?=$this->translate('Skip all')?>
-            </a>
-        </div>
-    </div>
-
     <hr>
 
     <form action="./validate" method="post">
@@ -51,11 +42,15 @@
             </tbody>
         </table>
         <div class="row justify-content-md-center">
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-primary btn-block" name="action" value="validate">
+            <div class="col-md-6 text-center">
+                <button type="submit" class="btn btn-primary" name="action" value="validate">
                     <i class="far fa-check-circle"></i>
                     <?=$this->translate('Save')?>
                 </button>
+                <a href="./geocode" class="btn btn-danger">
+                    <i class="far fa-times-circle"></i>
+                    <?=$this->translate('Skip all')?>
+                </a>
             </div>
         </div>
     </form>
