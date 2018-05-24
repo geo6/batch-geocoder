@@ -9,12 +9,24 @@
 <?php $this->stop() ?>
 
 <div class="container">
-    <h1>
-        <?=$this->translate('Map')?>
-        <a href="<?=$this->url('view')?>" class="btn btn-lg btn-outline-primary float-right" style="text-decoration: none;">
+    <div class="float-right">
+        <a href="<?=$this->url('view')?>" class="btn btn-lg btn-outline-secondary" style="text-decoration: none;">
             <i class="fas fa-list-ul"></i>
             <?=$this->translate('List')?>
         </a>
+        <div class="btn-group">
+            <button class="btn btn-lg btn-outline-primary dropdown-toggle" type="button" id="dropExport" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-download"></i>
+                <?=$this->translate('Export')?>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropExport">
+                <a class="dropdown-item" target="_blank" href="<?=$this->url('export', ['type' => 'csv'])?>">CSV</a>
+                <a class="dropdown-item" target="_blank" href="<?=$this->url('export', ['type' => 'geojson'])?>">GeoJSON</a>
+            </div>
+        </div>
+    </div>
+    <h1>
+        <?=$this->translate('Map')?>
     </h1>
     <hr>
     <div id="map">
