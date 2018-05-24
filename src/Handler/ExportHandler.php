@@ -6,9 +6,6 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use Geo6\Text\Text;
-use Geocoder\Formatter\StringFormatter;
-use Geocoder\Model\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -17,9 +14,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\TextResponse;
-use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class ExportHandler implements RequestHandlerInterface
 {
@@ -46,7 +41,7 @@ class ExportHandler implements RequestHandlerInterface
             'process_score',
             'process_provider',
             'longitude' => new Expression('ST_X(the_geog::geometry)'),
-            'latitude' => new Expression('ST_Y(the_geog::geometry)'),
+            'latitude'  => new Expression('ST_Y(the_geog::geometry)'),
         ]);
         $select->where
             ->equalTo('valid', 't')
@@ -91,7 +86,7 @@ class ExportHandler implements RequestHandlerInterface
 
             case 'geojson':
                 $geojson = [
-                    'type' => 'FeatureCollection',
+                    'type'     => 'FeatureCollection',
                     'features' => [],
                 ];
 
@@ -99,20 +94,20 @@ class ExportHandler implements RequestHandlerInterface
                     $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
 
                     $feature = [
-                        'type' => 'Feature',
-                        'id' => $result->id,
+                        'type'       => 'Feature',
+                        'id'         => $result->id,
                         'properties' => [
-                            'id' => $result->id,
-                            'streetname' => $result->streetname,
-                            'housenumber' => $result->housenumber,
-                            'postalcode' => $validation->postalcode ?? $result->postalcode,
-                            'locality' => $validation->locality ?? $result->locality,
-                            'process_address' => $result->process_address,
-                            'process_score' => $result->process_score,
+                            'id'               => $result->id,
+                            'streetname'       => $result->streetname,
+                            'housenumber'      => $result->housenumber,
+                            'postalcode'       => $validation->postalcode ?? $result->postalcode,
+                            'locality'         => $validation->locality ?? $result->locality,
+                            'process_address'  => $result->process_address,
+                            'process_score'    => $result->process_score,
                             'process_provider' => $result->process_provider,
                         ],
                         'geometry' => [
-                            'type' => 'Point',
+                            'type'        => 'Point',
                             'coordinates' => [
                                 round($result->longitude, 6),
                                 round($result->latitude, 6),
@@ -139,6 +134,7 @@ class ExportHandler implements RequestHandlerInterface
         rewind($fp);
         $data = stream_get_contents($fp);
         fclose($fp);
+
         return rtrim($data, "\n");
     }
 }
