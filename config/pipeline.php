@@ -49,6 +49,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - route-based authentication
     // - route-based validation
     // - etc.
+    $app->pipe(App\Middleware\CheckSessionMiddleware::class);
     $app->pipe(App\Middleware\ConfigMiddleware::class);
     $app->pipe(App\Middleware\DbAdapterMiddleware::class);
     $app->pipe(App\Middleware\LocalizationMiddleware::class);
