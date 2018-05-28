@@ -61,8 +61,7 @@ class ValidateHandler implements RequestHandlerInterface
             $flashMessages->flash('error-upload', 'No record !');
 
             return new RedirectResponse($this->router->generateUri('home'));
-        }
-        elseif (isset($config['limit']) && $count > $config['limit']) {
+        } elseif (isset($config['limit']) && $count > $config['limit']) {
             $flashMessages->flash('error-upload', sprintf(
                 'Too many records: %d !',
                 $count
