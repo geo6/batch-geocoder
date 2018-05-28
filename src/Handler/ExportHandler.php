@@ -81,7 +81,11 @@ class ExportHandler implements RequestHandlerInterface
                     ]).PHP_EOL;
                 }
 
-                return new TextResponse($text);
+                return (new TextResponse($text))->
+                    withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.csv')->
+                    withHeader('Pragma', 'no-cache')->
+                    withHeader('Expires', '0')->
+                    withHeader('Cache-Control', 'no-cache, must-revalidate');
                 break;
 
             case 'geojson':
@@ -118,7 +122,11 @@ class ExportHandler implements RequestHandlerInterface
                     $geojson['features'][] = $feature;
                 }
 
-                return new JsonResponse($geojson);
+                return (new JsonResponse($geojson))->
+                    withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.json')->
+                    withHeader('Pragma', 'no-cache')->
+                    withHeader('Expires', '0')->
+                    withHeader('Cache-Control', 'no-cache, must-revalidate');
                 break;
 
             default:
