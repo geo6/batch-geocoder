@@ -53,13 +53,16 @@
     },
     "scripts": {
         "post-create-project-cmd": [
+            "@development-disable"
             "@init:directory",
             "@init:sql",
             "@gettext:mo",
-            "@development-disable"
+            "npm update",
+            "npm run build"
         ],
         "post-update-cmd": [
             "@gettext:mo",
+            "npm update",
             "npm run build"
         ],
         "development-disable": "zf-development-mode disable",
@@ -83,8 +86,20 @@
         "gettext:po:nl": "mkdir -p data/locale/nl && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/nl",
         "gettext:mo:fr": "msgfmt -c -o data/locale/fr/messages.mo data/locale/fr/messages.po",
         "gettext:mo:nl": "msgfmt -c -o data/locale/nl/messages.mo data/locale/nl/messages.po",
-        "init:directory": "mkdir -p data/cache && mkdir -p data/upload && sudo chmod -R 0777 data/",
-        "init:sql": "sudo -u postgres createuser --pwprompt geocode && sudo -u postgres psql -f scripts/create-database.sql && sudo -u postgres psql -f scripts/create-extension.sql geocode",
-        "git:pull": "git fetch --all && git reset --hard origin/master && git pull origin master"
+        "init:directory": [
+            "mkdir -p data/cache",
+            "mkdir -p data/upload",
+            "chmod -R 0777 data/*"
+        ],
+        "init:sql": [
+            "sudo -u postgres createuser --pwprompt geocode",
+            "sudo -u postgres psql -f scripts/create-database.sql",
+            "sudo -u postgres psql -f scripts/create-extension.sql geocode"
+        ],
+        "git:pull": [
+            "git fetch --all",
+            "git reset --hard origin/master",
+            "git pull origin master"
+        ]
     }
 }
