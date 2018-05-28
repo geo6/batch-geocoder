@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-22 15:59+0100\n"
-"PO-Revision-Date: 2018-03-22 16:05+0100\n"
+"POT-Creation-Date: 2018-05-28 14:33+0200\n"
+"PO-Revision-Date: 2018-05-28 14:37+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,7 +16,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.7\n"
+
+msgid "View"
+msgstr "Voir"
+
+msgid "View on map"
+msgstr "Voir sur la carte"
 
 msgid "Choose the correct result"
 msgstr "Choisissez le bon résultat"
@@ -30,11 +36,11 @@ msgstr "Table"
 msgid "Address"
 msgstr "Adresse"
 
+msgid "Save"
+msgstr "Enregistrer"
+
 msgid "Skip"
 msgstr "Passer"
-
-msgid "View on map"
-msgstr "Voir sur la carte"
 
 msgid "Record count"
 msgstr "Nombre d'adresses"
@@ -78,6 +84,27 @@ msgstr "Résultats multiples"
 msgid "No result"
 msgstr "Aucun résultat"
 
+msgid ""
+"The <em>Batch Geocoder</em> application allows you to geocode your dataset "
+"of addresses."
+msgstr ""
+"L'application <em>Batch Geocoder</em> vous permet de géocoder votre lot "
+"d'adresses."
+
+msgid ""
+"You can upload your file and the application will process it to add a "
+"location (longitude, latitude) to each address."
+msgstr ""
+"Vous pouvez charger votre fichier et l'application le traitera pour ajouter "
+"une position (longitude, latitude) à chaque adresse."
+
+msgid ""
+"The application will try to find a location using several providers (GEO-6, "
+"Geopunt, UrbIS, SPW, ...)."
+msgstr ""
+"L'application essaiera de trouver une position en utilisant diverses sources "
+"(GEO-6, Geopunt, UrbIS, SPW, …)."
+
 msgid "Data structure"
 msgstr "Structure des données"
 
@@ -111,6 +138,13 @@ msgstr ""
 "Votre fichier doit être encodé en UTF-8 et le séparateur doit être une "
 "virgule <kbd>,</kbd>. Votre fichier ne doit pas avoir d'entête."
 
+msgid ""
+"Your data will be completely removed from our server at the latest after 24 "
+"hours !"
+msgstr ""
+"Vos données seront complètement supprimées de notre serveur au plus tard "
+"après 24 heures !"
+
 msgid "Send"
 msgstr "Envoyer"
 
@@ -120,17 +154,23 @@ msgstr "Archives"
 msgid "Load"
 msgstr "Charger"
 
+msgid "List"
+msgstr "Liste"
+
+msgid "Export"
+msgstr "Exporter"
+
+msgid "Map"
+msgstr "Carte"
+
 msgid "Validate"
 msgstr "Valider"
 
 msgid "Skip all"
 msgstr "Tout passer"
 
-msgid "Save"
-msgstr "Enregistrer"
-
-msgid "View"
-msgstr "Voir"
+msgid "Results"
+msgstr "Résultats"
 
 msgid "Geocoded"
 msgstr "Géocodé"
@@ -140,6 +180,18 @@ msgstr "Non géocodé"
 
 msgid "Invalid"
 msgstr "Invalide"
+
+msgid "Source address"
+msgstr "Adresse source"
+
+msgid "Geocoded address"
+msgstr "Adresse géocodée"
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Provider"
+msgstr "Source"
 
 msgid "Oops!"
 msgstr "Oups!"
@@ -164,6 +216,3 @@ msgstr "Nous avons rencontré une erreur \"%d %s\"."
 
 msgid "Log out"
 msgstr "Se déconnecter"
-
-msgid "Results"
-msgstr "Résultats"
