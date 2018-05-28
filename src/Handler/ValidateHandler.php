@@ -16,6 +16,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Flash\FlashMessageMiddleware;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Session\SessionMiddleware;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -36,6 +37,8 @@ class ValidateHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        $flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
@@ -49,6 +52,24 @@ class ValidateHandler implements RequestHandlerInterface
         $table = $session->get('table');
 
         $sql = new Sql($adapter, $table);
+
+        $select = $sql->select();
+        $qsz = $sql->buildSqlString($select);
+        $count = ($adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE))->count();
+
+        if ($count === 0) {
+            $flashMessages->flash('error-upload', 'No record !');
+
+            return new RedirectResponse($this->router->generateUri('home'));
+        }
+        elseif (isset($config['limit']) && $count > $config['limit']) {
+            $flashMessages->flash('error-upload', sprintf(
+                'Too many records: %d !',
+                $count
+            ));
+
+            return new RedirectResponse($this->router->generateUri('home'));
+        }
 
         if (isset($query['validate']) && is_array($query['validate'])) {
             foreach ($query['validate'] as $postalcode => $validate) {

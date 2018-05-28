@@ -49,6 +49,7 @@ class HomeHandler implements RequestHandlerInterface
 
         $data = [
             'title'    => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
+            'limit'    => $config['limit'] ?? null,
             'error'    => $error,
             'tables'   => $tables,
             'archives' => (isset($config['archives']) && $config['archives'] === true && isset($query['archives'])),

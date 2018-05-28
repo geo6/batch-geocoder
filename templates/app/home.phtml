@@ -30,7 +30,14 @@
                 </div>
             <?php endif ?>
             <form id="geocoder-form" action="./upload" method="post" autocomplete="off" enctype="multipart/form-data">
-                <p class="form-text"><?=$this->translate('You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>. Your file must not have a header.')?></p>
+                <p class="form-text">
+                    <?=$this->translate('You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>. Your file must not have a header.')?>
+                </p>
+                <?php if (!is_null($limit)): ?>
+                    <p class="form-text">
+                        <?=$this->translate('Maximum count of records')?>: <?=$limit?>
+                    </p>
+                <?php endif ?>
                 <div class="form-group">
                     <input type="file" name="file" class="form-control-file" accept=".csv,.txt" required="required">
                     <small id="passwordHelpBlock" class="form-text text-muted">
