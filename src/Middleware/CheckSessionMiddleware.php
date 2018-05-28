@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Adapter\Adapter;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Session\SessionMiddleware;
 
@@ -43,7 +41,8 @@ class CheckSessionMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function checkTableName() {
+    private function checkTableName()
+    {
         return is_null($this->session->get('table'));
     }
 }
