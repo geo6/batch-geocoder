@@ -42,7 +42,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $client = new Guzzle6Client();
 
         $providers = [
-            new Provider\Geo6\Geo6($client, $config['access']['geo6']['consumer'], $config['access']['geo6']['secret']),
+            new Provider\Geo6\Geo6($client, $config['tokens']['geo6']['consumer'], $config['tokens']['geo6']['secret']),
             new Provider\UrbIS\UrbIS($client),
             new Provider\Geopunt\Geopunt($client),
             new Provider\SPW\SPW($client),
