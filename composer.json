@@ -55,7 +55,12 @@
         "post-create-project-cmd": [
             "@init:directory",
             "@init:sql",
-            "@development-enable"
+            "@gettext:mo",
+            "@development-disable"
+        ],
+        "post-update-cmd": [
+            "@gettext:mo",
+            "npm run build"
         ],
         "development-disable": "zf-development-mode disable",
         "development-enable": "zf-development-mode enable",
@@ -67,17 +72,17 @@
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/ -d display_errors=1",
         "gettext": [
-            "@gettext:fr:po",
-            "@gettext:nl:po"
+            "@gettext:po:fr",
+            "@gettext:po:nl"
         ],
         "gettext:mo": [
-            "@gettext:fr:mo",
-            "@gettext:nl:mo"
+            "@gettext:mo:fr",
+            "@gettext:mo:nl"
         ],
-        "gettext:fr:po": "mkdir -p data/locale/fr && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/fr",
-        "gettext:fr:mo": "msgfmt -c -o data/locale/fr/messages.mo data/locale/fr/messages.po",
-        "gettext:nl:po": "mkdir -p data/locale/nl && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/nl",
-        "gettext:nl:mo": "msgfmt -c -o data/locale/nl/messages.mo data/locale/nl/messages.po",
+        "gettext:po:fr": "mkdir -p data/locale/fr && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/fr",
+        "gettext:po:nl": "mkdir -p data/locale/nl && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/nl",
+        "gettext:mo:fr": "msgfmt -c -o data/locale/fr/messages.mo data/locale/fr/messages.po",
+        "gettext:mo:nl": "msgfmt -c -o data/locale/nl/messages.mo data/locale/nl/messages.po",
         "init:directory": "mkdir -p data/cache && mkdir -p data/upload && sudo chmod -R 0777 data/",
         "init:sql": "sudo -u postgres createuser --pwprompt geocode && sudo -u postgres psql -f scripts/create-database.sql && sudo -u postgres psql -f scripts/create-extension.sql geocode",
         "git:pull": "git fetch --all && git reset --hard origin/master && git pull origin master"
