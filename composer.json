@@ -57,7 +57,7 @@
             "@init:directory",
             "@init:sql",
             "@gettext:mo",
-            "npm update",
+            "npm install",
             "npm run build"
         ],
         "post-update-cmd": [
