@@ -53,7 +53,7 @@
     },
     "scripts": {
         "post-create-project-cmd": [
-            "@development-disable"
+            "@development-disable",
             "@init:directory",
             "@init:sql",
             "@gettext:mo",
