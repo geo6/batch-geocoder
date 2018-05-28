@@ -48,7 +48,7 @@ class HomeHandler implements RequestHandlerInterface
         rsort($tables);
 
         $data = [
-            'title'    => substr($config['name'], strpos($config['name'], '/') + 1),
+            'title'    => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
             'error'    => $error,
             'tables'   => $tables,
             'archives' => (isset($config['archives']) && $config['archives'] === true && isset($query['archives'])),

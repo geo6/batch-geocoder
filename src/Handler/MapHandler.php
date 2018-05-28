@@ -86,7 +86,7 @@ class MapHandler implements RequestHandlerInterface
         }
 
         $data = [
-            'title'   => substr($config['name'], strpos($config['name'], '/') + 1),
+            'title'   => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
             'geojson' => $geojson,
         ];
 

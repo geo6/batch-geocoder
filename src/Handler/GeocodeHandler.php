@@ -93,7 +93,7 @@ class GeocodeHandler implements RequestHandlerInterface
         $resultGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
 
         $data = [
-            'title'            => substr($config['name'], strpos($config['name'], '/') + 1),
+            'title'            => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
             'table'            => $table,
             'count'            => $resultCount->count,
             'countInvalid'     => $resultInvalid->count,
