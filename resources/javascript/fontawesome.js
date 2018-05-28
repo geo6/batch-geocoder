@@ -6,26 +6,26 @@ import {
     faArrowRight,
     faCog,
     faDownload,
+    faEraser,
+    faLanguage,
     faListUl,
     faMapMarkerAlt,
+    faRocket,
     faSave,
     faStar,
     faSync,
+    faTable,
     faUpload,
     faUser
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
     faCheckCircle,
-    faEraser,
-    faLanguage,
     faListAlt,
     faMap,
-    faRocket,
     faStar as faStarEmpty,
-    faTable,
     faTimesCircle,
-} from '@fortawesome/pro-regular-svg-icons'
+} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
     faAngleDoubleRight,
