@@ -5671,3 +5671,5 @@ DROP TABLE IF EXISTS "validation_bpost";
 CREATE TABLE "validation_bpost" AS (
   SELECT DISTINCT ON ("postalcode", "name") "postalcode", "name", unaccent(UPPER("name")) AS "normalized", "level", "language" FROM "pc" ORDER BY 1,2,4
 );
+
+ALTER TABLE "validation_bpost" OWNER TO "geocode";
