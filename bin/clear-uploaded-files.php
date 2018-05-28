@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-define('DURATION', 60*60*24);
+define('DURATION', 60 * 60 * 24);
 
 clear(realpath('data/upload'));
 
 exit(0);
 
-/**
- *
- */
-function clear (string $directory) {
+function clear(string $directory)
+{
     $glob = glob($directory.'/*');
 
     foreach ($glob as $g) {
