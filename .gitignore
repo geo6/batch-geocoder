@@ -28,3 +28,4 @@ public/js/
 .npmrc
 package-lock.json
 composer.lock
+install-providers.sh
