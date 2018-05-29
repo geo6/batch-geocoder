@@ -10,7 +10,6 @@ use ErrorException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Ddl;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\RedirectResponse;
@@ -90,7 +89,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Upload file on disk.
      */
-    private function uploadFile ()
+    private function uploadFile()
     {
         if (!is_null($this->file) && $this->file->getError() === UPLOAD_ERR_OK) {
             $info = pathinfo($this->file->getClientFilename());
@@ -123,7 +122,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Check file extension and mime type.
      */
-    private function checkFile ()
+    private function checkFile()
     {
         $validator = new ValidatorChain();
         $validator->attach(new Extension('csv,txt'));
@@ -141,7 +140,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Import data in database.
      */
-    private function importFile ($postgresql)
+    private function importFile($postgresql)
     {
         $fname = basename($this->path);
         $this->table = date('Ymd').'_'.(new Alnum())->filter($fname);
@@ -195,7 +194,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Check table count.
      */
-    private function checkTable ($limit = null)
+    private function checkTable($limit = null)
     {
         $sql = new Sql($this->adapter, $this->table);
 
@@ -222,7 +221,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * If there is an error, delete the current file and the current table in the database (if it exists).
      */
-    private function cleanCurrent ()
+    private function cleanCurrent()
     {
         // Delete file
         if (!is_null($this->path) && file_exists($this->path)) {
