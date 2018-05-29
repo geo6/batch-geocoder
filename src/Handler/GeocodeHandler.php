@@ -94,6 +94,7 @@ class GeocodeHandler implements RequestHandlerInterface
 
         $data = [
             'title'            => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
+            'version'          => $config['version'],
             'table'            => $table,
             'count'            => $resultCount->count,
             'countInvalid'     => $resultInvalid->count,

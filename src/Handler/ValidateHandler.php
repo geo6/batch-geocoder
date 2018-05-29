@@ -101,6 +101,7 @@ class ValidateHandler implements RequestHandlerInterface
         if ($suggestions !== false && !empty($suggestions)) {
             $data = [
                 'title'       => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
+                'version'     => $config['version'],
                 'table'       => $table,
                 'suggestions' => $suggestions,
             ];

@@ -1,4 +1,4 @@
-<?php $this->layout('layout::default', ['title' => $title]) ?>
+<?php $this->layout('layout::default', ['title' => $title, 'version' => $version]) ?>
 
 <div class="container">
     <h1><?=$this->translate($title)?></h1>
@@ -67,5 +67,3 @@
         </div>
     <?php endif ?>
 </div>
-
-<?=$this->fetch('partial::modal', $this->data())?>

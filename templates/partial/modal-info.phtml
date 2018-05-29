@@ -1,0 +1,23 @@
+<div id="geocoder-modal-info" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="far fa-question-circle"></i>
+                    <?=$this->translate('About')?>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="small text-info">
+                    <i class="fas fa-code-branch"></i>
+                    <?=$this->translate('Version')?>: <?=$version?><br>
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/geo6/batch-geocoder/" target="_blank"><?=$this->translate('Fork, Submit issue, or suggestion on GitHub')?></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
