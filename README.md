@@ -78,3 +78,7 @@ If you need more information, have a look a [Geocoder PHP documentation](https:/
 
 All those parameters are optional.  
 By default, archive mode is disabled and there is no limit of maximum number of records allowed.
+
+#### Archive mode
+
+If you enable archive mode, you can add `?archives` to display a listbox of existing tables : <http://localhost:8080/app/batch-geocoder/?archives>
