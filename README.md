@@ -7,7 +7,7 @@
 
 The "Batch Geocoder" application allows you to geocode your dataset of addresses.  
 You can upload your file and the application will process it to add a location (longitude, latitude) to each address.  
-The application will try to find a location using several providers (GEO-6, Geopunt, UrbIS, SPW, ...).
+The application will try to find a location using several providers, you can define the list of providers used in your configuration file (see [documentation](https://github.com/geo6/batch-geocoder#providers)).
 
 ---
 
