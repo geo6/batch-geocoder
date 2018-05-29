@@ -9,10 +9,8 @@ use App\Middleware\DbAdapterMiddleware;
 use App\Validator\Address as AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
-use Geocoder\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
-use Http\Adapter\Guzzle6\Client as Guzzle6Client;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -38,16 +36,6 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $query = $request->getQueryParams();
 
         $table = $session->get('table');
-
-        $client = new Guzzle6Client();
-
-        $providers = [
-            new Provider\Geo6\Geo6($client, $config['tokens']['geo6']['consumer'], $config['tokens']['geo6']['secret']),
-            new Provider\UrbIS\UrbIS($client),
-            new Provider\Geopunt\Geopunt($client),
-            new Provider\SPW\SPW($client),
-            new Provider\bpost\bpost($client),
-        ];
 
         $sql = new Sql($adapter, $table);
         $select = $sql->select();
@@ -99,19 +87,9 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $progress = [];
                 $noresult = true;
 
-                foreach ($providers as $i => $provider) {
-                    switch ($provider->getName()) {
-                        case 'geo6':
-                            $format = '%n %S, %z %L';
-                            break;
-
-                        default:
-                            $format = '%S %n, %z %L';
-                            break;
-                    }
-
+                foreach ($config['providers'] as $i => $provider) {
                     $result = self::RESULT_NORESULT;
-                    $query = self::geocode($provider, $address, $format, $adapter, $result);
+                    $query = self::geocode($provider, $address, '%S %n, %z %L', $adapter, $result);
 
                     $progress[$i] = $query;
 

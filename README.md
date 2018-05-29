@@ -30,25 +30,43 @@ If you want to use YAML, do not forget to install [YAML PECL extension](http://p
 
 ### Database
 
-```
-postgresql:
-  host: localhost
-  port: 5432
-  dbname: geocode
-  user: geocode
-  password: <YOURPASSWORD>
-```
+    postgresql:
+        host: localhost
+        port: 5432
+        dbname: geocode
+        user: geocode
+        password: <YOURPASSWORD>
 
-### Geocoding API token
+### Providers
 
-Please contact [GEO-6](https://geo6.be/) to ask for your token.
+The application is developed so everyone can use the Geocoder PHP providers (and client) he needs.
 
-```
-tokens:
-    geo6:
-        consumer: <YOURCONSUMERID>
-        secret: <YOURSECRETKEY>
-```
+You can configure the application by adding a configuration file with `providers` parameter in `config/application` directory.  
+Here is the one I use for Belgium :
+
+    <?php
+
+    use Geocoder\Provider;
+    use Http\Adapter\Guzzle6\Client;
+
+    $client = new Client();
+
+    return [
+        'providers' => [
+            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+            new Provider\UrbIS\UrbIS($client),
+            new Provider\Geopunt\Geopunt($client),
+            new Provider\SPW\SPW($client),
+            new Provider\bpost\bpost($client),
+        ]
+    ];
+
+You will have to install those providers, of course.  
+For instance, to install `UrbIS` provider, just run :
+
+    composer require geo6/geocoder-php-urbis-provider
+
+If you need more information, have a look a [Geocoder PHP documentation](https://github.com/geocoder-php/Geocoder#geocoder) !
 
 ### Additional parameters
 
