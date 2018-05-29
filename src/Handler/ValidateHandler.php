@@ -53,23 +53,6 @@ class ValidateHandler implements RequestHandlerInterface
 
         $sql = new Sql($adapter, $table);
 
-        $select = $sql->select();
-        $qsz = $sql->buildSqlString($select);
-        $count = ($adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE))->count();
-
-        if ($count === 0) {
-            $flashMessages->flash('error-upload', 'No record !');
-
-            return new RedirectResponse($this->router->generateUri('home'));
-        } elseif (isset($config['limit']) && $count > $config['limit']) {
-            $flashMessages->flash('error-upload', sprintf(
-                'Too many records: %d !',
-                $count
-            ));
-
-            return new RedirectResponse($this->router->generateUri('home'));
-        }
-
         if (isset($query['validate']) && is_array($query['validate'])) {
             foreach ($query['validate'] as $postalcode => $validate) {
                 foreach ($validate as $locality => $v) {
