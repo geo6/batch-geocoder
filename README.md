@@ -74,7 +74,7 @@ If you need more information, have a look a [Geocoder PHP documentation](https:/
 |-----------------|-----------|----------------------------------------------------|
 | title           | *string*  | Title of the application (default: batch-geocoder) |
 | archives        | *boolean* | Enable archive mode (see here under)               |
-| limit           | *integer* | Maximum number of records allowed                   |
+| limit           | *integer* | Maximum number of records allowed                  |
 
 All those parameters are optional.  
 By default, archive mode is disabled and there is no limit of maximum number of records allowed.
