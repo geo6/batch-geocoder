@@ -6,21 +6,32 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-<?php if (isset($identity)): ?>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-language"></i>
+                    <?=ucfirst(Locale::getDisplayLanguage(Locale::getDefault()))?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownLanguage">
+                    <a class="dropdown-item" href="?<?=http_build_query(array_merge($params ?? [], ['lang' => 'fr']))?>">Fran&ccedil;ais</a>
+                    <a class="dropdown-item" href="?<?=http_build_query(array_merge($params ?? [], ['lang' => 'nl']))?>">Nederlands</a>
+                    <a class="dropdown-item" href="?<?=http_build_query(array_merge($params ?? [], ['lang' => 'en']))?>">English</a>
+                </div>
+            </li>
+            <?php if (isset($identity)): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdownIdentity" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle" title="<?=$identity?>"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownIdentity">
                     <a class="dropdown-item" href="<?=$this->url('logout')?>">
                         <i class="fas fa-sign-out-alt"></i>
                         <?=$this->translate('Log out')?>
                     </a>
                 </div>
             </li>
+            <?php endif ?>
         </ul>
-<?php endif ?>
     </div>
   </div>
 </nav>
