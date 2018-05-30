@@ -11,6 +11,13 @@
                 </button>
             </div>
             <div class="modal-body">
+                <strong><?=$this->translate('Providers')?>:</strong>
+                <ol>
+                <?php foreach ($providers as $p): ?>
+                    <li><?=$this->e($p)?></li>
+                <?php endforeach ?>
+                </ol>
+                <hr>
                 <p class="small text-info">
                     <i class="fas fa-code-branch"></i>
                     <?=$this->translate('Version')?>: <?=$version?><br>

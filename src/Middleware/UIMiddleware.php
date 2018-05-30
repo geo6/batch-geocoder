@@ -27,11 +27,17 @@ class UIMiddleware implements MiddlewareInterface
     {
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 
+        $providers = [];
+        foreach ($config['providers'] as $provider) {
+            $providers[] = $provider->getName();
+        }
+
         $this->template->addDefaultParam($this->template::TEMPLATE_ALL, 'title', $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1));
 
         $this->template->addDefaultParam('partial::header', 'params', $request->getQueryParams());
 
         $this->template->addDefaultParam('partial::modal-info', 'version', $config['version']);
+        $this->template->addDefaultParam('partial::modal-info', 'providers', $providers);
 
         return $handler->handle($request);
     }
