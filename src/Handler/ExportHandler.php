@@ -94,12 +94,12 @@ class ExportHandler implements RequestHandlerInterface
                     'features' => [],
                 ];
 
-                foreach ($resultsGeocoded as $result) {
+                foreach ($resultsGeocoded as $i => $result) {
                     $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
 
                     $feature = [
                         'type'       => 'Feature',
-                        'id'         => $result->id,
+                        'id'         => ($i + 1),
                         'properties' => [
                             'id'               => $result->id,
                             'streetname'       => $result->streetname,
