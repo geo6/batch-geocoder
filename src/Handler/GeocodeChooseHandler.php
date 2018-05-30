@@ -114,7 +114,9 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
             $session->unset('id');
             $session->unset('addresses');
-        } elseif (isset($query['id'], $query['longitude'], $query['latitude']) && $query['id'] === $session->get('id')) {
+        } elseif (isset($query['id'], $query['longitude'], $query['latitude']) &&
+            $query['id'] === $session->get('id')
+        ) {
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),

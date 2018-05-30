@@ -31,7 +31,11 @@ class UIMiddleware implements MiddlewareInterface
             $providers[] = $provider->getName();
         }
 
-        $this->template->addDefaultParam($this->template::TEMPLATE_ALL, 'title', $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1));
+        $this->template->addDefaultParam(
+            $this->template::TEMPLATE_ALL,
+            'title',
+            $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1)
+        );
 
         $this->template->addDefaultParam('partial::header', 'params', $request->getQueryParams());
 

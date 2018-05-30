@@ -54,8 +54,7 @@ class UploadHandler implements RequestHandlerInterface
 
             if ($this->uploadFile() !== false && file_exists($this->path) === true) {
                 if ($this->checkFile() === true) {
-                    if (
-                        $this->importFile($config['postgresql']) &&
+                    if ($this->importFile($config['postgresql']) &&
                         $this->checkTable($config['limit'] ?? null)
                     ) {
                         $session->set('path', $this->path);
