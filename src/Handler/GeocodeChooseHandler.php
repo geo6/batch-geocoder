@@ -205,8 +205,6 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $session->set('addresses', $addresses);
 
             $data = [
-                'title'   => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
-                'version' => $config['version'],
                 'table'   => $table,
                 'address' => $formatter->format($address, '%S %n, %z %L'),
                 'id'      => $result->id,

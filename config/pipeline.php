@@ -53,6 +53,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->pipe(App\Middleware\ConfigMiddleware::class);
     $app->pipe(App\Middleware\DbAdapterMiddleware::class);
     $app->pipe(App\Middleware\LocalizationMiddleware::class);
+    $app->pipe(App\Middleware\UIMiddleware::class);
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
     // At this point, if no Response is returned by any middleware, the

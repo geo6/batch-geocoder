@@ -38,6 +38,8 @@ class ConfigProvider
             'factories'  => [
                 Extension\TranslateExtension::class => Extension\Factory\TranslateExtensionFactory::class,
 
+                Middleware\UIMiddleware::class      => Middleware\Factory\UIMiddlewareFactory::class,
+
                 Handler\GeocodeHandler::class       => Handler\Factory\GeocodeHandlerFactory::class,
                 Handler\GeocodeChooseHandler::class => Handler\Factory\GeocodeChooseHandlerFactory::class,
                 Handler\HomeHandler::class          => Handler\Factory\HomeHandlerFactory::class,

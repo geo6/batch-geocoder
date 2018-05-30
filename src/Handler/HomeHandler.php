@@ -48,8 +48,6 @@ class HomeHandler implements RequestHandlerInterface
         rsort($tables);
 
         $data = [
-            'title'    => $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1),
-            'version'  => $config['version'],
             'limit'    => $config['limit'] ?? null,
             'error'    => $error,
             'tables'   => $tables,
