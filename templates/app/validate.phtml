@@ -20,14 +20,17 @@
     <form action="./validate" method="post">
         <table class="table table-striped">
             <tbody>
-            <?php foreach ($suggestions as $postalcode => $suggest): ?>
-                <?php foreach ($suggest as $locality => $sugg): ?>
+            <?php foreach ($suggestions as $postalcode => $localities): ?>
+                <?php foreach ($localities as $locality => $result): ?>
                     <tr>
                         <td class="align-middle"><?=$postalcode?></td>
                         <td class="align-middle"><?=$locality?></td>
+                        <td class="align-middle">
+                            <?=sprintf($this->translatePlural('%d record', '%d records', $result['count']), $result['count'])?>
+                        </td>
                         <td>
                             <select class="form-control" name="validate[<?=$postalcode?>][<?=$locality?>]">
-                            <?php foreach ($sugg as $s): ?>
+                            <?php foreach ($result['suggestions'] as $s): ?>
                                 <option value="<?=$s['postalcode']?>|<?=$s['name']?>"><?=$s['postalcode']?> - <?=$s['name']?></option>
                             <?php endforeach ?>
                             </select>

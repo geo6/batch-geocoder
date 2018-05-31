@@ -122,7 +122,11 @@ class ValidateHandler implements RequestHandlerInterface
         $sql = new Sql($adapter, $table);
 
         $list = $sql->select();
-        $list->columns(['postalcode', 'locality']);
+        $list->columns([
+            'postalcode',
+            'locality',
+            'count' => new Expression('COUNT(*)'),
+        ]);
         $list->where(['valid' => new Expression('false')]);
         $list->group(['postalcode', 'locality']);
         $list->order(['postalcode']);
@@ -151,7 +155,10 @@ class ValidateHandler implements RequestHandlerInterface
                 if (!isset($suggestions[$r->postalcode][$r->locality])) {
                     $suggestions[$r->postalcode][$r->locality] = [];
                 }
-                $suggestions[$r->postalcode][$r->locality] = $resultsSuggestion->toArray();
+                $suggestions[$r->postalcode][$r->locality] = [
+                    'count' => $r->count,
+                    'suggestions' => $resultsSuggestion->toArray(),
+                ];
             }
 
             return $suggestions;
