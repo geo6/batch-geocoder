@@ -14,7 +14,7 @@ use Zend\Db\Sql\Ddl\DropTable;
 use Zend\Db\Sql\Sql;
 
 /**
- * Delete remaining uploaded files
+ * Delete remaining uploaded files.
  */
 $directory = realpath('data/upload');
 $error = false;
@@ -22,7 +22,7 @@ $error = false;
 if ($directory !== false && file_exists($directory) && is_dir($directory)) {
     if ($handle = opendir($directory)) {
         while (false !== ($file = readdir($handle))) {
-            if (!in_array($file, ['.','..']) && !is_dir($directory.'/'.$file)) {
+            if (!in_array($file, ['.', '..']) && !is_dir($directory.'/'.$file)) {
                 $unlink = unlink($directory.'/'.$file);
 
                 if ($unlink === true) {
@@ -46,7 +46,7 @@ if ($directory !== false && file_exists($directory) && is_dir($directory)) {
 }
 
 /**
- * Delete PostgreSQL tables
+ * Delete PostgreSQL tables.
  */
 $config = (new ConfigAggregator([
     new ZendConfigProvider('config/application/*.{php,ini,xml,json,yaml}'),
