@@ -145,10 +145,10 @@ class ValidateHandler implements RequestHandlerInterface
                 $qsz = $sql->buildSqlString($suggestion);
                 $resultsSuggestion = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
-                if (isset($suggestions[$r->postalcode])) {
+                if (!isset($suggestions[$r->postalcode])) {
                     $suggestions[$r->postalcode] = [];
                 }
-                if (isset($suggestions[$r->postalcode][$r->locality])) {
+                if (!isset($suggestions[$r->postalcode][$r->locality])) {
                     $suggestions[$r->postalcode][$r->locality] = [];
                 }
                 $suggestions[$r->postalcode][$r->locality] = $resultsSuggestion->toArray();
