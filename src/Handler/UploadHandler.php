@@ -242,13 +242,15 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * If there is an error, delete the current file and the current table in the database (if it exists).
      */
-    private function deleteFile() {
+    private function deleteFile()
+    {
         if (!is_null($this->path) && file_exists($this->path)) {
             unlink($this->path);
         }
     }
 
-    private function deleteTable() {
+    private function deleteTable()
+    {
         if (!is_null($this->table)) {
             $this->adapter->query(
                 sprintf(
