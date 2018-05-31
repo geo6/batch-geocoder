@@ -144,7 +144,7 @@ class ValidateHandler implements RequestHandlerInterface
                     ->equalTo('postalcode', $r->postalcode)
                     ->or
                     ->like('normalized', strtoupper(Text::removeAccents($r->locality)));
-                $suggestion->order(['level', 'postalcode']);
+                $suggestion->order(['postalcode', 'level']);
 
                 $qsz = $sql->buildSqlString($suggestion);
                 $resultsSuggestion = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
