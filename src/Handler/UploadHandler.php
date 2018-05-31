@@ -10,6 +10,7 @@ use ErrorException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Db\Metadata\Metadata;
 use Zend\Db\Sql\Ddl;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\RedirectResponse;
@@ -68,14 +69,18 @@ class UploadHandler implements RequestHandlerInterface
                     }
                 }
             } catch (ErrorException $e) {
-                $this->cleanCurrent();
+                $this->deleteFile();
+                $this->deleteTable();
 
                 return $this->flashError($e);
             } catch (Exception $e) {
-                $this->cleanCurrent();
+                $this->deleteFile();
+                $this->deleteTable();
 
                 return $this->flashError($e);
             }
+
+            $this->deleteFile();
         }
 
         if (!isset($config['validation']) || $config['validation'] !== false) {
@@ -103,7 +108,7 @@ class UploadHandler implements RequestHandlerInterface
         if (!is_null($this->file) && $this->file->getError() === UPLOAD_ERR_OK) {
             $info = pathinfo($this->file->getClientFilename());
 
-            $directory = realpath('data/upload').'/'.date('Y').'/'.date('m');
+            $directory = realpath('data/upload');
             $fname = $this->file->getClientFilename();
 
             if (!file_exists($directory) || !is_dir($directory)) {
@@ -153,6 +158,13 @@ class UploadHandler implements RequestHandlerInterface
     {
         $fname = basename($this->path);
         $this->table = date('Ymd').'_'.(new Alnum())->filter($fname);
+
+        $metadata = new Metadata($this->adapter);
+        $tables = $metadata->getTableNames();
+        $i = 1;
+        while (in_array($this->table, $tables)) {
+            $this->table = date('Ymd').'_'.(new Alnum())->filter($fname).'_'.($i++);
+        }
 
         try {
             // Create table
@@ -230,14 +242,13 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * If there is an error, delete the current file and the current table in the database (if it exists).
      */
-    private function cleanCurrent()
-    {
-        // Delete file
+    private function deleteFile() {
         if (!is_null($this->path) && file_exists($this->path)) {
             unlink($this->path);
         }
+    }
 
-        // Delete table
+    private function deleteTable() {
         if (!is_null($this->table)) {
             $this->adapter->query(
                 sprintf(
