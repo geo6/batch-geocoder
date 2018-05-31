@@ -41,38 +41,48 @@ class UploadHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-        $this->adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
-
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
-        $files = $request->getUploadedFiles();
+        $query = $request->getParsedBody();
 
-        try {
-            $this->file = $files['file'];
+        if (isset($config['archives']) && $config['archives'] === true && isset($query['table'])) {
+            $session->set('table', $query['table']);
+        } else {
+            $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
+            $this->adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
 
-            if ($this->uploadFile() !== false && file_exists($this->path) === true) {
-                if ($this->checkFile() === true) {
-                    if ($this->importFile($config['postgresql']) &&
-                        $this->checkTable($config['limit'] ?? null)
-                    ) {
-                        $session->set('path', $this->path);
-                        $session->set('table', $this->table);
+            $files = $request->getUploadedFiles();
+
+            try {
+                $this->file = $files['file'];
+
+                if ($this->uploadFile() !== false && file_exists($this->path) === true) {
+                    if ($this->checkFile() === true) {
+                        if ($this->importFile($config['postgresql']) &&
+                            $this->checkTable($config['limit'] ?? null)
+                        ) {
+                            $session->set('path', $this->path);
+                            $session->set('table', $this->table);
+                        }
                     }
                 }
+            } catch (ErrorException $e) {
+                $this->cleanCurrent();
+
+                return $this->flashError($e);
+            } catch (Exception $e) {
+                $this->cleanCurrent();
+
+                return $this->flashError($e);
             }
-        } catch (ErrorException $e) {
-            $this->cleanCurrent();
-
-            return $this->flashError($e);
-        } catch (Exception $e) {
-            $this->cleanCurrent();
-
-            return $this->flashError($e);
         }
 
-        return new RedirectResponse($this->router->generateUri('validate'));
+        if (!isset($config['validation']) || $config['validation'] !== false) {
+            return new RedirectResponse($this->router->generateUri('validate'));
+        }
+
+        return new RedirectResponse($this->router->generateUri('geocode'));
     }
 
     /**

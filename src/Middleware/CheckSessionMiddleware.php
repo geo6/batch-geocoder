@@ -23,6 +23,7 @@ class CheckSessionMiddleware implements MiddlewareInterface
 
         $path = $request->getUri()->getPath();
         switch ($path) {
+            case '/app/batch-geocoder/validate':
             case '/app/batch-geocoder/geocode':
             case '/app/batch-geocoder/geocode/process':
             case '/app/batch-geocoder/geocode/choose':

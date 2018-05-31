@@ -9,10 +9,6 @@ The "Batch Geocoder" application allows you to geocode your dataset of addresses
 You can upload your file and the application will process it to add a location (longitude, latitude) to each address.  
 The application will try to find a location using several providers, you can define the list of providers used in your configuration file (see [documentation](https://github.com/geo6/batch-geocoder#providers)).
 
-This application is developed for **Belgian addresses**, it will work with any set of addresses depending on the providers you use
-but the validation process (right after the upload process) will check if the postal code and locality is valid for each address
-(see `scripts/create-validation-bpost.sql`).
-
 ---
 
 ## Install
@@ -74,11 +70,12 @@ If you need more information, have a look a [Geocoder PHP documentation](https:/
 
 ### Additional parameters
 
-| Parameter name  | Type      | Description                                          |
-|-----------------|-----------|------------------------------------------------------|
-| title           | *string*  | Title of the application (default: `batch-geocoder`) |
-| archives        | *boolean* | Enable archive mode (see here under)                 |
-| limit           | *integer* | Maximum number of records allowed                    |
+| Parameter name  | Type      | Description                                                |
+|-----------------|-----------|------------------------------------------------------------|
+| title           | *string*  | Title of the application (default: `batch-geocoder`)       |
+| archives        | *boolean* | Enable archive mode (default: `false`) (see here under)    |
+| limit           | *integer* | Maximum number of records allowed                          |
+| validation      | *boolean* | Disable validation step (default: `true`) (see here under) |
 
 All those parameters are optional.  
 By default, archive mode is disabled and there is no limit of maximum number of records allowed.
@@ -86,3 +83,11 @@ By default, archive mode is disabled and there is no limit of maximum number of 
 #### Archive mode
 
 If you enable archive mode, you can add `?archives` to display a listbox of existing tables : <http://localhost:8080/app/batch-geocoder/?archives>
+
+#### Validation
+
+This application is developed for **Belgian addresses**, it will work with any set of addresses depending on the providers you use
+but the validation process (right after the upload process) will check if the postal code and locality is valid for each address
+(see `scripts/create-validation-bpost.sql`).
+
+If you want to disable this validation process, just set the `validation` parameter to `false`.

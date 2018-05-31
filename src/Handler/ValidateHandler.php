@@ -45,10 +45,6 @@ class ValidateHandler implements RequestHandlerInterface
 
         $query = $request->getParsedBody();
 
-        if (isset($config['archives']) && $config['archives'] === true && isset($query['table'])) {
-            $session->set('table', $query['table']);
-        }
-
         $table = $session->get('table');
 
         $sql = new Sql($adapter, $table);
