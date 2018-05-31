@@ -27,6 +27,9 @@
                         <td class="align-middle"><?=$locality?></td>
                         <td class="align-middle">
                             <?=sprintf($this->translatePlural('%d record', '%d records', $result['count']), $result['count'])?>
+                            <div class="small text-info">
+                                <?=nl2br($result['list'])?>
+                            </div>
                         </td>
                         <td>
                             <select class="form-control" name="validate[<?=$postalcode?>][<?=$locality?>]">
