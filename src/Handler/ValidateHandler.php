@@ -126,7 +126,7 @@ class ValidateHandler implements RequestHandlerInterface
             'postalcode',
             'locality',
             'count' => new Expression('COUNT(*)'),
-            'list' => new Expression('string_agg(CONCAT("streetname", \' \', "housenumber", \', \', "postalcode", \' \', "locality"), \''.PHP_EOL.'\')'),
+            'list'  => new Expression('string_agg(CONCAT("streetname", \' \', "housenumber", \', \', "postalcode", \' \', "locality"), \''.PHP_EOL.'\')'),
         ]);
         $list->where(['valid' => new Expression('false')]);
         $list->group(['postalcode', 'locality']);
@@ -157,8 +157,8 @@ class ValidateHandler implements RequestHandlerInterface
                     $suggestions[$r->postalcode][$r->locality] = [];
                 }
                 $suggestions[$r->postalcode][$r->locality] = [
-                    'count' => $r->count,
-                    'list' => $r->list,
+                    'count'       => $r->count,
+                    'list'        => $r->list,
                     'suggestions' => $resultsSuggestion->toArray(),
                 ];
             }
