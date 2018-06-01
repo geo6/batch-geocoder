@@ -12,6 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\Sql\Ddl;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\UploadedFile;
@@ -45,13 +46,30 @@ class UploadHandler implements RequestHandlerInterface
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 
+        $this->adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
+
         $query = $request->getParsedBody();
 
         if (isset($config['archives']) && $config['archives'] === true && isset($query['table'])) {
+            $sql = new Sql($this->adapter, $query['table']);
+
+            $reset = $sql->update();
+            $reset->set([
+                'process_datetime' => new Expression('NULL'),
+                'process_count'    => new Expression('NULL'),
+                'process_provider' => new Expression('NULL'),
+                'process_address'  => new Expression('NULL'),
+                'process_score'    => new Expression('NULL'),
+                'the_geog'         => new Expression('NULL'),
+            ]);
+            $reset->where
+                ->isNull('process_address');
+            $qsz = $sql->buildSqlString($reset);
+            $this->adapter->query($qsz, $this->adapter::QUERY_MODE_EXECUTE);
+
             $session->set('table', $query['table']);
         } else {
             $this->flashMessages = $request->getAttribute(FlashMessageMiddleware::FLASH_ATTRIBUTE);
-            $this->adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
 
             $files = $request->getUploadedFiles();
 

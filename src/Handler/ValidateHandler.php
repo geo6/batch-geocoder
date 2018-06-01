@@ -97,6 +97,7 @@ class ValidateHandler implements RequestHandlerInterface
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
+            ->isNull('process_count')
             ->isNull(new Expression('validation->\'postalcode\''))
             ->notIn('postalcode', (new Select('validation_bpost'))->columns(['postalcode']));
         $qsz = $sql->buildSqlString($update);
@@ -106,6 +107,7 @@ class ValidateHandler implements RequestHandlerInterface
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
+            ->isNull('process_count')
             ->isNull(new Expression('"validation"->\'locality\''))
             ->notIn(
                 new Expression('unaccent(UPPER("locality"))'),
@@ -123,6 +125,7 @@ class ValidateHandler implements RequestHandlerInterface
             'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation_bpost v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test']),
         ]);
         $update->where
+            ->isNull('process_count')
             ->equalTo('valid', 't');
         $qsz = $sql->buildSqlString($update);
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
