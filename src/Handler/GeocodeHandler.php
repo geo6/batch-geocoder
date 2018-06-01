@@ -60,6 +60,7 @@ class GeocodeHandler implements RequestHandlerInterface
                 'process_count'    => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
                 'process_address'  => new Expression('NULL'),
+                'process_score'    => new Expression('NULL'),
                 'the_geog'         => new Expression('NULL'),
             ]);
 
@@ -72,6 +73,7 @@ class GeocodeHandler implements RequestHandlerInterface
                 'process_count'    => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
                 'process_address'  => new Expression('NULL'),
+                'process_score'    => new Expression('NULL'),
                 'the_geog'         => new Expression('NULL'),
             ]);
             $reset->where
