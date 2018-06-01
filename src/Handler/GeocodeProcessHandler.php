@@ -178,7 +178,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
             if (count($validResult) === 1) {
                 $updateData['process_count'] = 1;
-                $updateData['process_address'] = $formatter->format($result->first(), '%S %n, %z %L');
+                $updateData['process_address'] = $formatter->format($validResult[0], '%S %n, %z %L');
                 $updateData['process_score'] = $validator->getScore($validResult[0]);
                 $updateData['the_geog'] = new Expression(sprintf(
                     'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
