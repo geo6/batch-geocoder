@@ -57,7 +57,7 @@ class ValidateHandler implements RequestHandlerInterface
                     $update = $sql->update();
                     $update->set([
                         'valid'      => new Expression('true'),
-                        'validation' => new Expression('hstore(ARRAY[\'postalcode\', ?, \'locality\', ?])', $valid),
+                        'validation' => new Expression('hstore(ARRAY[\'postalcode\', ?, \'locality\', ?, \'region\', ?])', $valid),
                     ]);
                     $update->where([
                         'valid'      => new Expression('false'),
@@ -93,15 +93,16 @@ class ValidateHandler implements RequestHandlerInterface
     {
         $sql = new Sql($adapter, $table);
 
+        // Check postal code
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
             ->isNull(new Expression('validation->\'postalcode\''))
             ->notIn('postalcode', (new Select('validation_bpost'))->columns(['postalcode']));
-
         $qsz = $sql->buildSqlString($update);
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
+        // Check if locality name match postal code
         $update = $sql->update();
         $update->set(['valid' => new Expression('false')]);
         $update->where
@@ -113,6 +114,16 @@ class ValidateHandler implements RequestHandlerInterface
                     $adapter->getPlatform()->quoteIdentifierChain(['validation_bpost', 'postalcode'])
                 )->columns(['normalized'])
             );
+        $qsz = $sql->buildSqlString($update);
+        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+        // Try to find correct region
+        $update = $sql->update();
+        $update->set([
+            'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation_bpost v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test'])
+        ]);
+        $update->where
+            ->equalTo('valid', 't');
         $qsz = $sql->buildSqlString($update);
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
     }
@@ -140,7 +151,7 @@ class ValidateHandler implements RequestHandlerInterface
             $sqlValidation = new Sql($adapter, 'validation_bpost');
             foreach ($results as $r) {
                 $suggestion = $sqlValidation->select();
-                $suggestion->columns(['postalcode', 'name']);
+                $suggestion->columns(['postalcode', 'name', 'region']);
                 $suggestion->where
                     ->equalTo('postalcode', $r->postalcode)
                     ->or

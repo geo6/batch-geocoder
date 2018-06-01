@@ -28,7 +28,7 @@ class UIMiddleware implements MiddlewareInterface
 
         $providers = [];
         foreach ($config['providers'] as $provider) {
-            $providers[] = $provider->getName();
+            $providers[] = is_array($provider) ? $provider[0]->getName() : $provider->getName();
         }
 
         $this->template->addDefaultParam(

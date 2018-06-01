@@ -83,7 +83,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             ]);
 
             if (isset($addresses[$query['provider']], $addresses[$query['provider']][$query['address']])) {
-                $validator = new AddressValidator($address);
+                $validator = new AddressValidator($address, $adapter, false);
 
                 $selection = $addresses[$query['provider']][$query['address']];
                 $addr = Address::createFromArray([
@@ -139,6 +139,14 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         }
 
         $select = $sql->select();
+        $select->columns([
+            'id',
+            'streetname',
+            'housenumber',
+            'postalcode',
+            'locality',
+            'validation' => new Expression('hstore_to_json(validation)'),
+        ]);
         $select->where
             ->equalTo('valid', 't')
             ->isNotNull('process_count')
@@ -151,6 +159,8 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
         if ($results->count() > 0) {
             $result = $results->current();
+
+            $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
 
             $address = Address::createFromArray([
                 'streetNumber' => trim($result->housenumber),
@@ -172,6 +182,14 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $addresses = [];
 
             foreach ($config['providers'] as $i => $provider) {
+                if (is_array($provider)) {
+                    if (!in_array($validation->region, $provider[1])) {
+                        continue;
+                    }
+
+                    $provider = $provider[0];
+                }
+
                 $query = GeocodeQuery::create($formatter->format($address, '%S %n, %z %L'));
                 $query = $query->withData('address', $address);
 
@@ -203,17 +221,32 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 }
             }
 
-            $session->set('id', $result->id);
-            $session->set('addresses', $addresses);
+            if (empty($addresses)) {
+                $update = $sql->update();
+                $update->set([
+                    'process_datetime' => date('c'),
+                    'process_count'    => -1,
+                    'process_provider' => new Expression('NULL'),
+                ]);
+                $update->where(['id' => $result->id]);
 
-            $data = [
-                'table'   => $table,
-                'address' => $formatter->format($address, '%S %n, %z %L'),
-                'id'      => $result->id,
-                'results' => $addresses,
-            ];
+                $qsz = $sql->buildSqlString($update);
+                $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
-            return new HtmlResponse($this->template->render('app::geocode-choose', $data));
+                return new RedirectResponse($this->router->generateUri('geocode.choose'));
+            } else {
+                $session->set('id', $result->id);
+                $session->set('addresses', $addresses);
+
+                $data = [
+                    'table'   => $table,
+                    'address' => $formatter->format($address, '%S %n, %z %L'),
+                    'id'      => $result->id,
+                    'results' => $addresses,
+                ];
+
+                return new HtmlResponse($this->template->render('app::geocode-choose', $data));
+            }
         } else {
             return new RedirectResponse($this->router->generateUri('view'));
         }

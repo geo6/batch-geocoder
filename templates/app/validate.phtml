@@ -34,7 +34,7 @@
                         <td>
                             <select class="form-control" name="validate[<?=$postalcode?>][<?=$locality?>]">
                             <?php foreach ($result['suggestions'] as $s): ?>
-                                <option value="<?=$s['postalcode']?>|<?=$s['name']?>"><?=$s['postalcode']?> - <?=$s['name']?></option>
+                                <option value="<?=$s['postalcode']?>|<?=$s['name']?>|<?=$s['region']?>"><?=$s['postalcode']?> - <?=$s['name']?></option>
                             <?php endforeach ?>
                             </select>
                         </td>

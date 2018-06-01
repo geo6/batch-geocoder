@@ -88,6 +88,14 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $noresult = true;
 
                 foreach ($config['providers'] as $i => $provider) {
+                    if (is_array($provider)) {
+                        if (!in_array($validation->region, $provider[1])) {
+                            continue;
+                        }
+
+                        $provider = $provider[0];
+                    }
+
                     $result = self::RESULT_NORESULT;
                     $query = self::geocode($provider, $address, '%S %n, %z %L', $adapter, $result);
 
@@ -169,7 +177,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         if ($count >= 1) {
             $validResult = [];
-            $validator = new AddressValidator($query->getData('address'), $adapter);
+            $validator = new AddressValidator($query->getData('address'), $adapter, $config['validation'] ?? true);
             foreach ($result as $address) {
                 if ($validator->isValid($address) === true) {
                     $validResult[] = $address;

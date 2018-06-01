@@ -68,6 +68,38 @@ For instance, to install `UrbIS` provider, just run :
 
 If you need more information, have a look a [Geocoder PHP documentation](https://github.com/geocoder-php/Geocoder#geocoder) !
 
+#### Dedicated providers
+
+If you use validation process (for Belgian addresses), the application will try to guess in which Belgian region your address is (Brussels, Flanders, or Wallonia).  
+Some providers are regional providers (see each provider's documentation) ; you can define for each provider if it should be use for all regions or just specific regions.
+
+Here is the same providers configuration but we define which provider to use for all of Belgium or just specific regions :
+
+    <?php
+
+    use Geocoder\Provider;
+    use Http\Adapter\Guzzle6\Client;
+
+    $client = new Client();
+
+    return [
+        'providers'  => [
+            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+            [new Provider\UrbIS\UrbIS($client), ['bru']],
+            [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
+            [new Provider\SPW\SPW($client), ['wal']],
+            new Provider\bpost\bpost($client),
+        ]
+    ];
+
+Explanations:
+
+- *GEO-6* provider will be used for all the addresses ;
+- *UrbIS* provider will be only used for addresses in Brussels ;
+- *Geopunt* provider will be only used for addresses in Brussels or Flanders (Vlaanderen) ;
+- *SPW* provider will be only used for addresses in Wallonia ;
+- *bpost* provider will be used for all the addresses ;
+
 ### Additional parameters
 
 | Parameter name  | Type      | Description                                                |
