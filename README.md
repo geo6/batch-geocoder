@@ -70,7 +70,7 @@ If you need more information, have a look a [Geocoder PHP documentation](https:/
 
 #### Dedicated providers
 
-If you use validation process (for Belgian addresses), the application will try to guess in which Belgian region your address is (Brussels, Flanders, or Wallonia).  
+If you use validation process (for Belgian addresses), the application will try to guess in which Belgian region your address is (Brussels `bru`, Flander `vla`, or Wallonia `wal`).  
 Some providers are regional providers (see each provider's documentation) ; you can define for each provider if it should be use for all regions or just specific regions.
 
 Here is the same providers configuration but we define which provider to use for all of Belgium or just specific regions :
