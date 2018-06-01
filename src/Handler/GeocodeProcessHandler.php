@@ -147,7 +147,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
                             $qsz = $sql->buildSqlString($update);
                             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
-                        } else  {
+                        } else {
                             $data['countMultiple']++;
 
                             $update = $sql->update();
