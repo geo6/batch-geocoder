@@ -95,12 +95,12 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
                 $update = $sql->update();
                 $update->set([
-                    'process_datetime'  => date('c'),
-                    'process_status'    => 9,
-                    'process_provider'  => $query['provider'],
-                    'process_address'   => $selection['display'],
-                    'process_score'     => $validator->getScore($addr),
-                    'the_geog'          => new Expression(sprintf(
+                    'process_datetime' => date('c'),
+                    'process_status'   => 9,
+                    'process_provider' => $query['provider'],
+                    'process_address'  => $selection['display'],
+                    'process_score'    => $validator->getScore($addr),
+                    'the_geog'         => new Expression(sprintf(
                         'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
                         $selection['longitude'],
                         $selection['latitude']
@@ -119,11 +119,11 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         ) {
             $update = $sql->update();
             $update->set([
-                'process_datetime'  => date('c'),
-                'process_status'    => 9,
-                'process_provider'  => 'manual',
-                'process_address'   => '',
-                'the_geog'          => new Expression(sprintf(
+                'process_datetime' => date('c'),
+                'process_status'   => 9,
+                'process_provider' => 'manual',
+                'process_address'  => '',
+                'the_geog'         => new Expression(sprintf(
                     'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
                     $query['longitude'],
                     $query['latitude']
@@ -228,9 +228,9 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             if (empty($addresses)) {
                 $update = $sql->update();
                 $update->set([
-                    'process_datetime'  => date('c'),
-                    'process_status'    => 9,
-                    'process_provider'  => new Expression('NULL'),
+                    'process_datetime' => date('c'),
+                    'process_status'   => 9,
+                    'process_provider' => new Expression('NULL'),
                 ]);
                 $update->where(['id' => $result->id]);
 
