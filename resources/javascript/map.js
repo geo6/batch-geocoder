@@ -75,7 +75,9 @@ export default function initMap(geojson) {
         })
     });
 
-    window.app.map.getView().fit(source.getExtent());
+    window.app.map.getView().fit(source.getExtent(), {
+        maxZoom: 18
+    });
 
     window.app.map.on('singleclick', function (event) {
         let features = this.getFeaturesAtPixel(event.pixel);
