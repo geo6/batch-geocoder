@@ -40,20 +40,6 @@ class ViewHandler implements RequestHandlerInterface
 
         $sql = new Sql($adapter, $table);
 
-        $reset = $sql->update();
-        $reset->set([
-            'process_status'    => 0,
-            'process_provider' => new Expression('NULL'),
-            'process_address'  => new Expression('NULL'),
-            'the_geog'         => new Expression('NULL'),
-        ]);
-        $reset->where
-            ->equalTo('valid', 't')
-            ->isNull('process_address');
-
-        $qsz = $sql->buildSqlString($reset);
-        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
-
         $select = $sql->select();
         $select->columns([
             'id',
@@ -70,7 +56,11 @@ class ViewHandler implements RequestHandlerInterface
         $select->where
             ->equalTo('valid', 't')
             ->isNotNull('process_status')
-            ->notEqualTo('process_status', 0);
+            ->nest()
+            ->equalTo('process_status', 1)
+            ->or
+            ->equalTo('process_status', 9)
+            ->unnest();
         $select->order(['postalcode', 'streetname', 'housenumber']);
 
         $qsz = $sql->buildSqlString($select);
@@ -128,8 +118,11 @@ class ViewHandler implements RequestHandlerInterface
         $select = $sql->select();
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_status')
-            ->equalTo('process_status', 0);
+            ->nest()
+            ->isNull('process_status')
+            ->or
+            ->equalTo('process_status', -1)
+            ->unnest();
         $select->order(['postalcode', 'streetname', 'housenumber']);
 
         $qsz = $sql->buildSqlString($select);
