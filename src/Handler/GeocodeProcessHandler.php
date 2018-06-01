@@ -23,9 +23,6 @@ use Zend\Expressive\Session\SessionMiddleware;
 class GeocodeProcessHandler implements RequestHandlerInterface
 {
     public const LIMIT = 25;
-    public const RESULT_MULTIPLE = 2;
-    public const RESULT_NORESULT = 0;
-    public const RESULT_SINGLE = 1;
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
@@ -51,41 +48,41 @@ class GeocodeProcessHandler implements RequestHandlerInterface
             ->equalTo('valid', 't')
             ->isNull('process_status');
         $select->limit(self::LIMIT);
-
         $qsz = $sql->buildSqlString($select);
-        $results = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+        $addresses = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
-        if ($results->count() === 0) {
+        if ($addresses->count() === 0) {
             return new JsonResponse(null);
         } else {
             $data = [
-                'count'         => $results->count(),
+                'count'         => $addresses->count(),
                 'countSingle'   => 0,
                 'countMultiple' => 0,
                 'countNoResult' => 0,
             ];
 
-            foreach ($results as $r) {
-                $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
+            foreach ($addresses as $address) {
+                $validation = !is_null($address->validation) ? json_decode($address->validation) : null;
 
-                $address = Address::createFromArray([
-                    'streetNumber' => trim($r->housenumber),
-                    'streetName'   => trim($r->streetname),
+                $geocodeAddress = Address::createFromArray([
+                    'streetNumber' => trim($address->housenumber),
+                    'streetName'   => trim($address->streetname),
                     'postalCode'   => trim(
                         isset($validation->postalcode) ?
                             (string) $validation->postalcode :
-                            (string) $r->postalcode
+                            (string) $address->postalcode
                     ),
                     'locality'     => trim(
                         isset($validation->locality) ?
                             $validation->locality :
-                            $r->locality
+                            $address->locality
                     ),
                 ]);
 
                 $formatter = new StringFormatter();
+                $validator = new AddressValidator($geocodeAddress, $adapter, $config['validation'] ?? true);
                 $progress = [];
-                $noresult = true;
+                $novalidresult = true;
 
                 foreach ($config['providers'] as $i => $provider) {
                     if (is_array($provider)) {
@@ -96,53 +93,91 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                         $provider = $provider[0];
                     }
 
-                    $result = self::RESULT_NORESULT;
-                    $query = self::geocode($provider, $address, '%S %n, %z %L', $adapter, $result);
+                    $rawCount = 0;
+                    $validResults = self::geocode($provider, $geocodeAddress, '%S %n, %z %L', $adapter, $rawCount);
 
-                    $progress[$i] = $query;
-
-                    if ($result === self::RESULT_SINGLE) {
+                    if (count($validResults) === 1) {
                         $data['countSingle']++;
-                        $noresult = false;
 
                         $update = $sql->update();
-                        $update->set($query);
-                        $update->where(['id' => $r->id]);
+                        $update->set([
+                            'process_datetime' => date('c'),
+                            'process_status'   => 1,
+                            'process_provider' => $provider->getName(),
+                            'process_address'  => $formatter->format($validResults[0], '%S %n, %z %L'),
+                            'process_score'    => $validator->getScore($validResults[0]),
+                            'the_geog'         => new Expression(sprintf(
+                                'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                                $validResults[0]->getCoordinates()->getLongitude(),
+                                $validResults[0]->getCoordinates()->getLatitude()
+                            )),
+                        ]);
+                        $update->where(['id' => $address->id]);
 
                         $qsz = $sql->buildSqlString($update);
                         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
+                        $novalidresult = false;
                         break;
-                    }
-                }
+                    } elseif (count($validResults) > 1) {
+                        $exactMatch = [];
+                        foreach ($validResults as $validResult) {
+                            if ($geocodeAddress->getStreetNumber() === $validResult->getStreetNumber()) {
+                                $exactMatch[] = $validResult;
+                            }
+                        }
 
-                if ($noresult === true) {
-                    // Find the first Provider that returned results
-                    foreach ($progress as $p => $result) {
-                        if ($result['process_status'] > 0) {
-                            $data['countMultiple']++;
-                            $noresult = false;
+                        if (count($exactMatch) === 1) {
+                            $data['countSingle']++;
 
                             $update = $sql->update();
-                            $update->set($result);
-                            $update->where(['id' => $r->id]);
+                            $update->set([
+                                'process_datetime' => date('c'),
+                                'process_status'   => 1,
+                                'process_provider' => $provider->getName(),
+                                'process_address'  => $formatter->format($exactMatch[0], '%S %n, %z %L'),
+                                'process_score'    => $validator->getScore($exactMatch[0]),
+                                'the_geog'         => new Expression(sprintf(
+                                    'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                                    $exactMatch[0]->getCoordinates()->getLongitude(),
+                                    $exactMatch[0]->getCoordinates()->getLatitude()
+                                )),
+                            ]);
+                            $update->where(['id' => $address->id]);
 
                             $qsz = $sql->buildSqlString($update);
                             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                        } else  {
+                            $data['countMultiple']++;
 
-                            break;
+                            $update = $sql->update();
+                            $update->set([
+                                'process_datetime' => date('c'),
+                                'process_status'   => 2,
+                                'process_provider' => $provider->getName(),
+                            ]);
+                            $update->where(['id' => $address->id]);
+
+                            $qsz = $sql->buildSqlString($update);
+                            $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
                         }
+
+                        $novalidresult = false;
+                        break;
                     }
+
+                    $progress[$provider->getName()] = $rawCount;
                 }
 
-                if ($noresult === true) {
+                if ($novalidresult === true) {
                     $data['countNoResult']++;
 
                     $update = $sql->update();
                     $update->set([
-                        'process_status' => 0,
+                        'process_datetime' => date('c'),
+                        'process_status'   => array_sum($progress) === 0 ? -1 : 0,
                     ]);
-                    $update->where(['id' => $r->id]);
+                    $update->where(['id' => $address->id]);
 
                     $qsz = $sql->buildSqlString($update);
                     $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
@@ -153,7 +188,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         }
     }
 
-    private static function geocode($provider, Address $address, string $format, Adapter $adapter, int &$result)
+    private static function geocode($provider, Address $address, string $format, Adapter $adapter, int &$rawCount)
     {
         $formatter = new StringFormatter();
 
@@ -167,43 +202,17 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $query = $query->withData('postalCode', $address->getPostalCode());
 
         $result = (new StatefulGeocoder($provider))->geocodeQuery($query);
-        $count = $result->count();
+        $rawCount = $result->count();
 
-        $updateData = [
-            'process_datetime' => date('c'),
-            'process_status'    => 0,
-            'process_provider' => $provider->getName(),
-        ];
+        $validResults = [];
 
-        if ($count >= 1) {
-            $validResult = [];
-            $validator = new AddressValidator($query->getData('address'), $adapter, $config['validation'] ?? true);
-            foreach ($result as $address) {
-                if ($validator->isValid($address) === true) {
-                    $validResult[] = $address;
-                }
+        $validator = new AddressValidator($query->getData('address'), $adapter, $config['validation'] ?? true);
+        foreach ($result as $address) {
+            if ($validator->isValid($address) === true) {
+                $validResults[] = $address;
             }
-
-            if (count($validResult) === 1) {
-                $updateData['process_status'] = 1;
-                $updateData['process_address'] = $formatter->format($validResult[0], '%S %n, %z %L');
-                $updateData['process_score'] = $validator->getScore($validResult[0]);
-                $updateData['the_geog'] = new Expression(sprintf(
-                    'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                    $validResult[0]->getCoordinates()->getLongitude(),
-                    $validResult[0]->getCoordinates()->getLatitude()
-                ));
-
-                $result = self::RESULT_SINGLE;
-            } else {
-                $updateData['process_status'] = 2;
-
-                $result = self::RESULT_MULTIPLE;
-            }
-        } else {
-            $result = self::RESULT_NORESULT;
         }
 
-        return $updateData;
+        return $validResults;
     }
 }
