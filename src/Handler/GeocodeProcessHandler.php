@@ -182,8 +182,8 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $updateData['process_score'] = $validator->getScore($validResult[0]);
                 $updateData['the_geog'] = new Expression(sprintf(
                     'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                    $result->first()->getCoordinates()->getLongitude(),
-                    $result->first()->getCoordinates()->getLatitude()
+                    $validResult[0]->getCoordinates()->getLongitude(),
+                    $validResult[0]->getCoordinates()->getLatitude()
                 ));
 
                 $result = self::RESULT_SINGLE;
