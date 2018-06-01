@@ -75,7 +75,7 @@ function selectAddress(provider, address, recenter) {
 export default function initMapChoose() {
     $('#results > div').each(function(index) {
         $(this).data('color', colors[index]);
-        $(this).find('h2 > svg').css('color', colors[index]);
+        $(this).find('h2').css('color', colors[index]);
     });
 
     $('#results > div > ul > li').each(function() {
@@ -121,6 +121,7 @@ export default function initMapChoose() {
     });
 
     window.app.map.getView().fit(addressesLayer.getSource().getExtent(), {
+        maxZoom: 18,
         padding: [5,5,5,5]
     });
 
@@ -135,11 +136,6 @@ export default function initMapChoose() {
             let coordinates = window.app.map.getCoordinateFromPixel(event.pixel);
             let lnglat = Proj.toLonLat(coordinates);
 
-            locationLayer.getSource().clear();
-            locationLayer.getSource().addFeature(new Feature({
-                geometry: new Point(coordinates),
-            }));
-
             $('#results > div > ul > li.text-primary').removeClass('text-primary');
             $('#selection').text('');
             $('#btn-save').addClass('disabled').
@@ -148,6 +144,11 @@ export default function initMapChoose() {
             if (window.app.map.getView().getZoom() < 17) {
                 alert('Please zoom in to set the location by clicking in the map !');
             } else {
+                locationLayer.getSource().clear();
+                locationLayer.getSource().addFeature(new Feature({
+                    geometry: new Point(coordinates),
+                }));
+
                 $('#selection').text(
                     Math.round(lnglat[0] * 1000000) / 1000000 + ', ' +
                     Math.round(lnglat[1] * 1000000) / 1000000
