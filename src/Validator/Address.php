@@ -16,11 +16,13 @@ final class Address
 {
     private $adapter;
     private $address;
+    private $validation;
 
-    public function __construct(AddressModel $address, Adapter $adapter = null)
+    public function __construct(AddressModel $address, Adapter $adapter = null, bool $validation = true)
     {
         $this->adapter = $adapter;
         $this->address = $address;
+        $this->validation = $validation;
     }
 
     public function isValid(AddressModel $address): bool
@@ -87,7 +89,7 @@ final class Address
 
         if ($locality1 === $locality2) {
             return true;
-        } else {
+        } elseif ($this->validation !== false) {
             $postalcode = $this->address->getPostalcode();
 
             $sql = new Sql($this->adapter, 'validation_bpost');
@@ -103,6 +105,10 @@ final class Address
             $localities = array_map('self::filter', $localities);
 
             return in_array($locality2, $localities);
+        } else {
+            $levenshtein = levenshtein($locality1, $locality2);
+
+            return $levenshtein < 5;
         }
     }
 
