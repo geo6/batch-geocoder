@@ -120,7 +120,7 @@ class ValidateHandler implements RequestHandlerInterface
         // Try to find correct region
         $update = $sql->update();
         $update->set([
-            'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation_bpost v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test'])
+            'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation_bpost v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test']),
         ]);
         $update->where
             ->equalTo('valid', 't');
