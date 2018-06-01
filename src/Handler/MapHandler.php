@@ -46,15 +46,15 @@ class MapHandler implements RequestHandlerInterface
             'housenumber',
             'postalcode',
             'locality',
-            'process_count',
+            'process_status',
             'process_provider',
             'process_address',
             'the_geog' => new Expression('ST_AsGeoJSON("the_geog")'),
         ]);
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
-            ->notEqualTo('process_count', 0);
+            ->isNotNull('process_status')
+            ->notEqualTo('process_status', 0);
         $select->order(['postalcode', 'streetname', 'housenumber']);
 
         $qsz = $sql->buildSqlString($select);

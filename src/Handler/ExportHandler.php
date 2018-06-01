@@ -45,8 +45,8 @@ class ExportHandler implements RequestHandlerInterface
         ]);
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
-            ->notEqualTo('process_count', 0);
+            ->isNotNull('process_status')
+            ->notEqualTo('process_status', 0);
 
         $qsz = $sql->buildSqlString($select);
         $resultsGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);

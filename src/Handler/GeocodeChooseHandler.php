@@ -49,7 +49,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),
-                'process_count'    => -1,
+                'process_status'   => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
             ]);
             $update->where(['id' => $query['skip']]);
@@ -96,7 +96,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 $update = $sql->update();
                 $update->set([
                     'process_datetime' => date('c'),
-                    'process_count'    => -1,
+                    'process_status'    => 9,
                     'process_provider' => $query['provider'],
                     'process_address'  => $selection['display'],
                     'process_score'    => $validator->getScore($addr),
@@ -120,7 +120,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),
-                'process_count'    => -1,
+                'process_status'    => 9,
                 'process_provider' => 'manual',
                 'process_address'  => '',
                 'the_geog'         => new Expression(sprintf(
@@ -149,8 +149,12 @@ class GeocodeChooseHandler implements RequestHandlerInterface
         ]);
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
-            ->greaterThanOrEqualTo('process_count', 0)
+            ->isNotNull('process_status')
+            ->nest()
+            ->equalTo('process_status', 0)
+            ->or
+            ->equalTo('process_status', 2)
+            ->unnest()
             ->isNull('process_address');
         $select->limit(1);
 
@@ -225,7 +229,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 $update = $sql->update();
                 $update->set([
                     'process_datetime' => date('c'),
-                    'process_count'    => -1,
+                    'process_status'    => 9,
                     'process_provider' => new Expression('NULL'),
                 ]);
                 $update->where(['id' => $result->id]);

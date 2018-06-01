@@ -56,7 +56,7 @@ class UploadHandler implements RequestHandlerInterface
             $reset = $sql->update();
             $reset->set([
                 'process_datetime' => new Expression('NULL'),
-                'process_count'    => new Expression('NULL'),
+                'process_status'    => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
                 'process_address'  => new Expression('NULL'),
                 'process_score'    => new Expression('NULL'),

@@ -12,7 +12,7 @@ CREATE TABLE "%s" (
   "valid" boolean NOT NULL DEFAULT true,
   "validation" hstore,
   "process_datetime" timestamp with time zone,
-  "process_count" int,
+  "process_status" int,
   "process_provider" varchar,
   "process_address" varchar,
   "process_score" int,

@@ -42,7 +42,7 @@ class ViewHandler implements RequestHandlerInterface
 
         $reset = $sql->update();
         $reset->set([
-            'process_count'    => 0,
+            'process_status'    => 0,
             'process_provider' => new Expression('NULL'),
             'process_address'  => new Expression('NULL'),
             'the_geog'         => new Expression('NULL'),
@@ -63,14 +63,14 @@ class ViewHandler implements RequestHandlerInterface
             'locality',
             'validation' => new Expression('hstore_to_json(validation)'),
             'process_address',
-            'process_count',
+            'process_status',
             'process_score',
             'process_provider',
         ]);
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
-            ->notEqualTo('process_count', 0);
+            ->isNotNull('process_status')
+            ->notEqualTo('process_status', 0);
         $select->order(['postalcode', 'streetname', 'housenumber']);
 
         $qsz = $sql->buildSqlString($select);
@@ -121,15 +121,15 @@ class ViewHandler implements RequestHandlerInterface
                 $diff['old'],
                 $diff['new'],
                 $score,
-                (intval($r->process_count) === -1),
+                (intval($r->process_status) === 9),
             ];
         }
 
         $select = $sql->select();
         $select->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
-            ->equalTo('process_count', 0);
+            ->isNotNull('process_status')
+            ->equalTo('process_status', 0);
         $select->order(['postalcode', 'streetname', 'housenumber']);
 
         $qsz = $sql->buildSqlString($select);

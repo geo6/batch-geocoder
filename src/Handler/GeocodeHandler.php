@@ -57,7 +57,7 @@ class GeocodeHandler implements RequestHandlerInterface
             $reset = $sql->update();
             $reset->set([
                 'process_datetime' => new Expression('NULL'),
-                'process_count'    => new Expression('NULL'),
+                'process_status'    => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
                 'process_address'  => new Expression('NULL'),
                 'process_score'    => new Expression('NULL'),
@@ -70,7 +70,7 @@ class GeocodeHandler implements RequestHandlerInterface
             $reset = $sql->update();
             $reset->set([
                 'process_datetime' => new Expression('NULL'),
-                'process_count'    => new Expression('NULL'),
+                'process_status'    => new Expression('NULL'),
                 'process_provider' => new Expression('NULL'),
                 'process_address'  => new Expression('NULL'),
                 'process_score'    => new Expression('NULL'),
@@ -88,7 +88,7 @@ class GeocodeHandler implements RequestHandlerInterface
         $countGeocoded->columns(['count' => new Expression('COUNT(*)')]);
         $countGeocoded->where
             ->equalTo('valid', 't')
-            ->isNotNull('process_count')
+            ->isNotNull('process_status')
             ->isNotNull('process_address');
 
         $qsz = $sql->buildSqlString($countGeocoded);

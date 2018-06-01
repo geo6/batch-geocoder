@@ -49,7 +49,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         ]);
         $select->where
             ->equalTo('valid', 't')
-            ->isNull('process_count');
+            ->isNull('process_status');
         $select->limit(self::LIMIT);
 
         $qsz = $sql->buildSqlString($select);
@@ -119,7 +119,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 if ($noresult === true) {
                     // Find the first Provider that returned results
                     foreach ($progress as $p => $result) {
-                        if ($result['process_count'] > 0) {
+                        if ($result['process_status'] > 0) {
                             $data['countMultiple']++;
                             $noresult = false;
 
@@ -140,7 +140,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
                     $update = $sql->update();
                     $update->set([
-                        'process_count' => 0,
+                        'process_status' => 0,
                     ]);
                     $update->where(['id' => $r->id]);
 
@@ -171,7 +171,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         $updateData = [
             'process_datetime' => date('c'),
-            'process_count'    => 0,
+            'process_status'    => 0,
             'process_provider' => $provider->getName(),
         ];
 
@@ -185,7 +185,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
             }
 
             if (count($validResult) === 1) {
-                $updateData['process_count'] = 1;
+                $updateData['process_status'] = 1;
                 $updateData['process_address'] = $formatter->format($validResult[0], '%S %n, %z %L');
                 $updateData['process_score'] = $validator->getScore($validResult[0]);
                 $updateData['the_geog'] = new Expression(sprintf(
@@ -196,7 +196,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
                 $result = self::RESULT_SINGLE;
             } else {
-                $updateData['process_count'] = count($validResult);
+                $updateData['process_status'] = 2;
 
                 $result = self::RESULT_MULTIPLE;
             }
