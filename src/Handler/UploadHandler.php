@@ -27,6 +27,9 @@ use Zend\Validator\ValidatorChain;
 
 class UploadHandler implements RequestHandlerInterface
 {
+    const SEPARATOR_COMMA = ',';
+    const SEPARATOR_SEMICOLON = ';';
+
     private $adapter;
     private $file;
     private $flashMessages;
@@ -189,6 +192,21 @@ class UploadHandler implements RequestHandlerInterface
                 $this->adapter::QUERY_MODE_EXECUTE
             );
 
+            // Try to determine the separator
+            $separator = self::SEPARATOR_COMMA;
+            if (($handle = fopen($this->path, 'r')) !== FALSE) {
+                $dataComma = fgetcsv($handle, 1000, self::SEPARATOR_COMMA);
+                $dataSemicolon = fgetcsv($handle, 1000, self::SEPARATOR_SEMICOLON);
+
+                if (count($dataComma) === 5) {
+                    $separator = self::SEPARATOR_COMMA;
+                } elseif (count($dataSemicolon) === 5) {
+                    $separator = self::SEPARATOR_SEMICOLON;
+                }
+
+                fclose($handle);
+            }
+
             // Load data
             $pg = pg_connect(sprintf(
                 'host=%s port=%s dbname=%s user=%s password=%s',
@@ -200,15 +218,19 @@ class UploadHandler implements RequestHandlerInterface
             ));
 
             $qsz = sprintf(
-                'COPY "%s" (id, streetname, housenumber, postalcode, locality) FROM STDIN WITH (FORMAT csv);',
+                'COPY "%s"'.
+                ' (id, streetname, housenumber, postalcode, locality)'.
+                ' FROM STDIN WITH ('.
+                'FORMAT csv'.
+                ($separator === self::SEPARATOR_SEMICOLON ? ', DELIMITER \''.self::SEPARATOR_SEMICOLON.'\'' : '').
+                ');',
                 $this->table
             );
             pg_query($pg, $qsz);
 
             $count = 0;
 
-            $handle = fopen($this->path, 'r');
-            if ($handle !== false) {
+            if (($handle = fopen($this->path, 'r')) !== false) {
                 while (($buffer = fgets($handle, 4096)) !== false) {
                     pg_put_line($pg, $buffer);
                     $count++;

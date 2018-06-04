@@ -30,7 +30,7 @@
             <?php endif ?>
             <form id="geocoder-form" action="./upload" method="post" autocomplete="off" enctype="multipart/form-data">
                 <p class="form-text">
-                    <?=$this->translate('You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>. Your file must not have a header.')?>
+                    <?=$this->translate('You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>, or a semicolon <kbd>;</kbd>. Your file must not have a header.')?>
                 </p>
                 <?php if (!is_null($limit)): ?>
                     <p class="form-text">
