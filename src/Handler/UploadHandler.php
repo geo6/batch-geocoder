@@ -194,7 +194,7 @@ class UploadHandler implements RequestHandlerInterface
 
             // Try to determine the separator
             $separator = self::SEPARATOR_COMMA;
-            if (($handle = fopen($this->path, 'r')) !== FALSE) {
+            if (($handle = fopen($this->path, 'r')) !== false) {
                 $dataComma = fgetcsv($handle, 1000, self::SEPARATOR_COMMA);
                 $dataSemicolon = fgetcsv($handle, 1000, self::SEPARATOR_SEMICOLON);
 
