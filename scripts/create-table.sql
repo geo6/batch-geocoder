@@ -7,7 +7,7 @@ CREATE TABLE "%s" (
   "id" varchar NOT NULL,
   "streetname" varchar NOT NULL,
   "housenumber" varchar NOT NULL,
-  "postalcode" int NOT NULL,
+  "postalcode" varchar NOT NULL,
   "locality" varchar NOT NULL,
   "valid" boolean NOT NULL DEFAULT true,
   "validation" hstore,

@@ -69,8 +69,8 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                     'streetName'   => trim($address->streetname),
                     'postalCode'   => trim(
                         isset($validation->postalcode) ?
-                            (string) $validation->postalcode :
-                            (string) $address->postalcode
+                            $validation->postalcode :
+                            $address->postalcode
                     ),
                     'locality'     => trim(
                         isset($validation->locality) ?

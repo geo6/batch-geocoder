@@ -72,7 +72,7 @@ class MapHandler implements RequestHandlerInterface
             $address = Address::createFromArray([
                 'streetNumber' => $r->housenumber,
                 'streetName'   => $r->streetname,
-                'postalCode'   => (string) $r->postalcode,
+                'postalCode'   => $r->postalcode,
                 'locality'     => $r->locality,
             ]);
 

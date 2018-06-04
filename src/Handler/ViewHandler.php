@@ -75,8 +75,8 @@ class ViewHandler implements RequestHandlerInterface
                 'streetName'   => trim($r->streetname),
                 'postalCode'   => trim(
                     isset($validation->postalcode) ?
-                        (string) $validation->postalcode :
-                        (string) $r->postalcode
+                        $validation->postalcode :
+                        $r->postalcode
                 ),
                 'locality'     => trim(
                     isset($validation->locality) ?
@@ -133,7 +133,7 @@ class ViewHandler implements RequestHandlerInterface
             $address = Address::createFromArray([
                 'streetNumber' => $r->housenumber,
                 'streetName'   => $r->streetname,
-                'postalCode'   => (string) $r->postalcode,
+                'postalCode'   => $r->postalcode,
                 'locality'     => $r->locality,
             ]);
 
@@ -153,7 +153,7 @@ class ViewHandler implements RequestHandlerInterface
             $address = Address::createFromArray([
               'streetNumber' => $r->housenumber,
               'streetName'   => $r->streetname,
-              'postalCode'   => (string) $r->postalcode,
+              'postalCode'   => $r->postalcode,
               'locality'     => $r->locality,
             ]);
 

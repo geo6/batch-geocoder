@@ -72,8 +72,8 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 'streetName'   => trim($r->streetname),
                 'postalCode'   => trim(
                     isset($validation->postalcode) ?
-                        (string) $validation->postalcode :
-                        (string) $r->postalcode
+                        $validation->postalcode :
+                        $r->postalcode
                 ),
                 'locality'     => trim(
                     isset($validation->locality) ?
@@ -171,8 +171,8 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 'streetName'   => trim($result->streetname),
                 'postalCode'   => trim(
                     isset($validation->postalcode) ?
-                        (string) $validation->postalcode :
-                        (string) $result->postalcode
+                        $validation->postalcode :
+                        $result->postalcode
                 ),
                 'locality'     => trim(
                     isset($validation->locality) ?

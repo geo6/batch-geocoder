@@ -3,7 +3,7 @@
 
 DROP TABLE IF EXISTS "validation_bpost";
 CREATE TABLE "validation_bpost" (
-    "postalcode" integer,
+    "postalcode" character varying,
     "name" character varying,
     "normalized" text,
     "level" integer,
