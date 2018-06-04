@@ -78,9 +78,7 @@ class UploadHandler implements RequestHandlerInterface
 
                 if ($this->uploadFile() !== false && file_exists($this->path) === true) {
                     if ($this->checkFile() === true) {
-                        if ($this->importFile($config['postgresql']) &&
-                            $this->checkTable($config['limit'] ?? null)
-                        ) {
+                        if ($this->importFile($config['postgresql'], $config['limit'] ?? null)) {
                             $session->set('path', $this->path);
                             $session->set('table', $this->table);
                         }
@@ -172,7 +170,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Import data in database.
      */
-    private function importFile($postgresql)
+    private function importFile(array $postgresql, int $limit = null)
     {
         $fname = basename($this->path);
         $this->table = date('Ymd').'_'.(new Alnum())->filter($fname);
@@ -207,12 +205,29 @@ class UploadHandler implements RequestHandlerInterface
             );
             pg_query($pg, $qsz);
 
+            $count = 0;
+
             $handle = fopen($this->path, 'r');
-            while (!feof($handle)) {
-                $row = fread($handle, 1024);
-                pg_put_line($pg, $row);
+            if ($handle !== false) {
+                while (($buffer = fgets($handle, 4096)) !== false) {
+                    pg_put_line($pg, $buffer);
+                    $count++;
+
+                    if (!is_null($limit) && $count > $limit) {
+                        fclose($handle);
+                        pg_end_copy($pg);
+
+                        throw new ErrorException(sprintf(
+                            'Too many records: %d !',
+                            $count
+                        ));
+                    }
+                }
+                if (!feof($handle)) {
+                    throw new ErrorException('Function fgets() failed!');
+                }
+                fclose($handle);
             }
-            fclose($handle);
 
             pg_end_copy($pg);
 
@@ -228,33 +243,6 @@ class UploadHandler implements RequestHandlerInterface
         }
 
         return $this->table;
-    }
-
-    /**
-     * Check table count.
-     */
-    private function checkTable($limit = null)
-    {
-        $sql = new Sql($this->adapter, $this->table);
-
-        $select = $sql->select();
-        $count = ($this->adapter->query(
-            $sql->buildSqlString($select),
-            $this->adapter::QUERY_MODE_EXECUTE
-        ))->count();
-
-        if ($count === 0) {
-            throw new ErrorException('No record !');
-        } elseif (!is_null($limit) && $count > $limit) {
-            throw new ErrorException(
-                sprintf(
-                    'Too many records: %d !',
-                    $count
-                )
-            );
-        }
-
-        return true;
     }
 
     /**
