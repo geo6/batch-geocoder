@@ -12,7 +12,7 @@ use Zend\Filter\FilterChain;
 use Zend\Filter\StringToUpper;
 use Zend\I18n\Filter\Alnum;
 
-final class AddressValidator
+final class AddressCheck
 {
     private $adapter;
     private $address;
@@ -27,10 +27,10 @@ final class AddressValidator
 
     public function isValid(AddressModel $address): bool
     {
-        return $this->validatePostalCode($address) &&
-            $this->validateLocality($address) &&
-            $this->validateStreetname($address) &&
-            $this->validateStreetNumber($address);
+        return $this->checkPostalCode($address) &&
+            $this->checkLocality($address) &&
+            $this->checkStreetname($address) &&
+            $this->checkStreetNumber($address);
     }
 
     public function getScore(AddressModel $address): int
@@ -74,7 +74,7 @@ final class AddressValidator
         return $filterChain->filter(Text::removeAccents($str));
     }
 
-    private function validatePostalCode(AddressModel $address): bool
+    private function checkPostalCode(AddressModel $address): bool
     {
         $postalCode1 = $this->address->getPostalCode();
         $postalCode2 = $address->getPostalCode();
@@ -82,7 +82,7 @@ final class AddressValidator
         return $postalCode1 === $postalCode2;
     }
 
-    private function validateLocality(AddressModel $address): bool
+    private function checkLocality(AddressModel $address): bool
     {
         $locality1 = self::filter($this->address->getLocality());
         $locality2 = self::filter($address->getLocality());
@@ -112,7 +112,7 @@ final class AddressValidator
         }
     }
 
-    private function validateStreetname(AddressModel $address): bool
+    private function checkStreetname(AddressModel $address): bool
     {
         $streetname1 = self::filter($this->address->getStreetname());
         $streetname2 = self::filter($address->getStreetname());
@@ -122,7 +122,7 @@ final class AddressValidator
         return $levenshtein < 5;
     }
 
-    private function validateStreetNumber(AddressModel $address): bool
+    private function checkStreetNumber(AddressModel $address): bool
     {
         $streetNumber1 = $this->address->getStreetNumber();
         $streetNumber2 = $address->getStreetNumber();

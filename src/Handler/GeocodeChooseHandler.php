@@ -6,7 +6,7 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use App\Tools\AddressValidator;
+use App\Tools\AddressCheck;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Geocoder\Query\GeocodeQuery;
@@ -83,7 +83,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             ]);
 
             if (isset($addresses[$query['provider']], $addresses[$query['provider']][$query['address']])) {
-                $validator = new AddressValidator($address, $adapter, false);
+                $validator = new AddressCheck($address, $adapter, false);
 
                 $selection = $addresses[$query['provider']][$query['address']];
                 $addr = Address::createFromArray([

@@ -6,7 +6,7 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use App\Tools\AddressValidator;
+use App\Tools\AddressCheck;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Geocoder\Query\GeocodeQuery;
@@ -80,7 +80,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 ]);
 
                 $formatter = new StringFormatter();
-                $validator = new AddressValidator($geocodeAddress, $adapter, $config['validation'] ?? true);
+                $validator = new AddressCheck($geocodeAddress, $adapter, $config['validation'] ?? true);
                 $progress = [];
                 $novalidresult = true;
 
@@ -211,7 +211,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         $validResults = [];
 
-        $validator = new AddressValidator($query->getData('address'), $adapter, $config['validation'] ?? true);
+        $validator = new AddressCheck($query->getData('address'), $adapter, $config['validation'] ?? true);
         foreach ($result as $address) {
             if ($validator->isValid($address) === true) {
                 $validResults[] = $address;
