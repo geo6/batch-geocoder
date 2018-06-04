@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Validator;
+namespace App\Tools;
 
 use Geo6\Text\Text;
 use Geocoder\Model\Address as AddressModel;
@@ -12,7 +12,7 @@ use Zend\Filter\FilterChain;
 use Zend\Filter\StringToUpper;
 use Zend\I18n\Filter\Alnum;
 
-final class Address
+final class AddressValidator
 {
     private $adapter;
     private $address;

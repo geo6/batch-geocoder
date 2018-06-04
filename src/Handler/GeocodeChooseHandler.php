@@ -6,7 +6,7 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
-use App\Validator\Address as AddressValidator;
+use App\Tools\AddressValidator;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Model\Address;
 use Geocoder\Query\GeocodeQuery;
