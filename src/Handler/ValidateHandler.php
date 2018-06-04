@@ -59,11 +59,22 @@ class ValidateHandler implements RequestHandlerInterface
                         'valid'      => new Expression('true'),
                         'validation' => new Expression('hstore(ARRAY[\'postalcode\', ?, \'locality\', ?, \'region\', ?])', $valid),
                     ]);
-                    $update->where([
-                        'valid'      => new Expression('false'),
-                        'postalcode' => empty($postalcode) ? '' : $postalcode,
-                        'locality'   => empty($locality) ? '' : $locality,
-                    ]);
+                    if ($postalcode === 'null') {
+                        $update->where
+                            ->equalTo('valid', new Expression('false'))
+                            ->isNull('postalcode')
+                            ->equalTo('locality', $locality);
+                    } elseif ($locality === 'null') {
+                        $update->where
+                            ->equalTo('valid', new Expression('false'))
+                            ->equalTo('postalcode', $postalcode)
+                            ->isNull('locality');
+                    } else {
+                        $update->where
+                            ->equalTo('valid', new Expression('false'))
+                            ->equalTo('postalcode', $postalcode)
+                            ->equalTo('locality', $locality);
+                    }
 
                     $qsz = $sql->buildSqlString($update);
                     $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
@@ -92,6 +103,19 @@ class ValidateHandler implements RequestHandlerInterface
     private static function validate(Adapter $adapter, string $table)
     {
         $sql = new Sql($adapter, $table);
+
+        // Check NULL for postal code and locality
+        $update = $sql->update();
+        $update->set(['valid' => new Expression('false')]);
+        $update->where
+            ->isNull('process_status')
+            ->nest()
+            ->isNull('postalcode')
+            ->or
+            ->isNull('locality')
+            ->unnest();
+        $qsz = $sql->buildSqlString($update);
+        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         // Check postal code
         $update = $sql->update();
@@ -158,23 +182,25 @@ class ValidateHandler implements RequestHandlerInterface
                 $suggestion->where
                     ->equalTo('postalcode', $r->postalcode)
                     ->or
-                    ->like('normalized', strtoupper(Text::removeAccents($r->locality)));
+                    ->like('normalized', strtoupper(Text::removeAccents($r->locality ?? '')));
                 $suggestion->order(['postalcode', 'level']);
 
                 $qsz = $sql->buildSqlString($suggestion);
                 $resultsSuggestion = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
-                if (!isset($suggestions[$r->postalcode])) {
-                    $suggestions[$r->postalcode] = [];
+                if ($resultsSuggestion->count() > 0) {
+                    if (!isset($suggestions[$r->postalcode])) {
+                        $suggestions[$r->postalcode] = [];
+                    }
+                    if (!isset($suggestions[$r->postalcode][$r->locality])) {
+                        $suggestions[$r->postalcode][$r->locality] = [];
+                    }
+                    $suggestions[$r->postalcode][$r->locality] = [
+                        'count'       => $r->count,
+                        'list'        => $r->list,
+                        'suggestions' => $resultsSuggestion->toArray(),
+                    ];
                 }
-                if (!isset($suggestions[$r->postalcode][$r->locality])) {
-                    $suggestions[$r->postalcode][$r->locality] = [];
-                }
-                $suggestions[$r->postalcode][$r->locality] = [
-                    'count'       => $r->count,
-                    'list'        => $r->list,
-                    'suggestions' => $resultsSuggestion->toArray(),
-                ];
             }
 
             return $suggestions;
