@@ -221,7 +221,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                         }
                     }
                 } catch (\Geocoder\Exception\InvalidServerResponse $e) {
-                    // Todo : add log
+                    // TODO : add log
                 }
             }
 

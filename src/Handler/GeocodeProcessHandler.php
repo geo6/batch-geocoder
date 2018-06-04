@@ -94,40 +94,11 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                     }
 
                     $rawCount = 0;
-                    $validResults = self::geocode($provider, $geocodeAddress, '%S %n, %z %L', $adapter, $rawCount);
 
-                    if (count($validResults) === 1) {
-                        $data['countSingle']++;
+                    try {
+                        $validResults = self::geocode($provider, $geocodeAddress, '%S %n, %z %L', $adapter, $rawCount);
 
-                        $update = $sql->update();
-                        $update->set([
-                            'process_datetime' => date('c'),
-                            'process_status'   => 1,
-                            'process_provider' => $provider->getName(),
-                            'process_address'  => $formatter->format($validResults[0], '%S %n, %z %L'),
-                            'process_score'    => $validator->getScore($validResults[0]),
-                            'the_geog'         => new Expression(sprintf(
-                                'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                                $validResults[0]->getCoordinates()->getLongitude(),
-                                $validResults[0]->getCoordinates()->getLatitude()
-                            )),
-                        ]);
-                        $update->where(['id' => $address->id]);
-
-                        $qsz = $sql->buildSqlString($update);
-                        $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
-
-                        $novalidresult = false;
-                        break;
-                    } elseif (count($validResults) > 1) {
-                        $exactMatch = [];
-                        foreach ($validResults as $validResult) {
-                            if ($geocodeAddress->getStreetNumber() === $validResult->getStreetNumber()) {
-                                $exactMatch[] = $validResult;
-                            }
-                        }
-
-                        if (count($exactMatch) === 1) {
+                        if (count($validResults) === 1) {
                             $data['countSingle']++;
 
                             $update = $sql->update();
@@ -135,35 +106,69 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                                 'process_datetime' => date('c'),
                                 'process_status'   => 1,
                                 'process_provider' => $provider->getName(),
-                                'process_address'  => $formatter->format($exactMatch[0], '%S %n, %z %L'),
-                                'process_score'    => $validator->getScore($exactMatch[0]),
+                                'process_address'  => $formatter->format($validResults[0], '%S %n, %z %L'),
+                                'process_score'    => $validator->getScore($validResults[0]),
                                 'the_geog'         => new Expression(sprintf(
                                     'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                                    $exactMatch[0]->getCoordinates()->getLongitude(),
-                                    $exactMatch[0]->getCoordinates()->getLatitude()
+                                    $validResults[0]->getCoordinates()->getLongitude(),
+                                    $validResults[0]->getCoordinates()->getLatitude()
                                 )),
                             ]);
                             $update->where(['id' => $address->id]);
 
                             $qsz = $sql->buildSqlString($update);
                             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
-                        } else {
-                            $data['countMultiple']++;
 
-                            $update = $sql->update();
-                            $update->set([
-                                'process_datetime' => date('c'),
-                                'process_status'   => 2,
-                                'process_provider' => $provider->getName(),
-                            ]);
-                            $update->where(['id' => $address->id]);
+                            $novalidresult = false;
+                            break;
+                        } elseif (count($validResults) > 1) {
+                            $exactMatch = [];
+                            foreach ($validResults as $validResult) {
+                                if ($geocodeAddress->getStreetNumber() === $validResult->getStreetNumber()) {
+                                    $exactMatch[] = $validResult;
+                                }
+                            }
 
-                            $qsz = $sql->buildSqlString($update);
-                            $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                            if (count($exactMatch) === 1) {
+                                $data['countSingle']++;
+
+                                $update = $sql->update();
+                                $update->set([
+                                    'process_datetime' => date('c'),
+                                    'process_status'   => 1,
+                                    'process_provider' => $provider->getName(),
+                                    'process_address'  => $formatter->format($exactMatch[0], '%S %n, %z %L'),
+                                    'process_score'    => $validator->getScore($exactMatch[0]),
+                                    'the_geog'         => new Expression(sprintf(
+                                        'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
+                                        $exactMatch[0]->getCoordinates()->getLongitude(),
+                                        $exactMatch[0]->getCoordinates()->getLatitude()
+                                    )),
+                                ]);
+                                $update->where(['id' => $address->id]);
+
+                                $qsz = $sql->buildSqlString($update);
+                                $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                            } else {
+                                $data['countMultiple']++;
+
+                                $update = $sql->update();
+                                $update->set([
+                                    'process_datetime' => date('c'),
+                                    'process_status'   => 2,
+                                    'process_provider' => $provider->getName(),
+                                ]);
+                                $update->where(['id' => $address->id]);
+
+                                $qsz = $sql->buildSqlString($update);
+                                $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+                            }
+
+                            $novalidresult = false;
+                            break;
                         }
-
-                        $novalidresult = false;
-                        break;
+                    } catch (\Geocoder\Exception\InvalidServerResponse $e) {
+                        // TODO: add log
                     }
 
                     $progress[$provider->getName()] = $rawCount;
