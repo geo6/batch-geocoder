@@ -74,7 +74,7 @@ final class AddressCheck
         return $filterChain->filter(Text::removeAccents($str));
     }
 
-    private function checkPostalCode(AddressModel $address): bool
+    public function checkPostalCode(AddressModel $address): bool
     {
         $postalCode1 = $this->address->getPostalCode();
         $postalCode2 = $address->getPostalCode();
@@ -82,7 +82,7 @@ final class AddressCheck
         return $postalCode1 === $postalCode2;
     }
 
-    private function checkLocality(AddressModel $address): bool
+    public function checkLocality(AddressModel $address): bool
     {
         $locality1 = self::filter($this->address->getLocality());
         $locality2 = self::filter($address->getLocality());
@@ -112,7 +112,7 @@ final class AddressCheck
         }
     }
 
-    private function checkStreetname(AddressModel $address): bool
+    public function checkStreetname(AddressModel $address): bool
     {
         $streetname1 = self::filter($this->address->getStreetname());
         $streetname2 = self::filter($address->getStreetname());
@@ -122,7 +122,7 @@ final class AddressCheck
         return $levenshtein < 5;
     }
 
-    private function checkStreetNumber(AddressModel $address): bool
+    public function checkStreetNumber(AddressModel $address): bool
     {
         $streetNumber1 = $this->address->getStreetNumber();
         $streetNumber2 = $address->getStreetNumber();
