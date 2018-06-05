@@ -27,7 +27,17 @@
         </div>
         <div class="col text-right">
             <a href="#" class="btn btn-primary disabled" data-id="<?=$id?>" id="btn-save"><i class="fas fa-save"></i> <?=$this->translate('Save')?></a>
-            <a href="?skip=<?=$this->e($id)?>" class="btn btn-outline-danger"><?=$this->translate('Skip')?> <i class="fas fa-angle-double-right"></i></a>
+            <div class="btn-group">
+                <a href="?skip=<?=$this->e($id)?>" class="btn btn-outline-danger">
+                    <?=$this->translate('Skip')?>
+                </a>
+                <button type="button" class="btn btn-outline-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only"><?=$this->translate('Toggle Dropdown')?></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="?skipall"><?=$this->translate('Skip all')?></a>
+                </div>
+            </div>
         </div>
     </div>
     <hr>

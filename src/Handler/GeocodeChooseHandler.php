@@ -45,7 +45,29 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
         $sql = new Sql($adapter, $table);
 
-        if (isset($query['skip'])) {
+        if (isset($query['skipall'])) {
+            $update = $sql->update();
+            $update->set([
+                'process_datetime' => date('c'),
+                'process_status'   => new Expression('NULL'),
+                'process_provider' => new Expression('NULL'),
+            ]);
+            $update->where
+                ->equalTo('valid', 't')
+                ->isNotNull('process_status')
+                ->nest()
+                ->equalTo('process_status', 0)
+                ->or
+                ->equalTo('process_status', 2)
+                ->unnest()
+                ->isNull('process_address');
+
+            $qsz = $sql->buildSqlString($update);
+            $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+            $session->unset('id');
+            $session->unset('addresses');
+        } elseif (isset($query['skip'])) {
             $update = $sql->update();
             $update->set([
                 'process_datetime' => date('c'),
