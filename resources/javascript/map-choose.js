@@ -23,7 +23,7 @@ import View from 'ol/view';
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
 let addressesLayer = new VectorLayer({
     source: new VectorSource(),
-    style: function(feature) {
+    style: function(feature, resolution) {
         let properties = feature.getProperties().properties;
 
         let fill = new Fill({
@@ -45,7 +45,7 @@ let addressesLayer = new VectorLayer({
                 stroke: stroke,
                 text: new Text({
                     offsetY: 15,
-                    text: properties.streetnumber.toString()
+                    text: (window.app.map.getView().getZoomForResolution(resolution) < 15 ? '' : properties.streetnumber.toString())
                 })
             })
         ];
