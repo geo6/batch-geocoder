@@ -100,10 +100,6 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                     try {
                         $validResults = self::geocode($provider, $geocodeAddress, self::FORMAT_STREETNUMBER, $adapter, $rawCount);
 
-                        if (count($validResults) === 0) {
-                            $validResults = self::geocodeStreet($provider, $geocodeAddress, self::FORMAT_STREET, $adapter, $rawCount);
-                        }
-
                         if (count($validResults) === 1) {
                             $data['countSingle']++;
 
@@ -172,6 +168,26 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
                             $novalidresult = false;
                             break;
+                        } else {
+                            $validStreetResults = self::geocodeStreet($provider, $geocodeAddress, self::FORMAT_STREET, $adapter);
+
+                            if (count($validStreetResults) > 0) {
+                                $data['countMultiple']++;
+
+                                $update = $sql->update();
+                                $update->set([
+                                    'process_datetime' => date('c'),
+                                    'process_status'   => 2,
+                                    'process_provider' => $provider->getName(),
+                                ]);
+                                $update->where(['id' => $address->id]);
+
+                                $qsz = $sql->buildSqlString($update);
+                                $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+
+                                $novalidresult = false;
+                                break;
+                            }
                         }
                     } catch (\Geocoder\Exception\InvalidServerResponse $e) {
                         // TODO: add log
@@ -229,7 +245,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         return $validResults;
     }
 
-    private static function geocodeStreet($provider, Address $address, string $format, Adapter $adapter, int &$rawCount)
+    private static function geocodeStreet($provider, Address $address, string $format, Adapter $adapter)
     {
         $formatter = new StringFormatter();
 
@@ -242,7 +258,6 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $query = $query->withData('postalCode', $address->getPostalCode());
 
         $result = (new StatefulGeocoder($provider))->geocodeQuery($query);
-        $rawCount = $result->count();
 
         $validResults = [];
 
