@@ -38,7 +38,12 @@
                 <h2><i class="fas fa-map-marker-alt"></i> <?=$this->translate($provider)?></h2>
                 <ul>
                     <?php foreach ($addresses as $i => $addr) : ?>
-                        <li data-longitude="<?=$addr['longitude']?>" data-latitude="<?=$addr['latitude']?>" data-id="<?=$id?>" data-address="<?=$i?>">
+                        <li data-longitude="<?=$addr['longitude']?>"
+                            data-latitude="<?=$addr['latitude']?>"
+                            data-id="<?=$id?>"
+                            data-address="<?=$i?>"
+                            data-streetnumber="<?=$addr['streetnumber']?>"
+                        >
                             <?=$this->e($addr['display'])?>
                         </li>
                     <?php endforeach; ?>

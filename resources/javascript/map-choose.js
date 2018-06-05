@@ -17,19 +17,23 @@ import Circle from 'ol/style/circle';
 import Fill from 'ol/style/fill';
 import Stroke from 'ol/style/stroke';
 import Style from 'ol/style/style';
+import Text from 'ol/style/text';
 import View from 'ol/view';
 
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
 let addressesLayer = new VectorLayer({
     source: new VectorSource(),
     style: function(feature) {
+        let properties = feature.getProperties().properties;
+
         let fill = new Fill({
-            color: feature.getProperties().properties.color
+            color: properties.color
         });
         let stroke = new Stroke({
             color: '#FFF',
             width: 2
         });
+
         return [
             new Style({
                 image: new Circle({
@@ -38,7 +42,11 @@ let addressesLayer = new VectorLayer({
                     radius: 5
                 }),
                 fill: fill,
-                stroke: stroke
+                stroke: stroke,
+                text: new Text({
+                    offsetY: 15,
+                    text: properties.streetnumber.toString()
+                })
             })
         ];
     }
@@ -66,7 +74,7 @@ function selectAddress(provider, address, recenter) {
 
     if (recenter === true) {
         window.app.map.getView().animate({
-            zoom: 17,
+            zoom: 18,
             center: Proj.fromLonLat(coordinates)
         });
     }
@@ -91,7 +99,8 @@ export default function initMapChoose() {
             properties: {
                 address: data.address,
                 color: color,
-                provider: data.provider
+                provider: data.provider,
+                streetnumber: data.streetnumber
             }
         }));
 
