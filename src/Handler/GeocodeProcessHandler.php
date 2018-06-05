@@ -263,7 +263,10 @@ class GeocodeProcessHandler implements RequestHandlerInterface
 
         $validator = new AddressCheck($query->getData('address'), $adapter, $config['validation'] ?? true);
         foreach ($result as $address) {
-            if ($validator->getScore($address) >= 14) {
+            if ($validator->checkPostalCode($address) &&
+                $validator->checkLocality($address) &&
+                $validator->checkStreetname($address)
+            ) {
                 $validResults[] = $address;
             }
         }
