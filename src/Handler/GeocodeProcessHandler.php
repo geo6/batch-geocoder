@@ -22,7 +22,9 @@ use Zend\Expressive\Session\SessionMiddleware;
 
 class GeocodeProcessHandler implements RequestHandlerInterface
 {
-    public const LIMIT = 25;
+    const LIMIT = 25;
+    const FORMAT_STREETNUMBER = '%S %n, %z %L';
+    const FORMAT_STREET = '%S, %z %L';
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
@@ -96,7 +98,11 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                     $rawCount = 0;
 
                     try {
-                        $validResults = self::geocode($provider, $geocodeAddress, '%S %n, %z %L', $adapter, $rawCount);
+                        $validResults = self::geocode($provider, $geocodeAddress, self::FORMAT_STREETNUMBER, $adapter, $rawCount);
+
+                        if (count($validResults) === 0) {
+                            $validResults = self::geocodeStreet($provider, $geocodeAddress, self::FORMAT_STREET, $adapter, $rawCount);
+                        }
 
                         if (count($validResults) === 1) {
                             $data['countSingle']++;
@@ -106,7 +112,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                                 'process_datetime' => date('c'),
                                 'process_status'   => 1,
                                 'process_provider' => $provider->getName(),
-                                'process_address'  => $formatter->format($validResults[0], '%S %n, %z %L'),
+                                'process_address'  => $formatter->format($validResults[0], self::FORMAT_STREETNUMBER),
                                 'process_score'    => $validator->getScore($validResults[0]),
                                 'the_geog'         => new Expression(sprintf(
                                     'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
@@ -137,7 +143,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                                     'process_datetime' => date('c'),
                                     'process_status'   => 1,
                                     'process_provider' => $provider->getName(),
-                                    'process_address'  => $formatter->format($exactMatch[0], '%S %n, %z %L'),
+                                    'process_address'  => $formatter->format($exactMatch[0], self::FORMAT_STREETNUMBER),
                                     'process_score'    => $validator->getScore($exactMatch[0]),
                                     'the_geog'         => new Expression(sprintf(
                                         'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
@@ -216,6 +222,33 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         $validator = new AddressCheck($query->getData('address'), $adapter, $config['validation'] ?? true);
         foreach ($result as $address) {
             if ($validator->isValid($address) === true) {
+                $validResults[] = $address;
+            }
+        }
+
+        return $validResults;
+    }
+
+    private static function geocodeStreet($provider, Address $address, string $format, Adapter $adapter, int &$rawCount)
+    {
+        $formatter = new StringFormatter();
+
+        $query = GeocodeQuery::create($formatter->format($address, $format));
+
+        $query = $query->withData('address', $address);
+
+        $query = $query->withData('streetName', $address->getStreetName());
+        $query = $query->withData('locality', $address->getLocality());
+        $query = $query->withData('postalCode', $address->getPostalCode());
+
+        $result = (new StatefulGeocoder($provider))->geocodeQuery($query);
+        $rawCount = $result->count();
+
+        $validResults = [];
+
+        $validator = new AddressCheck($query->getData('address'), $adapter, $config['validation'] ?? true);
+        foreach ($result as $address) {
+            if ($validator->getScore($address) >= 14) {
                 $validResults[] = $address;
             }
         }

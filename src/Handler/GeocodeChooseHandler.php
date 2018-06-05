@@ -205,6 +205,17 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 try {
                     $collection = (new StatefulGeocoder($provider))->geocodeQuery($query);
 
+                    if ($collection->count() === 0) {
+                        $query = GeocodeQuery::create($formatter->format($address, '%S, %z %L'));
+                        $query = $query->withData('address', $address);
+
+                        $query = $query->withData('streetName', $address->getStreetName());
+                        $query = $query->withData('locality', $address->getLocality());
+                        $query = $query->withData('postalCode', $address->getPostalCode());
+
+                        $collection = (new StatefulGeocoder($provider))->geocodeQuery($query);
+                    }
+
                     if ($collection->count() > 0) {
                         $addresses[$provider->getName()] = [];
 

@@ -25,6 +25,7 @@ ins {
 
 #map {
     min-height: 350px;
+    max-height: 600px;
     position: relative;
 }
 .overlays {
@@ -51,10 +52,16 @@ ins {
         padding:10px;
     }
 }
-#results > div > ul > li {
-    cursor: pointer;
 
-    &:hover {
-        font-weight: bold;
+#results > div {
+    max-height: 250px;
+    overflow-y: auto;
+
+    &> ul > li {
+        cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 }
