@@ -23,7 +23,7 @@ INSERT INTO "validation" ("postalcode", "name", "normalized", "level", "language
 ('612', 'Saint-Nicolas', 'SAINT-NICOLAS', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1000', 'BRUSSEL', 'BRUSSEL', 1, 'NF - FN', 'bru', 21004, 'BRUSSEL', 't'),
 ('1000', 'BRUXELLES', 'BRUXELLES', 1, 'NF - FN', 'bru', 21004, 'BRUXELLES', 't'),
-('1005', 'Verenigde Vergadering van de Gemeenschappelijke ', 'VERENIGDE VERGADERING VAN DE GEMEENSCHAPPELIJKE ', NULL, NULL, NULL, NULL, NULL, 'f'),
+('1005', 'Verenigde Vergadering van de Gemeenschappelijke', 'VERENIGDE VERGADERING VAN DE GEMEENSCHAPPELIJKE ', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1005', 'Assemblée Réunie de la Commission Communautaire', 'ASSEMBLEE REUNIE DE LA COMMISSION COMMUNAUTAIRE', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1006', 'Raad van de Vlaamse Gemeenschapscommissie', 'RAAD VAN DE VLAAMSE GEMEENSCHAPSCOMMISSIE', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1007', 'Assemblée de la Commission Communautaire Française', 'ASSEMBLEE DE LA COMMISSION COMMUNAUTAIRE FRANCAISE', NULL, NULL, NULL, NULL, NULL, 'f'),
