@@ -1,6 +1,9 @@
 -- Source: http://www.bpost.be/site/fr/envoyer/adressage/rechercher-un-code-postal
 -- Source: http://www.bpost.be/site/nl/verzenden/adressering/zoek-een-postcode
 -- Source: https://statbel.fgov.be/en/open-data/statistical-sectors
+-- Add :
+--  - 1040 BRUXELLES/BRUSSEL
+--  - 1050 BRUXELLES/BRUSSEL
 
 DROP TABLE IF EXISTS "validation";
 CREATE TABLE "validation" (
@@ -44,6 +47,8 @@ INSERT INTO "validation" ("postalcode", "name", "normalized", "level", "language
 ('1035', 'Ministère de la Région de Bruxelles Capitale', 'MINISTERE DE LA REGION DE BRUXELLES CAPITALE', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1035', 'Ministerie van het Brussels Hoofdstedelijk Gewest', 'MINISTERIE VAN HET BRUSSELS HOOFDSTEDELIJK GEWEST', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1040', 'ETTERBEEK', 'ETTERBEEK', 1, 'NF - FN', 'bru', 21005, 'ETTERBEEK', 't'),
+('1040', 'BRUSSEL', 'BRUSSEL', 1, 'NF - FN', 'bru', 21004, 'BRUSSEL', 't'),
+('1040', 'BRUXELLES', 'BRUXELLES', 1, 'NF - FN', 'bru', 21004, 'BRUXELLES', 't'),
 ('1041', 'International press center', 'INTERNATIONAL PRESS CENTER', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1041', 'International Press Center', 'INTERNATIONAL PRESS CENTER', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1043', 'VRT', 'VRT', NULL, NULL, NULL, NULL, NULL, 'f'),
@@ -57,6 +62,8 @@ INSERT INTO "validation" ("postalcode", "name", "normalized", "level", "language
 ('1049', 'Union Européenne - Commission', 'UNION EUROPEENNE - COMMISSION', NULL, NULL, NULL, NULL, NULL, 'f'),
 ('1050', 'ELSENE', 'ELSENE', 1, 'NF - FN', 'bru', 21009, 'ELSENE', 't'),
 ('1050', 'IXELLES', 'IXELLES', 1, 'NF - FN', 'bru', 21009, 'IXELLES', 't'),
+('1050', 'BRUSSEL', 'BRUSSEL', 1, 'NF - FN', 'bru', 21004, 'BRUSSEL', 't'),
+('1050', 'BRUXELLES', 'BRUXELLES', 1, 'NF - FN', 'bru', 21004, 'BRUXELLES', 't'),
 ('1060', 'SAINT-GILLES', 'SAINT-GILLES', 1, 'NF - FN', 'bru', 21013, 'SAINT-GILLES', 't'),
 ('1060', 'SINT-GILLIS', 'SINT-GILLIS', 1, 'NF - FN', 'bru', 21013, 'SINT-GILLIS', 't'),
 ('1070', 'ANDERLECHT', 'ANDERLECHT', 1, 'NF - FN', 'bru', 21001, 'ANDERLECHT', 't'),
