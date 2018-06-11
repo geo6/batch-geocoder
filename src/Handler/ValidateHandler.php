@@ -123,7 +123,7 @@ class ValidateHandler implements RequestHandlerInterface
         $update->where
             ->isNull('process_status')
             ->isNull(new Expression('validation->\'postalcode\''))
-            ->notIn('postalcode', (new Select('validation_bpost'))->columns(['postalcode']));
+            ->notIn('postalcode', (new Select('validation'))->columns(['postalcode']));
         $qsz = $sql->buildSqlString($update);
         $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
@@ -135,9 +135,9 @@ class ValidateHandler implements RequestHandlerInterface
             ->isNull(new Expression('"validation"->\'locality\''))
             ->notIn(
                 new Expression('unaccent(UPPER("locality"))'),
-                (new Select('validation_bpost'))->where(
+                (new Select('validation'))->where(
                     $adapter->getPlatform()->quoteIdentifierChain([$table, 'postalcode']).' = '.
-                    $adapter->getPlatform()->quoteIdentifierChain(['validation_bpost', 'postalcode'])
+                    $adapter->getPlatform()->quoteIdentifierChain(['validation', 'postalcode'])
                 )->columns(['normalized'])
             );
         $qsz = $sql->buildSqlString($update);
@@ -146,7 +146,7 @@ class ValidateHandler implements RequestHandlerInterface
         // Try to find correct region
         $update = $sql->update();
         $update->set([
-            'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation_bpost v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test']),
+            'validation' => new Expression('hstore(\'region\', (SELECT region FROM validation v WHERE postalcode = v.postalcode AND unaccent(UPPER(locality)) = v.normalized LIMIT 1))', ['test']),
         ]);
         $update->where
             ->isNull('process_status')
@@ -175,7 +175,7 @@ class ValidateHandler implements RequestHandlerInterface
 
         if ($results->count() > 0) {
             $suggestions = [];
-            $sqlValidation = new Sql($adapter, 'validation_bpost');
+            $sqlValidation = new Sql($adapter, 'validation');
             foreach ($results as $r) {
                 $suggestion = $sqlValidation->select();
                 $suggestion->columns(['postalcode', 'name', 'region']);

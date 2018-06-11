@@ -92,7 +92,7 @@ final class AddressCheck
         } elseif ($this->validation !== false) {
             $postalcode = $this->address->getPostalcode();
 
-            $sql = new Sql($this->adapter, 'validation_bpost');
+            $sql = new Sql($this->adapter, 'validation');
 
             $select = $sql->select();
             $select->where->equalTo('postalcode', $postalcode);

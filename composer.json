@@ -89,7 +89,7 @@
             "sudo -u postgres createuser --pwprompt geocode",
             "sudo -u postgres psql -f scripts/create-database.sql",
             "sudo -u postgres psql -f scripts/create-extension.sql geocode",
-            "sudo -u postgres psql -f scripts/create-validation-bpost.sql geocode"
+            "sudo -u postgres psql -f scripts/create-validation.sql geocode"
         ],
         "git:pull": [
             "git fetch --all",
