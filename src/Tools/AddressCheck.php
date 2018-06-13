@@ -79,7 +79,34 @@ final class AddressCheck
         $postalCode1 = $this->address->getPostalCode();
         $postalCode2 = $address->getPostalCode();
 
-        return $postalCode1 === $postalCode2;
+        if ($postalCode1 === $postalCode2) {
+            return true;
+        } elseif ($this->validation !== false) {
+            $sql = new Sql($this->adapter, 'validation');
+
+            $selectNIS5 = $sql->select();
+            $selectNIS5->columns(['nis5']);
+            $selectNIS5->where
+                ->equalTo('postalcode', $postalCode1);
+
+            $select = $sql->select();
+            $select->columns(['postalcode']);
+            $select->where
+                ->in('nis5', $selectNIS5);
+
+            $qsz = $sql->buildSqlString($select);
+            $results = $this->adapter->query($qsz, $this->adapter::QUERY_MODE_EXECUTE);
+
+            $postalCodes = [];
+            foreach ($results as $r) {
+                $postalCodes[] = $r->postalcode;
+            }
+            $postalCodes = array_unique($postalCodes);
+
+            return in_array($postalCode2, $postalCodes);
+        } else {
+            return false;
+        }
     }
 
     public function checkLocality(AddressModel $address): bool
