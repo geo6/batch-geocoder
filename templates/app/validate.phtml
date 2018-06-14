@@ -23,12 +23,14 @@
             <?php foreach ($suggestions as $postalcode => $localities): ?>
                 <?php foreach ($localities as $locality => $result): ?>
                     <tr>
-                        <td class="align-middle"><?=$postalcode?></td>
-                        <td class="align-middle"><?=$locality?></td>
-                        <td class="align-middle">
+                        <td class="align-top"><?=$postalcode?></td>
+                        <td class="align-top"><?=$locality?></td>
+                        <td class="align-top">
                             <?=sprintf($this->translatePlural('%d record', '%d records', $result['count']), $result['count'])?>
                             <div class="small text-info">
-                                <?=nl2br($result['list'])?>
+                            <?php foreach ($result['list'] as $l): ?>
+                                <?=$l?><br>
+                            <?php endforeach ?>
                             </div>
                         </td>
                         <td>
