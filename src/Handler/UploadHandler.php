@@ -253,13 +253,29 @@ class UploadHandler implements RequestHandlerInterface
 
             pg_end_copy($pg);
 
+            $sql = new Sql($this->adapter, $this->table);
+
             // Create primary key
             $alter = new Ddl\AlterTable($this->table);
             $alter->addConstraint(new Ddl\Constraint\PrimaryKey('id'));
             $this->adapter->query(
-                (new Sql($this->adapter))->getSqlStringForSqlObject($alter),
+                $sql->getSqlStringForSqlObject($alter),
                 $this->adapter::QUERY_MODE_EXECUTE
             );
+
+            // Trim all values
+            $trim = $sql->update();
+            $trim->set([
+                'streetname'  => new Expression('trim("streetname")'),
+                'housenumber' => new Expression('trim("housenumber")'),
+                'postalcode'  => new Expression('trim("postalcode")'),
+                'locality'    => new Expression('trim("locality")'),
+            ]);
+            $this->adapter->query(
+                $sql->getSqlStringForSqlObject($trim),
+                $this->adapter::QUERY_MODE_EXECUTE
+            );
+
         } catch (InvalidQueryException $e) {
             throw new ErrorException($e->getMessage());
         }
