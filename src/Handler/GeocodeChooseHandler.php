@@ -207,7 +207,13 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
             $addresses = [];
 
-            foreach ($config['providers'] as $i => $provider) {
+            if (isset($config['providers']['automatic'], $config['providers']['manual'])) {
+                $providers = $config['providers']['manual'];
+            } else {
+                $providers = $config['providers'];
+            }
+
+            foreach ($providers as $i => $provider) {
                 if (is_array($provider)) {
                     if (!in_array($validation->region, $provider[1])) {
                         continue;

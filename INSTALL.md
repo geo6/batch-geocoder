@@ -35,6 +35,8 @@ Here is the one I use for Belgium :
 
     <?php
 
+    declare(strict_types=1);
+
     use Geocoder\Provider;
     use Http\Adapter\Guzzle6\Client;
 
@@ -66,6 +68,8 @@ Here is the same providers configuration but we define which provider to use for
 
     <?php
 
+    declare(strict_types=1);
+
     use Geocoder\Provider;
     use Http\Adapter\Guzzle6\Client;
 
@@ -88,6 +92,36 @@ Explanations:
 - *Geopunt* provider will be only used for addresses in Brussels or Flanders (Vlaanderen) ;
 - *SPW* provider will be only used for addresses in Wallonia ;
 - *bpost* provider will be used for all the addresses ;
+
+#### Use different providers for automatic and interactive/manual mode
+
+If you want to use a different set of providers in automatic and interactive/manual mode, you just have to define
+`automatic` and `manual` arrays in `providers` configuration array.
+
+    <?php
+
+    declare(strict_types=1);
+
+    use Geocoder\Provider;
+    use Http\Adapter\Guzzle6\Client;
+
+    $client = new Client();
+
+    return [
+        'providers'  => [
+            'automatic' => [
+                new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+            ],
+            'manual' => [
+                new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+                [new Provider\UrbIS\UrbIS($client), ['bru']],
+                [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
+                [new Provider\SPW\SPW($client), ['wal']],
+                new Provider\bpost\bpost($client),
+            ]
+        ]
+    ];
+
 
 ### Additional parameters
 

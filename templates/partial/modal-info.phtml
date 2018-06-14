@@ -1,5 +1,5 @@
 <div id="geocoder-modal-info" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
@@ -11,12 +11,27 @@
                 </button>
             </div>
             <div class="modal-body">
+            <?php if (isset($providersAutomatic, $providersManual)) : ?>
+                <strong><?=$this->translate('Providers in automatic mode')?>:</strong>
+                <ol>
+                <?php foreach ($providersAutomatic as $p): ?>
+                    <li><?=$this->e($p)?></li>
+                <?php endforeach ?>
+                </ol>
+                <strong><?=$this->translate('Providers in interactive mode')?>:</strong>
+                <ol>
+                <?php foreach ($providersManual as $p): ?>
+                    <li><?=$this->e($p)?></li>
+                <?php endforeach ?>
+                </ol>
+            <?php else : ?>
                 <strong><?=$this->translate('Providers')?>:</strong>
                 <ol>
                 <?php foreach ($providers as $p): ?>
                     <li><?=$this->e($p)?></li>
                 <?php endforeach ?>
                 </ol>
+            <?php endif ?>
                 <hr>
                 <p class="small text-info">
                     <i class="fas fa-code-branch"></i>
