@@ -86,7 +86,13 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                 $progress = [];
                 $novalidresult = true;
 
-                foreach ($config['providers'] as $i => $provider) {
+                if (isset($config['providers']['automatic'], $config['providers']['manual'])) {
+                    $providers = $config['providers']['automatic'];
+                } else {
+                    $providers = $config['providers'];
+                }
+
+                foreach ($providers as $i => $provider) {
                     if (is_array($provider)) {
                         if (!in_array($validation->region, $provider[1])) {
                             continue;
