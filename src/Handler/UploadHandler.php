@@ -275,7 +275,6 @@ class UploadHandler implements RequestHandlerInterface
                 $sql->getSqlStringForSqlObject($trim),
                 $this->adapter::QUERY_MODE_EXECUTE
             );
-
         } catch (InvalidQueryException $e) {
             throw new ErrorException($e->getMessage());
         }
