@@ -210,7 +210,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
                     $update = $sql->update();
                     $update->set([
                         'process_datetime' => date('c'),
-                        'process_status'   => array_sum($progress) === 0 ? -1 : 0,
+                        'process_status'   => isset($config['providers']['automatic'], $config['providers']['manual']) ? 0 : (array_sum($progress) === 0 ? -1 : 0),
                     ]);
                     $update->where(['id' => $address->id]);
 
