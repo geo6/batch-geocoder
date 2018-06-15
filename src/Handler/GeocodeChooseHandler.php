@@ -122,11 +122,13 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                     'process_provider' => $query['provider'],
                     'process_address'  => $selection['display'],
                     'process_score'    => $validator->getScore($addr),
-                    'the_geog'         => new Expression(sprintf(
-                        'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                        $selection['longitude'],
-                        $selection['latitude']
-                    )),
+                    'the_geog'         => new Expression(
+                        'ST_SetSRID(ST_MakePoint(?, ?), 4326)',
+                        [
+                            $selection['longitude'],
+                            $selection['latitude'],
+                        ]
+                    ),
                 ]);
                 $update->where(['id' => $query['id']]);
 
@@ -145,11 +147,13 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                 'process_status'   => 9,
                 'process_provider' => 'manual',
                 'process_address'  => '',
-                'the_geog'         => new Expression(sprintf(
-                    'ST_SetSRID(ST_MakePoint(%f, %f), 4326)',
-                    $query['longitude'],
-                    $query['latitude']
-                )),
+                'the_geog'         => new Expression(
+                    'ST_SetSRID(ST_MakePoint(?, ?), 4326)',
+                    [
+                        $query['longitude'],
+                        $query['latitude'],
+                    ]
+                ),
             ]);
             $update->where(['id' => $query['id']]);
 
