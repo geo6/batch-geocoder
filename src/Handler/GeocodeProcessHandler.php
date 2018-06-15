@@ -8,6 +8,7 @@ use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use App\Tools\AddressCheck;
 use Geocoder\Formatter\StringFormatter;
+use Geocoder\Http\Provider\AbstractHttpProvider;
 use Geocoder\Model\Address;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\StatefulGeocoder;
@@ -223,7 +224,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         }
     }
 
-    private static function geocode($provider, Address $address, string $format, Adapter $adapter, int &$rawCount)
+    private static function geocode(AbstractHttpProvider $provider, Address $address, string $format, Adapter $adapter, int &$rawCount) : array
     {
         $formatter = new StringFormatter();
 
@@ -251,7 +252,7 @@ class GeocodeProcessHandler implements RequestHandlerInterface
         return $validResults;
     }
 
-    private static function geocodeStreet($provider, Address $address, string $format, Adapter $adapter)
+    private static function geocodeStreet(AbstractHttpProvider $provider, Address $address, string $format, Adapter $adapter) : array
     {
         $formatter = new StringFormatter();
 
