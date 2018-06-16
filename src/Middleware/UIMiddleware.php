@@ -26,6 +26,10 @@ class UIMiddleware implements MiddlewareInterface
     {
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 
+        $this->template->addDefaultParam('partial::modal-info', 'version', $config['version']);
+
+        $this->template->addDefaultParam('partial::header', 'params', $request->getQueryParams());
+
         if (isset($config['providers']['automatic'], $config['providers']['manual'])) {
             $providersAutomatic = [];
             foreach ($config['providers']['automatic'] as $provider) {
@@ -35,11 +39,16 @@ class UIMiddleware implements MiddlewareInterface
             foreach ($config['providers']['manual'] as $provider) {
                 $providersManual[] = is_array($provider) ? $provider[0]->getName() : $provider->getName();
             }
+
+            $this->template->addDefaultParam('partial::modal-info', 'providersAutomatic', $providersAutomatic ?? []);
+            $this->template->addDefaultParam('partial::modal-info', 'providersManual', $providersManual ?? []);
         } else {
             $providers = [];
             foreach ($config['providers'] as $provider) {
                 $providers[] = is_array($provider) ? $provider[0]->getName() : $provider->getName();
             }
+
+            $this->template->addDefaultParam('partial::modal-info', 'providers', $providers ?? []);
         }
 
         $this->template->addDefaultParam(
@@ -47,13 +56,6 @@ class UIMiddleware implements MiddlewareInterface
             'title',
             $config['title'] ?? substr($config['name'], strpos($config['name'], '/') + 1)
         );
-
-        $this->template->addDefaultParam('partial::header', 'params', $request->getQueryParams());
-
-        $this->template->addDefaultParam('partial::modal-info', 'version', $config['version']);
-        $this->template->addDefaultParam('partial::modal-info', 'providers', $providers ?? []);
-        $this->template->addDefaultParam('partial::modal-info', 'providersAutomatic', $providersAutomatic ?? []);
-        $this->template->addDefaultParam('partial::modal-info', 'providersManual', $providersManual ?? []);
 
         return $handler->handle($request);
     }
