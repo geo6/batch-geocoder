@@ -1,4 +1,4 @@
-import { library, dom } from '@fortawesome/fontawesome-svg-core'
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
     faGithub
 } from '@fortawesome/free-brands-svg-icons';
@@ -21,7 +21,7 @@ import {
     faTable,
     faUpload,
     faUser
-} from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons';
 
 import {
     faCheckCircle,
@@ -30,7 +30,7 @@ import {
     faQuestionCircle,
     faStar as faStarEmpty,
     faTimesCircle,
-} from '@fortawesome/free-regular-svg-icons'
+} from '@fortawesome/free-regular-svg-icons';
 
 library.add(
     faAngleDoubleRight,
