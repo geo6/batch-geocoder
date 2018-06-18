@@ -92,14 +92,16 @@
             "sudo -u postgres psql -f scripts/create-validation.sql geocode"
         ],
         "git:pull": [
+            "git checkout master",
             "git fetch --all",
             "git reset --hard origin/master",
             "git pull origin master"
         ],
         "git:pull:develop": [
+            "git checkout develop",
             "git fetch --all",
             "git reset --hard origin/develop",
-            "git pull origin master"
+            "git pull origin develop"
         ]
     }
 }
