@@ -131,6 +131,7 @@ If you want to use a different set of providers in automatic and interactive/man
 | archives        | *boolean* | Enable archive mode (default: `false`) (see here under)    |
 | limit           | *integer* | Maximum number of records allowed                          |
 | validation      | *boolean* | Disable validation step (default: `true`) (see here under) |
+| doublePass      | *boolean* | Enable double pass process (default: `false`)              |
 
 All those parameters are optional.  
 By default, archive mode is disabled and there is no limit of maximum number of records allowed.

@@ -53,29 +53,38 @@ class GeocodeHandler implements RequestHandlerInterface
         $qsz = $sql->buildSqlString($countInvalid);
         $resultInvalid = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
 
+        if (isset($config['doublePass']) && $config['doublePass'] === true) {
+            $countDoublePass = $sql->select();
+            $countDoublePass->columns(['count' => new Expression('COUNT(*)')]);
+            $countDoublePass->where
+                ->isNotNull('process_doublepass');
+
+            $qsz = $sql->buildSqlString($countDoublePass);
+            $resultDoublePass = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE)->current();
+        }
+
+        $resetData = [
+            'process_datetime' => new Expression('NULL'),
+            'process_status'   => new Expression('NULL'),
+            'process_provider' => new Expression('NULL'),
+            'process_address'  => new Expression('NULL'),
+            'process_score'    => new Expression('NULL'),
+            'the_geog'         => new Expression('NULL'),
+        ];
+
+        if (isset($config['doublePass']) && $config['doublePass'] === true) {
+            $resetData['process_doublepass'] = new Expression('NULL');
+        }
+
         if (isset($query['reset'])) {
             $reset = $sql->update();
-            $reset->set([
-                'process_datetime' => new Expression('NULL'),
-                'process_status'   => new Expression('NULL'),
-                'process_provider' => new Expression('NULL'),
-                'process_address'  => new Expression('NULL'),
-                'process_score'    => new Expression('NULL'),
-                'the_geog'         => new Expression('NULL'),
-            ]);
+            $reset->set($resetData);
 
             $qsz = $sql->buildSqlString($reset);
             $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
         } elseif (isset($query['launch'])) {
             $reset = $sql->update();
-            $reset->set([
-                'process_datetime' => new Expression('NULL'),
-                'process_status'   => new Expression('NULL'),
-                'process_provider' => new Expression('NULL'),
-                'process_address'  => new Expression('NULL'),
-                'process_score'    => new Expression('NULL'),
-                'the_geog'         => new Expression('NULL'),
-            ]);
+            $reset->set($resetData);
             $reset->where
                 ->equalTo('valid', 't')
                 ->isNull('process_address');
@@ -101,6 +110,7 @@ class GeocodeHandler implements RequestHandlerInterface
             'countGeocoded'    => $resultGeocoded->count,
             'countNotGeocoded' => ($resultCount->count - ($resultInvalid->count + $resultGeocoded->count)),
             'launch'           => (isset($query['launch'])),
+            'doublePass'       => (isset($config['doublePass']) && $config['doublePass'] === true),
         ];
 
         return new HtmlResponse($this->template->render('app::geocode', $data));

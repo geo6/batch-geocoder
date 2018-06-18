@@ -52,6 +52,7 @@ class ViewHandler implements RequestHandlerInterface
             'process_status',
             'process_score',
             'process_provider',
+            'process_doublepass' => isset($config['doublePass']) && $config['doublePass'] === true ? new Expression('hstore_to_json(process_doublepass)') : null,
         ]);
         $select->where
             ->equalTo('valid', 't')
@@ -69,6 +70,7 @@ class ViewHandler implements RequestHandlerInterface
         $addressGeocoded = [];
         foreach ($resultsGeocoded as $r) {
             $validation = !is_null($r->validation) ? json_decode($r->validation) : null;
+            $doublePass = !is_null($r->process_doublepass) ? json_decode($r->process_doublepass) : null;
 
             $address = Address::createFromArray([
                 'streetNumber' => trim($r->housenumber),
@@ -107,7 +109,7 @@ class ViewHandler implements RequestHandlerInterface
             }
 
             $addressGeocoded[] = [
-                $r->process_provider,
+                isset($doublePass->provider) ? $doublePass->provider.' + '.$r->process_provider : $r->process_provider,
                 $diff['old'],
                 $diff['new'],
                 $score,

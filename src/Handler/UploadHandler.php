@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Db\Sql\Ddl as AppDdl;
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use ErrorException;
@@ -81,7 +82,7 @@ class UploadHandler implements RequestHandlerInterface
 
                 if ($this->uploadFile() !== false && file_exists($this->path) === true) {
                     if ($this->checkFile() === true) {
-                        if ($this->importFile($config['postgresql'], $config['limit'] ?? null)) {
+                        if ($this->importFile($config['postgresql'], $config['limit'] ?? null, $config['doublePass'] ?? false)) {
                             $session->set('path', $this->path);
                             $session->set('table', $this->table);
                         }
@@ -173,7 +174,7 @@ class UploadHandler implements RequestHandlerInterface
     /**
      * Import data in database.
      */
-    private function importFile(array $postgresql, int $limit = null)
+    private function importFile(array $postgresql, int $limit = null, bool $doublePass = false)
     {
         $fname = basename($this->path);
         $this->table = date('Ymd').'_'.(new Alnum())->filter($fname);
@@ -275,6 +276,15 @@ class UploadHandler implements RequestHandlerInterface
                 $sql->getSqlStringForSqlObject($trim),
                 $this->adapter::QUERY_MODE_EXECUTE
             );
+
+            if ($doublePass === true) {
+                $alter = new Ddl\AlterTable($this->table);
+                $alter->addColumn(new AppDdl\Column\Hstore('process_doublepass', true));
+                $this->adapter->query(
+                    $sql->getSqlStringForSqlObject($alter),
+                    $this->adapter::QUERY_MODE_EXECUTE
+                );
+            }
         } catch (InvalidQueryException $e) {
             throw new ErrorException($e->getMessage());
         }

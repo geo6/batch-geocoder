@@ -1,7 +1,7 @@
 /*global $*/
 
 export default function geocodeProcess() {
-    fetch('./geocode/process', {
+    fetch('./geocode/process/first', {
         cache: 'no-cache',
         credentials: 'same-origin',
         mode: 'same-origin'
@@ -45,8 +45,9 @@ export default function geocodeProcess() {
 
             window.app.fn.geocodeProcess();
         } else {
+            let spin = $('.fa-cog.fa-spin').clone()
+
             $('.fa-cog.fa-spin').remove();
-            $('#btn-geocode-next').removeClass('disabled');
 
             let countGeocoded = window.app.geocode.countAlreadyGeocoded + window.app.geocode.process.countSingle;
             let countNotGeocoded = window.app.geocode.process.countMultiple + window.app.geocode.process.countNoResult;
@@ -71,6 +72,35 @@ export default function geocodeProcess() {
 
             $('#btn-geocode-reset').removeClass('disabled');
             $('.progress-bar.progress-bar-striped.progress-bar-animated').removeClass('progress-bar-striped progress-bar-animated');
+
+            if (window.app.geocode.doublePass === true) {
+                $('#progress-doublepass-count').parent('dt').prepend(spin);
+
+                geocodeDoubleProcess();
+            } else {
+                $('#btn-geocode-next').removeClass('disabled');
+            }
+        }
+    });
+}
+
+function geocodeDoubleProcess() {
+    fetch('./geocode/process/second', {
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        mode: 'same-origin'
+    }).then(function(response) {
+        return response.json();
+    }).then(function(json) {
+        if (json !== null) {
+            let count = $('#progress-doublepass-count').text().length === 0 ? 0 : parseInt($('#progress-doublepass-count').text());
+
+            $('#progress-doublepass-count').text(count + json.countSingle);
+
+            geocodeDoubleProcess();
+        } else {
+            $('.fa-cog.fa-spin').remove();
+            $('#btn-geocode-next').removeClass('disabled');
         }
     });
 }

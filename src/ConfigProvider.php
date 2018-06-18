@@ -32,7 +32,8 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\GeocodeProcessHandler::class => Handler\GeocodeProcessHandler::class,
+                Handler\Process\FirstHandler::class  => Handler\Process\FirstHandler::class,
+                Handler\Process\SecondHandler::class => Handler\Process\SecondHandler::class,
                 Handler\ExportHandler::class         => Handler\ExportHandler::class,
             ],
             'factories'  => [

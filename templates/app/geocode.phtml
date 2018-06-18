@@ -3,6 +3,7 @@
 <?php $this->start('scripts') ?>
 <script>
 window.app.geocode.launch = <?=json_encode($launch)?>;
+window.app.geocode.doublePass = <?=json_encode($doublePass)?>;
 window.app.geocode.total = <?=$count?>;
 window.app.geocode.count = <?=$countNotGeocoded?>;
 window.app.geocode.countAlreadyGeocoded = <?=$countGeocoded?>;
@@ -94,5 +95,16 @@ window.app.geocode.countAlreadyGeocoded = <?=$countGeocoded?>;
                 </div>
             </dd>
         </dl>
+        <?php if ($doublePass === true) : ?>
+        <hr>
+        <dl>
+            <dt>
+                <?=$this->translate('Double pass')?> :
+                <span id="progress-doublepass-count" class="text-info"></span>
+            </dt>
+            <dd>
+            </dd>
+        </dl>
+        <?php endif ?>
     <?php endif ?>
 </div>

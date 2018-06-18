@@ -172,6 +172,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             'postalcode',
             'locality',
             'validation' => new Expression('hstore_to_json(validation)'),
+            'process_doublepass' => isset($config['doublePass']) && $config['doublePass'] === true ? new Expression('hstore_to_json(process_doublepass)') : null,
         ]);
         $select->where
             ->equalTo('valid', 't')
@@ -206,6 +207,21 @@ class GeocodeChooseHandler implements RequestHandlerInterface
                         $result->locality
                 ),
             ]);
+
+            if (isset($config['doublePass']) && $config['doublePass'] === true) {
+                $doublePass = !is_null($result->process_doublepass) ? json_decode($result->process_doublepass) : null;
+
+                if (!is_null($doublePass)) {
+                    $sourceAddress = $address;
+
+                    $address = Address::createFromArray([
+                        'streetNumber' => trim($doublePass->housenumber),
+                        'streetName'   => trim($doublePass->streetname),
+                        'postalCode'   => trim($doublePass->postalcode),
+                        'locality'     => trim($doublePass->locality),
+                    ]);
+                }
+            }
 
             $formatter = new StringFormatter();
 
@@ -289,7 +305,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
 
                 $data = [
                     'table'   => $table,
-                    'address' => $formatter->format($address, '%S %n, %z %L'),
+                    'address' => $formatter->format($sourceAddress ?? $address, '%S %n, %z %L'),
                     'id'      => $result->id,
                     'results' => $addresses,
                 ];
