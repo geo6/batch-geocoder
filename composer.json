@@ -95,6 +95,11 @@
             "git fetch --all",
             "git reset --hard origin/master",
             "git pull origin master"
+        ],
+        "git:pull:develop": [
+            "git fetch --all",
+            "git reset --hard origin/develop",
+            "git pull origin master"
         ]
     }
 }
