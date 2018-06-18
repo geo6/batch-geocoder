@@ -8,9 +8,6 @@ use Geocoder\Http\Provider\AbstractHttpProvider;
 use Geocoder\Model\Address;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Sql;
 
 interface Handler
 {
@@ -21,8 +18,10 @@ interface Handler
     public function buildAddress() : Address;
 
     public function geocode(AbstractHttpProvider $provider, int &$rawCount) : array;
+
     public function geocodeStreet(AbstractHttpProvider $provider) : array;
 
     public function storeSingleResult(AbstractHttpProvider $provider, int $providerPointer, Address $result) : void;
+
     public function storeMultipleResult(AbstractHttpProvider $provider) : void;
 }

@@ -171,7 +171,7 @@ class GeocodeChooseHandler implements RequestHandlerInterface
             'housenumber',
             'postalcode',
             'locality',
-            'validation' => new Expression('hstore_to_json(validation)'),
+            'validation'         => new Expression('hstore_to_json(validation)'),
             'process_doublepass' => isset($config['doublePass']) && $config['doublePass'] === true ? new Expression('hstore_to_json(process_doublepass)') : null,
         ]);
         $select->where

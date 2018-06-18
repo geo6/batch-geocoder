@@ -4,23 +4,12 @@ declare(strict_types=1);
 
 namespace App\Handler\Process;
 
-use App\Middleware\ConfigMiddleware;
-use App\Middleware\DbAdapterMiddleware;
 use App\Tools\AddressCheck;
 use Geocoder\Formatter\StringFormatter;
 use Geocoder\Http\Provider\AbstractHttpProvider;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressBuilder;
-use Geocoder\Query\GeocodeQuery;
-use Geocoder\StatefulGeocoder;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Session\SessionMiddleware;
 
 class SecondHandler extends FirstHandler
 {
@@ -31,13 +20,13 @@ class SecondHandler extends FirstHandler
         $select = $this->sql->select();
         $select->columns([
             'id',
-            'streetname' => new Expression('process_doublepass->\'streetname\''),
+            'streetname'  => new Expression('process_doublepass->\'streetname\''),
             'housenumber' => new Expression('process_doublepass->\'housenumber\''),
-            'postalcode' => new Expression('process_doublepass->\'postalcode\''),
-            'locality' => new Expression('process_doublepass->\'locality\''),
-            'validation' => new Expression('hstore_to_json(hstore(\'region\', validation->\'region\'))'),
-            'provider' => new Expression('process_doublepass->\'provider\''),
-            'source' => new Expression('hstore_to_json(hstore('.
+            'postalcode'  => new Expression('process_doublepass->\'postalcode\''),
+            'locality'    => new Expression('process_doublepass->\'locality\''),
+            'validation'  => new Expression('hstore_to_json(hstore(\'region\', validation->\'region\'))'),
+            'provider'    => new Expression('process_doublepass->\'provider\''),
+            'source'      => new Expression('hstore_to_json(hstore('.
                 'ARRAY['.
                     '\'streetname\','.
                     '\'housenumber\','.
@@ -97,7 +86,7 @@ class SecondHandler extends FirstHandler
                 'ST_SetSRID(ST_MakePoint(?, ?), 4326)',
                 [
                     $result->getCoordinates()->getLongitude(),
-                    $result->getCoordinates()->getLatitude()
+                    $result->getCoordinates()->getLatitude(),
                 ]
             ),
         ];
@@ -112,7 +101,6 @@ class SecondHandler extends FirstHandler
                     true,
                 ]
             );
-
         }
 
         $update = $this->sql->update();
@@ -147,7 +135,6 @@ class SecondHandler extends FirstHandler
                     true,
                 ]
             );
-
         }
 
         $update = $this->sql->update();

@@ -16,8 +16,6 @@ use Geocoder\StatefulGeocoder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\JsonResponse;
@@ -275,7 +273,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
                 'ST_SetSRID(ST_MakePoint(?, ?), 4326)',
                 [
                     $result->getCoordinates()->getLongitude(),
-                    $result->getCoordinates()->getLatitude()
+                    $result->getCoordinates()->getLatitude(),
                 ]
             ),
         ];
@@ -304,7 +302,6 @@ class FirstHandler implements Handler, RequestHandlerInterface
                     $result->getCoordinates()->getLatitude(),
                 ]
             );
-
         }
 
         $update = $this->sql->update();
