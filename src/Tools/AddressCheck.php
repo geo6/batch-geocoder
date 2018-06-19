@@ -146,7 +146,7 @@ final class AddressCheck
 
         $levenshtein = levenshtein($streetname1, $streetname2);
 
-        return $levenshtein < 5;
+        return $levenshtein < 3;
     }
 
     public function checkStreetNumber(AddressModel $address): bool
