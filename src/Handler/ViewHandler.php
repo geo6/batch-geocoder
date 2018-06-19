@@ -109,7 +109,7 @@ class ViewHandler implements RequestHandlerInterface
             }
 
             $addressGeocoded[] = [
-                isset($doublePass->provider) ? $doublePass->provider.' + '.$r->process_provider : $r->process_provider,
+                isset($doublePass->provider) && $doublePass->provider !== $r->process_provider ? $doublePass->provider.' + '.$r->process_provider : $r->process_provider,
                 $diff['old'],
                 $diff['new'],
                 $score,
