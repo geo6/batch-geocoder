@@ -59,7 +59,7 @@ $metadata = new Metadata($adapter);
 
 $tables = $metadata->getTableNames();
 foreach ($tables as $table) {
-    if (preg_match('/^[0-9]{4}[0-9]{2}[0-9]{2}_[a-z0-9]+(?:_[0-9]+)?$/', $table, $matches) === 1) {
+    if (preg_match('/^[0-9]{4}[0-9]{2}[0-9]{2}_[a-z0-9]+(?:_[0-9]+)?$/i', $table, $matches) === 1) {
         try {
             $drop = new DropTable($table);
 
