@@ -146,7 +146,7 @@ msgstr ""
 "U kan een  <code>.txt</code> of <code>.csv</code> bestand opladen. Uw "
 "bestand moet UTF-8-gecodeerd zijn en het scheidingsteken moet een komma zijn "
 "<kbd>,</kbd>, of een een puntkomma <kbd>;</kbd>. Uw bestand mag geen "
-"<code>header<code> hebben."
+"header hebben."
 
 msgid "Maximum count of records"
 msgstr "Maximum aantal records"
