@@ -9,6 +9,7 @@ use App\Middleware\DbAdapterMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -45,90 +46,21 @@ class ExportHandler implements RequestHandlerInterface
         ]);
 
         $qsz = $sql->buildSqlString($select);
-        $resultsGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
+        $results = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
 
         switch ($type) {
             case 'csv':
-                $text = self::str_putcsv([
-                    'id',
-                    'streetname',
-                    'housenumber',
-                    'postalcode',
-                    'locality',
-                    'process_address',
-                    'process_score',
-                    'process_provider',
-                    'longitude',
-                    'latitude',
-                ]).PHP_EOL;
-
-                foreach ($resultsGeocoded as $result) {
-                    $text .= self::str_putcsv([
-                        $result->id,
-                        $result->streetname,
-                        $result->housenumber,
-                        $validation->postalcode ?? $result->postalcode,
-                        $validation->locality ?? $result->locality,
-                        $result->process_address,
-                        $result->process_score,
-                        $result->process_provider,
-                        $result->longitude,
-                        $result->latitude,
-                    ]).PHP_EOL;
-                }
-
-                return (new TextResponse($text))->
-                    withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.csv')->
+                return self::exportCSV($results)->
                     withHeader('Pragma', 'no-cache')->
                     withHeader('Expires', '0')->
                     withHeader('Cache-Control', 'no-cache, must-revalidate');
                 break;
-
             case 'geojson':
-                $geojson = [
-                    'type'     => 'FeatureCollection',
-                    'features' => [],
-                ];
-
-                foreach ($resultsGeocoded as $i => $result) {
-                    $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
-
-                    $geometry = null;
-                    if (!is_null($result->longitude) && !is_null($result->latitude)) {
-                        $geometry = [
-                            'type'        => 'Point',
-                            'coordinates' => [
-                                round($result->longitude, 6),
-                                round($result->latitude, 6),
-                            ],
-                        ];
-                    }
-
-                    $feature = [
-                        'type'       => 'Feature',
-                        'id'         => ($i + 1),
-                        'properties' => [
-                            'id'               => $result->id,
-                            'streetname'       => $result->streetname,
-                            'housenumber'      => $result->housenumber,
-                            'postalcode'       => $validation->postalcode ?? $result->postalcode,
-                            'locality'         => $validation->locality ?? $result->locality,
-                            'process_address'  => $result->process_address,
-                            'process_score'    => $result->process_score,
-                            'process_provider' => $result->process_provider,
-                        ],
-                        'geometry' => $geometry,
-                    ];
-
-                    $geojson['features'][] = $feature;
-                }
-
-                return (new JsonResponse($geojson))->
-                    withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.json')->
+                return self::exportGeoJSON($results)->
                     withHeader('Pragma', 'no-cache')->
                     withHeader('Expires', '0')->
                     withHeader('Cache-Control', 'no-cache, must-revalidate');
-                break;
+                    break;
 
             default:
                 return (new EmptyResponse())->withStatus(400);
@@ -136,7 +68,7 @@ class ExportHandler implements RequestHandlerInterface
         }
     }
 
-    private static function str_putcsv($input, $delimiter = ',', $enclosure = '"')
+    private static function str_putcsv(array $input, string $delimiter = ',', string $enclosure = '"') : string
     {
         $fp = fopen('php://memory', 'r+b');
         fputcsv($fp, $input, $delimiter, $enclosure);
@@ -145,5 +77,83 @@ class ExportHandler implements RequestHandlerInterface
         fclose($fp);
 
         return rtrim($data, "\n");
+    }
+
+    private static function exportCSV(ResultSet $results) : TextResponse
+    {
+        $text = self::str_putcsv([
+            'id',
+            'streetname',
+            'housenumber',
+            'postalcode',
+            'locality',
+            'process_address',
+            'process_score',
+            'process_provider',
+            'longitude',
+            'latitude',
+        ]).PHP_EOL;
+
+        foreach ($results as $result) {
+            $text .= self::str_putcsv([
+                $result->id,
+                $result->streetname,
+                $result->housenumber,
+                $validation->postalcode ?? $result->postalcode,
+                $validation->locality ?? $result->locality,
+                $result->process_address,
+                $result->process_score,
+                $result->process_provider,
+                $result->longitude,
+                $result->latitude,
+            ]).PHP_EOL;
+        }
+
+        return (new TextResponse($text))->
+            withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.csv');
+    }
+
+    private static function exportGeoJSON(ResultSet $results) : JsonResponse
+    {
+        $geojson = [
+            'type'     => 'FeatureCollection',
+            'features' => [],
+        ];
+
+        foreach ($results as $i => $result) {
+            $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
+
+            $geometry = null;
+            if (!is_null($result->longitude) && !is_null($result->latitude)) {
+                $geometry = [
+                    'type'        => 'Point',
+                    'coordinates' => [
+                        round($result->longitude, 6),
+                        round($result->latitude, 6),
+                    ],
+                ];
+            }
+
+            $feature = [
+                'type'       => 'Feature',
+                'id'         => ($i + 1),
+                'properties' => [
+                    'id'               => $result->id,
+                    'streetname'       => $result->streetname,
+                    'housenumber'      => $result->housenumber,
+                    'postalcode'       => $validation->postalcode ?? $result->postalcode,
+                    'locality'         => $validation->locality ?? $result->locality,
+                    'process_address'  => $result->process_address,
+                    'process_score'    => $result->process_score,
+                    'process_provider' => $result->process_provider,
+                ],
+                'geometry' => $geometry,
+            ];
+
+            $geojson['features'][] = $feature;
+        }
+
+        return (new JsonResponse($geojson))->
+            withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.json');
     }
 }
