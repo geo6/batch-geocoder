@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-04 17:03+0200\n"
-"PO-Revision-Date: 2018-06-04 17:05+0200\n"
+"POT-Creation-Date: 2018-06-20 10:26+0200\n"
+"PO-Revision-Date: 2018-06-20 10:53+0200\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Language-Team: \n"
 "X-Generator: Poedit 2.0.8\n"
 
+msgid "View on map"
+msgstr "Voir sur la carte"
+
+msgid "View"
+msgstr "Voir"
+
 msgid ""
 "The application will try to find a location using several providers (GEO-6, "
 "Geopunt, UrbIS, SPW, ...)."
 msgstr ""
 "L'application essaiera de trouver une position en utilisant diverses sources "
 "(GEO-6, Geopunt, UrbIS, SPW, …)."
-
-msgid "View"
-msgstr "Voir"
-
-msgid "View on map"
-msgstr "Voir sur la carte"
 
 msgid "Choose the correct result"
 msgstr "Choisissez le bon résultat"
@@ -48,6 +48,12 @@ msgstr "Enregistrer"
 
 msgid "Skip"
 msgstr "Passer"
+
+msgid "Toggle Dropdown"
+msgstr ""
+
+msgid "Skip all"
+msgstr "Tout passer"
 
 msgid "Record count"
 msgstr "Nombre d'adresses"
@@ -90,6 +96,9 @@ msgstr "Résultats multiples"
 
 msgid "No result"
 msgstr "Aucun résultat"
+
+msgid "Double pass"
+msgstr "Double passe"
 
 msgid ""
 "The <em>Batch Geocoder</em> application allows you to geocode your dataset "
@@ -191,9 +200,6 @@ msgstr ""
 "Vous pouvez passer une adresse invalide (ou toutes les adresses invalides) "
 "mais toutes les adresses invalides ne seront pas géocodées !"
 
-msgid "Skip all"
-msgstr "Tout passer"
-
 msgid "Results"
 msgstr "Résultats"
 
@@ -244,6 +250,12 @@ msgstr "Se déconnecter"
 
 msgid "About"
 msgstr "A propos"
+
+msgid "Providers in automatic mode"
+msgstr "Fournisseurs en mode automatique"
+
+msgid "Providers in interactive mode"
+msgstr "Fournisseurs en mode manuel"
 
 msgid "Providers"
 msgstr "Fournisseurs"

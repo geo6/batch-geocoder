@@ -7,8 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-04 17:03+0200\n"
-"PO-Revision-Date: 2018-06-04 17:06+0200\n"
+"POT-Creation-Date: 2018-06-20 10:26+0200\n"
+"PO-Revision-Date: 2018-06-20 13:07+0200\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,219 +17,247 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 2.0.8\n"
-"Language: nl\n"
+
+msgid "View on map"
+msgstr "Zie ok op kaart"
+
+msgid "View"
+msgstr "Zien"
 
 msgid ""
 "The application will try to find a location using several providers (GEO-6, "
 "Geopunt, UrbIS, SPW, ...)."
 msgstr ""
-
-msgid "View"
-msgstr ""
-
-msgid "View on map"
-msgstr ""
+"De toepassing zal proberen posities te bepalen met gebruik van verschillende "
+"diensten (GEO-6, Geopunt, UrbIS, SPW, ...)."
 
 msgid "Choose the correct result"
-msgstr ""
+msgstr "Kies het juiste resultaat"
 
 msgid "Geocode"
-msgstr ""
+msgstr "Geocodeer"
 
 msgid "Table"
-msgstr ""
+msgstr "Tabel"
 
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 msgid "Save"
-msgstr ""
+msgstr "Bewaar"
 
 msgid "Skip"
-msgstr ""
+msgstr "Skip"
+
+msgid "Toggle Dropdown"
+msgstr "Schakel Dropdown in"
+
+msgid "Skip all"
+msgstr "Sla alles over"
 
 msgid "Record count"
-msgstr ""
+msgstr "Record aantal"
 
 #, php-format
 msgid "%d record"
 msgid_plural "%d records"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d record"
+msgstr[1] "%d records"
 
 msgid "Progress"
-msgstr ""
+msgstr "Verloop"
 
 #, php-format
 msgid "%d invalid record(s)"
-msgstr ""
+msgstr "%d ongeldig(e) record(s)"
 
 #, php-format
 msgid "%d not geocoded record(s)"
-msgstr ""
+msgstr "%d niet gevonden record(s)"
 
 #, php-format
 msgid "%d geocoded record(s)"
-msgstr ""
+msgstr "%d gevonden record(s)"
 
 msgid "Launch process"
-msgstr ""
+msgstr "Start het proces"
 
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 msgid "Single result"
-msgstr ""
+msgstr "Eén resultaat"
 
 msgid "Multiple result"
-msgstr ""
+msgstr "Meerdere resultaten"
 
 msgid "No result"
-msgstr ""
+msgstr "Geen resultaat"
+
+msgid "Double pass"
+msgstr "Dubbele pas"
 
 msgid ""
 "The <em>Batch Geocoder</em> application allows you to geocode your dataset "
 "of addresses."
 msgstr ""
+"Met de <em>Batch Geocoder</em> toepassing kunt u uw dataset met adressen "
+"geocoderen."
 
 msgid ""
 "You can upload your file and the application will process it to add a "
 "location (longitude, latitude) to each address."
 msgstr ""
+"U kunt uw bestand uploaden en de toepassing zal het verwerken om een locatie "
+"(lengte- en breedtegraad) aan elk adres toe te voegen."
 
 msgid "Data structure"
-msgstr ""
+msgstr "Data structuur"
 
 msgid "Identifier"
-msgstr ""
+msgstr "Identificeren"
 
 msgid "Must be unique"
-msgstr ""
+msgstr "Moet uniek zijn"
 
 msgid "Streetname"
-msgstr ""
+msgstr "Straatnaam"
 
 msgid "House number"
-msgstr ""
+msgstr "Huisnummer"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Postcode"
 
 msgid "Locality"
-msgstr ""
+msgstr "Plaats"
 
 msgid "An error occured :"
-msgstr ""
+msgstr "Er is een fout opgetreden:"
 
 msgid ""
 "You can upload a <code>.txt</code> or <code>.csv</code> file. Your file must "
 "be UTF-8 encoded and the separator must be a comma <kbd>,</kbd>, or a "
 "semicolon <kbd>;</kbd>. Your file must not have a header."
 msgstr ""
+"U kan een  <code>.txt</code> of <code>.csv</code> bestand opladen. Uw "
+"bestand moet UTF-8-gecodeerd zijn en het scheidingsteken moet een komma zijn "
+"<kbd>,</kbd>, of een een puntkomma <kbd>;</kbd>. Uw bestand mag geen "
+"<code>header<code> hebben."
 
 msgid "Maximum count of records"
-msgstr ""
+msgstr "Maximum aantal records"
 
 msgid ""
 "Your data will be completely removed from our server at the latest after 24 "
 "hours !"
-msgstr ""
+msgstr "Uw gegevens worden na 24 uur volledig van onze server verwijderd!"
 
 msgid "Send"
-msgstr ""
+msgstr "Opsturen"
 
 msgid "Archives"
-msgstr ""
+msgstr "Archieven"
 
 msgid "Load"
-msgstr ""
+msgstr "Opladen"
 
 msgid "List"
-msgstr ""
+msgstr "Lijst"
 
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 msgid "Map"
-msgstr ""
+msgstr "Kaart"
 
 msgid "Validate"
-msgstr ""
+msgstr "Valideren"
 
 msgid ""
 "The application try to validate matching between postal code and locality."
 msgstr ""
+"De toepassing probeert de afstemming tussen postcode en plaats te valideren."
 
 msgid ""
 "If there is no valid match between the postal code and the locality of one "
 "of your addresses, the application provides you suggestion to fix it."
 msgstr ""
+"Als er geen geldige afstemming is tussen de postcode en de plaats van één "
+"van uw adressen, geeft de toepassing u een suggestie om deze te herstellen."
 
 msgid ""
 "You can skip an invalid address (or all of it) but all the invalid addresses "
 "will not be geocoded !"
 msgstr ""
-
-msgid "Skip all"
-msgstr ""
+"U kunt één ongeldig adres (of alles) overslaan, maar alle ongeldige zullen "
+"niet geocodeerd zijn!"
 
 msgid "Results"
-msgstr ""
+msgstr "Resultaten"
 
 msgid "Geocoded"
-msgstr ""
+msgstr "Geocodeerd"
 
 msgid "Not geocoded"
-msgstr ""
+msgstr "Niet geocodeerd"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Ongeldig"
 
 msgid "Source address"
-msgstr ""
+msgstr "Bron adres"
 
 msgid "Geocoded address"
-msgstr ""
+msgstr "Geocodeerd adres"
 
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 msgid "Provider"
-msgstr ""
+msgstr "Leverancier"
 
 msgid "Oops!"
-msgstr ""
+msgstr "Oops!"
 
 msgid "This is awkward."
-msgstr ""
+msgstr "Dit is lastig."
 
 msgid "We encountered a \"404 Not Found\" error"
-msgstr ""
+msgstr "We hebben een fout \"404 niet gevonden\" aangetroffen"
 
 #, php-format
 msgid ""
 "You are looking for something that doesn't exist or may have moved. Check "
 "out one of the links on this page or head back to <a href=\"%s\">Home</a>."
 msgstr ""
+"U bent op zoek naar iets dat niet bestaat of misschien is verplaatst. Bekijk "
+"één van de links op deze pagina of ga naar <a href=\"%s\"> Startpagina </a>."
 
 #, php-format
 msgid "We encountered a \"%d %s\" error."
-msgstr ""
+msgstr "We hebben een fout \"%d %s\" aangetroffen"
 
 msgid "Log out"
-msgstr ""
+msgstr "Uitloggen"
 
 msgid "About"
-msgstr ""
+msgstr "Over"
+
+msgid "Providers in automatic mode"
+msgstr "Providers in automatische modus"
+
+msgid "Providers in interactive mode"
+msgstr "Providers in interactive modus"
 
 msgid "Providers"
-msgstr ""
+msgstr "Providers"
 
 msgid "Version"
-msgstr ""
+msgstr "Versie"
 
 msgid "Submit issue, or suggestion on GitHub"
-msgstr ""
+msgstr "Dien een probleem of suggestie in op GitHub"
