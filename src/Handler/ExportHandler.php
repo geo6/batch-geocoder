@@ -43,14 +43,6 @@ class ExportHandler implements RequestHandlerInterface
             'longitude' => new Expression('ST_X(the_geog::geometry)'),
             'latitude'  => new Expression('ST_Y(the_geog::geometry)'),
         ]);
-        $select->where
-            ->equalTo('valid', 't')
-            ->isNotNull('process_status')
-            ->nest()
-            ->equalTo('process_status', 1)
-            ->or
-            ->equalTo('process_status', 9)
-            ->unnest();
 
         $qsz = $sql->buildSqlString($select);
         $resultsGeocoded = $adapter->query($qsz, $adapter::QUERY_MODE_EXECUTE);
@@ -101,6 +93,17 @@ class ExportHandler implements RequestHandlerInterface
                 foreach ($resultsGeocoded as $i => $result) {
                     $validation = !is_null($result->validation) ? json_decode($result->validation) : null;
 
+                    $geometry = null;
+                    if (!is_null($result->longitude) && !is_null($result->latitude)) {
+                        $geometry = [
+                            'type'        => 'Point',
+                            'coordinates' => [
+                                round($result->longitude, 6),
+                                round($result->latitude, 6),
+                            ],
+                        ];
+                    }
+
                     $feature = [
                         'type'       => 'Feature',
                         'id'         => ($i + 1),
@@ -114,13 +117,7 @@ class ExportHandler implements RequestHandlerInterface
                             'process_score'    => $result->process_score,
                             'process_provider' => $result->process_provider,
                         ],
-                        'geometry' => [
-                            'type'        => 'Point',
-                            'coordinates' => [
-                                round($result->longitude, 6),
-                                round($result->latitude, 6),
-                            ],
-                        ],
+                        'geometry' => $geometry,
                     ];
 
                     $geojson['features'][] = $feature;
