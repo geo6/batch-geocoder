@@ -6,15 +6,19 @@ namespace App\Handler;
 
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Sql;
+use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\TextResponse;
+use Zend\Diactoros\Stream;
 use Zend\Expressive\Session\SessionMiddleware;
 
 class ExportHandler implements RequestHandlerInterface
@@ -60,7 +64,13 @@ class ExportHandler implements RequestHandlerInterface
                     withHeader('Pragma', 'no-cache')->
                     withHeader('Expires', '0')->
                     withHeader('Cache-Control', 'no-cache, must-revalidate');
-                    break;
+                break;
+            case 'xlsx':
+                return self::exportXLSX($results)->
+                    withHeader('Pragma', 'no-cache')->
+                    withHeader('Expires', '0')->
+                    withHeader('Cache-Control', 'no-cache, must-revalidate');
+                break;
 
             default:
                 return (new EmptyResponse())->withStatus(400);
@@ -155,5 +165,62 @@ class ExportHandler implements RequestHandlerInterface
 
         return (new JsonResponse($geojson))->
             withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.json');
+    }
+
+    private static function exportXLSX(ResultSet $results) : Response
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->fromArray([
+            'id',
+            'streetname',
+            'housenumber',
+            'postalcode',
+            'locality',
+            'process_address',
+            'process_score',
+            'process_provider',
+            'longitude',
+            'latitude',
+        ], null, 'A1');
+
+        foreach ($results as $i => $result) {
+            $sheet->fromArray([
+                $result->id,
+                $result->streetname,
+                $result->housenumber,
+                $validation->postalcode ?? $result->postalcode,
+                $validation->locality ?? $result->locality,
+                $result->process_address,
+                $result->process_score,
+                $result->process_provider,
+                $result->longitude,
+                $result->latitude,
+            ], null, 'A'.($i+2));
+        }
+
+        /*$spreadsheet->getActiveSheet()->setAutoFilter(
+            $spreadsheet->getActiveSheet()
+                ->calculateWorksheetDimension()
+        );*/
+
+        for ($c = 65; $c <= 74; $c++) {
+            $spreadsheet->getActiveSheet()->getColumnDimension(chr($c))->setAutoSize(true);
+            $sheet->getStyle(chr($c).'1')->getFont()->setBold(true);
+        }
+
+        $file = 'data/upload/batch-geocoder.xlsx';
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($file);
+
+        $body = new Stream('php://temp', 'w+');
+        $body->write(file_get_contents($file));
+
+        unlink($file);
+
+        return (new Response($body))->
+            withHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')->
+            withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.xlsx');
     }
 }
