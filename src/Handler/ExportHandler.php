@@ -196,7 +196,7 @@ class ExportHandler implements RequestHandlerInterface
                 $result->process_provider,
                 $result->longitude,
                 $result->latitude,
-            ], null, 'A'.($i+2));
+            ], null, 'A'.($i + 2));
         }
 
         /*$spreadsheet->getActiveSheet()->setAutoFilter(
