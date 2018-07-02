@@ -25,7 +25,5 @@ public/css/
 public/js/
 .ftpconfig
 
-.npmrc
-package-lock.json
 composer.lock
 install-providers.sh
