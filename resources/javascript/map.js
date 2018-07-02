@@ -2,20 +2,35 @@
 
 import 'ol/ol.css';
 
-import Map from 'ol/map';
-import Control from 'ol/control';
-import Attribution from 'ol/control/attribution';
-import ScaleLine from 'ol/control/scaleline';
-import GeoJSON from 'ol/format/geojson';
-import TileLayer from 'ol/layer/tile';
-import VectorLayer from 'ol/layer/vector';
-import OSMSource from 'ol/source/osm';
-import VectorSource from 'ol/source/vector';
-import Circle from 'ol/style/circle';
-import Fill from 'ol/style/fill';
-import Stroke from 'ol/style/stroke';
-import Style from 'ol/style/style';
-import View from 'ol/view';
+import {
+    Map,
+    View
+} from 'ol';
+import {
+    defaults as ControlDefaults,
+    Attribution,
+    ScaleLine
+} from 'ol/control';
+import {
+    GeoJSON
+} from 'ol/format';
+import {
+    Tile as TileLayer,
+    Vector as VectorLayer
+} from 'ol/layer';
+import {
+    OSM as OSMSource,
+    Vector as VectorSource
+} from 'ol/source';
+import {
+    ATTRIBUTION as OSMSourceAttribution
+} from 'ol/source/OSM';
+import {
+    Circle,
+    Fill,
+    Stroke,
+    Style
+} from 'ol/style';
 
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b', '#000'];
 let providers = [];
@@ -28,11 +43,11 @@ export default function initMap(geojson) {
     });
 
     window.app.map = new Map({
-        controls: Control.defaults({attribution: false}).extend([new Attribution({collapsible: false}), new ScaleLine()]),
+        controls: ControlDefaults({attribution: false}).extend([new Attribution({collapsible: false}), new ScaleLine()]),
         layers: [
             new TileLayer({
                 source: new OSMSource({
-                    attributions: [OSMSource.ATTRIBUTION, 'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>'],
+                    attributions: [OSMSourceAttribution, 'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>'],
                     url: 'https://tile.geo6.be/osmbe/{z}/{x}/{y}.png',
                     maxZoom: 18
                 })
@@ -44,7 +59,7 @@ export default function initMap(geojson) {
 
                     if (typeof providers[properties.provider] === 'undefined') {
                         providers[properties.provider] = colors.shift();
-                        $('#legend').append('<strong style="color: ' + providers[properties.provider] + '">' +  properties.provider + '</strong>, ')
+                        $('#legend').append('<strong style="color: ' + providers[properties.provider] + '">' +  properties.provider + '</strong>, ');
                     }
 
                     let fill = new Fill({

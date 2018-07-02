@@ -2,23 +2,41 @@
 
 import 'ol/ol.css';
 
-import Map from 'ol/map';
-import Control from 'ol/control';
-import Attribution from 'ol/control/attribution';
-import ScaleLine from 'ol/control/scaleline';
-import Feature from 'ol/feature';
-import Point from 'ol/geom/point';
-import TileLayer from 'ol/layer/tile';
-import VectorLayer from 'ol/layer/vector';
-import Proj from 'ol/proj';
-import OSMSource from 'ol/source/osm';
-import VectorSource from 'ol/source/vector';
-import Circle from 'ol/style/circle';
-import Fill from 'ol/style/fill';
-import Stroke from 'ol/style/stroke';
-import Style from 'ol/style/style';
-import Text from 'ol/style/text';
-import View from 'ol/view';
+import {
+    Feature,
+    Map,
+    View
+} from 'ol';
+import {
+    defaults as ControlDefaults,
+    Attribution,
+    ScaleLine
+} from 'ol/control';
+import {
+    Point
+} from 'ol/geom';
+import {
+    Tile as TileLayer,
+    Vector as VectorLayer
+} from 'ol/layer';
+import {
+    fromLonLat,
+    toLonLat
+} from 'ol/proj';
+import {
+    OSM as OSMSource,
+    Vector as VectorSource
+} from 'ol/source';
+import {
+    ATTRIBUTION as OSMSourceAttribution
+} from 'ol/source/OSM';
+import {
+    Circle,
+    Fill,
+    Stroke,
+    Style,
+    Text
+} from 'ol/style';
 
 let colors = ['#076a6d', '#e5936e', '#3a7ce8', '#18dba7', '#dbcb3b'];
 let addressesLayer = new VectorLayer({
@@ -75,7 +93,7 @@ function selectAddress(provider, address, recenter) {
     if (recenter === true) {
         window.app.map.getView().animate({
             zoom: 18,
-            center: Proj.fromLonLat(coordinates)
+            center: fromLonLat(coordinates)
         });
     }
 }
@@ -95,7 +113,7 @@ export default function initMapChoose() {
         let color = data.color;
 
         addressesLayer.getSource().addFeature(new Feature({
-            geometry: new Point(Proj.fromLonLat(coordinates)),
+            geometry: new Point(fromLonLat(coordinates)),
             properties: {
                 address: data.address,
                 color: color,
@@ -110,11 +128,11 @@ export default function initMapChoose() {
     });
 
     window.app.map = new Map({
-        controls: Control.defaults({attribution: false}).extend([new Attribution({collapsible: false}), new ScaleLine()]),
+        controls: ControlDefaults({attribution: false}).extend([new Attribution({collapsible: false}), new ScaleLine()]),
         layers: [
             new TileLayer({
                 source: new OSMSource({
-                    attributions: [OSMSource.ATTRIBUTION, 'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>'],
+                    attributions: [OSMSourceAttribution, 'Tiles courtesy of <a href="https://geo6.be/" target="_blank">GEO-6</a>'],
                     url: 'https://tile.geo6.be/osmbe/{z}/{x}/{y}.png',
                     maxZoom: 18
                 })
@@ -143,7 +161,7 @@ export default function initMapChoose() {
             selectAddress(properties.provider, properties.address);
         } else {
             let coordinates = window.app.map.getCoordinateFromPixel(event.pixel);
-            let lnglat = Proj.toLonLat(coordinates);
+            let lnglat = toLonLat(coordinates);
 
             $('#results > div > ul > li.text-primary').removeClass('text-primary');
             $('#selection').text('');
