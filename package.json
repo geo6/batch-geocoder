@@ -4,7 +4,7 @@
     "@fortawesome/free-brands-svg-icons": "5.1.0",
     "@fortawesome/free-regular-svg-icons": "5.1.0",
     "@fortawesome/free-solid-svg-icons": "5.1.0",
-    "ol": "4.6.5"
+    "ol": "5.0.0"
   },
   "devDependencies": {
     "css-loader": "0.28.11",
