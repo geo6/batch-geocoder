@@ -45,7 +45,7 @@ export default function geocodeProcess() {
 
             window.app.fn.geocodeProcess();
         } else {
-            let spin = $('.fa-cog.fa-spin').clone()
+            let spin = $('.fa-cog.fa-spin').clone();
 
             $('.fa-cog.fa-spin').remove();
 
