@@ -21,7 +21,7 @@
         "zendframework/zend-config": "3.2.0",
         "zendframework/zend-config-aggregator": "1.1.1",
         "zendframework/zend-db": "2.9.3",
-        "zendframework/zend-diactoros": "1.8.2",
+        "zendframework/zend-diactoros": "1.8.3",
         "zendframework/zend-expressive": "3.0.2",
         "zendframework/zend-expressive-fastroute": "3.0.1",
         "zendframework/zend-expressive-flash": "1.0.0",
