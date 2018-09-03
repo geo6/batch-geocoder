@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.2",
-    "@fortawesome/free-brands-svg-icons": "5.2.0",
+    "@fortawesome/free-brands-svg-icons": "5.3.1",
     "@fortawesome/free-regular-svg-icons": "5.2.0",
     "@fortawesome/free-solid-svg-icons": "5.2.0",
     "ol": "5.1.3"
