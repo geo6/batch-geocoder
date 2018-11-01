@@ -35,7 +35,7 @@
         "zendframework/zend-validator": "2.10.2"
     },
     "require-dev": {
-        "filp/whoops": "2.2.0",
+        "filp/whoops": "2.3.1",
         "squizlabs/php_codesniffer": "3.3.1",
         "zfcampus/zf-development-mode": "3.2.0"
     },
