@@ -21,9 +21,5 @@ temp/
 
 # Misc.
 config/application/
-public/css/
-public/js/
-.ftpconfig
 
-composer.lock
 install-providers.sh

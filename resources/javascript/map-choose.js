@@ -1,5 +1,3 @@
-/*global $*/
-
 import 'ol/ol.css';
 
 import {

@@ -6,7 +6,9 @@ The "Batch Geocoder" application requires [PostgreSQL 10.0+](https://www.postgre
 
 To install the "Batch Geocoder" application :
 
-    composer create-project geo6/batch-geocoder
+```shell
+composer create-project geo6/batch-geocoder
+```
 
 The install process will create a new PostgreSQL user (`geocode`) and a new PostgreSQL database (`geocode`). You will be asked to set the PostgreSQL `geocode` user password !
 
@@ -19,12 +21,14 @@ If you want to use YAML, do not forget to install [YAML PECL extension](http://p
 
 ### Database
 
-    postgresql:
-        host: localhost
-        port: 5432
-        dbname: geocode
-        user: geocode
-        password: <YOURPASSWORD>
+```yaml
+postgresql:
+    host: localhost
+    port: 5432
+    dbname: geocode
+    user: geocode
+    password: <YOURPASSWORD>
+```
 
 ### Providers
 
@@ -33,29 +37,33 @@ The application is developed so everyone can use the Geocoder PHP providers (and
 You can configure the application by adding a configuration file with `providers` parameter in `config/application` directory.  
 Here is the one I use for Belgium :
 
-    <?php
+```php
+<?php
 
-    declare(strict_types=1);
+declare(strict_types=1);
 
-    use Geocoder\Provider;
-    use Http\Adapter\Guzzle6\Client;
+use Geocoder\Provider;
+use Http\Adapter\Guzzle6\Client;
 
-    $client = new Client();
+$client = new Client();
 
-    return [
-        'providers' => [
-            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
-            new Provider\UrbIS\UrbIS($client),
-            new Provider\Geopunt\Geopunt($client),
-            new Provider\SPW\SPW($client),
-            new Provider\bpost\bpost($client),
-        ]
-    ];
+return [
+    'providers' => [
+        new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+        new Provider\UrbIS\UrbIS($client),
+        new Provider\Geopunt\Geopunt($client),
+        new Provider\SPW\SPW($client),
+        new Provider\bpost\bpost($client),
+    ]
+];
+```
 
 You will have to install those providers, of course.  
 For instance, to install `UrbIS` provider, just run :
 
-    composer require geo6/geocoder-php-urbis-provider
+```shell
+composer require geo6/geocoder-php-urbis-provider
+```
 
 If you need more information, have a look a [Geocoder PHP documentation](https://github.com/geocoder-php/Geocoder#geocoder) !
 
@@ -66,24 +74,26 @@ Some providers are regional providers (see each provider's documentation) ; you 
 
 Here is the same providers configuration but we define which provider to use for all of Belgium or just specific regions :
 
-    <?php
+```php
+<?php
 
-    declare(strict_types=1);
+declare(strict_types=1);
 
-    use Geocoder\Provider;
-    use Http\Adapter\Guzzle6\Client;
+use Geocoder\Provider;
+use Http\Adapter\Guzzle6\Client;
 
-    $client = new Client();
+$client = new Client();
 
-    return [
-        'providers'  => [
-            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
-            [new Provider\UrbIS\UrbIS($client), ['bru']],
-            [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
-            [new Provider\SPW\SPW($client), ['wal']],
-            new Provider\bpost\bpost($client),
-        ]
-    ];
+return [
+    'providers'  => [
+        new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+        [new Provider\UrbIS\UrbIS($client), ['bru']],
+        [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
+        [new Provider\SPW\SPW($client), ['wal']],
+        new Provider\bpost\bpost($client),
+    ]
+];
+```
 
 Explanations:
 
@@ -98,30 +108,31 @@ Explanations:
 If you want to use a different set of providers in automatic and interactive/manual mode, you just have to define
 `automatic` and `manual` arrays in `providers` configuration array.
 
-    <?php
+```php
+<?php
 
-    declare(strict_types=1);
+declare(strict_types=1);
 
-    use Geocoder\Provider;
-    use Http\Adapter\Guzzle6\Client;
+use Geocoder\Provider;
+use Http\Adapter\Guzzle6\Client;
 
-    $client = new Client();
+$client = new Client();
 
-    return [
-        'providers'  => [
-            'automatic' => [
-                new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
-            ],
-            'manual' => [
-                new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
-                [new Provider\UrbIS\UrbIS($client), ['bru']],
-                [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
-                [new Provider\SPW\SPW($client), ['wal']],
-                new Provider\bpost\bpost($client),
-            ]
+return [
+    'providers'  => [
+        'automatic' => [
+            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+        ],
+        'manual' => [
+            new Provider\Geo6\Geo6($client, '<MYCONSUMERID>', '<MYSECRETKEY>'),
+            [new Provider\UrbIS\UrbIS($client), ['bru']],
+            [new Provider\Geopunt\Geopunt($client), ['vla', 'bru']],
+            [new Provider\SPW\SPW($client), ['wal']],
+            new Provider\bpost\bpost($client),
         ]
-    ];
-
+    ]
+];
+```
 
 ### Additional parameters
 

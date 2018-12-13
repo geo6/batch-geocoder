@@ -1,7 +1,3 @@
-/*global $*/
-
-require('./fontawesome');
-
 import initMap from './map';
 import initMapChoose from './map-choose';
 import geocodeProcess from './geocodeProcess';

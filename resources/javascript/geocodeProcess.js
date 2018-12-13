@@ -1,5 +1,3 @@
-/*global $*/
-
 export default function geocodeProcess() {
     fetch('./geocode/process/first', {
         cache: 'no-cache',
