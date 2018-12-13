@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14252790afc547ef1b4a1a0a7360c154",
+    "content-hash": "52d3ea0acde4af2c29ab0739d8bb602c",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -527,6 +527,101 @@
             "time": "2016-12-28T00:14:17+00:00"
         },
         {
+            "name": "markbaker/complex",
+            "version": "1.4.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MarkBaker/PHPComplex.git",
+                "reference": "1ea674a8308baf547cbcbd30c5fcd6d301b7c000"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MarkBaker/PHPComplex/zipball/1ea674a8308baf547cbcbd30c5fcd6d301b7c000",
+                "reference": "1ea674a8308baf547cbcbd30c5fcd6d301b7c000",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6.0|^7.0.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3",
+                "phpcompatibility/php-compatibility": "^8.0",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phploc/phploc": "2.*",
+                "phpmd/phpmd": "2.*",
+                "phpunit/phpunit": "^4.8.35|^5.4.0",
+                "sebastian/phpcpd": "2.*",
+                "squizlabs/php_codesniffer": "^3.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Complex\\": "classes/src/"
+                },
+                "files": [
+                    "classes/src/functions/abs.php",
+                    "classes/src/functions/acos.php",
+                    "classes/src/functions/acosh.php",
+                    "classes/src/functions/acot.php",
+                    "classes/src/functions/acoth.php",
+                    "classes/src/functions/acsc.php",
+                    "classes/src/functions/acsch.php",
+                    "classes/src/functions/argument.php",
+                    "classes/src/functions/asec.php",
+                    "classes/src/functions/asech.php",
+                    "classes/src/functions/asin.php",
+                    "classes/src/functions/asinh.php",
+                    "classes/src/functions/atan.php",
+                    "classes/src/functions/atanh.php",
+                    "classes/src/functions/conjugate.php",
+                    "classes/src/functions/cos.php",
+                    "classes/src/functions/cosh.php",
+                    "classes/src/functions/cot.php",
+                    "classes/src/functions/coth.php",
+                    "classes/src/functions/csc.php",
+                    "classes/src/functions/csch.php",
+                    "classes/src/functions/exp.php",
+                    "classes/src/functions/inverse.php",
+                    "classes/src/functions/ln.php",
+                    "classes/src/functions/log2.php",
+                    "classes/src/functions/log10.php",
+                    "classes/src/functions/negative.php",
+                    "classes/src/functions/pow.php",
+                    "classes/src/functions/rho.php",
+                    "classes/src/functions/sec.php",
+                    "classes/src/functions/sech.php",
+                    "classes/src/functions/sin.php",
+                    "classes/src/functions/sinh.php",
+                    "classes/src/functions/sqrt.php",
+                    "classes/src/functions/tan.php",
+                    "classes/src/functions/tanh.php",
+                    "classes/src/functions/theta.php",
+                    "classes/src/operations/add.php",
+                    "classes/src/operations/subtract.php",
+                    "classes/src/operations/multiply.php",
+                    "classes/src/operations/divideby.php",
+                    "classes/src/operations/divideinto.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Baker",
+                    "email": "mark@lange.demon.co.uk"
+                }
+            ],
+            "description": "PHP Class for working with complex numbers",
+            "homepage": "https://github.com/MarkBaker/PHPComplex",
+            "keywords": [
+                "complex",
+                "mathematics"
+            ],
+            "time": "2018-10-13T23:28:42+00:00"
+        },
+        {
             "name": "nikic/fast-route",
             "version": "v1.3.0",
             "source": {
@@ -924,16 +1019,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.3.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec"
+                "reference": "cd60531c44f580fbdfbd55dfb935af791f09be5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec",
-                "reference": "aa5b0d0236c907fd8dba0883f3ceb97cc52e46ec",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/cd60531c44f580fbdfbd55dfb935af791f09be5d",
+                "reference": "cd60531c44f580fbdfbd55dfb935af791f09be5d",
                 "shasum": ""
             },
             "require": {
@@ -949,6 +1044,7 @@
                 "ext-xmlwriter": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
+                "markbaker/complex": "^1.4.1",
                 "php": "^5.6|^7.0",
                 "psr/simple-cache": "^1.0"
             },
@@ -957,15 +1053,16 @@
                 "friendsofphp/php-cs-fixer": "@stable",
                 "jpgraph/jpgraph": "^4.0",
                 "mpdf/mpdf": "^7.0.0",
+                "phpcompatibility/php-compatibility": "^8.0",
                 "phpunit/phpunit": "^5.7",
-                "squizlabs/php_codesniffer": "^2.7",
+                "squizlabs/php_codesniffer": "^3.3",
                 "tecnickcom/tcpdf": "^6.2"
             },
             "suggest": {
                 "dompdf/dompdf": "Option for rendering PDF with PDF Writer",
                 "jpgraph/jpgraph": "Option for rendering charts, or including charts with PDF or HTML Writers",
                 "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
-                "tecnick.com/tcpdf": "Option for rendering PDF with PDF Writer"
+                "tecnickcom/tcpdf": "Option for rendering PDF with PDF Writer"
             },
             "type": "library",
             "autoload": {
@@ -979,19 +1076,22 @@
             ],
             "authors": [
                 {
-                    "name": "Maarten Balliauw",
-                    "homepage": "http://blog.maartenballiauw.be"
-                },
-                {
                     "name": "Erik Tilt"
                 },
                 {
-                    "name": "Franck Lefevre",
-                    "homepage": "http://rootslabs.net"
+                    "name": "Adrien Crivelli"
+                },
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "https://blog.maartenballiauw.be"
                 },
                 {
                     "name": "Mark Baker",
-                    "homepage": "http://markbakeruk.net"
+                    "homepage": "https://markbakeruk.net"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "https://rootslabs.net"
                 }
             ],
             "description": "PHPSpreadsheet - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
@@ -1006,7 +1106,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2018-06-12T13:40:21+00:00"
+            "time": "2018-11-25T17:40:15+00:00"
         },
         {
             "name": "psr/container",
@@ -1695,16 +1795,16 @@
         },
         {
             "name": "zendframework/zend-expressive",
-            "version": "3.0.3",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive.git",
-                "reference": "c6db5b1a7524414eee0637bb50b8eed32fd67794"
+                "reference": "c48f901f4d7c559a9ccd0e996186018477120744"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/c6db5b1a7524414eee0637bb50b8eed32fd67794",
-                "reference": "c6db5b1a7524414eee0637bb50b8eed32fd67794",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive/zipball/c48f901f4d7c559a9ccd0e996186018477120744",
+                "reference": "c48f901f4d7c559a9ccd0e996186018477120744",
                 "shasum": ""
             },
             "require": {
@@ -1730,7 +1830,7 @@
                 "phpstan/phpstan-strict-rules": "^0.9",
                 "phpunit/phpunit": "^7.0.1",
                 "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-diactoros": "^1.7.1",
+                "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
                 "zendframework/zend-expressive-aurarouter": "^3.0",
                 "zendframework/zend-expressive-fastroute": "^3.0",
                 "zendframework/zend-expressive-zendrouter": "^3.0",
@@ -1751,8 +1851,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev",
-                    "dev-develop": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev",
+                    "dev-develop": "3.3.x-dev"
                 },
                 "zf": {
                     "config-provider": "Zend\\Expressive\\ConfigProvider"
@@ -1783,7 +1883,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-07-25T15:30:00+00:00"
+            "time": "2018-11-08T15:30:09+00:00"
         },
         {
             "name": "zendframework/zend-expressive-fastroute",
@@ -2100,16 +2200,16 @@
         },
         {
             "name": "zendframework/zend-expressive-session",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-session.git",
-                "reference": "632fba38f01e884bb788ac3baf529d41458d75a4"
+                "reference": "de67a644d34848451e137919b7018161f7dced13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-session/zipball/632fba38f01e884bb788ac3baf529d41458d75a4",
-                "reference": "632fba38f01e884bb788ac3baf529d41458d75a4",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-session/zipball/de67a644d34848451e137919b7018161f7dced13",
+                "reference": "de67a644d34848451e137919b7018161f7dced13",
                 "shasum": ""
             },
             "require": {
@@ -2132,8 +2232,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-develop": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev",
+                    "dev-develop": "1.3.x-dev"
                 },
                 "zf": {
                     "config-provider": "Zend\\Expressive\\Session\\ConfigProvider"
@@ -2158,7 +2258,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-03-15T14:36:37+00:00"
+            "time": "2018-10-30T21:08:51+00:00"
         },
         {
             "name": "zendframework/zend-expressive-session-ext",
