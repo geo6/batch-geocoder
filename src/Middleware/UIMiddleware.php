@@ -26,8 +26,6 @@ class UIMiddleware implements MiddlewareInterface
     {
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 
-        $this->template->addDefaultParam('partial::modal-info', 'version', $config['version']);
-
         $this->template->addDefaultParam('partial::header', 'params', $request->getQueryParams());
 
         if (isset($config['providers']['automatic'], $config['providers']['manual'])) {
