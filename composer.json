@@ -45,7 +45,6 @@
     "scripts": {
         "post-create-project-cmd": [
             "@development-enable",
-            "@init:directory",
             "@init:sql",
             "@gettext:mo"
         ],
@@ -68,23 +67,6 @@
         "gettext:mo:nl": "msgfmt -c -o data/locale/nl/messages.mo data/locale/nl/messages.po",
         "gettext:po:fr": "mkdir -p data/locale/fr && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/fr",
         "gettext:po:nl": "mkdir -p data/locale/nl && find templates/ -iname \"*.phtml\" | xargs xgettext --from-code=utf-8 --no-location --sort-by-file --join-existing --keyword=translate --keyword=translatePlural:1,2 --language=PHP --output-dir=data/locale/nl",
-        "git:pull": [
-            "git checkout master",
-            "git fetch --all",
-            "git reset --hard origin/master",
-            "git pull origin master"
-        ],
-        "git:pull:develop": [
-            "git checkout develop",
-            "git fetch --all",
-            "git reset --hard origin/develop",
-            "git pull origin develop"
-        ],
-        "init:directory": [
-            "mkdir -p data/cache",
-            "mkdir -p data/upload",
-            "chmod -R 0777 data/*"
-        ],
         "init:sql": [
             "sudo -u postgres createuser --pwprompt geocode",
             "sudo -u postgres psql -f scripts/create-database.sql",
