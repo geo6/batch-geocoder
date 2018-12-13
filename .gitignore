@@ -6,20 +6,11 @@ vendor/
 node_modules/
 
 # Local configs
+config/application/
 config/autoload/*.local.php
 config/development.config.php
 
-# Binary gettext files
-*.mo
-
-# Data
-data/logs/
-data/cache/
-data/sessions/
-data/tmp/
-temp/
-
 # Misc.
-config/application/
+.vscode/
 
 install-providers.sh

@@ -1,0 +1,12 @@
+*
+!cache
+!cache/.gitkeep
+!locale
+!locale/fr
+!locale/fr/*.po
+!locale
+!locale/nl
+!locale/nl/*.po
+!upload
+!upload/.gitkeep
+!.gitignore
