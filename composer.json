@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.2",
         "geo6/php-text-tools": "1.0.0",
-        "geocoder-php/common-http": "4.1.0",
+        "geocoder-php/common-http": "4.2.0",
         "php-http/guzzle6-adapter": "1.1.1",
         "php-http/message": "1.6.0",
         "phpoffice/phpspreadsheet": "1.5.2",
