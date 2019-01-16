@@ -24,7 +24,7 @@
         "zendframework/zend-expressive-session-ext": "1.3.0",
         "zendframework/zend-filter": "2.9.1",
         "zendframework/zend-i18n": "2.9.0",
-        "zendframework/zend-servicemanager": "3.3.2",
+        "zendframework/zend-servicemanager": "3.4.0",
         "zendframework/zend-validator": "2.11.0"
     },
     "require-dev": {
