@@ -9,7 +9,7 @@
     "sass-loader": "^7.1",
     "style-loader": "^0.23",
     "webpack": "^4.28.3",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.2"
   },
   "scripts": {
     "build": "npm run build:css & npm run build:js",
