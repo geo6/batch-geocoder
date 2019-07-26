@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bb50f12f2756508ba6cabb19538a7ec",
+    "content-hash": "417b1cd6bbdf6f50f0f9a9ed7d5e8956",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2067,16 +2067,16 @@
         },
         {
             "name": "zendframework/zend-expressive-flash",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-flash.git",
-                "reference": "5c64af69a7669e097e4f859430513a19303661bb"
+                "reference": "53232df92d6f86c59fb0c4f4e585890885e5b8fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-flash/zipball/5c64af69a7669e097e4f859430513a19303661bb",
-                "reference": "5c64af69a7669e097e4f859430513a19303661bb",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-flash/zipball/53232df92d6f86c59fb0c4f4e585890885e5b8fc",
+                "reference": "53232df92d6f86c59fb0c4f4e585890885e5b8fc",
                 "shasum": ""
             },
             "require": {
@@ -2122,7 +2122,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-03-15T14:52:49+00:00"
+            "time": "2019-06-24T22:24:18+00:00"
         },
         {
             "name": "zendframework/zend-expressive-helpers",
