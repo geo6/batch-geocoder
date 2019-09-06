@@ -12,5 +12,6 @@ config/development.config.php
 
 # Misc.
 .vscode/
+hosts.yml
 
 install-providers.sh
