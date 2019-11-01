@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ol": "5.3.3"
+    "ol": "6.1.0"
   },
   "devDependencies": {
     "css-loader": "^3.2.0",
