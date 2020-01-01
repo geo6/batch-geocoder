@@ -153,10 +153,10 @@ class ViewHandler implements RequestHandlerInterface
         $addressInvalid = [];
         foreach ($resultsInvalid as $r) {
             $address = Address::createFromArray([
-              'streetNumber' => $r->housenumber,
-              'streetName'   => $r->streetname,
-              'postalCode'   => $r->postalcode,
-              'locality'     => $r->locality,
+                'streetNumber' => $r->housenumber,
+                'streetName'   => $r->streetname,
+                'postalCode'   => $r->postalcode,
+                'locality'     => $r->locality,
             ]);
 
             $addressInvalid[] = $formatter->format($address, '%S %n, %z %L');
