@@ -87,6 +87,7 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
+            "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
@@ -1692,6 +1693,7 @@
                 "plugin",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-component-installer",
             "time": "2018-03-21T16:53:56+00:00"
         },
         {
@@ -1752,6 +1754,7 @@
                 "config",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-config",
             "time": "2019-06-08T18:58:54+00:00"
         },
         {
@@ -1807,6 +1810,7 @@
                 "config-aggregator",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-config-aggregator",
             "time": "2018-04-04T20:37:31+00:00"
         },
         {
@@ -1865,6 +1869,7 @@
                 "db",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-db",
             "time": "2019-02-25T11:37:45+00:00"
         },
         {
@@ -1931,6 +1936,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-07-10T16:13:25+00:00"
         },
         {
@@ -1976,6 +1982,7 @@
                 "escaper",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-escaper",
             "time": "2019-09-05T20:03:20+00:00"
         },
         {
@@ -2068,6 +2075,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio",
             "time": "2018-11-08T15:30:09+00:00"
         },
         {
@@ -2135,6 +2143,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-fastroute",
             "time": "2019-06-20T13:58:31+00:00"
         },
         {
@@ -2194,6 +2203,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-flash",
             "time": "2019-06-24T22:24:18+00:00"
         },
         {
@@ -2254,6 +2264,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-helpers",
             "time": "2019-03-12T20:43:27+00:00"
         },
         {
@@ -2381,6 +2392,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-router",
             "time": "2018-06-05T15:28:00+00:00"
         },
         {
@@ -2443,6 +2455,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-session",
             "time": "2019-03-05T20:57:32+00:00"
         },
         {
@@ -2502,6 +2515,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-session-ext",
             "time": "2019-02-28T18:47:31+00:00"
         },
         {
@@ -2555,6 +2569,7 @@
                 "zend-expressive",
                 "zf"
             ],
+            "abandoned": "mezzio/mezzio-template",
             "time": "2019-06-20T14:05:59+00:00"
         },
         {
@@ -2620,6 +2635,7 @@
                 "filter",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-filter",
             "time": "2019-08-19T07:08:04+00:00"
         },
         {
@@ -2674,6 +2690,7 @@
                 "psr-7",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-httphandlerrunner",
             "time": "2018-02-21T20:33:02+00:00"
         },
         {
@@ -2742,6 +2759,7 @@
                 "i18n",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-i18n",
             "time": "2018-05-16T16:39:13+00:00"
         },
         {
@@ -2810,6 +2828,7 @@
                 "servicemanager",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-servicemanager",
             "time": "2018-12-22T06:05:09+00:00"
         },
         {
@@ -2856,6 +2875,7 @@
                 "stdlib",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-stdlib",
             "time": "2018-08-28T21:34:05+00:00"
         },
         {
@@ -2922,6 +2942,7 @@
                 "psr-7",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-stratigility",
             "time": "2018-07-24T20:39:18+00:00"
         },
         {
@@ -2995,6 +3016,7 @@
                 "validator",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-validator",
             "time": "2019-01-30T14:26:10+00:00"
         }
     ],
@@ -3044,8 +3066,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -3109,16 +3131,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.4.2",
+            "version": "3.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8"
+                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
-                "reference": "b8a7362af1cc1aadb5bd36c3defc4dda2cf5f0a8",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
+                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
                 "shasum": ""
             },
             "require": {
@@ -3156,7 +3178,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-04-10T23:49:02+00:00"
+            "time": "2019-12-04T04:46:47+00:00"
         },
         {
             "name": "zfcampus/zf-development-mode",
@@ -3205,6 +3227,7 @@
                 "framework",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-development-mode",
             "time": "2018-05-07T15:44:42+00:00"
         }
     ],
