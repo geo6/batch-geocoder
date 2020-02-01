@@ -14,7 +14,7 @@ class LocalizationMiddleware implements MiddlewareInterface
 {
     public const LOCALIZATION_ATTRIBUTE = 'locale';
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $cookies = $request->getCookieParams();
         $query = $request->getQueryParams();

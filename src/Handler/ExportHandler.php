@@ -23,7 +23,7 @@ use Zend\Expressive\Session\SessionMiddleware;
 
 class ExportHandler implements RequestHandlerInterface
 {
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -78,7 +78,7 @@ class ExportHandler implements RequestHandlerInterface
         }
     }
 
-    private static function str_putcsv(array $input, string $delimiter = ',', string $enclosure = '"') : string
+    private static function str_putcsv(array $input, string $delimiter = ',', string $enclosure = '"'): string
     {
         $fp = fopen('php://memory', 'r+b');
         fputcsv($fp, $input, $delimiter, $enclosure);
@@ -89,7 +89,7 @@ class ExportHandler implements RequestHandlerInterface
         return rtrim($data, "\n");
     }
 
-    private static function exportCSV(ResultSet $results) : TextResponse
+    private static function exportCSV(ResultSet $results): TextResponse
     {
         $text = self::str_putcsv([
             'id',
@@ -123,7 +123,7 @@ class ExportHandler implements RequestHandlerInterface
             withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.csv');
     }
 
-    private static function exportGeoJSON(ResultSet $results) : JsonResponse
+    private static function exportGeoJSON(ResultSet $results): JsonResponse
     {
         $geojson = [
             'type'     => 'FeatureCollection',
@@ -167,7 +167,7 @@ class ExportHandler implements RequestHandlerInterface
             withHeader('Content-Disposition', 'attachment; filename=batch-geocoder.json');
     }
 
-    private static function exportXLSX(ResultSet $results) : Response
+    private static function exportXLSX(ResultSet $results): Response
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
