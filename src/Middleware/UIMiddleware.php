@@ -22,7 +22,7 @@ class UIMiddleware implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 

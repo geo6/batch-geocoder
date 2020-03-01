@@ -33,7 +33,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
     protected $sql;
     protected $validation = true;
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -151,7 +151,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         }
     }
 
-    public function getAddresses() : array
+    public function getAddresses(): array
     {
         $adapter = $this->sql->getAdapter();
 
@@ -177,7 +177,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         return $result->toArray();
     }
 
-    public function buildAddress() : Address
+    public function buildAddress(): Address
     {
         $address = $this->addresses[$this->pointer];
         $validation = !is_null($address['validation']) ? json_decode($address['validation'], true) : null;
@@ -191,7 +191,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         return $builder->build();
     }
 
-    public function geocode(AbstractHttpProvider $provider, int &$rawCount) : array
+    public function geocode(AbstractHttpProvider $provider, int &$rawCount): array
     {
         $address = $this->buildAddress();
 
@@ -221,7 +221,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         return $validResults;
     }
 
-    public function geocodeStreet(AbstractHttpProvider $provider) : array
+    public function geocodeStreet(AbstractHttpProvider $provider): array
     {
         $address = $this->buildAddress();
 
@@ -252,7 +252,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         return $validResults;
     }
 
-    public function storeSingleResult(AbstractHttpProvider $provider, int $providerPointer, Address $result) : void
+    public function storeSingleResult(AbstractHttpProvider $provider, int $providerPointer, Address $result): void
     {
         $id = $this->addresses[$this->pointer]['id'];
         $address = $this->buildAddress();
@@ -314,7 +314,7 @@ class FirstHandler implements Handler, RequestHandlerInterface
         );
     }
 
-    public function storeMultipleResult(AbstractHttpProvider $provider) : void
+    public function storeMultipleResult(AbstractHttpProvider $provider): void
     {
         $id = $this->addresses[$this->pointer]['id'];
 

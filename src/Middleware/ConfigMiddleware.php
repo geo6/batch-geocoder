@@ -15,7 +15,7 @@ class ConfigMiddleware implements MiddlewareInterface
 {
     public const CONFIG_ATTRIBUTE = 'config';
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $config = new ConfigAggregator([
             new ZendConfigProvider('./composer.json'),

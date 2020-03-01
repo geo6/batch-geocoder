@@ -14,7 +14,7 @@ class ConfigProvider
     /**
      * Returns the configuration array.
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -28,7 +28,7 @@ class ConfigProvider
     /**
      * Returns the container dependencies.
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [
@@ -55,7 +55,7 @@ class ConfigProvider
     /**
      * Returns the templates configuration.
      */
-    public function getTemplates() : array
+    public function getTemplates(): array
     {
         return [
             'paths' => [
@@ -70,7 +70,7 @@ class ConfigProvider
     /**
      * Returns the Plates extentsions configuration.
      */
-    public function getPlatesExentions() : array
+    public function getPlatesExentions(): array
     {
         return [
             Extension\TranslateExtension::class,
