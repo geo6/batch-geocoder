@@ -30,7 +30,7 @@ class ViewHandler implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $adapter = $request->getAttribute(DbAdapterMiddleware::DBADAPTER_ATTRIBUTE);
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
@@ -153,10 +153,10 @@ class ViewHandler implements RequestHandlerInterface
         $addressInvalid = [];
         foreach ($resultsInvalid as $r) {
             $address = Address::createFromArray([
-              'streetNumber' => $r->housenumber,
-              'streetName'   => $r->streetname,
-              'postalCode'   => $r->postalcode,
-              'locality'     => $r->locality,
+                'streetNumber' => $r->housenumber,
+                'streetName'   => $r->streetname,
+                'postalCode'   => $r->postalcode,
+                'locality'     => $r->locality,
             ]);
 
             $addressInvalid[] = $formatter->format($address, '%S %n, %z %L');

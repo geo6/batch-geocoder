@@ -13,7 +13,7 @@ use Zend\Db\Sql\Expression;
 
 class SecondHandler extends FirstHandler
 {
-    public function getAddresses() : array
+    public function getAddresses(): array
     {
         $adapter = $this->sql->getAdapter();
 
@@ -56,7 +56,7 @@ class SecondHandler extends FirstHandler
         return $result->toArray();
     }
 
-    public function storeSingleResult(AbstractHttpProvider $provider, int $providerPointer, Address $result) : void
+    public function storeSingleResult(AbstractHttpProvider $provider, int $providerPointer, Address $result): void
     {
         $id = $this->addresses[$this->pointer]['id'];
         $address = $this->buildAddress($provider);
@@ -113,7 +113,7 @@ class SecondHandler extends FirstHandler
         );
     }
 
-    public function storeMultipleResult(AbstractHttpProvider $provider) : void
+    public function storeMultipleResult(AbstractHttpProvider $provider): void
     {
         $id = $this->addresses[$this->pointer]['id'];
 
