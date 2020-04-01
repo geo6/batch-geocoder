@@ -15,7 +15,7 @@ class DbAdapterMiddleware implements MiddlewareInterface
 {
     public const DBADAPTER_ATTRIBUTE = 'adapter';
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $config = $request->getAttribute(ConfigMiddleware::CONFIG_ATTRIBUTE);
 

@@ -15,7 +15,7 @@ class CheckSessionMiddleware implements MiddlewareInterface
 {
     private $session;
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $this->session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
 

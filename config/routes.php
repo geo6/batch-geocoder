@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\MiddlewareFactory;
 
-return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/app/batch-geocoder/', App\Handler\HomeHandler::class, 'home');
     $app->post('/app/batch-geocoder/upload', App\Handler\UploadHandler::class, 'upload');
     $app->route('/app/batch-geocoder/validate', App\Handler\ValidateHandler::class, ['GET', 'POST'], 'validate');

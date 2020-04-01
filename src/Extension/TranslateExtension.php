@@ -23,12 +23,12 @@ class TranslateExtension implements ExtensionInterface
         $engine->registerFunction('translatePlural', [$this, 'generateTranslatePlural']);
     }
 
-    public function generateTranslate(string $message) : string
+    public function generateTranslate(string $message): string
     {
         return $this->translator->translate($message);
     }
 
-    public function generateTranslatePlural(string $singular, string $plural, int $number) : string
+    public function generateTranslatePlural(string $singular, string $plural, int $number): string
     {
         return $this->translator->translatePlural($singular, $plural, $number);
     }
