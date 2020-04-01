@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13b4c5da99ce18d1e6595e8ebdec7573",
+    "content-hash": "8fad70d9c810a81b85802fd15fdc0f95",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2258,16 +2258,16 @@
         },
         {
             "name": "zendframework/zend-expressive-platesrenderer",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-platesrenderer.git",
-                "reference": "3af784f358f9e99c51ae06df6e2d3f282a40b916"
+                "reference": "9744a68b3b3fddc860880ce3b81e7f65420238e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-platesrenderer/zipball/3af784f358f9e99c51ae06df6e2d3f282a40b916",
-                "reference": "3af784f358f9e99c51ae06df6e2d3f282a40b916",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-platesrenderer/zipball/9744a68b3b3fddc860880ce3b81e7f65420238e1",
+                "reference": "9744a68b3b3fddc860880ce3b81e7f65420238e1",
                 "shasum": ""
             },
             "require": {
@@ -2318,20 +2318,20 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2019-03-12T18:42:48+00:00"
+            "time": "2019-10-08T17:07:44+00:00"
         },
         {
             "name": "zendframework/zend-expressive-router",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-expressive-router.git",
-                "reference": "072d6b0620f7e1e616cb60062425b4eedd1a0447"
+                "reference": "e76e6abd277c73268d27d92f7b385991e86488b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-expressive-router/zipball/072d6b0620f7e1e616cb60062425b4eedd1a0447",
-                "reference": "072d6b0620f7e1e616cb60062425b4eedd1a0447",
+                "url": "https://api.github.com/repos/zendframework/zend-expressive-router/zipball/e76e6abd277c73268d27d92f7b385991e86488b9",
+                "reference": "e76e6abd277c73268d27d92f7b385991e86488b9",
                 "shasum": ""
             },
             "require": {
@@ -2343,7 +2343,7 @@
             },
             "require-dev": {
                 "malukenho/docheader": "^0.1.6",
-                "phpunit/phpunit": "^7.0.2",
+                "phpunit/phpunit": "^7.5.16 || ^8.4.1",
                 "zendframework/zend-coding-standard": "~1.0.0"
             },
             "suggest": {
@@ -2381,7 +2381,7 @@
                 "zend-expressive",
                 "zf"
             ],
-            "time": "2018-06-05T15:28:00+00:00"
+            "time": "2019-10-16T20:06:55+00:00"
         },
         {
             "name": "zendframework/zend-expressive-session",
@@ -3044,8 +3044,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
