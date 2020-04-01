@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "css-loader": "^3.4.2",
-    "eslint": "^6.3.0",
+    "eslint": "^6.8.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0",
     "style-loader": "^1.1",
