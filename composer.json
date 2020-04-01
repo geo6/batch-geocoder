@@ -10,7 +10,7 @@
         "php-http/guzzle6-adapter": "2.0.1",
         "php-http/message": "1.8.0",
         "phpoffice/phpspreadsheet": "1.9.0",
-        "zendframework/zend-component-installer": "2.1.1",
+        "zendframework/zend-component-installer": "2.1.2",
         "zendframework/zend-config": "3.3.0",
         "zendframework/zend-config-aggregator": "1.1.1",
         "zendframework/zend-db": "2.10.0",
