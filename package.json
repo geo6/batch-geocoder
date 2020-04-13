@@ -3,7 +3,7 @@
     "ol": "5.3.3"
   },
   "devDependencies": {
-    "css-loader": "^3.4.2",
+    "css-loader": "^3.5.2",
     "eslint": "^6.8.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0",
