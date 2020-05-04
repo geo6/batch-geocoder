@@ -9,7 +9,7 @@
         "geocoder-php/common-http": "4.2.0",
         "php-http/guzzle6-adapter": "2.0.1",
         "php-http/message": "1.8.0",
-        "phpoffice/phpspreadsheet": "1.11.0",
+        "phpoffice/phpspreadsheet": "1.12.0",
         "zendframework/zend-component-installer": "2.1.2",
         "zendframework/zend-config": "3.3.0",
         "zendframework/zend-config-aggregator": "1.2.0",
