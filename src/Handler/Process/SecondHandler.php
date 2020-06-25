@@ -9,7 +9,7 @@ use Geocoder\Formatter\StringFormatter;
 use Geocoder\Http\Provider\AbstractHttpProvider;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressBuilder;
-use Zend\Db\Sql\Expression;
+use Laminas\Db\Sql\Expression;
 
 class SecondHandler extends FirstHandler
 {

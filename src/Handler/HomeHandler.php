@@ -9,11 +9,11 @@ use App\Middleware\DbAdapterMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Metadata\Metadata;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Flash\FlashMessageMiddleware;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Laminas\Db\Metadata\Metadata;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Mezzio\Flash\FlashMessageMiddleware;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 
 class HomeHandler implements RequestHandlerInterface
 {

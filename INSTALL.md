@@ -14,7 +14,7 @@ The install process will create a new PostgreSQL user (`geocode`) and a new Post
 
 ## Configuration
 
-The configuration files have to be in `config/application` directory. You can use `php`, `ini`, `xml`, `json`, or `yaml` file according to [`zend-config`](https://docs.zendframework.com/zend-config/reader/).
+The configuration files have to be in `config/application` directory. You can use `php`, `ini`, `xml`, `json`, or `yaml` file according to [`laminas-config`](https://docs.zendframework.com/laminas-config/reader/).
 
 I use `yaml` files, but you can do exactly the same with the other formats depending on you preferences.  
 If you want to use YAML, do not forget to install [YAML PECL extension](http://php.net/manual/en/book.yaml.php).

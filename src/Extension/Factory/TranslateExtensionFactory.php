@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Extension\Factory;
 
 use Psr\Container\ContainerInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class TranslateExtensionFactory
 {

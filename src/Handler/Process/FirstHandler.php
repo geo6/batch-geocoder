@@ -16,10 +16,10 @@ use Geocoder\StatefulGeocoder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Session\SessionMiddleware;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
+use Laminas\Diactoros\Response\JsonResponse;
+use Mezzio\Session\SessionMiddleware;
 
 class FirstHandler implements Handler, RequestHandlerInterface
 {

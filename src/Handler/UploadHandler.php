@@ -11,20 +11,20 @@ use ErrorException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Metadata\Metadata;
-use Zend\Db\Sql\Ddl;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Diactoros\UploadedFile;
-use Zend\Expressive\Flash\FlashMessageMiddleware;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\I18n\Filter\Alnum;
-use Zend\Validator\File\Extension;
-use Zend\Validator\File\MimeType;
-use Zend\Validator\ValidatorChain;
+use Laminas\Db\Metadata\Metadata;
+use Laminas\Db\Sql\Ddl;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\UploadedFile;
+use Mezzio\Flash\FlashMessageMiddleware;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Session\SessionMiddleware;
+use Mezzio\Template\TemplateRendererInterface;
+use Laminas\I18n\Filter\Alnum;
+use Laminas\Validator\File\Extension;
+use Laminas\Validator\File\MimeType;
+use Laminas\Validator\ValidatorChain;
 
 class UploadHandler implements RequestHandlerInterface
 {

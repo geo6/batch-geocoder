@@ -6,11 +6,11 @@ namespace App\Tools;
 
 use Geo6\Text\Text;
 use Geocoder\Model\Address as AddressModel;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\Sql;
-use Zend\Filter\FilterChain;
-use Zend\Filter\StringToUpper;
-use Zend\I18n\Filter\Alnum;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Sql\Sql;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\StringToUpper;
+use Laminas\I18n\Filter\Alnum;
 
 final class AddressCheck
 {

@@ -14,13 +14,13 @@ use Geocoder\StatefulGeocoder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Session\SessionMiddleware;
+use Mezzio\Template\TemplateRendererInterface;
 
 class GeocodeChooseHandler implements RequestHandlerInterface
 {

@@ -6,12 +6,12 @@ chdir(dirname(__DIR__));
 
 require 'vendor/autoload.php';
 
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\ZendConfigProvider;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Metadata\Metadata;
-use Zend\Db\Sql\Ddl\DropTable;
-use Zend\Db\Sql\Sql;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\LaminasConfigProvider;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Metadata\Metadata;
+use Laminas\Db\Sql\Ddl\DropTable;
+use Laminas\Db\Sql\Sql;
 
 /**
  * Delete remaining uploaded files.
@@ -49,7 +49,7 @@ if ($directory !== false && file_exists($directory) && is_dir($directory)) {
  * Delete PostgreSQL tables.
  */
 $config = (new ConfigAggregator([
-    new ZendConfigProvider('config/application/*.{php,ini,xml,json,yaml}'),
+    new LaminasConfigProvider('config/application/*.{php,ini,xml,json,yaml}'),
 ]))->getMergedConfig();
 
 $adapter = new Adapter(array_merge(['driver' => 'Pdo_Pgsql'], $config['postgresql']));

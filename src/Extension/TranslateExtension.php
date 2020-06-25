@@ -6,7 +6,7 @@ namespace App\Extension;
 
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
 
 class TranslateExtension implements ExtensionInterface
 {

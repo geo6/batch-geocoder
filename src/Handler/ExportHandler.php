@@ -11,15 +11,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Response\EmptyResponse;
-use Zend\Diactoros\Response\JsonResponse;
-use Zend\Diactoros\Response\TextResponse;
-use Zend\Diactoros\Stream;
-use Zend\Expressive\Session\SessionMiddleware;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Sql;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Response\EmptyResponse;
+use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response\TextResponse;
+use Laminas\Diactoros\Stream;
+use Mezzio\Session\SessionMiddleware;
 
 class ExportHandler implements RequestHandlerInterface
 {

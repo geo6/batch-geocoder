@@ -10,15 +10,15 @@ use Geo6\Text\Text;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Sql;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Flash\FlashMessageMiddleware;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Session\SessionMiddleware;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Sql;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Flash\FlashMessageMiddleware;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Session\SessionMiddleware;
+use Mezzio\Template\TemplateRendererInterface;
 
 /**
  * @see http://www.bpost.be/site/fr/envoyer/adressage/rechercher-un-code-postal/

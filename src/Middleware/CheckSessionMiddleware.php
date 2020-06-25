@@ -8,8 +8,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Session\SessionMiddleware;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Session\SessionMiddleware;
 
 class CheckSessionMiddleware implements MiddlewareInterface
 {
