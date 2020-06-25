@@ -7,9 +7,6 @@ namespace App\Handler;
 use App\Middleware\ConfigMiddleware;
 use App\Middleware\DbAdapterMiddleware;
 use Geo6\Text\Text;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
@@ -19,6 +16,9 @@ use Mezzio\Flash\FlashMessageMiddleware;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Session\SessionMiddleware;
 use Mezzio\Template\TemplateRendererInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * @see http://www.bpost.be/site/fr/envoyer/adressage/rechercher-un-code-postal/

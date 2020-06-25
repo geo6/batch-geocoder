@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Extension\Factory;
 
-use Psr\Container\ContainerInterface;
 use Laminas\I18n\Translator\Translator;
+use Psr\Container\ContainerInterface;
 
 class TranslateExtensionFactory
 {

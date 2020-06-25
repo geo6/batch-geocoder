@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Extension;
 
+use Laminas\I18n\Translator\Translator;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
-use Laminas\I18n\Translator\Translator;
 
 class TranslateExtension implements ExtensionInterface
 {
