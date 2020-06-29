@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d95918c9af164a4e48170c9c6a6325e",
+    "content-hash": "6c8297dce860e408d16fb0ada6c1d3c1",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -664,16 +664,16 @@
         },
         {
             "name": "laminas/laminas-db",
-            "version": "2.11.0",
+            "version": "2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-db.git",
-                "reference": "26422b5469ed894b916ea6b8377a7332206178cc"
+                "reference": "6c4238918b9204db1eb8cafae2c1940d40f4c007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/26422b5469ed894b916ea6b8377a7332206178cc",
-                "reference": "26422b5469ed894b916ea6b8377a7332206178cc",
+                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/6c4238918b9204db1eb8cafae2c1940d40f4c007",
+                "reference": "6c4238918b9204db1eb8cafae2c1940d40f4c007",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
                 "php": "^5.6 || ^7.0"
             },
             "replace": {
-                "zendframework/zend-db": "self.version"
+                "zendframework/zend-db": "^2.11.0"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
@@ -722,7 +722,7 @@
                 "db",
                 "laminas"
             ],
-            "time": "2019-12-31T19:56:10+00:00"
+            "time": "2020-03-29T12:08:51+00:00"
         },
         {
             "name": "laminas/laminas-dependency-plugin",
