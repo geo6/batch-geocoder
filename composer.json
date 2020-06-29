@@ -13,7 +13,7 @@
         "laminas/laminas-db": "2.11.3",
         "laminas/laminas-dependency-plugin": "^1.0",
         "laminas/laminas-diactoros": "2.2.1",
-        "laminas/laminas-filter": "2.9.2",
+        "laminas/laminas-filter": "2.9.4",
         "laminas/laminas-i18n": "2.10.1",
         "laminas/laminas-servicemanager": "3.4.0",
         "laminas/laminas-validator": "2.13.4",
