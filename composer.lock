@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a21a39ddccfa6aa913e4c692ec2c6f6",
+    "content-hash": "5d95918c9af164a4e48170c9c6a6325e",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -2238,16 +2238,16 @@
         },
         {
             "name": "mezzio/mezzio-session-ext",
-            "version": "1.7.0",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-session-ext.git",
-                "reference": "b28cd7dbb95c94b3c5056fa2c8e80cab2cc30166"
+                "reference": "447360ce5b260f834588686e4d879fb3a9bf5860"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/b28cd7dbb95c94b3c5056fa2c8e80cab2cc30166",
-                "reference": "b28cd7dbb95c94b3c5056fa2c8e80cab2cc30166",
+                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/447360ce5b260f834588686e4d879fb3a9bf5860",
+                "reference": "447360ce5b260f834588686e4d879fb3a9bf5860",
                 "shasum": ""
             },
             "require": {
@@ -2261,12 +2261,12 @@
                 "phpspec/prophecy": "<1.7.2"
             },
             "replace": {
-                "zendframework/zend-expressive-session-ext": "self.version"
+                "zendframework/zend-expressive-session-ext": "^1.7.0"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "laminas/laminas-diactoros": "^1.6",
-                "phpunit/phpunit": "^7.0.2"
+                "phpunit/phpunit": "^7.5.20 || ^8.5.2 || ^9.0.1"
             },
             "type": "library",
             "extra": {
@@ -2297,7 +2297,7 @@
                 "psr-7",
                 "session"
             ],
-            "time": "2019-12-31T15:46:24+00:00"
+            "time": "2020-03-28T22:18:16+00:00"
         },
         {
             "name": "mezzio/mezzio-template",
