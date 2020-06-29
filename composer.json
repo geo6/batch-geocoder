@@ -9,7 +9,7 @@
         "geocoder-php/common-http": "4.2.0",
         "laminas/laminas-component-installer": "2.1.2",
         "laminas/laminas-config": "3.3.0",
-        "laminas/laminas-config-aggregator": "1.2.0",
+        "laminas/laminas-config-aggregator": "1.2.2",
         "laminas/laminas-db": "2.11.0",
         "laminas/laminas-dependency-plugin": "^1.0",
         "laminas/laminas-diactoros": "2.2.1",
