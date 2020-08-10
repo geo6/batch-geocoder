@@ -3820,16 +3820,16 @@
         },
         {
             "name": "laminas/laminas-development-mode",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-development-mode.git",
-                "reference": "203cf2f61dbea1489cb6e0c42ffdc987ebe4f796"
+                "reference": "dccbfc5a1503eb3f3805869525258ca6e6f6a0ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-development-mode/zipball/203cf2f61dbea1489cb6e0c42ffdc987ebe4f796",
-                "reference": "203cf2f61dbea1489cb6e0c42ffdc987ebe4f796",
+                "url": "https://api.github.com/repos/laminas/laminas-development-mode/zipball/dccbfc5a1503eb3f3805869525258ca6e6f6a0ce",
+                "reference": "dccbfc5a1503eb3f3805869525258ca6e6f6a0ce",
                 "shasum": ""
             },
             "require": {
@@ -3837,7 +3837,7 @@
                 "php": "^5.6 || ^7.0"
             },
             "replace": {
-                "zfcampus/zf-development-mode": "self.version"
+                "zfcampus/zf-development-mode": "^3.2.0"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
@@ -3848,12 +3848,6 @@
                 "bin/laminas-development-mode"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\DevelopmentMode\\": "src/"
@@ -3869,7 +3863,13 @@
                 "framework",
                 "laminas"
             ],
-            "time": "2019-12-31T16:40:06+00:00"
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-08-03T14:07:04+00:00"
         },
         {
             "name": "psr/log",
