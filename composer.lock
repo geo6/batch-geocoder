@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "593bbfd02a86a8f7f855c64908fc7692",
+    "content-hash": "52c753d60142476820452d2d318d0402",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -533,16 +533,16 @@
         },
         {
             "name": "laminas/laminas-component-installer",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-component-installer.git",
-                "reference": "92735977fb7ad9050712e8ff804edff50d01406e"
+                "reference": "00c4847e8bc19a3cebe15e0d57b979dc7ddb8c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/92735977fb7ad9050712e8ff804edff50d01406e",
-                "reference": "92735977fb7ad9050712e8ff804edff50d01406e",
+                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/00c4847e8bc19a3cebe15e0d57b979dc7ddb8c12",
+                "reference": "00c4847e8bc19a3cebe15e0d57b979dc7ddb8c12",
                 "shasum": ""
             },
             "require": {
@@ -587,7 +587,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-09-02T15:15:31+00:00"
+            "time": "2020-10-24T18:12:41+00:00"
         },
         {
             "name": "laminas/laminas-config",
@@ -1465,16 +1465,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "4939c81f63a8a4968c108c440275c94955753b19"
+                "reference": "6ede70583e101030bcace4dcddd648f760ddf642"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/4939c81f63a8a4968c108c440275c94955753b19",
-                "reference": "4939c81f63a8a4968c108c440275c94955753b19",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6ede70583e101030bcace4dcddd648f760ddf642",
+                "reference": "6ede70583e101030bcace4dcddd648f760ddf642",
                 "shasum": ""
             },
             "require": {
@@ -1486,10 +1486,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-develop": "1.1.x-dev"
-                },
                 "laminas": {
                     "module": "Laminas\\ZendFrameworkBridge"
                 }
@@ -1519,7 +1515,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-08-18T16:34:51+00:00"
+            "time": "2020-09-14T14:23:00+00:00"
         },
         {
             "name": "league/plates",
