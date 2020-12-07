@@ -15,7 +15,7 @@
         "laminas/laminas-diactoros": "2.4.1",
         "laminas/laminas-filter": "2.9.4",
         "laminas/laminas-i18n": "2.10.3",
-        "laminas/laminas-servicemanager": "3.4.1",
+        "laminas/laminas-servicemanager": "3.5.1",
         "laminas/laminas-validator": "2.13.4",
         "mezzio/mezzio": "3.2.2",
         "mezzio/mezzio-fastroute": "3.0.3",

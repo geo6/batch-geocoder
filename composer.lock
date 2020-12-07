@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de61144eaefb191fa71a103771f83ca0",
+    "content-hash": "7700594c7ef224204d8f705d5c76f06d",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1184,7 +1184,7 @@
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.4.1",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
