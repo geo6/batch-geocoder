@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d573964c10896a03618300d484ea8d92",
+    "content-hash": "d909c480fd4742f392f47a690fcf3608",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -2986,7 +2986,7 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.16.0",
+            "version": "1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
