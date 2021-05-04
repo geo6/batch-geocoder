@@ -4,7 +4,7 @@
     "description": "Allows you to geocode your dataset of addresses (CSV format)",
     "license": "GPL-3.0-or-later",
     "require": {
-        "php": "^7.2",
+        "php": "^7.2 || ^8.0",
         "geo6/php-text-tools": "^1.0",
         "geocoder-php/common-http": "^4.3",
         "laminas/laminas-component-installer": "^2.3",
