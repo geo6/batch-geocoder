@@ -1,10 +1,12 @@
 {
+  "name": "@geo6/batch-geocoder",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "ol": "5.3.3"
   },
   "devDependencies": {
-    "css-loader": "^5.0.1",
-    "eslint": "^7.19.0",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.25.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.1",
     "style-loader": "^2.0",
@@ -15,8 +17,7 @@
     "build": "npm run build:css & npm run build:js",
     "build:css": "node-sass --output-style compressed --output public/css resources/sass/style.scss",
     "build:js": "webpack --config webpack.config.js",
-    "test": "eslint resources/javascript/",
-    "fix": "eslint resources/javascript/ --fix",
+    "lint": "eslint resources/javascript/",
     "watch": "npm run watch:css",
     "watch:css": "node-sass --watch --output-style compressed --output public/css resources/sass/style.scss"
   }
