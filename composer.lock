@@ -4,29 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcf4b216da847bb8fe672bd823857996",
+    "content-hash": "87c99130decbe806198959d11c842e2c",
     "packages": [
         {
             "name": "brick/varexporter",
-            "version": "0.3.2",
+            "version": "0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/varexporter.git",
-                "reference": "411110b797c6b1ecf947a0eec17ffaa59284f5a0"
+                "reference": "05241f28dfcba2b51b11e2d750e296316ebbe518"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/varexporter/zipball/411110b797c6b1ecf947a0eec17ffaa59284f5a0",
-                "reference": "411110b797c6b1ecf947a0eec17ffaa59284f5a0",
+                "url": "https://api.github.com/repos/brick/varexporter/zipball/05241f28dfcba2b51b11e2d750e296316ebbe518",
+                "reference": "05241f28dfcba2b51b11e2d750e296316ebbe518",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.0",
-                "php": ">=7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^7.0"
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^8.5 || ^9.0",
+                "vimeo/psalm": "4.4.1"
             },
             "type": "library",
             "autoload": {
@@ -42,7 +43,11 @@
             "keywords": [
                 "var_export"
             ],
-            "time": "2020-03-13T16:56:53+00:00"
+            "support": {
+                "issues": "https://github.com/brick/varexporter/issues",
+                "source": "https://github.com/brick/varexporter/tree/0.3.5"
+            },
+            "time": "2021-02-10T13:53:07+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -94,6 +99,10 @@
                 "stream_filter_append",
                 "stream_filter_register"
             ],
+            "support": {
+                "issues": "https://github.com/clue/stream-filter/issues",
+                "source": "https://github.com/clue/stream-filter/tree/v1.5.0"
+            },
             "funding": [
                 {
                     "url": "https://clue.engineering/support",
@@ -135,38 +144,46 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
+            "support": {
+                "issues": "https://github.com/container-interop/container-interop/issues",
+                "source": "https://github.com/container-interop/container-interop/tree/master"
+            },
             "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "dflydev/fig-cookies",
-            "version": "v2.0.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-fig-cookies.git",
-                "reference": "733af78ddad60aec96f7c4a1204619dd4d62afff"
+                "reference": "ea6934204b1b34ffdf5130dc7e0928d18ced2498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-fig-cookies/zipball/733af78ddad60aec96f7c4a1204619dd4d62afff",
-                "reference": "733af78ddad60aec96f7c4a1204619dd4d62afff",
+                "url": "https://api.github.com/repos/dflydev/dflydev-fig-cookies/zipball/ea6934204b1b34ffdf5130dc7e0928d18ced2498",
+                "reference": "ea6934204b1b34ffdf5130dc7e0928d18ced2498",
                 "shasum": ""
             },
             "require": {
                 "ext-pcre": "*",
-                "php": "^7.2",
+                "php": "^7.2 || ^8.0",
                 "psr/http-message": "^1"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^4",
-                "phpstan/phpstan": "^0.10.1",
-                "phpunit/phpunit": "^7.2.6",
-                "squizlabs/php_codesniffer": "^3.3"
+                "doctrine/coding-standard": "^8",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpunit/phpunit": "^7.2.6 || ^9",
+                "scrutinizer/ocular": "^1.8",
+                "squizlabs/php_codesniffer": "^3.3",
+                "vimeo/psalm": "^4.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-main": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -190,7 +207,11 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2020-01-02T16:13:22+00:00"
+            "support": {
+                "issues": "https://github.com/dflydev/dflydev-fig-cookies/issues",
+                "source": "https://github.com/dflydev/dflydev-fig-cookies/tree/v3.0.0"
+            },
+            "time": "2021-01-22T02:53:56+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -240,24 +261,28 @@
             "keywords": [
                 "html"
             ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
+            },
             "time": "2020-06-29T00:56:53+00:00"
         },
         {
             "name": "fig/http-message-util",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message-util.git",
-                "reference": "3242caa9da7221a304b8f84eb9eaddae0a7cf422"
+                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/3242caa9da7221a304b8f84eb9eaddae0a7cf422",
-                "reference": "3242caa9da7221a304b8f84eb9eaddae0a7cf422",
+                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/9d94dc0154230ac39e5bf89398b324a86f63f765",
+                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3 || ^7.0"
+                "php": "^5.3 || ^7.0 || ^8.0"
             },
             "suggest": {
                 "psr/http-message": "The package containing the PSR-7 interfaces"
@@ -280,7 +305,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Utility classes and constants for use with PSR-7 (psr/http-message)",
@@ -292,7 +317,11 @@
                 "request",
                 "response"
             ],
-            "time": "2020-02-05T20:36:27+00:00"
+            "support": {
+                "issues": "https://github.com/php-fig/http-message-util/issues",
+                "source": "https://github.com/php-fig/http-message-util/tree/1.1.5"
+            },
+            "time": "2020-11-24T22:02:12+00:00"
         },
         {
             "name": "geo6/php-text-tools",
@@ -327,25 +356,29 @@
                     "email": "jbe@geo6.be"
                 }
             ],
+            "support": {
+                "issues": "https://github.com/geo6/php-text-tools/issues",
+                "source": "https://github.com/geo6/php-text-tools/tree/master"
+            },
             "abandoned": true,
             "time": "2018-01-29T09:34:38+00:00"
         },
         {
             "name": "geocoder-php/common-http",
-            "version": "4.3.0",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/geocoder-php/php-common-http.git",
-                "reference": "2995af04aa877ecb705054556bdea540662db971"
+                "reference": "9f44a006d4b45d01dd31ea9b38ee7fb5724cd73e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/php-common-http/zipball/2995af04aa877ecb705054556bdea540662db971",
-                "reference": "2995af04aa877ecb705054556bdea540662db971",
+                "url": "https://api.github.com/repos/geocoder-php/php-common-http/zipball/9f44a006d4b45d01dd31ea9b38ee7fb5724cd73e",
+                "reference": "9f44a006d4b45d01dd31ea9b38ee7fb5724cd73e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": "^7.3 || ^8.0",
                 "php-http/client-implementation": "^1.0",
                 "php-http/discovery": "^1.6",
                 "php-http/httplug": "^1.0 || ^2.0",
@@ -358,7 +391,7 @@
                 "nyholm/psr7": "^1.0",
                 "php-http/message": "^1.0",
                 "php-http/mock-client": "^1.0",
-                "phpunit/phpunit": "^7.5",
+                "phpunit/phpunit": "^9.5",
                 "symfony/stopwatch": "~2.5"
             },
             "type": "library",
@@ -390,7 +423,10 @@
             "keywords": [
                 "http geocoder"
             ],
-            "time": "2020-07-04T13:18:10+00:00"
+            "support": {
+                "source": "https://github.com/geocoder-php/php-common-http/tree/4.4.0"
+            },
+            "time": "2020-12-21T09:30:01+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -457,27 +493,31 @@
                 "rest",
                 "web service"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/6.5"
+            },
             "time": "2020-06-16T21:01:06+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "v1.3.1",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+                "reference": "8e7d04f1f6450fef59366c399cfad4b9383aa30d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/8e7d04f1f6450fef59366c399cfad4b9383aa30d",
+                "reference": "8e7d04f1f6450fef59366c399cfad4b9383aa30d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0"
+                "symfony/phpunit-bridge": "^4.4 || ^5.1"
             },
             "type": "library",
             "extra": {
@@ -508,20 +548,24 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "support": {
+                "issues": "https://github.com/guzzle/promises/issues",
+                "source": "https://github.com/guzzle/promises/tree/1.4.1"
+            },
+            "time": "2021-03-07T09:25:29+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc960a912984efb74d0a90222870c72c87f10c91",
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91",
                 "shasum": ""
             },
             "require": {
@@ -534,15 +578,15 @@
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
             },
             "suggest": {
-                "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -579,26 +623,30 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-07-01T23:21:34+00:00"
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.8.2"
+            },
+            "time": "2021-04-26T09:17:50+00:00"
         },
         {
             "name": "laminas/laminas-component-installer",
-            "version": "2.3.2",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-component-installer.git",
-                "reference": "ea0c0d147f229ff78eeab52f4097e532ed7e2351"
+                "reference": "98c6590594b5a61710a5b5119edb93d2fc66e090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/ea0c0d147f229ff78eeab52f4097e532ed7e2351",
-                "reference": "ea0c0d147f229ff78eeab52f4097e532ed7e2351",
+                "url": "https://api.github.com/repos/laminas/laminas-component-installer/zipball/98c6590594b5a61710a5b5119edb93d2fc66e090",
+                "reference": "98c6590594b5a61710a5b5119edb93d2fc66e090",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0 || ^2.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
                 "zendframework/zend-component-installer": "^2.1.2"
@@ -608,7 +656,10 @@
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "malukenho/docheader": "^0.1.6",
                 "mikey179/vfsstream": "^1.6.7",
-                "phpunit/phpunit": "^7.5.15 || ^8.3.4"
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.13.0",
+                "vimeo/psalm": "^4.2"
             },
             "type": "composer-plugin",
             "extra": {
@@ -631,48 +682,56 @@
                 "laminas",
                 "plugin"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-component-installer/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-component-installer/issues",
+                "rss": "https://github.com/laminas/laminas-component-installer/releases.atom",
+                "source": "https://github.com/laminas/laminas-component-installer"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-10-27T21:29:13+00:00"
+            "time": "2020-12-01T22:04:24+00:00"
         },
         {
             "name": "laminas/laminas-config",
-            "version": "3.3.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-config.git",
-                "reference": "b8fe057f55e69a0e7a2e4ced79218a43f58606a8"
+                "reference": "f91cd6fe79e82cbbcaa36485108a04e8ef1e679b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-config/zipball/b8fe057f55e69a0e7a2e4ced79218a43f58606a8",
-                "reference": "b8fe057f55e69a0e7a2e4ced79218a43f58606a8",
+                "url": "https://api.github.com/repos/laminas/laminas-config/zipball/f91cd6fe79e82cbbcaa36485108a04e8ef1e679b",
+                "reference": "f91cd6fe79e82cbbcaa36485108a04e8ef1e679b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0"
             },
             "conflict": {
                 "container-interop/container-interop": "<1.2.0"
             },
             "replace": {
-                "zendframework/zend-config": "self.version"
+                "zendframework/zend-config": "^3.3.0"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "laminas/laminas-filter": "^2.7.2",
-                "laminas/laminas-i18n": "^2.7.4",
-                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3",
+                "laminas/laminas-i18n": "^2.10.3",
+                "laminas/laminas-servicemanager": "^3.4.1",
                 "malukenho/docheader": "^0.1.6",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+                "phpunit/phpunit": "^8.5.8"
             },
             "suggest": {
                 "laminas/laminas-filter": "^2.7.2; install if you want to use the Filter processor",
@@ -680,12 +739,6 @@
                 "laminas/laminas-servicemanager": "^2.7.8 || ^3.3; if you need an extensible plugin manager for use with the Config Factory"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev",
-                    "dev-develop": "3.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\Config\\": "src/"
@@ -701,27 +754,41 @@
                 "config",
                 "laminas"
             ],
-            "time": "2019-12-31T16:30:11+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-config/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-config/issues",
+                "rss": "https://github.com/laminas/laminas-config/releases.atom",
+                "source": "https://github.com/laminas/laminas-config"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-02-11T15:06:51+00:00"
         },
         {
             "name": "laminas/laminas-config-aggregator",
-            "version": "1.3.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-config-aggregator.git",
-                "reference": "141382658ab4ebd0f6c2e529c4736f88bef5dcca"
+                "reference": "c5908c265ada01c8952baf84f102a073de30947f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-config-aggregator/zipball/141382658ab4ebd0f6c2e529c4736f88bef5dcca",
-                "reference": "141382658ab4ebd0f6c2e529c4736f88bef5dcca",
+                "url": "https://api.github.com/repos/laminas/laminas-config-aggregator/zipball/c5908c265ada01c8952baf84f102a073de30947f",
+                "reference": "c5908c265ada01c8952baf84f102a073de30947f",
                 "shasum": ""
             },
             "require": {
                 "brick/varexporter": "^0.3.2",
                 "laminas/laminas-stdlib": "^2.7.7 || ^3.1.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.2",
+                "php": "^7.3 || ~8.0.0",
                 "webimpress/safe-writer": "^1.0.2 || ^2.0.1"
             },
             "replace": {
@@ -732,7 +799,9 @@
                 "laminas/laminas-config": "^2.6 || ^3.0",
                 "laminas/laminas-servicemanager": "^2.7.7 || ^3.1.1",
                 "malukenho/docheader": "^0.1.5",
-                "phpunit/phpunit": "^8.5.8"
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.6"
             },
             "suggest": {
                 "laminas/laminas-config": "Allows loading configuration from XML, INI, YAML, and JSON files",
@@ -740,12 +809,6 @@
                 "laminas/laminas-config-aggregator-parameters": "Allows usage of templated parameters within your configuration"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev",
-                    "dev-develop": "1.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\ConfigAggregator\\": "src/"
@@ -761,54 +824,59 @@
                 "config-aggregator",
                 "laminas"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-config-aggregator/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-config-aggregator/issues",
+                "rss": "https://github.com/laminas/laminas-config-aggregator/releases.atom",
+                "source": "https://github.com/laminas/laminas-config-aggregator"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-07-08T17:26:27+00:00"
+            "time": "2021-03-16T14:31:55+00:00"
         },
         {
             "name": "laminas/laminas-db",
-            "version": "2.11.3",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-db.git",
-                "reference": "6c4238918b9204db1eb8cafae2c1940d40f4c007"
+                "reference": "80cbba4e749f9eb7d8036172acb9ad41e8b6923f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/6c4238918b9204db1eb8cafae2c1940d40f4c007",
-                "reference": "6c4238918b9204db1eb8cafae2c1940d40f4c007",
+                "url": "https://api.github.com/repos/laminas/laminas-db/zipball/80cbba4e749f9eb7d8036172acb9ad41e8b6923f",
+                "reference": "80cbba4e749f9eb7d8036172acb9ad41e8b6923f",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-stdlib": "^2.7 || ^3.0",
+                "laminas/laminas-stdlib": "^3.3",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
                 "zendframework/zend-db": "^2.11.0"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
-                "laminas/laminas-hydrator": "^1.1 || ^2.1 || ^3.0",
-                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14"
+                "laminas/laminas-eventmanager": "^3.3",
+                "laminas/laminas-hydrator": "^3.2 || ^4.0",
+                "laminas/laminas-servicemanager": "^3.3",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "laminas/laminas-eventmanager": "Laminas\\EventManager component",
-                "laminas/laminas-hydrator": "Laminas\\Hydrator component for using HydratingResultSets",
+                "laminas/laminas-hydrator": "(^3.2 || ^4.0) Laminas\\Hydrator component for using HydratingResultSets",
                 "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "2.11.x-dev",
-                    "dev-develop": "2.12.x-dev"
-                },
                 "laminas": {
                     "component": "Laminas\\Db",
                     "config-provider": "Laminas\\Db\\ConfigProvider"
@@ -829,41 +897,48 @@
                 "db",
                 "laminas"
             ],
-            "time": "2020-03-29T12:08:51+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-db/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-db/issues",
+                "rss": "https://github.com/laminas/laminas-db/releases.atom",
+                "source": "https://github.com/laminas/laminas-db"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-02-22T22:27:56+00:00"
         },
         {
             "name": "laminas/laminas-dependency-plugin",
-            "version": "1.0.4",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-dependency-plugin.git",
-                "reference": "38bf91861f5b4d49f9a1c530327c997f7a7fb2db"
+                "reference": "c5b4bf87729d6f38c73ca8ed22a5d62ec641d075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-dependency-plugin/zipball/38bf91861f5b4d49f9a1c530327c997f7a7fb2db",
-                "reference": "38bf91861f5b4d49f9a1c530327c997f7a7fb2db",
+                "url": "https://api.github.com/repos/laminas/laminas-dependency-plugin/zipball/c5b4bf87729d6f38c73ca8ed22a5d62ec641d075",
+                "reference": "c5b4bf87729d6f38c73ca8ed22a5d62ec641d075",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.1",
-                "php": "^5.6 || ^7.0"
+                "composer-plugin-api": "^1.1 || ^2.0",
+                "php": "^7.3 || ~8.0.0"
             },
             "require-dev": {
-                "composer/composer": "^1.9",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-                "phpcompatibility/php-compatibility": "^9.3",
-                "phpunit/phpunit": "^8.4",
-                "roave/security-advisories": "dev-master",
-                "webimpress/coding-standard": "^1.0"
+                "composer/composer": "^1.9 || ^2.0",
+                "mikey179/vfsstream": "^1.6",
+                "roave/security-advisories": "dev-master"
             },
             "type": "composer-plugin",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-develop": "1.1.x-dev"
-                },
-                "class": "Laminas\\DependencyPlugin\\DependencyRewriterPlugin"
+                "class": "Laminas\\DependencyPlugin\\DependencyRewriterPluginDelegator"
             },
             "autoload": {
                 "psr-4": {
@@ -875,31 +950,35 @@
                 "BSD-3-Clause"
             ],
             "description": "Replace zendframework and zfcampus packages with their Laminas Project equivalents.",
+            "support": {
+                "issues": "https://github.com/laminas/laminas-dependency-plugin/issues",
+                "source": "https://github.com/laminas/laminas-dependency-plugin/tree/2.1.2"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-05-20T13:45:39+00:00"
+            "time": "2021-02-15T16:44:31+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
-            "version": "2.4.1",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "36ef09b73e884135d2059cc498c938e90821bb57"
+                "reference": "53df7b7cd66e0905e6133970a4b90392a7a08075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/36ef09b73e884135d2059cc498c938e90821bb57",
-                "reference": "36ef09b73e884135d2059cc498c938e90821bb57",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/53df7b7cd66e0905e6133970a4b90392a7a08075",
+                "reference": "53df7b7cd66e0905e6133970a4b90392a7a08075",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/http-factory": "^1.0",
                 "psr/http-message": "^1.0"
             },
@@ -918,10 +997,11 @@
                 "ext-dom": "*",
                 "ext-gd": "*",
                 "ext-libxml": "*",
-                "http-interop/http-factory-tests": "^0.5.0",
+                "http-interop/http-factory-tests": "^0.8.0",
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "php-http/psr7-integration-tests": "^1.0",
-                "phpunit/phpunit": "^7.5.18"
+                "php-http/psr7-integration-tests": "^1.1",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.1"
             },
             "type": "library",
             "extra": {
@@ -966,46 +1046,54 @@
                 "psr-17",
                 "psr-7"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-diactoros/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-diactoros/issues",
+                "rss": "https://github.com/laminas/laminas-diactoros/releases.atom",
+                "source": "https://github.com/laminas/laminas-diactoros"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-09-03T14:29:41+00:00"
+            "time": "2021-04-13T19:39:11+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-escaper.git",
-                "reference": "25f2a053eadfa92ddacb609dcbbc39362610da70"
+                "reference": "5e04bc5ae5990b17159d79d331055e2c645e5cc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/25f2a053eadfa92ddacb609dcbbc39362610da70",
-                "reference": "25f2a053eadfa92ddacb609dcbbc39362610da70",
+                "url": "https://api.github.com/repos/laminas/laminas-escaper/zipball/5e04bc5ae5990b17159d79d331055e2c645e5cc5",
+                "reference": "5e04bc5ae5990b17159d79d331055e2c645e5cc5",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
-                "zendframework/zend-escaper": "self.version"
+                "zendframework/zend-escaper": "^2.6.1"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.12.2",
+                "vimeo/psalm": "^3.16"
+            },
+            "suggest": {
+                "ext-iconv": "*",
+                "ext-mbstring": "*"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6.x-dev",
-                    "dev-develop": "2.7.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\Escaper\\": "src/"
@@ -1021,26 +1109,40 @@
                 "escaper",
                 "laminas"
             ],
-            "time": "2019-12-31T16:43:30+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-escaper/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-escaper/issues",
+                "rss": "https://github.com/laminas/laminas-escaper/releases.atom",
+                "source": "https://github.com/laminas/laminas-escaper"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-11-17T21:26:43+00:00"
         },
         {
             "name": "laminas/laminas-filter",
-            "version": "2.9.4",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-filter.git",
-                "reference": "3c4476e772a062cef7531c6793377ae585d89c82"
+                "reference": "dd295a15f5c13d0c13d69ca0107190b1f2083d91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/3c4476e772a062cef7531c6793377ae585d89c82",
-                "reference": "3c4476e772a062cef7531c6793377ae585d89c82",
+                "url": "https://api.github.com/repos/laminas/laminas-filter/zipball/dd295a15f5c13d0c13d69ca0107190b1f2083d91",
+                "reference": "dd295a15f5c13d0c13d69ca0107190b1f2083d91",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
+                "laminas/laminas-stdlib": "^3.3",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ~8.0.0"
             },
             "conflict": {
                 "laminas/laminas-validator": "<2.10.1"
@@ -1051,11 +1153,14 @@
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "laminas/laminas-crypt": "^3.2.1",
-                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3",
+                "laminas/laminas-servicemanager": "^3.3",
                 "laminas/laminas-uri": "^2.6",
                 "pear/archive_tar": "^1.4.3",
-                "phpunit/phpunit": "^5.7.23 || ^6.4.3",
-                "psr/http-factory": "^1.0"
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "psr/http-factory": "^1.0",
+                "vimeo/psalm": "^4.6"
             },
             "suggest": {
                 "laminas/laminas-crypt": "Laminas\\Crypt component, for encryption filters",
@@ -1066,10 +1171,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "2.9.x-dev",
-                    "dev-develop": "2.10.x-dev"
-                },
                 "laminas": {
                     "component": "Laminas\\Filter",
                     "config-provider": "Laminas\\Filter\\ConfigProvider"
@@ -1090,25 +1191,39 @@
                 "filter",
                 "laminas"
             ],
-            "time": "2020-03-29T12:41:29+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-filter/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-filter/issues",
+                "rss": "https://github.com/laminas/laminas-filter/releases.atom",
+                "source": "https://github.com/laminas/laminas-filter"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-03-16T14:37:02+00:00"
         },
         {
             "name": "laminas/laminas-httphandlerrunner",
-            "version": "1.2.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-httphandlerrunner.git",
-                "reference": "e1a5dad040e0043135e8095ee27d1fbf6fb640e1"
+                "reference": "6a2dd33e4166469ade07ad1283b45924383b224b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-httphandlerrunner/zipball/e1a5dad040e0043135e8095ee27d1fbf6fb640e1",
-                "reference": "e1a5dad040e0043135e8095ee27d1fbf6fb640e1",
+                "url": "https://api.github.com/repos/laminas/laminas-httphandlerrunner/zipball/6a2dd33e4166469ade07ad1283b45924383b224b",
+                "reference": "6a2dd33e4166469ade07ad1283b45924383b224b",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/http-message": "^1.0",
                 "psr/http-message-implementation": "^1.0",
                 "psr/http-server-handler": "^1.0"
@@ -1118,15 +1233,13 @@
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-diactoros": "^1.7 || ^2.1.1",
-                "phpunit/phpunit": "^7.0.2"
+                "laminas/laminas-diactoros": "^2.1.1",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.6"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev",
-                    "dev-develop": "1.3.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Laminas\\HttpHandlerRunner\\ConfigProvider"
                 }
@@ -1149,33 +1262,41 @@
                 "psr-15",
                 "psr-7"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-httphandlerrunner/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-httphandlerrunner/issues",
+                "rss": "https://github.com/laminas/laminas-httphandlerrunner/releases.atom",
+                "source": "https://github.com/laminas/laminas-httphandlerrunner"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-06-03T15:52:17+00:00"
+            "time": "2021-04-08T13:52:56+00:00"
         },
         {
             "name": "laminas/laminas-i18n",
-            "version": "2.10.3",
+            "version": "2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-i18n.git",
-                "reference": "94ff957a1366f5be94f3d3a9b89b50386649e3ae"
+                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-i18n/zipball/94ff957a1366f5be94f3d3a9b89b50386649e3ae",
-                "reference": "94ff957a1366f5be94f3d3a9b89b50386649e3ae",
+                "url": "https://api.github.com/repos/laminas/laminas-i18n/zipball/5e85a8facc5534e856cc7f5b4326533eede84b8a",
+                "reference": "5e85a8facc5534e856cc7f5b4326533eede84b8a",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
                 "laminas/laminas-stdlib": "^2.7 || ^3.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ~8.0.0"
             },
             "conflict": {
                 "phpspec/prophecy": "<1.9.0"
@@ -1189,10 +1310,10 @@
                 "laminas/laminas-config": "^2.6",
                 "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
                 "laminas/laminas-filter": "^2.6.1",
-                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-servicemanager": "^3.2.1",
                 "laminas/laminas-validator": "^2.6",
                 "laminas/laminas-view": "^2.6.3",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "laminas/laminas-cache": "Laminas\\Cache component",
@@ -1206,10 +1327,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "2.10.x-dev",
-                    "dev-develop": "2.11.x-dev"
-                },
                 "laminas": {
                     "component": "Laminas\\I18n",
                     "config-provider": "Laminas\\I18n\\ConfigProvider"
@@ -1230,28 +1347,46 @@
                 "i18n",
                 "laminas"
             ],
-            "time": "2020-03-29T12:51:08+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-i18n/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-i18n/issues",
+                "rss": "https://github.com/laminas/laminas-i18n/releases.atom",
+                "source": "https://github.com/laminas/laminas-i18n"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-07T21:10:50+00:00"
         },
         {
             "name": "laminas/laminas-servicemanager",
-            "version": "3.5.2",
+            "version": "3.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-servicemanager.git",
-                "reference": "0669e1eec8d9f61e35a5bc5012796d49f418b259"
+                "reference": "b1445e1a7077c21b0fad0974a1b7a11b9dbe0828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/0669e1eec8d9f61e35a5bc5012796d49f418b259",
-                "reference": "0669e1eec8d9f61e35a5bc5012796d49f418b259",
+                "url": "https://api.github.com/repos/laminas/laminas-servicemanager/zipball/b1445e1a7077c21b0fad0974a1b7a11b9dbe0828",
+                "reference": "b1445e1a7077c21b0fad0974a1b7a11b9dbe0828",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.2",
                 "laminas/laminas-stdlib": "^3.2.1",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0"
+            },
+            "conflict": {
+                "laminas/laminas-code": "<3.3.1",
+                "zendframework/zend-code": "<3.3.1"
             },
             "provide": {
                 "container-interop/container-interop-implementation": "^1.2",
@@ -1261,27 +1396,24 @@
                 "zendframework/zend-servicemanager": "^3.4.0"
             },
             "require-dev": {
+                "composer/package-versions-deprecated": "^1.0",
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "mikey179/vfsstream": "^1.6.5",
-                "ocramius/proxy-manager": "^1.0 || ^2.0",
-                "phpbench/phpbench": "^0.13.0",
-                "phpunit/phpunit": "^5.7.25 || ^6.4.4"
+                "laminas/laminas-container-config-test": "^0.3",
+                "laminas/laminas-dependency-plugin": "^2.1",
+                "mikey179/vfsstream": "^1.6.8",
+                "ocramius/proxy-manager": "^2.2.3",
+                "phpbench/phpbench": "^1.0.0-alpha3",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.4"
             },
             "suggest": {
-                "laminas/laminas-stdlib": "laminas-stdlib ^2.5 if you wish to use the MergeReplaceKey or MergeRemoveKey features in Config instances",
-                "ocramius/proxy-manager": "ProxyManager 1.* to handle lazy initialization of services"
+                "ocramius/proxy-manager": "ProxyManager ^2.1.1 to handle lazy initialization of services"
             },
             "bin": [
                 "bin/generate-deps-for-config-factory",
                 "bin/generate-factory-for-class"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev",
-                    "dev-develop": "4.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\ServiceManager\\": "src/"
@@ -1302,47 +1434,49 @@
                 "service-manager",
                 "servicemanager"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-servicemanager/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-servicemanager/issues",
+                "rss": "https://github.com/laminas/laminas-servicemanager/releases.atom",
+                "source": "https://github.com/laminas/laminas-servicemanager"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-17T16:54:43+00:00"
+            "time": "2021-02-03T08:44:41+00:00"
         },
         {
             "name": "laminas/laminas-stdlib",
-            "version": "3.2.1",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stdlib.git",
-                "reference": "2b18347625a2f06a1a485acfbc870f699dbe51c6"
+                "reference": "d81c7ffe602ed0e6ecb18691019111c0f4bf1efe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/2b18347625a2f06a1a485acfbc870f699dbe51c6",
-                "reference": "2b18347625a2f06a1a485acfbc870f699dbe51c6",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/d81c7ffe602ed0e6ecb18691019111c0f4bf1efe",
+                "reference": "d81c7ffe602ed0e6ecb18691019111c0f4bf1efe",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ^8.0"
             },
             "replace": {
-                "zendframework/zend-stdlib": "self.version"
+                "zendframework/zend-stdlib": "^3.2.1"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "phpbench/phpbench": "^0.13",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+                "phpbench/phpbench": "^0.17.1",
+                "phpunit/phpunit": "~9.3.7"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\Stdlib\\": "src/"
@@ -1358,27 +1492,41 @@
                 "laminas",
                 "stdlib"
             ],
-            "time": "2019-12-31T17:51:15+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-stdlib/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-stdlib/issues",
+                "rss": "https://github.com/laminas/laminas-stdlib/releases.atom",
+                "source": "https://github.com/laminas/laminas-stdlib"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-11-19T20:18:59+00:00"
         },
         {
             "name": "laminas/laminas-stratigility",
-            "version": "3.2.2",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stratigility.git",
-                "reference": "3f88aa174324bc9e6dd55715f401f9f25dbd722c"
+                "reference": "d6336b873fe8f766f84b82164f2a25e4decd6a9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stratigility/zipball/3f88aa174324bc9e6dd55715f401f9f25dbd722c",
-                "reference": "3f88aa174324bc9e6dd55715f401f9f25dbd722c",
+                "url": "https://api.github.com/repos/laminas/laminas-stratigility/zipball/d6336b873fe8f766f84b82164f2a25e4decd6a9a",
+                "reference": "d6336b873fe8f766f84b82164f2a25e4decd6a9a",
                 "shasum": ""
             },
             "require": {
                 "fig/http-message-util": "^1.1",
                 "laminas/laminas-escaper": "^2.3",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/http-message": "^1.0",
                 "psr/http-server-middleware": "^1.0"
             },
@@ -1392,18 +1540,14 @@
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "laminas/laminas-diactoros": "^1.7.1",
                 "malukenho/docheader": "^0.1.6",
-                "phpunit/phpunit": "^7.0.1"
+                "phpspec/prophecy": "^1.12",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "psr/http-message-implementation": "Please install a psr/http-message-implementation to consume Stratigility; e.g., laminas/laminas-diactoros"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "src/functions/double-pass-middleware.php",
@@ -1432,27 +1576,41 @@
                 "psr-15",
                 "psr-7"
             ],
-            "time": "2020-03-29T13:31:02+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-stratigility/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-stratigility/issues",
+                "rss": "https://github.com/laminas/laminas-stratigility/releases.atom",
+                "source": "https://github.com/laminas/laminas-stratigility"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2020-10-20T10:38:04+00:00"
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "2.13.5",
+            "version": "2.14.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-validator.git",
-                "reference": "d334dddda43af263d6a7e5024fd2b013cb6981f7"
+                "reference": "e370c4695db1c81e6dfad38d8c4dbdb37b23d776"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/d334dddda43af263d6a7e5024fd2b013cb6981f7",
-                "reference": "d334dddda43af263d6a7e5024fd2b013cb6981f7",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/e370c4695db1c81e6dfad38d8c4dbdb37b23d776",
+                "reference": "e370c4695db1c81e6dfad38d8c4dbdb37b23d776",
                 "shasum": ""
             },
             "require": {
                 "container-interop/container-interop": "^1.1",
-                "laminas/laminas-stdlib": "^3.2.1",
+                "laminas/laminas-stdlib": "^3.3",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
                 "zendframework/zend-validator": "^2.13.0"
@@ -1463,16 +1621,19 @@
                 "laminas/laminas-config": "^2.6",
                 "laminas/laminas-db": "^2.7",
                 "laminas/laminas-filter": "^2.6",
-                "laminas/laminas-http": "^2.5.4",
+                "laminas/laminas-http": "^2.14.2",
                 "laminas/laminas-i18n": "^2.6",
                 "laminas/laminas-math": "^2.6",
-                "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+                "laminas/laminas-servicemanager": "^2.7.11 || ^3.0.3",
                 "laminas/laminas-session": "^2.8",
-                "laminas/laminas-uri": "^2.5",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.2",
+                "laminas/laminas-uri": "^2.7",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.15.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0",
+                "vimeo/psalm": "^4.3"
             },
             "suggest": {
                 "laminas/laminas-db": "Laminas\\Db component, required by the (No)RecordExists validator",
@@ -1507,34 +1668,44 @@
                 "laminas",
                 "validator"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-validator/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-validator/issues",
+                "rss": "https://github.com/laminas/laminas-validator/releases.atom",
+                "source": "https://github.com/laminas/laminas-validator"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-01-06T15:05:04+00:00"
+            "time": "2021-01-24T20:45:49+00:00"
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "6ede70583e101030bcace4dcddd648f760ddf642"
+                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6ede70583e101030bcace4dcddd648f760ddf642",
-                "reference": "6ede70583e101030bcace4dcddd648f760ddf642",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/6cccbddfcfc742eb02158d6137ca5687d92cee32",
+                "reference": "6cccbddfcfc742eb02158d6137ca5687d92cee32",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0 || ^8.0"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1 || ^9.3",
-                "squizlabs/php_codesniffer": "^3.5"
+                "psalm/plugin-phpunit": "^0.15.1",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^4.6"
             },
             "type": "library",
             "extra": {
@@ -1561,35 +1732,41 @@
                 "laminas",
                 "zf"
             ],
+            "support": {
+                "forum": "https://discourse.laminas.dev/",
+                "issues": "https://github.com/laminas/laminas-zendframework-bridge/issues",
+                "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
+                "source": "https://github.com/laminas/laminas-zendframework-bridge"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-09-14T14:23:00+00:00"
+            "time": "2021-02-25T21:54:58+00:00"
         },
         {
             "name": "league/plates",
-            "version": "3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/plates.git",
-                "reference": "b1684b6f127714497a0ef927ce42c0b44b45a8af"
+                "reference": "6d3ee31199b536a4e003b34a356ca20f6f75496a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/plates/zipball/b1684b6f127714497a0ef927ce42c0b44b45a8af",
-                "reference": "b1684b6f127714497a0ef927ce42c0b44b45a8af",
+                "url": "https://api.github.com/repos/thephpleague/plates/zipball/6d3ee31199b536a4e003b34a356ca20f6f75496a",
+                "reference": "6d3ee31199b536a4e003b34a356ca20f6f75496a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3 | ^7.0"
+                "php": "^7.0|^8.0"
             },
             "require-dev": {
-                "mikey179/vfsstream": "^1.4",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
             "extra": {
@@ -1611,10 +1788,15 @@
                     "name": "Jonathan Reinink",
                     "email": "jonathan@reinink.ca",
                     "role": "Developer"
+                },
+                {
+                    "name": "RJ Garcia",
+                    "email": "ragboyjr@icloud.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Plates, the native PHP template system that's fast, easy to use and easy to extend.",
-            "homepage": "http://platesphp.com",
+            "homepage": "https://platesphp.com",
             "keywords": [
                 "league",
                 "package",
@@ -1622,7 +1804,11 @@
                 "templating",
                 "views"
             ],
-            "time": "2016-12-28T00:14:17+00:00"
+            "support": {
+                "issues": "https://github.com/thephpleague/plates/issues",
+                "source": "https://github.com/thephpleague/plates/tree/v3.4.0"
+            },
+            "time": "2020-12-25T05:00:37+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
@@ -1683,6 +1869,10 @@
                 "stream",
                 "zip"
             ],
+            "support": {
+                "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
+                "source": "https://github.com/maennchen/ZipStream-PHP/tree/master"
+            },
             "funding": [
                 {
                     "url": "https://opencollective.com/zipstream",
@@ -1784,24 +1974,28 @@
                 "complex",
                 "mathematics"
             ],
+            "support": {
+                "issues": "https://github.com/MarkBaker/PHPComplex/issues",
+                "source": "https://github.com/MarkBaker/PHPComplex/tree/PHP8"
+            },
             "time": "2020-08-26T10:42:07+00:00"
         },
         {
             "name": "markbaker/matrix",
-            "version": "2.0.0",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MarkBaker/PHPMatrix.git",
-                "reference": "9567d9c4c519fbe40de01dbd1e4469dbbb66f46a"
+                "reference": "361c0f545c3172ee26c3d596a0aa03f0cef65e6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/9567d9c4c519fbe40de01dbd1e4469dbbb66f46a",
-                "reference": "9567d9c4c519fbe40de01dbd1e4469dbbb66f46a",
+                "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
+                "reference": "361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
@@ -1819,22 +2013,22 @@
                     "Matrix\\": "classes/src/"
                 },
                 "files": [
-                    "classes/src/functions/adjoint.php",
-                    "classes/src/functions/antidiagonal.php",
-                    "classes/src/functions/cofactors.php",
-                    "classes/src/functions/determinant.php",
-                    "classes/src/functions/diagonal.php",
-                    "classes/src/functions/identity.php",
-                    "classes/src/functions/inverse.php",
-                    "classes/src/functions/minors.php",
-                    "classes/src/functions/trace.php",
-                    "classes/src/functions/transpose.php",
-                    "classes/src/operations/add.php",
-                    "classes/src/operations/directsum.php",
-                    "classes/src/operations/subtract.php",
-                    "classes/src/operations/multiply.php",
-                    "classes/src/operations/divideby.php",
-                    "classes/src/operations/divideinto.php"
+                    "classes/src/Functions/adjoint.php",
+                    "classes/src/Functions/antidiagonal.php",
+                    "classes/src/Functions/cofactors.php",
+                    "classes/src/Functions/determinant.php",
+                    "classes/src/Functions/diagonal.php",
+                    "classes/src/Functions/identity.php",
+                    "classes/src/Functions/inverse.php",
+                    "classes/src/Functions/minors.php",
+                    "classes/src/Functions/trace.php",
+                    "classes/src/Functions/transpose.php",
+                    "classes/src/Operations/add.php",
+                    "classes/src/Operations/directsum.php",
+                    "classes/src/Operations/subtract.php",
+                    "classes/src/Operations/multiply.php",
+                    "classes/src/Operations/divideby.php",
+                    "classes/src/Operations/divideinto.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1854,54 +2048,60 @@
                 "matrix",
                 "vector"
             ],
-            "time": "2020-08-28T17:11:00+00:00"
+            "support": {
+                "issues": "https://github.com/MarkBaker/PHPMatrix/issues",
+                "source": "https://github.com/MarkBaker/PHPMatrix/tree/2.1.2"
+            },
+            "time": "2021-01-23T16:37:31+00:00"
         },
         {
             "name": "mezzio/mezzio",
-            "version": "3.2.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio.git",
-                "reference": "6bd539f29c7b27cab7bcb6ea433222f8b1c0d099"
+                "reference": "af67e673959bbd60013fd777326117edf6288899"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio/zipball/6bd539f29c7b27cab7bcb6ea433222f8b1c0d099",
-                "reference": "6bd539f29c7b27cab7bcb6ea433222f8b1c0d099",
+                "url": "https://api.github.com/repos/mezzio/mezzio/zipball/af67e673959bbd60013fd777326117edf6288899",
+                "reference": "af67e673959bbd60013fd777326117edf6288899",
                 "shasum": ""
             },
             "require": {
-                "fig/http-message-util": "^1.1.2",
-                "laminas/laminas-httphandlerrunner": "^1.0.1",
-                "laminas/laminas-stratigility": "^3.0",
-                "laminas/laminas-zendframework-bridge": "^1.0",
-                "mezzio/mezzio-router": "^3.0",
-                "mezzio/mezzio-template": "^2.0",
-                "php": "^7.1",
+                "fig/http-message-util": "^1.1.5",
+                "laminas/laminas-httphandlerrunner": "^1.3.0",
+                "laminas/laminas-stratigility": "^3.3.0",
+                "laminas/laminas-zendframework-bridge": "^1.1.0",
+                "mezzio/mezzio-router": "^3.2.0",
+                "mezzio/mezzio-template": "^2.1.0",
+                "php": "^7.3||~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1",
-                "psr/http-server-middleware": "^1.0"
+                "psr/http-server-middleware": "^1.0",
+                "webmozart/assert": "^1.10"
             },
             "conflict": {
                 "container-interop/container-interop": "<1.2.0",
-                "laminas/laminas-diactoros": "<1.7.1"
+                "laminas/laminas-diactoros": "<1.7.1",
+                "laminas/laminas-stdlib": "<3.2.1"
             },
             "replace": {
                 "zendframework/zend-expressive": "^3.2.1"
             },
             "require-dev": {
-                "filp/whoops": "^1.1.10 || ^2.1.13",
+                "filp/whoops": "^2.8.0",
                 "laminas/laminas-coding-standard": "~1.0.0",
-                "laminas/laminas-diactoros": "^1.7.1 || ^2.0",
-                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3",
-                "malukenho/docheader": "^0.1.6",
-                "mezzio/mezzio-aurarouter": "^3.0",
-                "mezzio/mezzio-fastroute": "^3.0",
-                "mezzio/mezzio-laminasrouter": "^3.0",
+                "laminas/laminas-diactoros": "^2.5.0",
+                "laminas/laminas-servicemanager": "^3.6.0",
+                "malukenho/docheader": "^0.1.8",
+                "mezzio/mezzio-aurarouter": "^3.1.0",
+                "mezzio/mezzio-fastroute": "^3.1.0",
+                "mezzio/mezzio-laminasrouter": "^3.1.0",
                 "mockery/mockery": "^1.0",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-strict-rules": "^0.9",
-                "phpunit/phpunit": "^7.0.1"
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.13",
+                "vimeo/psalm": "^4.1"
             },
             "suggest": {
                 "filp/whoops": "^2.1 to use the Whoops error handler",
@@ -1917,10 +2117,6 @@
             ],
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\ConfigProvider"
                 }
@@ -1950,35 +2146,43 @@
                 "psr-15",
                 "psr-7"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio/issues",
+                "rss": "https://github.com/mezzio/mezzio/releases.atom",
+                "source": "https://github.com/mezzio/mezzio"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-04-28T18:52:32+00:00"
+            "time": "2021-04-20T18:13:43+00:00"
         },
         {
             "name": "mezzio/mezzio-fastroute",
-            "version": "3.0.3",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-fastroute.git",
-                "reference": "3e7d8ade90c3c2ef68a1f798c11c0c396ed40929"
+                "reference": "faa586b35dc76231a5dce736227046ccbee2b5f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-fastroute/zipball/3e7d8ade90c3c2ef68a1f798c11c0c396ed40929",
-                "reference": "3e7d8ade90c3c2ef68a1f798c11c0c396ed40929",
+                "url": "https://api.github.com/repos/mezzio/mezzio-fastroute/zipball/faa586b35dc76231a5dce736227046ccbee2b5f1",
+                "reference": "faa586b35dc76231a5dce736227046ccbee2b5f1",
                 "shasum": ""
             },
             "require": {
                 "fig/http-message-util": "^1.1.2",
                 "laminas/laminas-stdlib": "^2.0 || ^3.1",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "mezzio/mezzio-router": "^3.0",
+                "mezzio/mezzio-router": "^3.2",
                 "nikic/fast-route": "^1.2",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1"
             },
@@ -1986,22 +2190,21 @@
                 "container-interop/container-interop": "<1.2.0"
             },
             "replace": {
-                "zendframework/zend-expressive-fastroute": "self.version"
+                "zendframework/zend-expressive-fastroute": "^3.0.3"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "laminas/laminas-diactoros": "^1.7.1",
                 "laminas/laminas-stratigility": "^3.0",
                 "malukenho/docheader": "^0.1.6",
-                "mikey179/vfsstream": "^1.6.5",
-                "phpunit/phpunit": "^7.0.2"
+                "mikey179/vfsstream": "^1.6.7",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.4.1",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.6"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev",
-                    "dev-develop": "3.1.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Router\\FastRouteRouter\\ConfigProvider"
                 }
@@ -2026,44 +2229,51 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2019-12-31T15:43:56+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/features/router/fast-route/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-fastroute/issues",
+                "rss": "https://github.com/mezzio/mezzio-fastroute/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-fastroute"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-19T21:45:49+00:00"
         },
         {
             "name": "mezzio/mezzio-flash",
-            "version": "1.0.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-flash.git",
-                "reference": "b72641eb35ddc1328354c747126ed4d7c8c3cf00"
+                "reference": "cf3efca920590121372c93350a9eb623c71d0067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-flash/zipball/b72641eb35ddc1328354c747126ed4d7c8c3cf00",
-                "reference": "b72641eb35ddc1328354c747126ed4d7c8c3cf00",
+                "url": "https://api.github.com/repos/mezzio/mezzio-flash/zipball/cf3efca920590121372c93350a9eb623c71d0067",
+                "reference": "cf3efca920590121372c93350a9eb623c71d0067",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-session": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/http-server-middleware": "^1.0"
             },
-            "conflict": {
-                "phpspec/prophecy": "<1.7.2"
-            },
             "replace": {
-                "zendframework/zend-expressive-flash": "self.version"
+                "zendframework/zend-expressive-flash": "^1.0.1"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^7.0.2"
+                "laminas/laminas-coding-standard": "~2.1.0",
+                "phpunit/phpunit": "^9.3"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev",
-                    "dev-develop": "1.1.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Flash\\ConfigProvider"
                 }
@@ -2088,46 +2298,63 @@
                 "psr-7",
                 "session"
             ],
-            "time": "2019-12-31T15:43:59+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio-flash/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-flash/issues",
+                "rss": "https://github.com/mezzio/mezzio-flash/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-flash"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-14T21:34:09+00:00"
         },
         {
             "name": "mezzio/mezzio-helpers",
-            "version": "5.3.0",
+            "version": "5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-helpers.git",
-                "reference": "276a539a9212bd2ff48ec7c411b049f11fcff62d"
+                "reference": "d0dfb5f447faf7e019436976adec5128a0379132"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-helpers/zipball/276a539a9212bd2ff48ec7c411b049f11fcff62d",
-                "reference": "276a539a9212bd2ff48ec7c411b049f11fcff62d",
+                "url": "https://api.github.com/repos/mezzio/mezzio-helpers/zipball/d0dfb5f447faf7e019436976adec5128a0379132",
+                "reference": "d0dfb5f447faf7e019436976adec5128a0379132",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-router": "^3.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1",
                 "psr/http-server-middleware": "^1.0"
             },
             "replace": {
-                "zendframework/zend-expressive-helpers": "self.version"
+                "zendframework/zend-expressive-helpers": "^5.3.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "ext-json": "*",
+                "laminas/laminas-coding-standard": "~2.1.0",
                 "laminas/laminas-diactoros": "^1.7.1",
-                "malukenho/docheader": "^0.1.6",
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^7.0.2"
+                "malukenho/docheader": "^0.1.8",
+                "mockery/mockery": "^1.4.2",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.4.2",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.7"
+            },
+            "suggest": {
+                "ext-json": "If you wish to use the JsonStrategy with BodyParamsMiddleware"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "5.3.x-dev",
-                    "dev-develop": "5.4.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Helper\\ConfigProvider"
                 }
@@ -2151,20 +2378,34 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2019-12-31T15:44:52+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/features/helpers/intro/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-helpers/issues",
+                "rss": "https://github.com/mezzio/mezzio-helpers/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-helpers"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-23T14:12:21+00:00"
         },
         {
             "name": "mezzio/mezzio-platesrenderer",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-platesrenderer.git",
-                "reference": "f8bef66ae557455c36b7cb920bcf6f0b57d094df"
+                "reference": "d2792f73e2a4d52682e7ef2eb5065026104039f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-platesrenderer/zipball/f8bef66ae557455c36b7cb920bcf6f0b57d094df",
-                "reference": "f8bef66ae557455c36b7cb920bcf6f0b57d094df",
+                "url": "https://api.github.com/repos/mezzio/mezzio-platesrenderer/zipball/d2792f73e2a4d52682e7ef2eb5065026104039f3",
+                "reference": "d2792f73e2a4d52682e7ef2eb5065026104039f3",
                 "shasum": ""
             },
             "require": {
@@ -2174,26 +2415,25 @@
                 "mezzio/mezzio-helpers": "^5.2",
                 "mezzio/mezzio-router": "^3.0",
                 "mezzio/mezzio-template": "^2.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0"
             },
             "conflict": {
                 "container-interop/container-interop": "<1.2.0"
             },
             "replace": {
-                "zendframework/zend-expressive-platesrenderer": "self.version"
+                "zendframework/zend-expressive-platesrenderer": "^2.2.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "malukenho/docheader": "^0.1.5",
-                "phpunit/phpunit": "^7.0.2"
+                "laminas/laminas-coding-standard": "~2.1.4",
+                "malukenho/docheader": "^0.1.6",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "0.15",
+                "vimeo/psalm": "^4.4"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev",
-                    "dev-develop": "2.2.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Plates\\ConfigProvider"
                 }
@@ -2218,26 +2458,40 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2019-12-31T15:45:32+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/features/template/plates/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-platesrenderer/issues",
+                "rss": "https://github.com/mezzio/mezzio-platesrenderer/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-platesrenderer"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-03-02T19:03:39+00:00"
         },
         {
             "name": "mezzio/mezzio-router",
-            "version": "3.1.3",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-router.git",
-                "reference": "21b1db5c28590cc563729189519bfde3218e38fa"
+                "reference": "42659ecc8db2e60ca3dde413507a98d879031a37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/21b1db5c28590cc563729189519bfde3218e38fa",
-                "reference": "21b1db5c28590cc563729189519bfde3218e38fa",
+                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/42659ecc8db2e60ca3dde413507a98d879031a37",
+                "reference": "42659ecc8db2e60ca3dde413507a98d879031a37",
                 "shasum": ""
             },
             "require": {
                 "fig/http-message-util": "^1.1.2",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1",
                 "psr/http-server-middleware": "^1.0"
@@ -2246,10 +2500,13 @@
                 "zendframework/zend-expressive-router": "^3.1.1"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-coding-standard": "~2.1.0",
                 "malukenho/docheader": "^0.1.6",
                 "phpspec/prophecy": "^1.9",
-                "phpunit/phpunit": "^7.5.16 || ^8.4.1"
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.4.1",
+                "psalm/plugin-phpunit": "^0.15.0",
+                "vimeo/psalm": "^4.3"
             },
             "suggest": {
                 "mezzio/mezzio-aurarouter": "^3.0 to use the Aura.Router routing adapter",
@@ -2258,10 +2515,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1.x-dev",
-                    "dev-develop": "3.2.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Router\\ConfigProvider"
                 }
@@ -2285,43 +2538,52 @@
                 "psr",
                 "psr-7"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/features/router/intro/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-router/issues",
+                "rss": "https://github.com/mezzio/mezzio-router/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-router"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-06-22T20:10:45+00:00"
+            "time": "2021-01-06T16:46:13+00:00"
         },
         {
             "name": "mezzio/mezzio-session",
-            "version": "1.3.0",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-session.git",
-                "reference": "e1376add7b6eed510be5e34c3764841efeca1ffe"
+                "reference": "d495542a2785ec9bffccfe0deb8ffa6da93741bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-session/zipball/e1376add7b6eed510be5e34c3764841efeca1ffe",
-                "reference": "e1376add7b6eed510be5e34c3764841efeca1ffe",
+                "url": "https://api.github.com/repos/mezzio/mezzio-session/zipball/d495542a2785ec9bffccfe0deb8ffa6da93741bc",
+                "reference": "d495542a2785ec9bffccfe0deb8ffa6da93741bc",
                 "shasum": ""
             },
             "require": {
+                "dflydev/fig-cookies": "^2.0.1 || ^3.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-server-middleware": "^1.0"
             },
-            "conflict": {
-                "phpspec/prophecy": "<1.7.2"
-            },
             "replace": {
-                "zendframework/zend-expressive-session": "self.version"
+                "zendframework/zend-expressive-session": "^1.3.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
-                "phpunit/phpunit": "^6.5.5"
+                "laminas/laminas-coding-standard": "~2.1.0",
+                "laminas/laminas-diactoros": "^2.2",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.12.2",
+                "vimeo/psalm": "^3.16"
             },
             "suggest": {
                 "mezzio/mezzio-csrf": "^1.0 || ^1.0-dev for CSRF protection capabilities",
@@ -2330,10 +2592,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev",
-                    "dev-develop": "1.4.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Session\\ConfigProvider"
                 }
@@ -2356,46 +2614,55 @@
                 "psr-7",
                 "session"
             ],
-            "time": "2019-12-31T15:46:11+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio-session/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-session/issues",
+                "rss": "https://github.com/mezzio/mezzio-session/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-session"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-20T15:55:47+00:00"
         },
         {
             "name": "mezzio/mezzio-session-ext",
-            "version": "1.7.2",
+            "version": "1.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-session-ext.git",
-                "reference": "447360ce5b260f834588686e4d879fb3a9bf5860"
+                "reference": "594e53d9546d11e9b601c2a6aec06577bbf55528"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/447360ce5b260f834588686e4d879fb3a9bf5860",
-                "reference": "447360ce5b260f834588686e4d879fb3a9bf5860",
+                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/594e53d9546d11e9b601c2a6aec06577bbf55528",
+                "reference": "594e53d9546d11e9b601c2a6aec06577bbf55528",
                 "shasum": ""
             },
             "require": {
-                "dflydev/fig-cookies": "^1.0 || ^2.0",
                 "ext-session": "*",
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "mezzio/mezzio-session": "^1.3",
-                "php": "^7.1"
-            },
-            "conflict": {
-                "phpspec/prophecy": "<1.7.2"
+                "mezzio/mezzio-session": "^1.4",
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
                 "zendframework/zend-expressive-session-ext": "^1.7.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "dflydev/fig-cookies": "^2.0.1 || ^3.0",
+                "laminas/laminas-coding-standard": "~2.1.0",
                 "laminas/laminas-diactoros": "^1.6",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.2 || ^9.0.1"
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-phpunit": "^0.12.2",
+                "vimeo/psalm": "^3.16"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.7.x-dev",
-                    "dev-develop": "1.8.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\Session\\Ext\\ConfigProvider"
                 }
@@ -2419,33 +2686,47 @@
                 "psr-7",
                 "session"
             ],
-            "time": "2020-03-28T22:18:16+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio-session-ext/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-session-ext/issues",
+                "rss": "https://github.com/mezzio/mezzio-session-ext/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-session-ext"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-20T16:25:13+00:00"
         },
         {
             "name": "mezzio/mezzio-template",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-template.git",
-                "reference": "569c3433fbd2deab2777d1beab4f5749bf83e8bb"
+                "reference": "8f36e80b3ac6d794cf324134b368ec00bb4cfdbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-template/zipball/569c3433fbd2deab2777d1beab4f5749bf83e8bb",
-                "reference": "569c3433fbd2deab2777d1beab4f5749bf83e8bb",
+                "url": "https://api.github.com/repos/mezzio/mezzio-template/zipball/8f36e80b3ac6d794cf324134b368ec00bb4cfdbe",
+                "reference": "8f36e80b3ac6d794cf324134b368ec00bb4cfdbe",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.1"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
-                "zendframework/zend-expressive-template": "self.version"
+                "zendframework/zend-expressive-template": "^2.0.1"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-coding-standard": "~2.1.0",
                 "malukenho/docheader": "^0.1.6",
-                "phpunit/phpunit": "^7.0.2"
+                "phpunit/phpunit": "^9.3"
             },
             "suggest": {
                 "mezzio/mezzio-laminasviewrenderer": "^2.0 to use the laminas-view PhpRenderer template renderer",
@@ -2453,12 +2734,6 @@
                 "mezzio/mezzio-twigrenderer": "^2.0 to use the Twig template renderer"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev",
-                    "dev-develop": "2.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Mezzio\\Template\\": "src/"
@@ -2475,30 +2750,44 @@
                 "mezzio",
                 "template"
             ],
-            "time": "2019-12-31T15:47:51+00:00"
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.mezzio.dev/mezzio/features/template/intro/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/mezzio/mezzio-template/issues",
+                "rss": "https://github.com/mezzio/mezzio-template/releases.atom",
+                "source": "https://github.com/mezzio/mezzio-template"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-01-23T03:51:53+00:00"
         },
         {
             "name": "myclabs/php-enum",
-            "version": "1.7.7",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "d178027d1e679832db9f38248fcc7200647dc2b7"
+                "reference": "46cf3d8498b095bd33727b13fd5707263af99421"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/d178027d1e679832db9f38248fcc7200647dc2b7",
-                "reference": "d178027d1e679832db9f38248fcc7200647dc2b7",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/46cf3d8498b095bd33727b13fd5707263af99421",
+                "reference": "46cf3d8498b095bd33727b13fd5707263af99421",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.1"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7",
+                "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "1.*",
-                "vimeo/psalm": "^3.8"
+                "vimeo/psalm": "^4.5.1"
             },
             "type": "library",
             "autoload": {
@@ -2521,6 +2810,10 @@
             "keywords": [
                 "enum"
             ],
+            "support": {
+                "issues": "https://github.com/myclabs/php-enum/issues",
+                "source": "https://github.com/myclabs/php-enum/tree/1.8.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/mnapoli",
@@ -2531,7 +2824,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-14T18:14:52+00:00"
+            "time": "2021-02-15T16:11:48+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -2577,20 +2870,24 @@
                 "router",
                 "routing"
             ],
+            "support": {
+                "issues": "https://github.com/nikic/FastRoute/issues",
+                "source": "https://github.com/nikic/FastRoute/tree/master"
+            },
             "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.6.0",
+            "version": "v4.10.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
+                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4432ba399e47c66624bc73c8c0f811e5c109576f",
+                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f",
                 "shasum": ""
             },
             "require": {
@@ -2598,8 +2895,8 @@
                 "php": ">=7.0"
             },
             "require-dev": {
-                "ircmaxell/php-yacc": "0.0.5",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -2607,7 +2904,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.9-dev"
                 }
             },
             "autoload": {
@@ -2629,33 +2926,37 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-07-02T17:12:47+00:00"
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.5"
+            },
+            "time": "2021-05-03T19:11:20+00:00"
         },
         {
             "name": "php-http/discovery",
-            "version": "1.9.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "9ab7668fee74a5ad61996095e50917bd50ee8bfe"
+                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/9ab7668fee74a5ad61996095e50917bd50ee8bfe",
-                "reference": "9ab7668fee74a5ad61996095e50917bd50ee8bfe",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/788f72d64c43dc361e7fcc7464c3d947c64984a7",
+                "reference": "788f72d64c43dc361e7fcc7464c3d947c64984a7",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1 || ^8.0"
             },
             "conflict": {
                 "nyholm/psr7": "<1.0"
             },
             "require-dev": {
-                "akeneo/phpspec-skip-example-extension": "^4.0",
+                "graham-campbell/phpspec-skip-example-extension": "^5.0",
                 "php-http/httplug": "^1.0 || ^2.0",
                 "php-http/message-factory": "^1.0",
-                "phpspec/phpspec": "^5.1",
+                "phpspec/phpspec": "^5.1 || ^6.1",
                 "puli/composer-plugin": "1.0.0-beta10"
             },
             "suggest": {
@@ -2694,25 +2995,29 @@
                 "message",
                 "psr7"
             ],
-            "time": "2020-07-02T11:43:45+00:00"
+            "support": {
+                "issues": "https://github.com/php-http/discovery/issues",
+                "source": "https://github.com/php-http/discovery/tree/1.13.0"
+            },
+            "time": "2020-11-27T14:49:42+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/guzzle6-adapter.git",
-                "reference": "6074a4b1f4d5c21061b70bab3b8ad484282fe31f"
+                "reference": "9d1a45eb1c59f12574552e81fb295e9e53430a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/guzzle6-adapter/zipball/6074a4b1f4d5c21061b70bab3b8ad484282fe31f",
-                "reference": "6074a4b1f4d5c21061b70bab3b8ad484282fe31f",
+                "url": "https://api.github.com/repos/php-http/guzzle6-adapter/zipball/9d1a45eb1c59f12574552e81fb295e9e53430a56",
+                "reference": "9d1a45eb1c59f12574552e81fb295e9e53430a56",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0",
-                "php": "^7.1",
+                "php": "^7.1 || ^8.0",
                 "php-http/httplug": "^2.0",
                 "psr/http-client": "^1.0"
             },
@@ -2723,8 +3028,8 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "^2.0",
-                "phpunit/phpunit": "^7.4"
+                "php-http/client-integration-tests": "^2.0 || ^3.0",
+                "phpunit/phpunit": "^7.4 || ^8.4"
             },
             "type": "library",
             "extra": {
@@ -2743,12 +3048,12 @@
             ],
             "authors": [
                 {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                },
-                {
                     "name": "David de Boer",
                     "email": "david@ddeboer.nl"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
                 }
             ],
             "description": "Guzzle 6 HTTP Adapter",
@@ -2757,31 +3062,35 @@
                 "Guzzle",
                 "http"
             ],
-            "time": "2018-12-16T14:44:03+00:00"
+            "support": {
+                "issues": "https://github.com/php-http/guzzle6-adapter/issues",
+                "source": "https://github.com/php-http/guzzle6-adapter/tree/v2.0.2"
+            },
+            "time": "2021-03-02T10:52:33+00:00"
         },
         {
             "name": "php-http/httplug",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/httplug.git",
-                "reference": "72d2b129a48f0490d55b7f89be0d6aa0597ffb06"
+                "reference": "191a0a1b41ed026b717421931f8d3bd2514ffbf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/httplug/zipball/72d2b129a48f0490d55b7f89be0d6aa0597ffb06",
-                "reference": "72d2b129a48f0490d55b7f89be0d6aa0597ffb06",
+                "url": "https://api.github.com/repos/php-http/httplug/zipball/191a0a1b41ed026b717421931f8d3bd2514ffbf9",
+                "reference": "191a0a1b41ed026b717421931f8d3bd2514ffbf9",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "php-http/promise": "^1.0",
+                "php": "^7.1 || ^8.0",
+                "php-http/promise": "^1.1",
                 "psr/http-client": "^1.0",
                 "psr/http-message": "^1.0"
             },
             "require-dev": {
                 "friends-of-phpspec/phpspec-code-coverage": "^4.1",
-                "phpspec/phpspec": "^4.3.4|^5.0|^6.0"
+                "phpspec/phpspec": "^5.1 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -2805,7 +3114,8 @@
                 },
                 {
                     "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "HTTPlug, the HTTP client abstraction for PHP",
@@ -2814,7 +3124,11 @@
                 "client",
                 "http"
             ],
-            "time": "2019-12-27T10:07:11+00:00"
+            "support": {
+                "issues": "https://github.com/php-http/httplug/issues",
+                "source": "https://github.com/php-http/httplug/tree/master"
+            },
+            "time": "2020-07-13T15:43:23+00:00"
         },
         {
             "name": "php-http/message",
@@ -2884,6 +3198,10 @@
                 "message",
                 "psr-7"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/message/issues",
+                "source": "https://github.com/php-http/message/tree/1.11.0"
+            },
             "time": "2021-02-01T08:54:58+00:00"
         },
         {
@@ -2934,25 +3252,32 @@
                 "stream",
                 "uri"
             ],
+            "support": {
+                "issues": "https://github.com/php-http/message-factory/issues",
+                "source": "https://github.com/php-http/message-factory/tree/master"
+            },
             "time": "2015-12-19T14:08:53+00:00"
         },
         {
             "name": "php-http/promise",
-            "version": "v1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/promise.git",
-                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980"
+                "reference": "4c4c1f9b7289a2ec57cde7f1e9762a5789506f88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/promise/zipball/dc494cdc9d7160b9a09bd5573272195242ce7980",
-                "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980",
+                "url": "https://api.github.com/repos/php-http/promise/zipball/4c4c1f9b7289a2ec57cde7f1e9762a5789506f88",
+                "reference": "4c4c1f9b7289a2ec57cde7f1e9762a5789506f88",
                 "shasum": ""
             },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
             "require-dev": {
-                "henrikbjorn/phpspec-code-coverage": "^1.0",
-                "phpspec/phpspec": "^2.4"
+                "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
+                "phpspec/phpspec": "^5.1.2 || ^6.2"
             },
             "type": "library",
             "extra": {
@@ -2971,12 +3296,12 @@
             ],
             "authors": [
                 {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                },
-                {
                     "name": "Joel Wurtz",
                     "email": "joel.wurtz@gmail.com"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
                 }
             ],
             "description": "Promise used for asynchronous HTTP requests",
@@ -2984,20 +3309,24 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-01-26T13:27:02+00:00"
+            "support": {
+                "issues": "https://github.com/php-http/promise/issues",
+                "source": "https://github.com/php-http/promise/tree/1.1.0"
+            },
+            "time": "2020-07-07T09:29:14+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.16.1",
+            "version": "1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50"
+                "reference": "c55269cb06911575a126dc225a05c0e4626e5fb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/76d4323b85129d0c368149c831a07a3e258b2b50",
-                "reference": "76d4323b85129d0c368149c831a07a3e258b2b50",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/c55269cb06911575a126dc225a05c0e4626e5fb4",
+                "reference": "c55269cb06911575a126dc225a05c0e4626e5fb4",
                 "shasum": ""
             },
             "require": {
@@ -3025,7 +3354,7 @@
             },
             "require-dev": {
                 "dompdf/dompdf": "^0.8.5",
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "friendsofphp/php-cs-fixer": "^2.18",
                 "jpgraph/jpgraph": "^4.0",
                 "mpdf/mpdf": "^8.0",
                 "phpcompatibility/php-compatibility": "^9.3",
@@ -3081,31 +3410,30 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2020-12-31T18:03:49+00:00"
+            "support": {
+                "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/1.17.1"
+            },
+            "time": "2021-03-02T17:54:11+00:00"
         },
         {
             "name": "psr/container",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -3118,7 +3446,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common Container Interface (PHP FIG PSR-11)",
@@ -3130,7 +3458,11 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14T16:28:37+00:00"
+            "support": {
+                "issues": "https://github.com/php-fig/container/issues",
+                "source": "https://github.com/php-fig/container/tree/1.1.1"
+            },
+            "time": "2021-03-05T17:36:06+00:00"
         },
         {
             "name": "psr/http-client",
@@ -3179,6 +3511,9 @@
                 "psr",
                 "psr-18"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client/tree/master"
+            },
             "time": "2020-06-29T06:28:15+00:00"
         },
         {
@@ -3231,6 +3566,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-factory/tree/master"
+            },
             "time": "2019-04-30T12:38:16+00:00"
         },
         {
@@ -3281,6 +3619,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -3334,6 +3675,10 @@
                 "response",
                 "server"
             ],
+            "support": {
+                "issues": "https://github.com/php-fig/http-server-handler/issues",
+                "source": "https://github.com/php-fig/http-server-handler/tree/master"
+            },
             "time": "2018-10-30T16:46:14+00:00"
         },
         {
@@ -3387,6 +3732,10 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "issues": "https://github.com/php-fig/http-server-middleware/issues",
+                "source": "https://github.com/php-fig/http-server-middleware/tree/master"
+            },
             "time": "2018-10-30T17:12:04+00:00"
         },
         {
@@ -3435,6 +3784,9 @@
                 "psr-16",
                 "simple-cache"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/master"
+            },
             "time": "2017-10-23T01:57:42+00:00"
         },
         {
@@ -3475,25 +3827,108 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-            "name": "symfony/polyfill-intl-idn",
-            "version": "v1.17.1",
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "a57f8161502549a742a63c09f0a604997bf47027"
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/a57f8161502549a742a63c09f0a604997bf47027",
-                "reference": "a57f8161502549a742a63c09f0a604997bf47027",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/c6c942b1ac76c82448322025e084cadc56048b4e",
+                "reference": "c6c942b1ac76c82448322025e084cadc56048b4e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-mbstring": "^1.3",
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.22-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.22.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-07T16:49:33+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-idn",
+            "version": "v1.22.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-idn.git",
+                "reference": "2d63434d922daf7da8dd863e7907e67ee3031483"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/2d63434d922daf7da8dd863e7907e67ee3031483",
+                "reference": "2d63434d922daf7da8dd863e7907e67ee3031483",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "symfony/polyfill-intl-normalizer": "^1.10",
                 "symfony/polyfill-php72": "^1.10"
             },
             "suggest": {
@@ -3502,7 +3937,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3527,6 +3962,10 @@
                     "email": "laurent@bassin.info"
                 },
                 {
+                    "name": "Trevor Rowbotham",
+                    "email": "trevor.rowbotham@pm.me"
+                },
+                {
                     "name": "Symfony Community",
                     "homepage": "https://symfony.com/contributors"
                 }
@@ -3541,6 +3980,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.22.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3555,20 +3997,104 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-06T08:46:27+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
-            "name": "symfony/polyfill-mbstring",
-            "version": "v1.20.0",
+            "name": "symfony/polyfill-intl-normalizer",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531"
+                "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/39d483bdf39be819deabf04ec872eb0b2410b531",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/43a0283138253ed1d48d352ab6d0bdb3f809f248",
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.22-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "intl",
+                "normalizer",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.22.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-22T09:19:47+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.22.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/5232de97ee3b75b0360528dae24e73db49566ab1",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1",
                 "shasum": ""
             },
             "require": {
@@ -3580,7 +4106,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3618,6 +4144,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3632,29 +4161,33 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.17.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "f048e612a3905f34931127360bdd2def19a5e582"
+                "reference": "cc6e6f9b39fe8075b3dabfbaf5b5f645ae1340c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/f048e612a3905f34931127360bdd2def19a5e582",
-                "reference": "f048e612a3905f34931127360bdd2def19a5e582",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/cc6e6f9b39fe8075b3dabfbaf5b5f645ae1340c9",
+                "reference": "cc6e6f9b39fe8075b3dabfbaf5b5f645ae1340c9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17-dev"
+                    "dev-main": "1.22-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
                 }
             },
             "autoload": {
@@ -3687,6 +4220,9 @@
                 "portable",
                 "shim"
             ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php72/tree/v1.22.1"
+            },
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3701,34 +4237,35 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-12T16:47:27+00:00"
+            "time": "2021-01-07T16:49:33+00:00"
         },
         {
             "name": "webimpress/safe-writer",
-            "version": "2.0.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webimpress/safe-writer.git",
-                "reference": "d6e879960febb307c112538997316371f1e95b12"
+                "reference": "9d37cc8bee20f7cb2f58f6e23e05097eab5072e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webimpress/safe-writer/zipball/d6e879960febb307c112538997316371f1e95b12",
-                "reference": "d6e879960febb307c112538997316371f1e95b12",
+                "url": "https://api.github.com/repos/webimpress/safe-writer/zipball/9d37cc8bee20f7cb2f58f6e23e05097eab5072e6",
+                "reference": "9d37cc8bee20f7cb2f58f6e23e05097eab5072e6",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5.2 || ^9.0.1",
-                "webimpress/coding-standard": "^1.1.4"
+                "phpunit/phpunit": "^9.5.4",
+                "vimeo/psalm": "^4.7",
+                "webimpress/coding-standard": "^1.2.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev",
-                    "dev-develop": "2.1.x-dev",
+                    "dev-master": "2.2.x-dev",
+                    "dev-develop": "2.3.x-dev",
                     "dev-release-1.0": "1.0.x-dev"
                 }
             },
@@ -3749,34 +4286,96 @@
                 "safe writer",
                 "webimpress"
             ],
+            "support": {
+                "issues": "https://github.com/webimpress/safe-writer/issues",
+                "source": "https://github.com/webimpress/safe-writer/tree/2.2.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/michalbundyra",
                     "type": "github"
                 }
             ],
-            "time": "2020-03-21T15:49:08+00:00"
+            "time": "2021-04-19T16:34:45+00:00"
         },
         {
-            "name": "willdurand/geocoder",
-            "version": "4.3.0",
+            "name": "webmozart/assert",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/geocoder-php/php-common.git",
-                "reference": "199d6a853947a5051e7ff14d35849759009bad5d"
+                "url": "https://github.com/webmozarts/assert.git",
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geocoder-php/php-common/zipball/199d6a853947a5051e7ff14d35849759009bad5d",
-                "reference": "199d6a853947a5051e7ff14d35849759009bad5d",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "phpstan/phpstan": "<0.12.20",
+                "vimeo/psalm": "<4.6.1 || 4.6.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.13"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "support": {
+                "issues": "https://github.com/webmozarts/assert/issues",
+                "source": "https://github.com/webmozarts/assert/tree/1.10.0"
+            },
+            "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "willdurand/geocoder",
+            "version": "4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geocoder-php/php-common.git",
+                "reference": "3e86f5b10ab0cef1cf03f979fe8e34b6476daff0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geocoder-php/php-common/zipball/3e86f5b10ab0cef1cf03f979fe8e34b6476daff0",
+                "reference": "3e86f5b10ab0cef1cf03f979fe8e34b6476daff0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "nyholm/nsa": "^1.1",
-                "phpunit/phpunit": "^7.5",
+                "phpunit/phpunit": "^9.5",
                 "symfony/stopwatch": "~2.5"
             },
             "suggest": {
@@ -3814,22 +4413,25 @@
                 "geocoding",
                 "geoip"
             ],
-            "time": "2020-07-04T13:18:10+00:00"
+            "support": {
+                "source": "https://github.com/geocoder-php/php-common/tree/4.4.0"
+            },
+            "time": "2020-12-21T09:30:01+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "filp/whoops",
-            "version": "2.9.2",
+            "version": "2.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536"
+                "reference": "c13c0be93cff50f88bbd70827d993026821914dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/df7933820090489623ce0be5e85c7e693638e536",
-                "reference": "df7933820090489623ce0be5e85c7e693638e536",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/c13c0be93cff50f88bbd70827d993026821914dd",
+                "reference": "c13c0be93cff50f88bbd70827d993026821914dd",
                 "shasum": ""
             },
             "require": {
@@ -3877,31 +4479,35 @@
                 "throwable",
                 "whoops"
             ],
+            "support": {
+                "issues": "https://github.com/filp/whoops/issues",
+                "source": "https://github.com/filp/whoops/tree/2.12.1"
+            },
             "funding": [
                 {
                     "url": "https://github.com/denis-sokolov",
                     "type": "github"
                 }
             ],
-            "time": "2021-01-24T12:00:00+00:00"
+            "time": "2021-04-25T12:00:00+00:00"
         },
         {
             "name": "laminas/laminas-development-mode",
-            "version": "3.2.1",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-development-mode.git",
-                "reference": "dccbfc5a1503eb3f3805869525258ca6e6f6a0ce"
+                "reference": "11b2adc8837e4419a5b31e2a7ae59f06636d4096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-development-mode/zipball/dccbfc5a1503eb3f3805869525258ca6e6f6a0ce",
-                "reference": "dccbfc5a1503eb3f3805869525258ca6e6f6a0ce",
+                "url": "https://api.github.com/repos/laminas/laminas-development-mode/zipball/11b2adc8837e4419a5b31e2a7ae59f06636d4096",
+                "reference": "11b2adc8837e4419a5b31e2a7ae59f06636d4096",
                 "shasum": ""
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^5.6 || ^7.0"
+                "php": "^7.3 || ~8.0.0"
             },
             "replace": {
                 "zfcampus/zf-development-mode": "^3.2.0"
@@ -3909,7 +4515,7 @@
             "require-dev": {
                 "laminas/laminas-coding-standard": "~1.0.0",
                 "mikey179/vfsstream": "^1.6.5",
-                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5"
+                "phpunit/phpunit": "^9.3"
             },
             "bin": [
                 "bin/laminas-development-mode"
@@ -3930,26 +4536,33 @@
                 "framework",
                 "laminas"
             ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-development-mode/issues",
+                "rss": "https://github.com/laminas/laminas-development-mode/releases.atom",
+                "source": "https://github.com/laminas/laminas-development-mode"
+            },
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-08-03T14:07:04+00:00"
+            "time": "2020-12-16T22:26:52+00:00"
         },
         {
             "name": "psr/log",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
                 "shasum": ""
             },
             "require": {
@@ -3973,7 +4586,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for logging libraries",
@@ -3983,20 +4596,23 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2020-03-23T09:12:05+00:00"
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
+            },
+            "time": "2021-05-03T11:20:27+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.8",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
+                "reference": "ffced0d2c8fa8e6cdc4d695a743271fab6c38625",
                 "shasum": ""
             },
             "require": {
@@ -4034,7 +4650,12 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2020-10-23T02:01:07+00:00"
+            "support": {
+                "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
+                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
+                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
+            },
+            "time": "2021-04-09T00:54:41+00:00"
         }
     ],
     "aliases": [],
@@ -4046,5 +4667,5 @@
         "php": "^7.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
