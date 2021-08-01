@@ -2,7 +2,7 @@
   "name": "@geo6/batch-geocoder",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "ol": "5.3.3"
+    "ol": "6.6.1"
   },
   "devDependencies": {
     "css-loader": "^5.2.6",
