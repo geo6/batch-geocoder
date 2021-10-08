@@ -2981,34 +2981,33 @@
         },
         {
             "name": "mezzio/mezzio-session-ext",
-            "version": "1.11.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-session-ext.git",
-                "reference": "594e53d9546d11e9b601c2a6aec06577bbf55528"
+                "reference": "37c051e6c7482b74dbbdf686a69044905c55384a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/594e53d9546d11e9b601c2a6aec06577bbf55528",
-                "reference": "594e53d9546d11e9b601c2a6aec06577bbf55528",
+                "url": "https://api.github.com/repos/mezzio/mezzio-session-ext/zipball/37c051e6c7482b74dbbdf686a69044905c55384a",
+                "reference": "37c051e6c7482b74dbbdf686a69044905c55384a",
                 "shasum": ""
             },
             "require": {
                 "ext-session": "*",
-                "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-session": "^1.4",
-                "php": "^7.3 || ~8.0.0"
+                "php": "^7.3 || ~8.0.0 || ~8.1.0"
             },
-            "replace": {
-                "zendframework/zend-expressive-session-ext": "^1.7.0"
+            "conflict": {
+                "zendframework/zend-expressive-session-ext": "*"
             },
             "require-dev": {
                 "dflydev/fig-cookies": "^2.0.1 || ^3.0",
-                "laminas/laminas-coding-standard": "~2.1.0",
-                "laminas/laminas-diactoros": "^1.6",
+                "laminas/laminas-coding-standard": "~2.2.0",
+                "laminas/laminas-diactoros": "^2.5.0",
                 "phpunit/phpunit": "^9.3",
-                "psalm/plugin-phpunit": "^0.12.2",
-                "vimeo/psalm": "^3.16"
+                "psalm/plugin-phpunit": "^0.16.1",
+                "vimeo/psalm": "^4.10"
             },
             "type": "library",
             "extra": {
@@ -3049,7 +3048,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2021-04-20T16:25:13+00:00"
+            "time": "2021-09-13T23:24:56+00:00"
         },
         {
             "name": "mezzio/mezzio-template",
@@ -3616,16 +3615,16 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.11.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "887734d9c515ad9a564f6581a682fff87a6253cc"
+                "reference": "39eb7548be982a81085fe5a6e2a44268cd586291"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/887734d9c515ad9a564f6581a682fff87a6253cc",
-                "reference": "887734d9c515ad9a564f6581a682fff87a6253cc",
+                "url": "https://api.github.com/repos/php-http/message/zipball/39eb7548be982a81085fe5a6e2a44268cd586291",
+                "reference": "39eb7548be982a81085fe5a6e2a44268cd586291",
                 "shasum": ""
             },
             "require": {
@@ -3684,9 +3683,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/message/issues",
-                "source": "https://github.com/php-http/message/tree/1.11.1"
+                "source": "https://github.com/php-http/message/tree/1.12.0"
             },
-            "time": "2021-05-24T18:11:08+00:00"
+            "time": "2021-08-29T09:13:12+00:00"
         },
         {
             "name": "php-http/message-factory",
