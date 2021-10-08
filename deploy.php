@@ -44,7 +44,14 @@ set('clear_paths', [
 after('deploy:update_code', 'deploy:clear_paths');
 
 // Hosts
-inventory('hosts.yml');
+if (file_exists('hosts.yml') && is_readable('hosts.yml')) {
+    inventory('hosts.yml');
+}
+
+host('sandbox')
+    ->hostname('51.38.47.237')
+    ->stage('sandbox')
+    ->set('deploy_path', '/var/www/sandbox/source/batch-geocoder');
 
 // Tasks
 task('debug:enable', 'composer run development-enable');
@@ -65,15 +72,6 @@ task('install_providers', function () {
     run('cd {{ release_path }} && composer require '.implode(' ', $providers));
 });
 after('deploy:vendors', 'install_providers');
-
-task('php:version', function () {
-    $test = run('php -r "echo version_compare(PHP_VERSION, \'7.3\', \'<\');"');
-
-    if ($test == 1) {
-        run('cd {{ release_path }} && composer update');
-    }
-});
-after('deploy:vendors', 'php:version');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
