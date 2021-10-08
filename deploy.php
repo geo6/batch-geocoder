@@ -15,9 +15,9 @@ set('branch', 'master');
 set('git_tty', true);
 
 // Shared files/dirs between deploys
-add('shared_files', [
-    'config/autoload/local.php',
-]);
+// add('shared_files', [
+//     'config/autoload/local.php',
+// ]);
 add('shared_dirs', [
     'config/application',
     'data/upload',
@@ -25,7 +25,6 @@ add('shared_dirs', [
 
 // Writable dirs by web server
 add('writable_dirs', [
-    'config',
     'data/cache',
     'data/upload',
 ]);
