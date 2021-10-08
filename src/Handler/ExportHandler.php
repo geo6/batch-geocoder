@@ -78,7 +78,7 @@ class ExportHandler implements RequestHandlerInterface
         }
     }
 
-    private static function str_putcsv(array $input, string $delimiter = ',', string $enclosure = '"'): string
+    private static function putcsv(array $input, string $delimiter = ',', string $enclosure = '"'): string
     {
         $fp = fopen('php://memory', 'r+b');
         fputcsv($fp, $input, $delimiter, $enclosure);
@@ -91,7 +91,7 @@ class ExportHandler implements RequestHandlerInterface
 
     private static function exportCSV(ResultSet $results): TextResponse
     {
-        $text = self::str_putcsv([
+        $text = self::putcsv([
             'id',
             'streetname',
             'housenumber',
@@ -105,7 +105,7 @@ class ExportHandler implements RequestHandlerInterface
         ]).PHP_EOL;
 
         foreach ($results as $result) {
-            $text .= self::str_putcsv([
+            $text .= self::putcsv([
                 $result->id,
                 $result->streetname,
                 $result->housenumber,
