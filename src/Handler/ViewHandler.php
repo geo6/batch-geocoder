@@ -113,7 +113,7 @@ class ViewHandler implements RequestHandlerInterface
                 $diff['old'],
                 $diff['new'],
                 $score,
-                (intval($r->process_status) === 9),
+                intval($r->process_status) === 9,
             ];
         }
 
