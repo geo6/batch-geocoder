@@ -26,7 +26,7 @@ class LocalizationMiddleware implements MiddlewareInterface
             if (isset($cookies['lang'])) {
                 setcookie('lang', '', time() - 3600);
             }
-            setcookie('lang', Locale::getDefault(), 0, '', '', (!empty($server['HTTPS'])), true);
+            setcookie('lang', Locale::getDefault(), 0, '', '', !empty($server['HTTPS']), true);
         } elseif (isset($cookies['lang'])) {
             Locale::setDefault(Locale::getPrimaryLanguage($cookies['lang']));
         } elseif (isset($server['HTTP_ACCEPT_LANGUAGE'])) {
